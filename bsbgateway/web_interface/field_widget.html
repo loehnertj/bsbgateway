@@ -1,4 +1,5 @@
 $def with (SELF, field, value)
+<<<<<<< HEAD
 $code:
     ##############################################################################
     #
@@ -55,3 +56,39 @@ $else:
         >
             <input type="submit" value="-- (reset)">
         </form>
+=======
+    $if not field.rw:
+        <span class="fieldvalue">$SELF.fmt_rovalue(field, value)</span>
+    $else:
+        <form class="fieldsetter" action="field-$field.disp_id" method="POST" onsubmit="return submit_field_$(field.type_name)(this);">
+            $if field.type_name == 'choice':
+                <select name="value">
+                    $if field.nullable:
+                        <option value="" $('selected' if value is None else '')>--</option>
+                    $ vkey = value[0] if value else ''
+                    $ keys = field.choices.keys()
+                    $ keys.sort()
+                    $for key in keys:
+                        <option value="$key" $('selected' if key==vkey else '')>$key $field.choices[key]</option>
+                </select>
+                
+            $elif field.type_name == 'time':
+                <input type="text" class="number" name="hour" value="$(value[0] if value else '--')">
+                <input type="text" class="number" name="minute" value="$(value[1] if value else '--')">
+                
+            $else:
+                <input type="text" class="number" name="value" value="$(value or '--')">$field.unit <span class="rangehint">$SELF.fmt_range(field)</span>
+                
+            <input type="submit" value="Set">
+        </form>
+        $if field.nullable:
+            $# Sending no value sets the NULL value.
+            <form
+                class="fieldsetter"
+                action="field-$field.disp_id"
+                method="POST"
+                onsubmit="submit_field_null(this);return false;"
+            >
+                <input type="submit" value="-- (reset)">
+            </form>
+>>>>>>> f4b6eedf01b8a8cecfa4a2131aff35675ba412d7

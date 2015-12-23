@@ -1,4 +1,5 @@
 # coding: utf8
+<<<<<<< HEAD
 
 ##############################################################################
 #
@@ -20,6 +21,8 @@
 #
 ##############################################################################
 
+=======
+>>>>>>> f4b6eedf01b8a8cecfa4a2131aff35675ba412d7
 import itertools as it
 from bsb_field import BsbField, BsbFieldChoice, BsbFieldInt8, BsbFieldInt16, BsbFieldTemperature, BsbFieldTime
 

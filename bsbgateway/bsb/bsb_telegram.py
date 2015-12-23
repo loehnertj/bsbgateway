@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 ##############################################################################
 #
@@ -19,6 +20,8 @@
 #
 ##############################################################################
 
+=======
+>>>>>>> f4b6eedf01b8a8cecfa4a2131aff35675ba412d7
 from crc16pure import crc16xmodem
 from bsb_field import BsbField
 from bsb_fields import fields_by_telegram_id

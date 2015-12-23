@@ -1,0 +1,24 @@
+$def with (body, title='')
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+<html>
+    <head>
+        <title>$(title + ' - ' if title else '')BSB-Web</title>
+        <!--<link rel="shortcut icon" href="static/favicon.ico?v=1" type="image/x-icon"/> -->
+        <link rel="stylesheet" type="text/css" href="static/main.css" />
+        <script type="text/javascript" src="static/jquery.js"></script>
+        <script type="text/javascript" src="static/main.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+    </head>
+    <body>
+    
+    $if title:
+        <h2><a href="/">BSB-Web</a></h2>
+        <h1>$title</h1>
+    $else:
+        <h1>BSB-Web</h1>
+
+$:body
+    </body>
+</html>

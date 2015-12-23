@@ -1,0 +1,22 @@
+$def with (group, field_func)
+
+<script type="text/javascript">
+    _DELAY = 200; // ms
+    $$(document).ready(function() {
+        $$('.fieldcontainer').each(function(n, elem){
+            // set timer to load each field after progressive delay.
+            setTimeout(
+                function() {
+                    var disp_id = $$(elem).find('.disp_id').text();
+                    $$(elem).load('field-'+disp_id+'.fragment');
+                },
+                n*_DELAY
+            );
+        });
+    });
+</script>
+
+<ul>
+$for f in group.fields:
+    <li class="fieldcontainer" id="fieldcontainer-$f.disp_id"><span class="disp_id">$f.disp_id</span>: ...</li>
+</ul>

@@ -1,0 +1,52 @@
+body {
+    font-family:sans-serif;
+    background-color:#f0f0f0;
+}
+
+h2 {
+    font-size: 120%;
+    margin: 0pt 1em 3pt;
+    font-family:Courier;
+    font-style:italic;
+}
+
+h1 {
+    font-size: 140%;
+    border-bottom: 1pt solid #808080;
+    margin:0pt 2em 2pt;
+    font-family:Courier;
+    font-style:italic;
+    border-radius:10px;
+    padding:0pt 10pt 0pt;
+}
+
+
+li {
+    list-style:none;
+    padding: 3pt 0 3pt;
+    border-bottom:1pt solid #808080;
+    min-height:2em;
+}
+
+.fieldid, .rangehint {
+    font-size:90%;
+    font-style:italic;
+}
+.fieldname {
+}
+.fieldvalue, input.number, select {
+    font-size:110%;
+    font-weight:bold;
+}
+
+form {
+    display:inline;
+}
+
+input.number {
+    width:3em;
+}
+
+.error {
+    color: red;
+}

@@ -1,35 +1,57 @@
 $def with (SELF, field, value)
-    $if not field.rw:
-        <span class="fieldvalue">$SELF.fmt_rovalue(field, value)</span>
-    $else:
-        <form class="fieldsetter" action="field-$field.disp_id" method="POST" onsubmit="return submit_field_$(field.type_name)(this);">
-            $if field.type_name == 'choice':
-                <select name="value">
-                    $if field.nullable:
-                        <option value="" $('selected' if value is None else '')>--</option>
-                    $ vkey = value[0] if value else ''
-                    $ keys = field.choices.keys()
-                    $ keys.sort()
-                    $for key in keys:
-                        <option value="$key" $('selected' if key==vkey else '')>$key $field.choices[key]</option>
-                </select>
-                
-            $elif field.type_name == 'time':
-                <input type="text" class="number" name="hour" value="$(value[0] if value else '--')">
-                <input type="text" class="number" name="minute" value="$(value[1] if value else '--')">
-                
-            $else:
-                <input type="text" class="number" name="value" value="$(value or '--')">$field.unit <span class="rangehint">$SELF.fmt_range(field)</span>
-                
-            <input type="submit" value="Set">
+$code:
+    ##############################################################################
+    #
+    #    Part of BsbGateway
+    #    Copyright (C) Johannes Loehnert, 2013-2015
+    #
+    #    This program is free software: you can redistribute it and/or modify
+    #    it under the terms of the GNU Lesser General Public License as published by
+    #    the Free Software Foundation, either version 3 of the License, or
+    #    (at your option) any later version.
+    #
+    #    This program is distributed in the hope that it will be useful,
+    #    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    #    GNU Lesser General Public License for more details.
+    #
+    #    You should have received a copy of the GNU Lesser General Public License
+    #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    #
+    ##############################################################################
+
+
+$if not field.rw:
+    <span class="fieldvalue">$SELF.fmt_rovalue(field, value)</span>
+$else:
+    <form class="fieldsetter" action="field-$field.disp_id" method="POST" onsubmit="return submit_field_$(field.type_name)(this);">
+        $if field.type_name == 'choice':
+            <select name="value">
+                $if field.nullable:
+                    <option value="" $('selected' if value is None else '')>--</option>
+                $ vkey = value[0] if value else ''
+                $ keys = field.choices.keys()
+                $ keys.sort()
+                $for key in keys:
+                    <option value="$key" $('selected' if key==vkey else '')>$key $field.choices[key]</option>
+            </select>
+            
+        $elif field.type_name == 'time':
+            <input type="text" class="number" name="hour" value="$(value[0] if value else '--')">
+            <input type="text" class="number" name="minute" value="$(value[1] if value else '--')">
+            
+        $else:
+            <input type="text" class="number" name="value" value="$(value or '--')">$field.unit <span class="rangehint">$SELF.fmt_range(field)</span>
+            
+        <input type="submit" value="Set">
+    </form>
+    $if field.nullable:
+        $# Sending no value sets the NULL value.
+        <form
+            class="fieldsetter"
+            action="field-$field.disp_id"
+            method="POST"
+            onsubmit="submit_field_null(this);return false;"
+        >
+            <input type="submit" value="-- (reset)">
         </form>
-        $if field.nullable:
-            $# Sending no value sets the NULL value.
-            <form
-                class="fieldsetter"
-                action="field-$field.disp_id"
-                method="POST"
-                onsubmit="submit_field_null(this);return false;"
-            >
-                <input type="submit" value="-- (reset)">
-            </form>

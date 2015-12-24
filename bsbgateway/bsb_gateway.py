@@ -193,7 +193,6 @@ class BsbGateway(object):
                     if rq[0] == key:
                         o.pending_web_requests.remove(rq)
                         rq[1].put(telegram)
-                        break
                         
     def on_web_event(o, request):
         # FIXME: rate limit 10/s

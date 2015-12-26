@@ -19,13 +19,14 @@
 ##############################################################################
 
 import logging
+from event_sources import EventSource
 from fake_serial_source import SerialSource
 
 from bsb_telegram import BsbTelegram
 from bsb_field import ValidateError, EncodeError
 from bsb_fields import fields
 
-class BsbComm(SerialSource):
+class BsbComm(EventSource):
     '''simplifies the conversion between serial data and BsbTelegrams.
     BsbComm represents one or multiple BSB bus endpoint(s). You can
     send and receive BsbTelegrams. 
@@ -49,7 +50,7 @@ class BsbComm(SerialSource):
     _leftover_data = ''
     
     def __init__(o, name, port, first_bus_address, n_addresses=1, sniffmode=False):
-        SerialSource.__init__(o,
+        o.serial = SerialSource(
             name=name,
             port_num=port,
             port_baud=4800,
@@ -68,7 +69,7 @@ class BsbComm(SerialSource):
             # data = timestamp,bytes
             telegrams = o.process_received_data(data[0], data[1])
             putevent_func(name, telegrams)
-        SerialSource.run(o, convert_data)
+        o.serial.run(convert_data)
         
         
     def process_received_data(o, timestamp, data):
@@ -116,7 +117,7 @@ class BsbComm(SerialSource):
         t.dst = 0
         t.packettype = 'get'
         t.field = fields[disp_id]
-        o.write(t.serialize())
+        o.serial.write(t.serialize())
 
     def send_set(o, disp_id, value, which_address=0, validate=True):
         '''sends a SET request for the given disp_id.
@@ -134,5 +135,5 @@ class BsbComm(SerialSource):
         t.data = value
         # might throw ValidateError or EncodeError.
         data = t.serialize(validate=validate)
-        o.write(data)
+        o.serial.write(data)
         

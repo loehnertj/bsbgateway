@@ -123,10 +123,11 @@ class BsbGateway(object):
     _dump = 'off'
     _dump_filter = 'True'
 
-    def __init__(o, serial_port, bus_address, loggers, atomic_interval):
+    def __init__(o, serial_port, bus_address, loggers, atomic_interval, web_interface_port=8080):
         o._bsbcomm = BsbComm('bsb', serial_port, bus_address, n_addresses=3)
         o.loggers = loggers
         o.atomic_interval = atomic_interval
+        o.web_interface_port = web_interface_port
         o.pending_web_requests = []
         
     def run(o):
@@ -136,7 +137,7 @@ class BsbGateway(object):
         sources = [
             StdinSource('stdin'),
             SyncedSecondTimerSource('timer'),
-            WebInterface('web'),
+            WebInterface('web', port=o.web_interface_port),
             o._bsbcomm,
         ]
         o._hub = HubSource()
@@ -372,4 +373,10 @@ def run(config):
             if logger.disp_id == disp_id:
                 logger.add_trigger(emailaction, *trigger[1:])
     
-    BsbGateway(config['serial_port'], config['bus_address'], loggers, config['atomic_interval']).run()
+    BsbGateway(
+        serial_port=config['serial_port'],
+        bus_address=config['bus_address'],
+        loggers=loggers,
+        atomic_interval=config['atomic_interval'],
+        web_interface_port=config['web_interface_port']
+    ).run()

@@ -62,6 +62,8 @@ emailaddress = 'recipient@domain.com'
 emailserver = 'smtp.domain.com'
 emailcredentials = ('loginname', 'password')
 
+# Port on which the web interface shall listen.
+web_interface_port = 8081
 
 import bsbgateway
 bsbgateway.run(globals())

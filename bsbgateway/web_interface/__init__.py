@@ -49,8 +49,9 @@ def print_handlers(urls):
     log().info('\n    '.join(s))
 
 class WebInterface(EventSource):
-    def __init__(o, name='web'):
+    def __init__(o, name='web', port=8080):
         o.name = name
+        o.port = port
         o.stoppable = False
         
     def run(o, putevent):
@@ -63,7 +64,7 @@ class WebInterface(EventSource):
         
         app = web.application(urls)
         app.add_processor(add_to_ctx(Web2Broetje(o.name, putevent), 'broetje'))
-        web.httpserver.runsimple(app.wsgifunc(), ("0.0.0.0", 8081)) 
+        web.httpserver.runsimple(app.wsgifunc(), ("0.0.0.0", o.port)) 
 
 class Web2Broetje(object):
     '''provides the connection from web to backend.'''

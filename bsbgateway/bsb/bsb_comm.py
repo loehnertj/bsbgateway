@@ -51,6 +51,10 @@ class BsbComm(EventSource):
     _leftover_data = ''
     
     def __init__(o, name, port, first_bus_address, n_addresses=1, sniffmode=False):
+        if (first_bus_address<=10):
+            raise ValueError("First bus address must be >10.")
+        if (first_bus_address+n_addresses>127):
+            raise ValueError("Last bus address must be <128.")
         if port=='fake':
             o.serial = FakeSerialSource(name=name)
         else:

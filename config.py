@@ -11,7 +11,8 @@ serial_port = 'fake'
 # serial_port = '/dev/ttyS0'
 # serial_port = '/dev/ttyUSB0'
 
-# Bus adress offset of Gateway. DO NOT USE 0!!
+# Bus adress offset of Gateway. Allowed range: 11 ... 125.
+# (0 is the main device, 10 is the control panel).
 # Gateway will use:
 # This address for logging
 # This address + 1 for cmdline requests

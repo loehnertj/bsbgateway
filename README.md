@@ -1,4 +1,4 @@
-# bsbgateway
+ bsbgateway
 Read and write data on a BSB (Boiler System Bus).
 
 Functionalities offered:
@@ -21,7 +21,3 @@ Run using `sh bsbgateway.sh`.
 For continuous operation, it is (currently) recommendable to run in a `screen` environment like so:
 
 `screen -dmS bsbgateway '/bin/sh /path/to/bsbgateway.sh'`
-
-## Notice
-
-There are still some important quirks to be ironed out, e.g. hardcoded serial port, hardcoded web server port, etc. - See issue list.

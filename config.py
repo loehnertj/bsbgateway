@@ -1,5 +1,13 @@
+'''Configuration file template for BsbGateway.'''
+
+################################################
+# Python configuration
+
 import logging
 logging.basicConfig(level='DEBUG', format='%(levelname)s %(name)s:%(lineno)d -- %(message)s')
+
+################################################
+# Device configuration
 
 # The serial port to use.
 # * 'fake' = use a fake device, see below.
@@ -19,19 +27,24 @@ serial_port = 'fake'
 # This address + 2 for webinterface requests
 bus_address = 23
 
-# Haupttakt. Signale koennen nicht oefter geloggt werden. Entspricht min. Zeitaufloesung.
-# Einheit: Sekunden
+
+################################################
+# Logger configuration
+
+# Global log timer interval. Determines the "time slice" for logging.
+# Signals cannot be logged faster than that; and every logger's period
+# has to be a multiple of this. Unit = seconds.
 atomic_interval = 5
 
-# Pfad wo die tracefiles abgelegt werden
-# (Dateiname = <disp_id>.trace )
+# Path to store the trace files in.
+# (Filename = <tracefile_dir>/<disp_id>.trace )
 tracefile_dir = 'traces'
 
-# zu loggende Felder und Loginterval in Sekunden.
-# Liste von Tupeln: (Disp_ID, Interval).
-# Die Disp_ID kann am Heizungskontrollpanel oder in bsb_fields.py
-# nachgeschlagen werden.
-# Intervall in Sekunden, MUSS ganzzahliges Vielfaches des atomic_interval sein!!!
+# Fields to be logged and logging interval in seconds.
+# List of tuples: (Disp_ID, Interval).
+# The disp_id can be found on the device control panel
+# or by using the LIST and INFO commands of the commandline interface.
+# Interval in seconds MUST be a multiple of atomic_interval.
 loggers = [
     (8510, 5), # Kollektortemperatur
     (8310, 300), # Kesseltemperatur
@@ -43,12 +56,12 @@ loggers = [
     (8007, 5), # Status Solar
 ]
 
-# Trigger fuer Email-Ausloesung.
-# Tupel (Disp_ID, Triggertyp, Schwellwert(e))
-# Triggertypen: 'rising_edge', 'falling_edge' (1 Schwellwert)
-#  Schwellwert = in Einheiten des decodierten Feldwertes.
-# Nach jeder Triggerausloesung gelten 6 Std. Totzeit.
-# Der Trigger funktioniert nur wenn fuer das Feld auch ein Logger definiert ist!
+# Triggers for email notification.
+# Tuple (Disp_ID, Trigger type, threshold(s)).
+# Triggertypes currently defined are: 'rising_edge', 'falling_edge' (1 Threshold value)
+#  Threshold = in units of the (decoded) field value.
+# After each trigger event, six hours of dead time apply.
+# Triggers only work if there is a LOGGER defined for the field.
 
 triggers = [
 # Example: notify when value of 8700 falls below 10.0.
@@ -57,13 +70,20 @@ triggers = [
 
 # Email recipient
 emailaddress = 'recipient@domain.com'
-
 # SMTP server and credentials for sending email notifications
 emailserver = 'smtp.domain.com'
 emailcredentials = ('loginname', 'password')
 
+
+################################################
+# Web interface configuration
+
 # Port on which the web interface shall listen.
 web_interface_port = 8081
+
+
+################################################
+# Leave this alone
 
 import bsbgateway
 bsbgateway.run(globals())

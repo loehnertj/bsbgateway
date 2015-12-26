@@ -117,6 +117,7 @@ class BsbTelegram(object):
         '''return cls instance, rest of data'''
         cls._validate(data)
 
+
         t = cls()
         t.src = data[1] ^ 0x80
         t.dst = data[2]
@@ -124,7 +125,7 @@ class BsbTelegram(object):
         t.packettype = _PACKETTYPES.get(data[4], 'unknown (%d)'%(data[4]))
 
         mult = 0x1000000
-        # bei requests sind byte 5+6 getauscht
+        # For requests, byte 5+6 are swapped.
         if t.packettype in ['get', 'set']:
             data[5], data[6] = data[6], data[5]
 

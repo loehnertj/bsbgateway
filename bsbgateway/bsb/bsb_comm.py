@@ -40,7 +40,7 @@ class BsbComm(EventSource):
     
     Functions for sending:
         * send_get: sends a telegram requesting the disp_id's value
-        * send_set: TODO
+        * send_set: sends a telegram setting the value for disp_id.
         
     Also supports sniffing (i.e. catching messages for other endpoints). 
     Set sniffmode=True for this. Can be toggled while running.

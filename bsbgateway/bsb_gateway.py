@@ -123,8 +123,8 @@ class BsbGateway(object):
     _dump = 'off'
     _dump_filter = 'True'
 
-    def __init__(o, bus_address, loggers, atomic_interval):
-        o._bsbcomm = BsbComm('bsb', '/dev/ttyUSB0', bus_address, n_addresses=3)
+    def __init__(o, serial_port, bus_address, loggers, atomic_interval):
+        o._bsbcomm = BsbComm('bsb', serial_port, bus_address, n_addresses=3)
         o.loggers = loggers
         o.atomic_interval = atomic_interval
         o.pending_web_requests = []
@@ -372,4 +372,4 @@ def run(config):
             if logger.disp_id == disp_id:
                 logger.add_trigger(emailaction, *trigger[1:])
     
-    BsbGateway(config['bus_address'], loggers, config['atomic_interval']).run()
+    BsbGateway(config['serial_port'], config['bus_address'], loggers, config['atomic_interval']).run()

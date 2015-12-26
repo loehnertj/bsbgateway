@@ -1,6 +1,16 @@
 import logging
 logging.basicConfig(level='DEBUG', format='%(levelname)s %(name)s:%(lineno)d -- %(message)s')
 
+# The serial port to use.
+# * 'fake' = use a fake device, see below.
+# * '/dev/ttyS0' ... '/dev/ttyS3' are usual devices for real serial ports.
+# * '/dev/ttyUSB0' is the usual device for a USB-to-serial converter on Linux.
+#
+# The fake device answers get and set telegrams with appropriate replies. Set values are remembered for the session.
+serial_port = 'fake'
+# serial_port = '/dev/ttyS0'
+# serial_port = '/dev/ttyUSB0'
+
 # Bus adress offset of Gateway. DO NOT USE 0!!
 # Gateway will use:
 # This address for logging

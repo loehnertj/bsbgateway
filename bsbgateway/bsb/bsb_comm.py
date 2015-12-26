@@ -20,7 +20,8 @@
 
 import logging
 from event_sources import EventSource
-from fake_serial_source import SerialSource
+from serial_source import SerialSource
+from fake_serial_source import FakeSerialSource
 
 from bsb_telegram import BsbTelegram
 from bsb_field import ValidateError, EncodeError
@@ -50,16 +51,19 @@ class BsbComm(EventSource):
     _leftover_data = ''
     
     def __init__(o, name, port, first_bus_address, n_addresses=1, sniffmode=False):
-        o.serial = SerialSource(
-            name=name,
-            port_num=port,
-            port_baud=4800,
-            port_stopbits=1,
-            port_parity='odd',
-            invert_bytes=True,
-            expect_cts_state=False,
-            write_retry_time=0.005
-        )
+        if port=='fake':
+            o.serial = FakeSerialSource(name=name)
+        else:
+            o.serial = SerialSource(
+                name=name,
+                port_num=port,
+                port_baud=4800,
+                port_stopbits=1,
+                port_parity='odd',
+                invert_bytes=True,
+                expect_cts_state=False,
+                write_retry_time=0.005
+            )
         o.bus_addresses = range(first_bus_address, first_bus_address+n_addresses)
         o._leftover_data = ''
         o.sniffmode = sniffmode

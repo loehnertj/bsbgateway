@@ -26,7 +26,7 @@ from Queue import Queue
 
 from event_sources import EventSource
 
-class SerialSource(EventSource):
+class FakeSerialSource(EventSource):
     
     def __init__(o, name, *whatever, **more_stuff):
         o.name = name

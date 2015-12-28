@@ -49,14 +49,14 @@ class BsbField(object):
         '''turns the python value in data into bytes for sending.
         Must check that the data can be turned into valid bytes and raise EncodeError on fail.
         Flag is the first byte and depends on packettype and whether field is nullable.'''
-        raise EncodeError('Unknown field type, value cannot be encoded.')
+        raise EncodeError('Field %s: Unknown field type, value cannot be encoded.'%o.disp_id)
     
     def _validate_data(o, data):
         '''validates that data adheres to the constraints of the particular field.
         users should call validate(data), which takes care of the rw and nullable flags.
         Should raise ValidateError on fail.
         '''
-        raise ValidateError('Unknown field type, value cannot be validated.')
+        raise ValidateError('Field %s: Unknown field type, value cannot be validated.'%o.disp_id)
     
     def validate(o, data):
         '''Validates that the given data is valid within the field's defined constraints,

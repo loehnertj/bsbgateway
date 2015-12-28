@@ -46,6 +46,8 @@ class FakeSerialSource(EventSource):
 
     def write(o, data):
         log().debug('FAKE write: [%s]'%(data.encode('hex')))
+        # read back written data (as the real bus adapter does)
+        o.rdqueue.put(data)
         from bsb.bsb_telegram import BsbTelegram
         t = BsbTelegram.deserialize(data, o.device)[0]
         

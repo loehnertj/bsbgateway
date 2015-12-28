@@ -82,7 +82,7 @@ emailcredentials = ('loginname', 'password')
 ################################################
 # Cmdline interface configuration
 
-cmd_interface_enable = False
+cmd_interface_enable = True
 
 
 ################################################

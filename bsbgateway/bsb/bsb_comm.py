@@ -25,7 +25,6 @@ from fake_serial_source import FakeSerialSource
 
 from bsb_telegram import BsbTelegram
 from bsb_field import ValidateError, EncodeError
-from bsb_fields import fields
 
 class BsbComm(EventSource):
     '''simplifies the conversion between serial data and BsbTelegrams.
@@ -50,13 +49,13 @@ class BsbComm(EventSource):
     sniffmode = False
     _leftover_data = ''
     
-    def __init__(o, name, port, first_bus_address, n_addresses=1, sniffmode=False):
+    def __init__(o, name, port, device, first_bus_address, n_addresses=1, sniffmode=False):
         if (first_bus_address<=10):
             raise ValueError("First bus address must be >10.")
         if (first_bus_address+n_addresses>127):
             raise ValueError("Last bus address must be <128.")
         if port=='fake':
-            o.serial = FakeSerialSource(name=name)
+            o.serial = FakeSerialSource(name=name, device=device)
         else:
             o.serial = SerialSource(
                 name=name,
@@ -68,6 +67,7 @@ class BsbComm(EventSource):
                 expect_cts_state=False,
                 write_retry_time=0.005
             )
+        o.device = device
         o.bus_addresses = range(first_bus_address, first_bus_address+n_addresses)
         o._leftover_data = ''
         o.sniffmode = sniffmode
@@ -90,7 +90,7 @@ class BsbComm(EventSource):
             Only telegrams that have the right bus address and packettype 7 (return value)
             are included in the result.
         '''
-        telegrams = BsbTelegram.deserialize(o._leftover_data + data)
+        telegrams = BsbTelegram.deserialize(o._leftover_data + data, o.device)
         result = []
         if not telegrams:
             return
@@ -118,13 +118,13 @@ class BsbComm(EventSource):
     def send_get(o, disp_id, which_address=0):
         '''sends a GET request for the given disp_id.
         which_address: which busadress to use, default 0 (the first)'''
-        if disp_id not in fields:
+        if disp_id not in o.device.fields:
             raise EncodeError('unknown field')
         t = BsbTelegram()
         t.src = o.bus_addresses[which_address]
         t.dst = 0
         t.packettype = 'get'
-        t.field = fields[disp_id]
+        t.field = o.device.fields[disp_id]
         o.serial.write(t.serialize())
 
     def send_set(o, disp_id, value, which_address=0, validate=True):
@@ -133,13 +133,13 @@ class BsbComm(EventSource):
         which_address: which busadress to use, default 0 (the first).
         validate: to disable validation, USE WITH EXTREME CARE.
         '''
-        if disp_id not in fields:
+        if disp_id not in o.device.fields:
             raise EncodeError('unknown field')
         t = BsbTelegram()
         t.src = o.bus_addresses[which_address]
         t.dst = 0
         t.packettype = 'set'
-        t.field = fields[disp_id]
+        t.field = o.device.fields[disp_id]
         t.data = value
         # might throw ValidateError or EncodeError.
         data = t.serialize(validate=validate)

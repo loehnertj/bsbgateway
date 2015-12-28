@@ -25,7 +25,6 @@ import datetime
 import web
 
 from bsb.bsb_field import ValidateError, EncodeError
-from bsb.bsb_fields import fields
 from util.webutils import bridge_call
 from templates import tpl
 
@@ -36,12 +35,14 @@ _ERRHEADERS = {
         
 class Field(object):
     url = r'field-([0-9]+)(?:\.([a-zA-Z]+))?'
-    parameters={
-        'field': lambda x: fields[int(x)],
-        'value': lambda x: None if x in ('', '--') else float(x),
-        'hour': lambda x: None if x in ('', '--') else int(x),
-        'minute': lambda x: None if x in ('', '--') else int(x),
-    }
+    def __init__(o):
+        fields = web.ctx.broetje.fields
+        o.parameters={
+            'field': lambda x: fields[int(x)],
+            'value': lambda x: None if x in ('', '--') else float(x),
+            'hour': lambda x: None if x in ('', '--') else int(x),
+            'minute': lambda x: None if x in ('', '--') else int(x),
+        }
     
     def GET(o, disp_id, view=None):
         q = web.input()
@@ -50,7 +51,7 @@ class Field(object):
         if view:
             return bridge_call(o, view, q, o.parameters)
         else:
-            field = fields[int(disp_id)]
+            field = web.ctx.broetje.fields[int(disp_id)]
             return tpl.base(bridge_call(o, 'fragment', q, o.parameters), '{} {}'.format(field.disp_id, field.disp_name))
         
     def POST(o, disp_id, view=None):

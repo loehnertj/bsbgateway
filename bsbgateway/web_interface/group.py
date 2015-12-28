@@ -19,7 +19,6 @@
 ##############################################################################
 
 import web
-from bsb.bsb_fields import groups
 from templates import tpl
 from field import Field
 
@@ -28,6 +27,7 @@ class Group(object):
     
     def GET(o, disp_id):
         disp_id = int(disp_id)
+        groups = web.ctx.broetje.groups
         g = [g for g in groups if g.disp_id == disp_id]
         if len(g)!=1:
             raise web.notfound()

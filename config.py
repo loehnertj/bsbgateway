@@ -9,6 +9,10 @@ logging.basicConfig(level='DEBUG', format='%(levelname)s %(name)s:%(lineno)d -- 
 ################################################
 # Device configuration
 
+# Type of connected device. Currently there is only a (incomplete) driver for Broetje ISR Plus.
+# Read "driver" = "index of available fields".
+device = 'broetje_isr_plus'
+
 # The serial port to use.
 # * 'fake' = use a fake device, see below.
 # * '/dev/ttyS0' ... '/dev/ttyS3' are usual devices for real serial ports.

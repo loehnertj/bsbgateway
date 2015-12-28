@@ -28,8 +28,9 @@ from event_sources import EventSource
 
 class FakeSerialSource(EventSource):
     
-    def __init__(o, name, *whatever, **more_stuff):
+    def __init__(o, name, device=None, *whatever, **more_stuff):
         o.name = name
+        o.device = device
         o.stoppable = True
         o.rdqueue = Queue()
         o.state = {}
@@ -46,7 +47,7 @@ class FakeSerialSource(EventSource):
     def write(o, data):
         log().debug('FAKE write: [%s]'%(data.encode('hex')))
         from bsb.bsb_telegram import BsbTelegram
-        t = BsbTelegram.deserialize(data)[0]
+        t = BsbTelegram.deserialize(data, o.device)[0]
         
         # remember set value for session
         if t.packettype == 'set':

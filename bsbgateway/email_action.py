@@ -24,8 +24,6 @@ import smtplib
 from email.mime.text import MIMEText
 from threading import Thread
 
-from bsb.bsb_fields import fields
-
 def make_email_action(server, address, credentials):
     def send_async(msg):
         log().info('About to send email notification "%s"'%msg['Subject'])
@@ -36,8 +34,8 @@ def make_email_action(server, address, credentials):
         log().info('Email was sent.')
         
     def callback(logger, triggertype, param1, param2, prev_val, this_val):
-        fld = fields[logger.disp_id]
-        fldid = logger.disp_id
+        fld = logger.field
+        fldid = fld.disp_id
         fldname = fld.disp_name
         fldunit = fld.unit
         verb = {

@@ -35,7 +35,6 @@ from traceback import format_exc
 from event_sources import StdinSource, SyncedSecondTimerSource, HubSource
 from bsb.bsb_comm import BsbComm
 from bsb.bsb_field import EncodeError, ValidateError, BsbFieldChoice, BsbFieldInt8, BsbFieldInt16, BsbFieldTime
-from bsb.bsb_fields import groups, fields
 from single_field_logger import SingleFieldLogger
 from web_interface import WebInterface
 from email_action import make_email_action
@@ -123,8 +122,9 @@ class BsbGateway(object):
     _dump = 'off'
     _dump_filter = 'True'
 
-    def __init__(o, serial_port, bus_address, loggers, atomic_interval, web_interface_port=8080):
-        o._bsbcomm = BsbComm('bsb', serial_port, bus_address, n_addresses=3)
+    def __init__(o, serial_port, device, bus_address, loggers, atomic_interval, web_interface_port=8080):
+        o.device = device
+        o._bsbcomm = BsbComm('bsb', serial_port, device, bus_address, n_addresses=3)
         o.loggers = loggers
         o.atomic_interval = atomic_interval
         o.web_interface_port = web_interface_port
@@ -137,7 +137,7 @@ class BsbGateway(object):
         sources = [
             StdinSource('stdin'),
             SyncedSecondTimerSource('timer'),
-            WebInterface('web', port=o.web_interface_port),
+            WebInterface('web', device=o.device, port=o.web_interface_port),
             o._bsbcomm,
         ]
         o._hub = HubSource()
@@ -186,7 +186,7 @@ class BsbGateway(object):
                     print repr(telegram)
             if which_address==0 and telegram.packettype == 'ret':
                 for logger in o.loggers:
-                    if logger.disp_id == telegram.field.disp_id:
+                    if logger.field.disp_id == telegram.field.disp_id:
                         logger.log_value(telegram.timestamp, telegram.data)
             if which_address==2 and telegram.packettype in ['ret', 'ack']:
                 key = '%s%d'%(telegram.packettype, telegram.field.disp_id)
@@ -229,7 +229,7 @@ class BsbGateway(object):
     def cmd_set(o, disp_id, value, use_force):
         try:
             disp_id = int(disp_id)
-            field = fields[disp_id]
+            field = o.device.fields[disp_id]
         except (TypeError, ValueError, KeyError):
             print 'Unrecognized field.'
             return
@@ -299,11 +299,11 @@ class BsbGateway(object):
         if not text: hash=True
         if hash:
             grps = [grp
-                    for grp in groups
+                    for grp in o.device.groups
                     if text in grp.name.lower()
             ]
         else:
-            grps = groups
+            grps = o.device.groups
         if len(grps) == 0:
             print 'Not found.'
             return
@@ -329,7 +329,7 @@ class BsbGateway(object):
         '''info <id>[, <id>...]: print field descriptions for the given field ids (4-digit numbers).'''
         ids = [int(id) for id in ids.split(' ') if id!='']
         try:
-            ll = [fields[id] for id in ids]
+            ll = [o.device.fields[id] for id in ids]
         except KeyError:
             print 'Not found.'
             return
@@ -357,10 +357,16 @@ Commands: (every command can be abbreviated to just the first character)
                 
 
 def run(config):
+    # FIXME: make this a dynamic import.
+    if config['device'] == 'broetje_isr_plus':
+        import bsb.broetje_isr_plus as device
+    else:
+        raise ValueError('Unsupported device')
+    
     emailaction = make_email_action(config['emailserver'], config['emailaddress'], config['emailcredentials'])
     loggers = [
         SingleFieldLogger(
-            disp_id=disp_id, 
+            field=device.fields[disp_id],
             interval=interval, 
             atomic_interval=config['atomic_interval'],
             filename=os.path.join(config['tracefile_dir'], '%d.trace'%disp_id)
@@ -372,9 +378,10 @@ def run(config):
         for logger in loggers:
             if logger.disp_id == disp_id:
                 logger.add_trigger(emailaction, *trigger[1:])
-    
+                
     BsbGateway(
         serial_port=config['serial_port'],
+        device=device,
         bus_address=config['bus_address'],
         loggers=loggers,
         atomic_interval=config['atomic_interval'],

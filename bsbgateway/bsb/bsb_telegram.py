@@ -21,7 +21,6 @@
 
 from crc16pure import crc16xmodem
 from bsb_field import BsbField
-from bsb_fields import fields_by_telegram_id
 
 __all__ = ['DecodeError', 'BsbTelegram']
 
@@ -66,7 +65,7 @@ class BsbTelegram(object):
         o.data = None
 
     @classmethod
-    def deserialize(cls, data):
+    def deserialize(cls, data, device):
         '''returns a list of BsbTelegrams and unparseable data, if any.
         For unparseable data, the list entry is a tuple: (data sequence, error message)
         Order follows the input stream order.
@@ -78,7 +77,7 @@ class BsbTelegram(object):
 
         while indata:
             try:
-                t, indata = cls._parse(indata)
+                t, indata = cls._parse(indata, device)
                 result.append(t)
             except DecodeError, e:
                 junk, indata = cls._skip(indata)
@@ -113,7 +112,7 @@ class BsbTelegram(object):
             raise DecodeError("bad crc checksum for: " + pretty)
 
     @classmethod
-    def _parse(cls, data):
+    def _parse(cls, data, device):
         '''return cls instance, rest of data'''
         cls._validate(data)
 
@@ -133,7 +132,10 @@ class BsbTelegram(object):
         for d in data[5:9]:
             fieldid, mult = d*mult+fieldid, mult / 0x100
 
-        t.field = fields_by_telegram_id.get(fieldid, BsbField(telegram_id=fieldid,disp_id=0,disp_name='Unbekannt'))
+        t.field = BsbField(telegram_id=fieldid, disp_id=0, disp_name='Unbekannt')
+        if device:
+            # Try to identify the field. if not found, keep the "null" field.
+            t.field = device.fields_by_telegram_id.get(fieldid, t.field)
         t.rawdata = data[9:dlen-2]
         if t.rawdata:
             t.data = t.field.decode(t.rawdata)
@@ -187,7 +189,7 @@ def runtest():
 
 
     data = s.replace('\n','').replace(' ', '').decode('hex')
-    result = BsbTelegram.deserialize(data)
+    result = BsbTelegram.deserialize(data, None)
 
     for r in result:
         print repr(r)

@@ -21,23 +21,15 @@
 import time
 import os
 
-from bsb.bsb_fields import fields
-
-
 
 class SingleFieldLogger(object):
-    interval = 1
-    disp_id = 0
-    send_get_telegram = None
-    
     _last_save_time = 0
     _last_saved_value = None
     _dtype = ''
     _last_was_value = False
-    filename = ''
     
-    def __init__(o, disp_id, interval=1, atomic_interval=1, send_get_telegram=None, filename=''):
-        o.disp_id = disp_id
+    def __init__(o, field, interval=1, atomic_interval=1, send_get_telegram=None, filename=''):
+        o.field = field
         o.interval = interval
         o.atomic_interval = atomic_interval
         o.send_get_telegram = send_get_telegram
@@ -46,7 +38,7 @@ class SingleFieldLogger(object):
         # list of timestamps when trigger was last fired.
         o.trigger_timestamps = []
         
-        o.filename = filename or '%d.trace'%disp_id
+        o.filename = filename or '%d.trace'%o.field.disp_id
         if not os.path.exists(filename):
             o.log_fieldname()
         o.log_interval()
@@ -94,7 +86,7 @@ class SingleFieldLogger(object):
     def tick(o):
         t = o.get_now()
         if t % o.interval == 0:
-            o.send_get_telegram(o.disp_id)
+            o.send_get_telegram(o.field.disp_id)
             
     def log_value(o, timestamp, value):
         t = o.atomic_interval * int(timestamp  / o.atomic_interval)
@@ -115,9 +107,8 @@ class SingleFieldLogger(object):
         o._last_saved_value = value
             
     def log_fieldname(o):
-        fld = fields[o.disp_id]
-        o._log_append(':disp_id %d'%o.disp_id)
-        o._log_append(':fieldname %s'%fld.disp_name.encode('utf8'))
+        o._log_append(':disp_id %d'%o.field.disp_id)
+        o._log_append(':fieldname %s'%o.field.disp_name.encode('utf8'))
         
     def log_interval(o):
         o._log_append(':interval %d'%o.interval)

@@ -41,16 +41,18 @@ from bsb.bsb_field import EncodeError, ValidateError
 class BsbGateway(object):
     _hub = None
 
-    def __init__(o, serial_port, device, bus_address, loggers, atomic_interval, web_interface_port=8080):
+    def __init__(o, serial_port, device, bus_address, loggers, atomic_interval, web_interface_port=8080, cmd_interface_enable=True):
         o.device = device
         o._bsbcomm = BsbComm('bsb', serial_port, device, bus_address, n_addresses=3)
         o.loggers = loggers
         o.atomic_interval = atomic_interval
         o.web_interface_port = web_interface_port
         o.pending_web_requests = []
+        o._cmd_interface_enable = cmd_interface_enable
         o.cmd_interface = None
         
     def run(o):
+        log().info('BsbGateway (c) J. Loehnert 2013-2015, starting @%s'%time.time())
         for logger in o.loggers:
             logger.send_get_telegram = lambda disp_id: o._bsbcomm.send_get(disp_id)
         
@@ -60,9 +62,11 @@ class BsbGateway(object):
         ]
         
         # Configuration switch tbd
-        if True:
+        if o._cmd_interface_enable:
             o.cmd_interface = CmdInterface(o)
             sources.append(o.cmd_interface)
+        else:
+            log().info('Running without cmdline interface. Use Ctrl+C or SIGTERM to quit.')
         
         if o.web_interface_port:
             sources.append( WebInterface('web', device=o.device, port=o.web_interface_port) )
@@ -164,5 +168,6 @@ def run(config):
         bus_address=config['bus_address'],
         loggers=loggers,
         atomic_interval=config['atomic_interval'],
-        web_interface_port=(config['web_interface_port'] if config['web_interface_enable'] else None)
+        web_interface_port=(config['web_interface_port'] if config['web_interface_enable'] else None),
+        cmd_interface_enable=config['cmd_interface_enable']
     ).run()

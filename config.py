@@ -80,6 +80,12 @@ emailcredentials = ('loginname', 'password')
 
 
 ################################################
+# Cmdline interface configuration
+
+cmd_interface_enable = False
+
+
+################################################
 # Web interface configuration
 
 # Use the web interface?

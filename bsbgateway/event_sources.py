@@ -20,6 +20,8 @@
 
 import sys
 import time
+import logging
+log = lambda: logging.getLogger(__name__)
 
 from Queue import Queue
 from threading import Thread
@@ -85,7 +87,7 @@ class EventSource(object):
         #    print repr(e)
         #    return
         o._running = False
-        print 'event source %s exited.'%o.name
+        log().debug('event source %s exited.'%o.name)
 
     def stop(o):
         '''stop the event source if running.
@@ -97,7 +99,7 @@ class EventSource(object):
         if not o._running:
             return
         if not o.stoppable:
-            print 'event source %s will stop somewhen...'%o.name
+            log().debug('event source %s will stop somewhen...'%o.name)
         o._stopflag = True
 
 

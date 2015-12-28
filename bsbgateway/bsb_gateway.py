@@ -75,7 +75,10 @@ class BsbGateway(object):
         for source in sources:
             o._hub.add_and_start_source(source)
 
-        o._hub.start_thread(o._dispatch_event, new_thread=False)
+        try:
+            o._hub.start_thread(o._dispatch_event, new_thread=False)
+        except KeyboardInterrupt:
+            o.quit()
 
     def _dispatch_event(o, evtype, evdata):
         try:

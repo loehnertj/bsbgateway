@@ -99,7 +99,7 @@ class SingleFieldLogger(object):
         if o._last_saved_value is not None and value == o._last_saved_value:
             o._log_append('~', False)
         else:
-            dtype = _get_format(value)
+            dtype = o.field.type_name
             if dtype != o._dtype:
                 o._log_append(':dtype %s'%dtype)
                 o._dtype = dtype
@@ -124,20 +124,6 @@ class SingleFieldLogger(object):
         fh.write(txt)
         fh.close()
         o._last_was_value = not (txt.startswith(':') or txt.startswith('\n:'))
-        
-        
-def _get_format(val):
-    types = {
-        type(None): 'none',
-        list: 'hex',
-        basestring: 'string',
-        float: 'float',
-        tuple: 'choice',
-    }
-    for t in types:
-        if isinstance(val, t):
-            return types[t]
-    return 'unknown'
         
 def _serialize_value(val):
     if val is None:

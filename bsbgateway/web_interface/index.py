@@ -24,4 +24,4 @@ from templates import tpl
 class Index(object):
     url = r''
     def GET(o):
-        return tpl.base(tpl.index(web.ctx.broetje.groups))
+        return tpl.base(tpl.index(web.ctx.bsb.groups))

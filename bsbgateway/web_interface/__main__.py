@@ -53,7 +53,7 @@ class FakeTelegram(object):
         o.field = FakeField()
         o.timestamp = time.time()
 
-class BroetjeResponder(object):
+class BsbResponder(object):
     def on_event(o, evtype, evdata):
         if evtype == 'web':
             rq = evdata.pop(0)
@@ -72,7 +72,7 @@ class BroetjeResponder(object):
         return t
 
 wi = WebInterface()
-br = BroetjeResponder()
+br = BsbResponder()
 wi.start_thread(br.on_event)
 
 log().warning('Running standalone test server with a mock backend. Press Enter to exit.')

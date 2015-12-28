@@ -36,7 +36,7 @@ _ERRHEADERS = {
 class Field(object):
     url = r'field-([0-9]+)(?:\.([a-zA-Z]+))?'
     def __init__(o):
-        fields = web.ctx.broetje.fields
+        fields = web.ctx.bsb.fields
         o.parameters={
             'field': lambda x: fields[int(x)],
             'value': lambda x: None if x in ('', '--') else float(x),
@@ -51,7 +51,7 @@ class Field(object):
         if view:
             return bridge_call(o, view, q, o.parameters)
         else:
-            field = web.ctx.broetje.fields[int(disp_id)]
+            field = web.ctx.bsb.fields[int(disp_id)]
             return tpl.base(bridge_call(o, 'fragment', q, o.parameters), '{} {}'.format(field.disp_id, field.disp_name))
         
     def POST(o, disp_id, view=None):
@@ -72,8 +72,8 @@ class Field(object):
         return tpl.field_widget(o, field, val)
             
     def value(o, field):
-        # sends event to the BroetjeLogger requesting field's value.
-        queue = web.ctx.broetje.get(field.disp_id)
+        # sends event to the BsbGateway requesting field's value.
+        queue = web.ctx.bsb.get(field.disp_id)
         # blocks until result is available
         t = queue.get()
         if t is None:
@@ -103,7 +103,7 @@ class Field(object):
                 value = int(value)
         field.validate(value)
         log().info('set field %d to value %r'%(field.disp_id, value))
-        queue = web.ctx.broetje.set(field.disp_id, value)
+        queue = web.ctx.bsb.set(field.disp_id, value)
         t = queue.get()
         if t is None:
             raise web.notfound()

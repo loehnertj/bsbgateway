@@ -27,7 +27,7 @@ class Group(object):
     
     def GET(o, disp_id):
         disp_id = int(disp_id)
-        groups = web.ctx.broetje.groups
+        groups = web.ctx.bsb.groups
         g = [g for g in groups if g.disp_id == disp_id]
         if len(g)!=1:
             raise web.notfound()

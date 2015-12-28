@@ -64,10 +64,10 @@ class WebInterface(EventSource):
         print_handlers(urls)
         
         app = web.application(urls)
-        app.add_processor(add_to_ctx(Web2Broetje(o.name, o.device, putevent), 'broetje'))
+        app.add_processor(add_to_ctx(Web2Bsb(o.name, o.device, putevent), 'bsb'))
         web.httpserver.runsimple(app.wsgifunc(), ("0.0.0.0", o.port)) 
 
-class Web2Broetje(object):
+class Web2Bsb(object):
     '''provides the connection from web to backend.'''
     def __init__(o, evname, device, putevent):
         o.evname = evname

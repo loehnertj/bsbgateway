@@ -137,9 +137,12 @@ class BsbGateway(object):
         sources = [
             StdinSource('stdin'),
             SyncedSecondTimerSource('timer'),
-            WebInterface('web', device=o.device, port=o.web_interface_port),
             o._bsbcomm,
         ]
+        
+        if o.web_interface_port:
+            sources.append( WebInterface('web', device=o.device, port=o.web_interface_port) )
+            
         o._hub = HubSource()
         for source in sources:
             o._hub.add_and_start_source(source)
@@ -385,5 +388,5 @@ def run(config):
         bus_address=config['bus_address'],
         loggers=loggers,
         atomic_interval=config['atomic_interval'],
-        web_interface_port=config['web_interface_port']
+        web_interface_port=(config['web_interface_port'] if config['web_interface_enable'] else None)
     ).run()

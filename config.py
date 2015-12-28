@@ -82,6 +82,9 @@ emailcredentials = ('loginname', 'password')
 ################################################
 # Web interface configuration
 
+# Use the web interface?
+web_interface_enable = True
+
 # Port on which the web interface shall listen.
 web_interface_port = 8081
 

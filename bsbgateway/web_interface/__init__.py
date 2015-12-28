@@ -21,7 +21,6 @@
 from Queue import Queue
 import logging
 log = lambda: logging.getLogger(__name__)
-from datetime import datetime
 import web
 
 from event_sources import EventSource
@@ -137,8 +136,5 @@ class MyLogMiddleware:
         method = environ.get('REQUEST_METHOD', '-')
         host = "%s:%s" % (environ.get('REMOTE_ADDR','-'), 
                           environ.get('REMOTE_PORT','-'))
-
-        time = datetime.now().isoformat()
-
         msg = self.template.format(**locals())
         log().info(msg)

@@ -21,7 +21,9 @@
 from Queue import Queue
 import logging
 log = lambda: logging.getLogger(__name__)
+from datetime import datetime
 import web
+
 from event_sources import EventSource
 from index import Index
 from field import Field
@@ -54,6 +56,7 @@ class WebInterface(EventSource):
         o.device = device
         o.port = port
         o.stoppable = False
+        o.server = None
         
     def run(o, putevent):
         urls = []
@@ -65,7 +68,24 @@ class WebInterface(EventSource):
         
         app = web.application(urls)
         app.add_processor(add_to_ctx(Web2Bsb(o.name, o.device, putevent), 'bsb'))
-        web.httpserver.runsimple(app.wsgifunc(), ("0.0.0.0", o.port)) 
+        #web.httpserver.runsimple(app.wsgifunc(), ("0.0.0.0", o.port)) 
+        o.server = o.startserver(app.wsgifunc(), o.port)
+        
+    def startserver(o, func, port):
+        from web.httpserver import WSGIServer, StaticMiddleware
+        func = StaticMiddleware(func)
+        func = MyLogMiddleware(func)
+    
+        o.server = WSGIServer(("0.0.0.0", port), func)
+
+        log().info("Web interface listening on http://0.0.0.0:%d/" % port)
+
+        o.server.start()
+        
+    def stop(o):
+        if o.server:
+            o.server.stop()
+            o.server = None
 
 class Web2Bsb(object):
     '''provides the connection from web to backend.'''
@@ -93,3 +113,32 @@ class Web2Bsb(object):
         o.putevent(o.evname, [rq, 'set', disp_id, value])
         return rq
         
+        
+# Ripped from web.httpserver, and somewhat modified.
+# LICENSE NOTICE: web.py is Public Domain. So this class is exempt from the GPL claim.
+class MyLogMiddleware:
+    """WSGI middleware for logging the status."""
+    def __init__(self, app):
+        self.app = app
+        self.template = '{host}: {method} {req} - {status}'
+        
+    def __call__(self, environ, start_response):
+        def xstart_response(status, response_headers, *args):
+            out = start_response(status, response_headers, *args)
+            self.log(status, environ)
+            return out
+
+        return self.app(environ, xstart_response)
+             
+    def log(self, status, environ):
+        outfile = environ.get('wsgi.errors', web.debug)
+        req = environ.get('PATH_INFO', '_')
+        protocol = environ.get('ACTUAL_SERVER_PROTOCOL', '-')
+        method = environ.get('REQUEST_METHOD', '-')
+        host = "%s:%s" % (environ.get('REMOTE_ADDR','-'), 
+                          environ.get('REMOTE_PORT','-'))
+
+        time = datetime.now().isoformat()
+
+        msg = self.template.format(**locals())
+        log().info(msg)

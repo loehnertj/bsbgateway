@@ -3,7 +3,7 @@ Read and write data on a BSB (Boiler System Bus).
 
 Functionalities offered:
 
- * Commandline interface. Enter `help` to get list of commands, `help <cmd>` for documentation of a specific command.
+ * [Commandline interface](doc/cmdline.md). Enter `help` to get list of commands, `help <cmd>` for documentation of a specific command.
  * Web interface at port :8081 (e.g. http://localhost:8081)
  * Logging of fields with preset interval. The logs are written in ASCII `.trace` files. Format description and viewer are to be done...
 

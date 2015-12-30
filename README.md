@@ -1,11 +1,11 @@
 # bsbgateway
-Read and write data on a BSB (Boiler System Bus).
+Read and write data on a [BSB](doc/protocol.md) (Boiler System Bus).
 
 Functionalities offered:
 
  * [Commandline interface](doc/cmdline.md). Enter `help` to get list of commands, `help <cmd>` for documentation of a specific command.
- * Web interface at port :8081 (e.g. http://localhost:8081)
- * Logging of fields with preset interval. The logs are written in ASCII `.trace` files. Format description and viewer are to be done...
+ * [Web interface](doc/web.md) at port :8081 (e.g. http://localhost:8081)
+ * [Logging of fields](doc/logging.md) with preset interval. The logs are written in ASCII `.trace` files. Format description and viewer are to be done...
 
 ## Installation
 

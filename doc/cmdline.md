@@ -9,9 +9,9 @@ The following commands are defined:
 
  * `help [<cmd>]` - help on specific command, or list of commands.
  * `quit` - Stops BsbGateway.
- * `get <field>` - request and print value of field with ID <field> once.
+ * `get <field>` - request and print value of field with ID `<field>` once.
    The ID is the value as seen on the standard LCD display. 
- * `set <field> <value>[!]` - set value of field with ID <field>. See [below](#setting-values).
+ * `set <field> <value>[!]` - set value of field with ID `<field>`. See [below](#setting-values).
  * `list [#][<text>][+]`: list field groups. See [below](#listing-fields).
  * `info <id>[ <id>...]`: print field descriptions for the given field ids.
  * `dump [<expr>]` - dump received data matching the filter. See [below](#sniffing-the-bus).
@@ -36,7 +36,7 @@ The `info` command gives detailed information about one or more fields.
     
 ## Setting values
     
-`set <field> <value>[!]` - sets value of field with ID <field>.
+`set <field> <value>[!]` - sets value of field with ID `<field>`.
 The ID is the value as seen on the standard LCD display.
 
 Depending of the type of the field, the value must be entered as follows:
@@ -48,7 +48,7 @@ Depending of the type of the field, the value must be entered as follows:
  
 By default, you can only set "writable" fields, and the value is bound checked.
 
-You can use  "!" after the value to disable validation. This will send
+You can use  `!` after the value to disable validation. This will send
 anything as long as it can be converted into bytes. **Be extremely careful.
 You might DESTROY your device with this. USE AT YOUR OWN RISK.**
 
@@ -58,14 +58,14 @@ You might DESTROY your device with this. USE AT YOUR OWN RISK.**
 `dump [<expr>]` dumps all telegrams matching the filter defined by `<expr>`. This
 looks at everything going over the bus.
 
-<expr> is a python expression(*). In the expression you can use the variables:
+`<expr>` is a python expression(*). In the expression you can use the variables:
  * `src` - source bus address ex. `src=10`
  * `dst` - destination bus address ex. `dst=0`
  * `field` - disp id of field ex. `field=8510`
  * `fieldhex` - hex (bus visible) id of field ex. `fieldhex=0x493d052a`
  * `type` - ret, get, set, ack, inf ex. `type=ack`
     
-The result of the expression must be True or False. To make life easier, you can
+The result of the expression must be True or False. (*) To make life easier, you can
 compare with single `=`, and no quotes are required around the type names (e.g. "ack").
 
 Special cases:

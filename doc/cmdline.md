@@ -11,10 +11,10 @@ The following commands are defined:
  * `quit` - Stops BsbGateway.
  * `get <field>` - request and print value of field with ID <field> once.
    The ID is the value as seen on the standard LCD display. 
- * `set <field> <value>[!]` - set value of field with ID <field>. See [below](#Setting-values).
- * `list [#][<text>][+]`: list field groups. See [below](#Listing-fields).
+ * `set <field> <value>[!]` - set value of field with ID <field>. See [below](#setting-values).
+ * `list [#][<text>][+]`: list field groups. See [below](#listing-fields).
  * `info <id>[ <id>...]`: print field descriptions for the given field ids.
- * `dump [<expr>]` - dump received data matching the filter. See [below](#Sniffing-the-bus).
+ * `dump [<expr>]` - dump received data matching the filter. See [below](#sniffing-the-bus).
  
 ## Listing fields
 

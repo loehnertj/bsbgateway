@@ -162,7 +162,7 @@ def run(config):
     for trigger in config['triggers']:
         disp_id = trigger[0]
         for logger in loggers:
-            if logger.disp_id == disp_id:
+            if logger.field.disp_id == disp_id:
                 logger.add_trigger(emailaction, *trigger[1:])
                 
     BsbGateway(

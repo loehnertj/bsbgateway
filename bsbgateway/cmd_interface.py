@@ -275,7 +275,7 @@ Commands: (every command can be abbreviated to just the first character)
                 'inf':'inf', 'get':'get', 'ret':'ret', 'set':'set', 'ack':'ack'
             })
         except Exception as e:
-            logging.error('error applying filter: %r'%e)
+            log().error('error applying filter: %r'%e)
             ff = False
         if which_address==1 or ff is True:
             print repr(telegram)

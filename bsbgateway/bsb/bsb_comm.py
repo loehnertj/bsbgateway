@@ -19,6 +19,7 @@
 ##############################################################################
 
 import logging
+log = lambda: logging.getLogger(__name__)
 from event_sources import EventSource
 from serial_source import SerialSource
 from fake_serial_source import FakeSerialSource
@@ -112,7 +113,7 @@ class BsbComm(EventSource):
                         which_address = None
                     result.append((which_address, t))
             elif t[1] != 'incomplete telegram':
-                logging.info('++++%r :: %s'%t )
+                log().info('++++%r :: %s'%t )
         return result
                 
     def send_get(o, disp_id, which_address=0):

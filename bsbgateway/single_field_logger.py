@@ -103,7 +103,7 @@ class SingleFieldLogger(object):
             if dtype != o._dtype:
                 o._log_append(':dtype %s'%dtype)
                 o._dtype = dtype
-            o._log_append('%s'%_serialize_value(value))
+            o._log_append('%s'%_serialize_value(value, dtype))
         o._last_saved_value = value
             
     def log_fieldname(o):
@@ -125,14 +125,19 @@ class SingleFieldLogger(object):
         fh.close()
         o._last_was_value = not (txt.startswith(':') or txt.startswith('\n:'))
         
-def _serialize_value(val):
+def _serialize_value(val, dtype):
     if val is None:
-        return ''
-    if isinstance(val, list):
+        return '--'
+    if dtype == '':
+        # unknown field type, save raw hex code
         return ''.join(map(chr, val)).encode('hex')
-    if isinstance(val, basestring):
-        return val
-    if isinstance(val, float):
+    elif dtype in ['int16', 'temperature']:
         return '%g'%val
-    if isinstance(val, tuple):
+    elif dtype == 'int8':
+        return '%g'%val
+    elif dtype == 'choice':
         return '%g'%val[0]
+    elif dtype == 'time':
+        return '%02.0d:%02.0d'%(val.hour, val.minute)
+    else:
+        raise ValueError('Cannot save values of type %s'%dtype)

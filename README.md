@@ -5,7 +5,7 @@ Functionalities offered:
 
  * [Commandline interface](doc/cmdline.md). Enter `help` to get list of commands, `help <cmd>` for documentation of a specific command.
  * [Web interface](doc/web.md) at port :8081 (e.g. http://localhost:8081)
- * [Logging of fields](doc/logging.md) with preset interval. The logs are written in ASCII `.trace` files. Format description and viewer are to be done...
+ * [Logging of fields](doc/logging.md) with preset interval. The logs are written in ASCII `.trace` files and can be loaded with `trace/load_trace.py` into `numpy` arrays.
 
 ## Installation
 

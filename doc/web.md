@@ -24,7 +24,7 @@ Multiple subqueries exist. Replace `<number>` with the 4-digit field number in e
 
  * `/field-<number>`, e.g. `/field-1620` - displays the field as a standalone page.
 
- * `/field-<number>.fragment` - returns only the body i.e. everything in the <body> tag.
+ * `/field-<number>.fragment` - returns only the body part of the page.
  
  * `/field-<number>.widget` - returns only the value part. In case of a readonly field, this is the formatted value; in case of a readwrite field, the HTML form.
  
@@ -47,4 +47,4 @@ To **set** a value, `POST` to `/field-<number>`. Depending on the value, you nee
  * For all other types, give `value`: a float number in the usual notation (`.` as decimal, `e+01` is allowed).
  * To set a nullable field to NULL, `POST` without any parameters.
  
-Only valid values can be set. You cannot override validation from the web interface (as opposed to the [Commandline Interface](cmdline.md) ).
+Only valid values can be set. You cannot override validation from the web interface (as opposed to the [Commandline Interface](cmdline.md)).

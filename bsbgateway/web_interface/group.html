@@ -23,22 +23,26 @@ $code:
 
 
 <script type="text/javascript">
-    _DELAY = 200; // ms
-    $$(document).ready(function() {
-        $$('.fieldcontainer').each(function(n, elem){
+    _DELAY = 500; // ms
+    function load_all() {
+        $$('.fieldwidget').each(function(n, elem){
             // set timer to load each field after progressive delay.
             setTimeout(
                 function() {
-                    var disp_id = $$(elem).find('.disp_id').text();
-                    $$(elem).load('field-'+disp_id+'.fragment');
+                    var disp_id = $$(elem).attr('id').replace('fieldwidget-', '');
+                    $$(elem).load('field-'+disp_id+'.widget');
                 },
                 n*_DELAY
             );
         });
-    });
+    }
 </script>
+
+<button onclick="load_all();">Load all</button>
 
 <ul>
 $for f in group.fields:
-    <li class="fieldcontainer" id="fieldcontainer-$f.disp_id"><span class="disp_id">$f.disp_id</span>: ...</li>
+    <li class="fieldcontainer" id="fieldcontainer-$f.disp_id">
+        $:field_func(f)
+    </li>
 </ul>

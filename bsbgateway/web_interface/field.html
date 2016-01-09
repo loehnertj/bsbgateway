@@ -24,6 +24,6 @@ $code:
 
 <span class="fieldid">$field.disp_id</span> <span class="fieldname">$field.disp_name</span>:
 <span class="fieldwidget" id="fieldwidget-$field.disp_id">
-    $:SELF.widget(field)
+    <button onclick="$$('#fieldwidget-$field.disp_id').load('field-$(field.disp_id).widget');" value="Load">Load</button>
 </span>
 <span class="fieldsetresult" id="fieldsetresult-$field.disp_id"></span>

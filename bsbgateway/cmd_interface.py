@@ -150,7 +150,7 @@ class CmdInterface(EventSource):
             try:
                 if field.type_name in ['choice', 'int8']:
                     value = int(value)
-                elif field.type_name in ['int16', 'temperature']:
+                elif field.type_name in ['int16', 'temperature', 'int32']:
                     value = float(value)
                 elif field.type_name in ['time']:
                     value = datetime.time(*map(int, value.split(':')))

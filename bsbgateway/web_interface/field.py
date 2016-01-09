@@ -121,7 +121,7 @@ class Field(object):
             return "%g %s"%(value, field.unit)
         
     def fmt_range(o, field):
-        if field.type_name in ('int16', 'temperature'):
+        if field.type_name in ('int16', 'temperature', 'int32'):
             mn, mx = field.min/field.divisor, field.max/field.divisor
         else:
             mn, mx = field.min, field.max

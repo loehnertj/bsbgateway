@@ -20,6 +20,7 @@ converters = {
     'int8': int,
     'temperature': float,
     'int16': float,
+    'int32': float,
     'time': lambda x: time(*map(int, x.split(':')))
 }
 

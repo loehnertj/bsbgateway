@@ -131,7 +131,7 @@ def _serialize_value(val, dtype):
     if dtype == '':
         # unknown field type, save raw hex code
         return ''.join(map(chr, val)).encode('hex')
-    elif dtype in ['int16', 'temperature']:
+    elif dtype in ['int16', 'temperature', 'int32']:
         return '%g'%val
     elif dtype == 'int8':
         return '%g'%val

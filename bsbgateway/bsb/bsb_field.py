@@ -22,7 +22,11 @@
 
 from datetime import time
 
-__all__ = ['EncodeError', 'ValidateError', 'BsbField', 'BsbFieldChoice', 'BsbFieldInt8', 'BsbFieldInt16', 'BsbFieldTemperature', 'BsbFieldTime']
+__all__ = ['EncodeError', 'ValidateError', 
+           'BsbField', 'BsbFieldChoice', 'BsbFieldInt8', 'BsbFieldInt16',
+           'BsbFieldTemperature', 'BsbFieldInt32', 'BsbFieldOperatingHours',
+           'BsbFieldTime',
+           ]
 
 class EncodeError(Exception): pass
 class ValidateError(Exception): pass
@@ -303,6 +307,64 @@ class BsbFieldTemperature(BsbFieldInt16):
     type_description = u'Temperature'
     def __init__(o, telegram_id, disp_id, disp_name, rw=False, nullable=False, min=None, max=None, *args, **kwargs):
         BsbFieldInt16.__init__(o, unit=u'°C', divisor=64.0, **xo(locals()))
+        
+class BsbFieldInt32(BsbField):
+    '''numeric value encoded as <flag> + int32, variable unit.
+    optional divisor can be given for fixed-point field (when reading, 
+    int value is divided by divisor).'''
+    type_name = 'int32'
+    type_description = u'Fixed-point 16-bit'
+    
+    def __init__(o, telegram_id, disp_id, disp_name, unit=u'', rw=False, nullable=False, divisor=1, min=None, max=None, *args, **kwargs):
+        BsbField.__init__(o, **xo(locals()))
+        o.divisor = divisor
+        o.min = -0x80000000 if min is None else int(min*divisor)
+        o.max = 0x7fffffff if max is None else int(max*divisor)
+        
+    @property
+    def _extra_description(o):
+        return u'''Allowed range: {min} ... {max} in steps of {fmdiv:g}.'''.format(
+            min=o.min/o.divisor,
+            max=o.max/o.divisor,
+            fmdiv=1.0/o.divisor,
+        )
+        
+    def _decode_data(o, rawdata):
+        assert len(rawdata)==5
+        val = rawdata[1]*0x1000000 + rawdata[2]*0x10000 + rawdata[3]*0x100 + rawdata[4]
+        if val >= 0x80000000:
+            val-= 0x100000000
+        return val/o.divisor
+    
+    def _validate_data(o, value):
+        prefix = 'Field %s: Value %r'%(o.disp_id, value)
+        try:
+            value = int(value*o.divisor)
+        except (TypeError, ValueError):
+            raise ValidateError(prefix +' cannot be converted to int.')
+        if value < o.min:
+            raise ValidateError(prefix +' is below min value of %d'%(o.min/o.divisor))
+        if value > o.max:
+            raise ValidateError(prefix +'is above max value of %d'%(o.max/o.divisor))
+        raise ValidateError('Field %s: Value encoding for int32-set is not verified on actual hardware yet. Aborting.')
+    
+    def _encode_data(o, value, flag):
+        if value is None:
+            return [flag, 0, 0, 0, 0]
+        try:
+            value = int(value*o.divisor)
+        except (TypeError, ValueError):
+            raise EncodeError('Value cannot be cast to int: %r'%value)
+        if value < -0x80000000 or value >= 0x80000000:
+            raise EncodeError('Not a int32 value: %r'%(value,))
+        if value<0:
+            value += 0x100000000
+        return [flag, (value // 0x1000000) & 0xff, (value // 0x10000) & 0xff, (value // 0x100) & 0xff, value & 0xff]
+    
+class BsbFieldOperatingHours(BsbFieldInt32):
+    # Do not override type_name here - to the outside it looks like a standard BsbFieldInt32
+    def __init__(o, telegram_id, disp_id, disp_name, rw=False, nullable=False, min=None, max=None, *args, **kwargs):
+        BsbFieldInt16.__init__(o, unit=u'h', divisor=3600.0, **xo(locals()))
         
 class BsbFieldTime(BsbField):
     '''time encoded as <flag> <hour> <minute>.

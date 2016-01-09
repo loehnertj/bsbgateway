@@ -1,3 +1,17 @@
+_DELAY = 500; // ms
+function load_all() {
+    $('.fieldwidget').each(function(n, elem){
+        // set timer to load each field after progressive delay.
+        setTimeout(
+            function() {
+                var disp_id = $(elem).attr('id').replace('fieldwidget-', '');
+                $(elem).load('field-'+disp_id+'.widget');
+            },
+            n*_DELAY
+        );
+    });
+}
+
 function submit_field_null(elem) {
     return submit_field(elem, {});
 }

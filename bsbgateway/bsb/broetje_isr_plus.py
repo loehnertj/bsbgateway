@@ -117,12 +117,8 @@ groups = [
         BsbFieldInt16(0x493D050C, 3884, u'Pumpendurchfluss', unit=u'l/h', min=10, max=1500, **RW),
         BsbFieldInt16(0x053D0F93, 3887, u'Impulseinheit Ertrag', unit=u'l', divisor=10.0, min=0, max=100, **RW),
     ]),
-    
-    Group(8000, u"8000 Diagnose", [
-        # Statusfelder
-        BsbFieldTemperature(0x493d052a, 8510, u'Kollektortemperatur 1', ),
-        BsbFieldTemperature(0x313d052f, 8830, u'Trinkwassertemperatur 1', ),
-        BsbFieldTemperature(0x0d3d0519, 8310, u'Kesseltemperatur', ),
+        
+    Group(8000, u"8000 Status", [
         BsbFieldChoice(0x053d07ae, 8007, u'Status Solar', choices={
             4  : u"Handbetrieb aktiv",
             2  : u"Störung",
@@ -163,7 +159,19 @@ groups = [
             25 : u"Aus",
             200: u"Bereit",
         }),
+    ]),
+    
+    Group(8300, u"8300 Diagnose Erzeuger", [
+        BsbFieldTemperature(0x0d3d0519, 8310, u'Kesseltemperatur', ),
+    ]),
+    
+    Group(8400, u"8400 Diagnose Solar", [
+        BsbFieldTemperature(0x493d052a, 8510, u'Kollektortemperatur 1', ),
+    ]),
+    
+    Group(8510, u"8700 Diagnose Verbraucher", [
         BsbFieldTemperature(0x053d0521, 8700, u'Außentemperatur', ),
+        BsbFieldTemperature(0x313d052f, 8830, u'Trinkwassertemperatur 1', ),
     ]),
         
     Group(0, "Unsortiert", [

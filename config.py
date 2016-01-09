@@ -3,6 +3,8 @@
 ################################################
 # Python configuration
 
+# See https://docs.python.org/2/library/logging.html on how to configure logging.
+# You will probably want to set filename='something.log'.
 import logging
 logging.basicConfig(level='DEBUG', format='%(levelname)s %(name)s:%(lineno)d -- %(message)s')
 

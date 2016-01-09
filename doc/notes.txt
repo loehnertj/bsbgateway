@@ -1,0 +1,247 @@
+# This file contains sniffed telegrams for reverse-engineering field types and finding field (hex) ids.
+# Unsorted dump of stuff with german comments. :-/
+
+<BsbTelegram 0 -> 127: inf 0x05000219 = [3, 106, 0, 0, 60, 132, 255, 255, 255, 255, 0, 12]>
+05000219 = 3 106 0 0 60 132 255 255 255 255 0 12 = Datum+Uhrzeit
+<BsbTelegram 0 -> 127: inf 0x31000212 = [1, 0, 69]>
+31000212 = 1 0 69 ???
+<BsbTelegram 0 -> 127: inf 10100 Brenner = [0, 0, 0, 217]>
+10100 = 0,0,0,217 (aus?)
+<BsbTelegram 10 -> 127: inf 10101 Zeit = [0, 113, 8, 20, 2, 22, 8, 36, 1]>
+<BsbTelegram 0 -> 127: inf 10103 HK2 - TBD = [0, 0, 255, 255, 255, 255, 255, 255, 0, 0]>
+<BsbTelegram 0 -> 127: inf 0x2F000211 = [0, 0, 255, 255, 255, 255, 255, 255, 0, 0]>
+
+0x053D06E8	[48, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] = Telefon Kundendienst == 0
+
+
+
+Setzen:
+3816 (Temperatur)
+
+# set 8.5°C
+<BsbTelegram 10 -> 0: set 3810 Solar - Temperaturdifferenz EIN = None °C [raw:01 02 20 ] @1449653144.903610>
+<BsbTelegram 0 -> 10: ack 3810 Solar - Temperaturdifferenz EIN = None °C [raw:] @1449653145.005735>
+# set 4°C
+<BsbTelegram 10 -> 0: set 3811 Solar -Temperaturdifferenz AUS = None °C [raw:01 01 00 ] @1449653193.979457>
+<BsbTelegram 0 -> 10: ack 3811 Solar -Temperaturdifferenz AUS = None °C [raw:] @1449653194.081088>
+
+# auf -- gesetzt
+<BsbTelegram 10 -> 0: set 3812 Solar - Ladetemp Min TWW-Speicher = 8.0 °C [raw:05 02 00 ] @1449653581.521296>
+<BsbTelegram 0 -> 10: ack 3812 Solar - Ladetemp Min TWW-Speicher = None °C [raw:] @1449653581.620808>
+# normal gesetzt
+<BsbTelegram 10 -> 0: set 3812 Solar - Ladetemp Min TWW-Speicher = 41.0 °C [raw:06 0A 40 ] @1449653498.824689>
+<BsbTelegram 0 -> 10: ack 3812 Solar - Ladetemp Min TWW-Speicher = None °C [raw:] @1449653498.925921>
+
+# Tempdifferenz AUS Puffer: 0°C
+<BsbTelegram 10 -> 0: set 0x493D0ADD = [6, 0, 0] [raw:06 00 00 ] @1449653655.016648>
+<BsbTelegram 0 -> 10: ack 0x493D0ADD = None [raw:] @1449653655.176503>
+# --
+<BsbTelegram 10 -> 0: set 0x493D0ADD = [5, 0, 0] [raw:05 00 00 ] @1449653659.078025>
+<BsbTelegram 0 -> 10: ack 0x493D0ADD = None [raw:] @1449653659.176550>
+
+# 60 s
+<BsbTelegram 10 -> 0: set 3828 Solar - Verzögerung Sekundärpumpe = None sec [raw:01 00 3C ] @1449653787.790198>
+<BsbTelegram 0 -> 10: ack 3828 Solar - Verzögerung Sekundärpumpe = None sec [raw:] @1449653787.890599>
+
+<BsbTelegram 10 -> 0: set 3812 Solar - Ladetemp Min TWW-Speicher = 40.0 °C [raw:06 0A 00 ] @1449653503.005758>
+<BsbTelegram 0 -> 10: ack 3812 Solar - Ladetemp Min TWW-Speicher = None °C [raw:] @1449653503.105164>
+
+# 5min
+<BsbTelegram 10 -> 0: set 3830 Solar - Kollektorstartfunktion = 5 min [raw:06 05 ] @1449653838.984828>
+<BsbTelegram 0 -> 10: ack 3830 Solar - Kollektorstartfunktion = None min [raw:] @1449653839.080084>
+# --
+<BsbTelegram 10 -> 0: set 3830 Solar - Kollektorstartfunktion = 5 min [raw:05 05 ] @1449653841.439631>
+<BsbTelegram 0 -> 10: ack 3830 Solar - Kollektorstartfunktion = None min [raw:] @1449653841.534874>
+
+<BsbTelegram 10 -> 0: set 3812 Solar - Ladetemp Min TWW-Speicher = 40.0 °C [raw:06 0A 00 ] @1449653503.005758>
+<BsbTelegram 0 -> 10: ack 3812 Solar - Ladetemp Min TWW-Speicher = None °C [raw:] @1449653503.105164>
+
+# Kollektor start ein 07:00 Uhr
+<BsbTelegram 10 -> 0: set 3832 Solar - Kollektorstartfunktion ein = None [raw:01 07 00 ] @1449653914.164094>
+<BsbTelegram 0 -> 10: ack 3832 Solar - Kollektorstartfunktion ein = None [raw:] @1449653914.263601>
+
+<BsbTelegram 10 -> 0: set 3850 Solar - Kollektorüberhitzschutz = 81.0 °C [raw:06 14 40 ] @1449653969.817147>
+<BsbTelegram 10 -> 0: set 3860 Solar - Verdampfung Wärmeträger = 129.0 °C [raw:06 20 40 ] @1449654047.075983>
+
+<BsbTelegram 10 -> 0: set 3880 Solar - Frostschutzmittel = u'<Unknown state: 260>' [raw:01 04 ] @1449654130.050368>
+<BsbTelegram 10 -> 0: set 3880 Solar - Frostschutzmittel = u'<Unknown state: 259>' [raw:01 03 ] @1449654133.290039>
+
+# Solar Impulseinheit Ertrag 1.6l / 10l (zweite Zeile), nicht nullable
+<BsbTelegram 10 -> 0: set 3887 Solar - FIXME = None l [raw:01 00 10 ] @1449654179.550144>
+<BsbTelegram 10 -> 0: set 3887 Solar - FIXME = None l [raw:01 00 64 ] @1449654190.929496>
+
+
+#0560 Zeitprogramm TWW:
+
+Montag = 560
+0x053D0AA1 = None [raw:] @1452197678.909783>
+Dienstag
+<BsbTelegram 0 -> 10: ret 0x053D0AA1 = [18, 30, 24, 0, 152, 0, 24, 0, 152, 0, 24, 0] [raw:12 1E 18 00 98 00 18 00 98 00 18 00 ] @1452197679.025493>
+Mittwoch
+<BsbTelegram 10 -> 0: get 0x053D0AA2 = None [raw:] @1452197679.179116>
+<BsbTelegram 0 -> 10: ret 0x053D0AA2 = [18, 30, 24, 0, 152, 0, 24, 0, 152, 0, 24, 0] [raw:12 1E 18 00 98 00 18 00 98 00 18 00 ] @1452197679.294816>
+<BsbTelegram 10 -> 0: get 0x053D0AA3 = None [raw:] @1452197679.451309>
+<BsbTelegram 0 -> 10: ret 0x053D0AA3 = [18, 30, 24, 0, 152, 0, 24, 0, 152, 0, 24, 0] [raw:12 1E 18 00 98 00 18 00 98 00 18 00 ] @1452197679.564118>
+<BsbTelegram 10 -> 0: get 0x053D0AA4 = None [raw:] @1452197679.719044>
+<BsbTelegram 0 -> 10: ret 0x053D0AA4 = [18, 30, 24, 0, 152, 0, 24, 0, 152, 0, 24, 0] [raw:12 1E 18 00 98 00 18 00 98 00 18 00 ] @1452197679.833368>
+<BsbTelegram 10 -> 0: get 0x053D0AA5 = None [raw:] @1452197679.988969>
+<BsbTelegram 0 -> 10: ret 0x053D0AA5 = [18, 30, 24, 0, 152, 0, 24, 0, 152, 0, 24, 0] [raw:12 1E 18 00 98 00 18 00 98 00 18 00 ] @1452197680.105104>
+Sonntag
+<BsbTelegram 10 -> 0: get 0x053D0AA6 = None [raw:] @1452197680.485716>
+<BsbTelegram 0 -> 10: ret 0x053D0AA6 
+
+Mo-So: Mo (ID560) wird abgerufen
+Mo-Fr: Mo
+Sa-So: Sa
+
+
+## Setzen:
+Sa-So 18:30 -> 18:40 -> 18:30:
+<BsbTelegram 10 -> 0: set 0x053D0AA5 = [18, 40, 24, 0, 128, 0, 0, 0, 128, 0, 0, 0] [raw:12 28 18 00 80 00 00 00 80 00 00 00 ] @1452197858.878220>
+<BsbTelegram 0 -> 10: ack 0x053D0AA5 = None [raw:] @1452197859.025831>
+<BsbTelegram 10 -> 0: set 0x053D0AA6 = [18, 40, 24, 0, 128, 0, 0, 0, 128, 0, 0, 0] [raw:12 28 18 00 80 00 00 00 80 00 00 00 ] @1452197859.145362>
+<BsbTelegram 0 -> 10: ack 0x053D0AA6 = None [raw:] @1452197859.292773>
+<BsbTelegram 10 -> 0: get 0x053D0AA5 = None [raw:] @1452197859.385231>
+<BsbTelegram 0 -> 10: ret 0x053D0AA5 = [18, 40, 24, 0, 152, 0, 24, 0, 152, 0, 24, 0] [raw:12 28 18 00 98 00 18 00 98 00 18 00 ] @1452197859.500694>
+<BsbTelegram 10 -> 127: inf 10101 Zeit = [0, 116, 1, 7, 4, 21, 39, 38, 0] [raw:00 74 01 07 04 15 27 26 00 ] @1452197860.843185>
+
+<BsbTelegram 10 -> 0: set 0x053D0AA5 = [18, 30, 24, 0, 128, 0, 0, 0, 128, 0, 0, 0] [raw:12 1E 18 00 80 00 00 00 80 00 00 00 ] @1452197863.877494>
+<BsbTelegram 0 -> 10: ack 0x053D0AA5 = None [raw:] @1452197864.024893>
+<BsbTelegram 10 -> 0: set 0x053D0AA6 = [18, 30, 24, 0, 128, 0, 0, 0, 128, 0, 0, 0] [raw:12 1E 18 00 80 00 00 00 80 00 00 00 ] @1452197864.144893>
+<BsbTelegram 0 -> 10: ack 0x053D0AA6 = None [raw:] @1452197864.292561>
+<BsbTelegram 10 -> 0: get 0x053D0AA5 = None [raw:] @1452197864.384546>
+<BsbTelegram 0 -> 10: ret 0x053D0AA5 = [18, 30, 24, 0, 152, 0, 24, 0, 152, 0, 24, 0] [raw:12 1E 18 00 98 00 18 00 98 00 18 00 ] @1452197864.500120>
+
+
+Sa (1.P.Aus -> 22:00) - 2. P. Ein 22:50
+<BsbTelegram 10 -> 0: set 0x053D0AA5 = [18, 30, 22, 0, 22, 50, 24, 0, 128, 0, 0, 0] [raw:12 1E 16 00 16 32 18 00 80 00 00 00 ] @1452198180.427719>
+
+2.P. Ein --> --
+<BsbTelegram 10 -> 0: set 0x053D0AA5 = [18, 30, 22, 0, 128, 0, 0, 0, 128, 0, 0, 0] [raw:12 1E 16 00 80 00 00 00 80 00 00 00 ] @1452198215.799435>
+
+
+#8000 Status
+<BsbTelegram 0 -> 10: ret 8000 Status Heizkreis 1 = [0, 114] [raw:00 72 ] @1452198425.952004>
+<BsbTelegram 0 -> 10: ret 8001 Status Heizkreis 2 = [0, 0] [raw:00 00 ] @1452198428.340391>
+# 8002
+<BsbTelegram 0 -> 10: ret 0x053D07A7 = [0, 0] [raw:00 00 ] @1452198429.750303>
+# 8003
+<BsbTelegram 0 -> 10: ret 0x053D07A1 = [0, 99] [raw:00 63 ] @1452198431.020720>
+<BsbTelegram 0 -> 10: ret 8005 Status Kessel = [0, 167] [raw:00 A7 ] @1452198432.312417>
+# 8007
+<BsbTelegram 0 -> 10: ret 0x053D07AD = [0, 63] [raw:00 3F ] @1452198433.470623>
+# 8008
+<BsbTelegram 0 -> 10: ret 0x053D0A08 = [0, 0] [raw:00 00 ] @1452198434.732931>
+# 8009
+<BsbTelegram 0 -> 10: ret 0x053D0F66 = [0, 18] [raw:00 12 ] @1452198436.072125>
+# 8010
+<BsbTelegram 0 -> 10: ret 0x053D07AB = [0, 0] [raw:00 00 ] @1452198437.420432>
+# 8011
+<BsbTelegram 0 -> 10: ret 0x053D0AFC = [0, 0] [raw:00 00 ] @1452198438.521584>
+
+
+#8300 Diagnose Erzeuger / #8500 Diagnose Solar
+8304 Kesselpumpe Q1 (Ein) <BsbTelegram 0 -> 10: ret 0x053D09A2 = [0, 255] [raw:00 FF ] @1452198593.243269>
+8308 Drehzahl Kesselpumpe (%) <BsbTelegram 0 -> 10: ret 0x053D0826 = [0, 30] [raw:00 1E ] @1452198595.477738>
+8310 Kesseltemperatur <BsbTelegram 0 -> 10: ret 8310 Kesseltemperatur = 40.125 °C [raw:00 0A 08 ] @1452198596.708486>
+(8311 <BsbTelegram 0 -> 10: ret 8311 Kesselsollwert = [0, 10, 80] [raw:00 0A 50 ] @1452198596.908089>)
+8312 Kesselschaltpunkt <BsbTelegram 0 -> 10: ret 0x053D0B26 = [0, 9, 80] [raw:00 09 50 ] @1452198597.603698>
+8314 Kesselrücklauftemperatur <BsbTelegram 0 -> 10: ret 8314 Kesselrücklauftemperatur = 31.90625 °C [raw:00 07 FA ] @1452198598.512682>
+8323 Gebläsedrehzahl (rpm) <BsbTelegram 0 -> 10: ret 0x093D0E69 = [0, 0, 0] [raw:00 00 00 ] @1452198599.347297>
+8324 Brennergebläsesollwert (rpm) <BsbTelegram 0 -> 10: ret 0x093D0E6A = [0, 0, 0] [raw:00 00 00 ] @1452198599.860400>
+8325 Akt. Gebläsesteuerung (%) <BsbTelegram 0 -> 10: ret 0x093D0E00 = [0, 0, 0] [raw:00 00 00 ] @1452198601.372346>
+8326 Brennermodulation (%) <BsbTelegram 0 -> 10: ret 0x053D0834 = [1, 0] [raw:01 00 ] @1452198601.569754>
+8329 Ionisationsstrom (uA) <BsbTelegram 0 -> 10: ret 0x093D0E16 = [0, 0, 0] [raw:00 00 00 ] @1452198602.126174>
+8330 Betriebsstunden 1. Stufe (3484h) <BsbTelegram 0 -> 10: ret 0x0D3D093B = [0, 0, 191, 97, 192] [raw:00 00 BF 61 C0 ] @1452198603.010411>
+8331 Startzähler 1. Stufe (110075#) <BsbTelegram 0 -> 10: ret 0x053D08A5 = [0, 0, 1, 173, 250] [raw:00 00 01 AD FA ] @1452198603.976653>
+8338 Betriebsstunden Heizbetrieb (4262h) <BsbTelegram 0 -> 10: ret 0x053D2FEB = [0, 0, 234, 30, 96] [raw:00 00 EA 1E 60 ] @1452198604.623747>
+8339 Betriebsstunden TWW (271h) <BsbTelegram 0 -> 10: ret 0x053D2FEC = [0, 0, 14, 226, 240] [raw:00 00 0E E2 F0 ] @1452198605.501766>
+8390 Aktuelle Phasennummer <BsbTelegram 0 -> 10: ret 0x093D0DFD = [0, 4] [raw:00 04 ] @1452198606.029517>
+8499 Kollektorpumpe 1 (Aus) <BsbTelegram 0 -> 10: ret 0x053D09AB = [0, 0] [raw:00 00 ] @1452198606.857200>
+8501 Solarstellglied Puffer (keine Funktion) <BsbTelegram 0 -> 10: ret 0x053D0A89 = [1, 0] [raw:01 00 ] @1452198607.628958>
+8502 Solarstellglied Schwimmbad (keine Funktion) <BsbTelegram 0 -> 10: ret 0x053D0A8B = [1, 0] [raw:01 00 ] @1452198608.171408>
+<BsbTelegram 0 -> 10: ret 8510 Kollektortemperatur 1 = 1.0625 °C [raw:00 00 44 ] @1452198609.148475>
+8511 Kollektortemperatur 1 max <BsbTelegram 0 -> 10: ret 0x493D053F = [0, 42, 162] [raw:00 2A A2 ] @1452198610.518932>
+8512 Kollektortemperatur 1 min <BsbTelegram 0 -> 10: ret 0x493D0718 = [0, 250, 63] [raw:00 FA 3F ] @1452198611.364475>
+8513 dT Kollektor 1 / TWW (°C) <BsbTelegram 0 -> 10: ret 0x493D053B = [0, 251, 131] [raw:00 FB 83 ] @1452198612.188213>
+8514 dT Kollektor 1 / Puffer <BsbTelegram 0 -> 10: ret 0x493D053C = [1, 221, 68] [raw:01 DD 44 ] @1452198612.860909>
+8515 dT Kollektor 1 / Schwimmbad <BsbTelegram 0 -> 10: ret 0x493D042E = [1, 0, 68] [raw:01 00 44 ] @1452198613.516853>
+8519 Solarvorlauftemperatur <BsbTelegram 0 -> 10: ret 0x493D050E = [1, 0, 0] [raw:01 00 00 ] @1452198614.120168>
+8520 Solarrücklauftemperatur <BsbTelegram 0 -> 10: ret 0x493D050F = [1, 0, 0] [raw:01 00 00 ] @1452198614.807857>
+8526 Tagesertrag Solarenergie (kWh, div=10??) <BsbTelegram 0 -> 10: ret 0x493D0599 = [0, 0, 0] [raw:00 00 00 ] @1452198615.488962>
+8527 Gesamtertrag Solarenergie (kWh) <BsbTelegram 0 -> 10: ret 0x493D0598 = [0, 0, 0, 0, 0] [raw:00 00 00 00 00 ] @1452198616.134048>
+8530 Betr'stunden Solarertrag (1401h) <BsbTelegram 0 -> 10: ret 8530 Betr'stunden Solarertrag = [0, 0, 76, 245, 144] [raw:00 00 4C F5 90 ] @1452198616.968083>
+8531 Betr'stunden Kollektorüberhitz (16h) <BsbTelegram 0 -> 10: ret 0x493D0717 = [0, 0, 0, 225, 0] [raw:00 00 00 E1 00 ] @1452198618.265396>
+8532 Betr'stunden Kollektorpumpe (1411h) <BsbTelegram 0 -> 10: ret 0x053D10A5 = [0, 0, 77, 130, 48] [raw:00 00 4D 82 30 ] @1452198619.119802>
+8560 Feststoffkesseltemperatur <BsbTelegram 0 -> 10: ret 0x513D052E = [1, 0, 0] [raw:01 00 00 ] @1452198619.745131>
+8570 Betr'stunden Feststoffkessel (0h) <BsbTelegram 0 -> 10: ret 0x513D0892 = [0, 0, 0, 0, 0] [raw:00 00 00 00 00 ] @1452198621.689725>
+
+
+#8700 Diagnose Verbraucher
+<BsbTelegram 0 -> 10: ret 8700 Außentemperatur = 2.890625 °C [raw:00 00 B9 ] @1452199672.190188>
+8701 Außentemperatur Minimum <BsbTelegram 0 -> 10: ret 0x053D056F = [0, 253, 12] [raw:00 FD 0C ] @1452199673.904086>
+8702 Außentemperatur Maximum <BsbTelegram 0 -> 10: ret 0x053D056E = [0, 9, 177] [raw:00 09 B1 ] @1452199674.857268>
+°C <BsbTelegram 0 -> 10: ret 8703 Außentemperatur gedämpft = [0, 0, 30] [raw:00 00 1E ] @1452199675.629090>
+°C <BsbTelegram 0 -> 10: ret 8704 Außentemperatur gemischt = [0, 0, 136] [raw:00 00 88 ] @1452199676.387851>
+8730 Heizkreispumpe 1 (Ein) <BsbTelegram 0 -> 10: ret 0x053D09A5 = [0, 255] [raw:00 FF ] @1452199677.180517>
+8731 Heizkreismischer 1 Auf (keine Funktion) <BsbTelegram 0 -> 10: ret 0x053D09A6 = [1, 0] [raw:01 00 ] @1452199678.088322>
+8732 Heizkreismischer 1 Zu (keine Funktion) <BsbTelegram 0 -> 10: ret 0x053D09A7 = [1, 0] [raw:01 00 ] @1452199678.911587>
+8735 Drehzahl Heizkreispumpe 1 (%) <BsbTelegram 0 -> 10: ret 0x213D04A7 = [1, 0] [raw:01 00 ] @1452199679.791416>
+<BsbTelegram 0 -> 10: ret 8740 Raumtemperatur 1 = 50.0 °C [raw:01 0C 80 ] @1452199680.729744>
+(<BsbTelegram 0 -> 10: ret 8741 Raumsollwert 1 = [0, 4, 192] [raw:00 04 C0 ] @1452199680.929925>)
+<BsbTelegram 0 -> 10: ret 8743 Vorlauftemperatur 1 = 0.0 °C [raw:01 00 00 ] @1452199681.586073>
+(<BsbTelegram 0 -> 10: ret 8744 Vorlaufsollwert 1 = [0, 9, 61] [raw:00 09 3D ] @1452199681.787954>)
+8749 Raumthermostat 1 (kein Bedarf) <BsbTelegram 0 -> 10: ret 0x053D0C7D = [0, 0] [raw:00 00 ] @1452199682.411534>
+8760 Heizkreispumpe 2 (keine Funktion) <BsbTelegram 0 -> 10: ret 0x053D09A8 = [1, 0] [raw:01 00 ] @1452199683.250105>
+8761 und ff. siehe 873x <BsbTelegram 0 -> 10: ret 0x053D09A9 = [1, 0] [raw:01 00 ] @1452199684.108885>
+8762 <BsbTelegram 0 -> 10: ret 0x053D09AA = [1, 0] [raw:01 00 ] @1452199684.877490>
+8765 <BsbTelegram 0 -> 10: ret 0x223D04A7 = [1, 0] [raw:01 00 ] @1452199685.599686>
+ <BsbTelegram 0 -> 10: ret 8770 Raumtemperatur 2 = 50.0 °C [raw:01 0C 80 ] @1452199686.301493>
+ <BsbTelegram 0 -> 10: ret 8771 Raumsollwert 2 = [1, 0, 0] [raw:01 00 00 ] @1452199686.502524>
+ <BsbTelegram 0 -> 10: ret 8773 Vorlauftemperatur 2 = 0.0 °C [raw:01 00 00 ] @1452199687.150455>
+ <BsbTelegram 0 -> 10: ret 8774 Vorlaufsollwert 2 = [1, 0, 0] [raw:01 00 00 ] @1452199687.348749>
+8779 Raumthermostat 2 (kein Bedarf) <BsbTelegram 0 -> 10: ret 0x063D0C7D = [0, 0] [raw:00 00 ] @1452199688.024799>
+8790 Heizkreispumpe 3 (keine Funktion) <BsbTelegram 0 -> 10: ret 0x053D09B0 = [1, 0] [raw:01 00 ] @1452199688.980656>
+8791 s.o. <BsbTelegram 0 -> 10: ret 0x053D0AA7 = [1, 0] [raw:01 00 ] @1452199689.948565>
+8792 s.o. <BsbTelegram 0 -> 10: ret 0x053D0AA8 = [1, 0] [raw:01 00 ] @1452199690.855157>
+8795 s.o. <BsbTelegram 0 -> 10: ret 0x233D04A7 = [1, 0] [raw:01 00 ] @1452199691.631848>
+8800 Raumtemperatur 3 (--°C) <BsbTelegram 0 -> 10: ret 0x2F3D051E = [1, 12, 128] [raw:01 0C 80 ] @1452199692.509476>
+8801 Raumsollwert 3 (--) <BsbTelegram 0 -> 10: ret 0x2F3D0593 = [1, 0, 0] [raw:01 00 00 ] @1452199692.709501>
+8803/4? Vorlauftemperatur 3 <BsbTelegram 0 -> 10: ret 0x233D0518 = [1, 0, 0] [raw:01 00 00 ] @1452199693.677157>
+8803/4? Vorlaufsollwert 3 <BsbTelegram 0 -> 10: ret 0x233D0667 = [1, 0, 0] [raw:01 00 00 ] @1452199693.876306>
+8809 Raumthermostat 3 (kein Bedarf) <BsbTelegram 0 -> 10: ret 0x073D0C7D = [0, 0] [raw:00 00 ] @1452199694.629448>
+8820 Trinkwasserpumpe (Aus) <BsbTelegram 0 -> 10: ret 0x053D09A3 = [0, 0] [raw:00 00 ] @1452199696.687752>
+8825 Drehzahl Trinkwasserpumpe (--%) <BsbTelegram 0 -> 10: ret 0x253D04A4 = [1, 0] [raw:01 00 ] @1452199697.849664>
+8826 Drehzal TWW Zw'kreispumpe (--%) <BsbTelegram 0 -> 10: ret 0x253D0B27 = [1, 0] [raw:01 00 ] @1452199699.009051>
+ <BsbTelegram 0 -> 10: ret 8830 Trinkwassertemperatur 1 = 44.5625 °C [raw:00 0B 24 ] @1452199699.911798>
+ <BsbTelegram 0 -> 10: ret 8831 Trinkwassersollwert = [0, 11, 64] [raw:00 0B 40 ] @1452199700.204837>
+ <BsbTelegram 0 -> 10: ret 8832 Trinkwassertemperatur 2 = 19.015625 °C [raw:00 04 C1 ] @1452199700.828913>
+8835 TWW Zirkulationstemperatur <BsbTelegram 0 -> 10: ret 0x253D077D = [1, 0, 0] [raw:01 00 00 ] @1452199701.716872>
+8836 TWW Ladetemperatur <BsbTelegram 0 -> 10: ret 0x253D0B25 = [0, 6, 195] [raw:00 06 C3 ] @1452199702.573267>
+8875 Vorlaufsollwert VK1 (°C) <BsbTelegram 0 -> 10: ret 0x053D080C = [0, 0, 0] [raw:00 00 00 ] @1452199703.408181>
+8885 Vorlaufsollwert VK2 <BsbTelegram 0 -> 10: ret 0x063D080C = [0, 0, 0] [raw:00 00 00 ] @1452199704.176560>
+8895 Vorlaufsollwert VK3 <BsbTelegram 0 -> 10: ret 0x073D080C = [0, 0, 0] [raw:00 00 00 ] @1452199704.890523>
+8900/1? Schwimmbadtemperatur oder Sollwert °C <BsbTelegram 0 -> 10: ret 0x053D0AF9 = [1, 0, 0] [raw:01 00 00 ] @1452199705.674507>
+8900/1? <BsbTelegram 0 -> 10: ret 0x053D0AF2 = [1, 0, 0] [raw:01 00 00 ] @1452199705.876913>
+8930/1? Vorreglertemperatur/Sollwert °C <BsbTelegram 0 -> 10: ret 0x053D08C7 = [1, 0, 0] [raw:01 00 00 ] @1452199706.425936>
+8930/1? <BsbTelegram 0 -> 10: ret 0x053D08C8 = [1, 0, 0] [raw:01 00 00 ] @1452199706.626144>
+8950 Schienenvorlauftemperatur °C <BsbTelegram 0 -> 10: ret 0x053D051F = [0, 7, 194] [raw:00 07 C2 ] @1452199707.427543>
+8951 Schienenvorlaufsollwert °C <BsbTelegram 0 -> 10: ret 0x053D0783 = [1, 0, 0] [raw:01 00 00 ] @1452199707.626862>
+8952 Schienenrücklauftemperatur <BsbTelegram 0 -> 10: ret 0x053D0AF8 = [1, 0, 0] [raw:01 00 00 ] @1452199708.273888>
+8962 Leistungssollwert Schiene (--%) <BsbTelegram 0 -> 10: ret 0x053D0B61 = [1, 0] [raw:01 00 ] @1452199709.178987>
+ 8980 <BsbTelegram 0 -> 10: ret 8980 Pufferspeichertemperatur 1 = 0.0 °C [raw:01 00 00 ] @1452199710.493322>
+8981 Pufferspeichersollwert °C <BsbTelegram 0 -> 10: ret 0x053D0883 = [0, 0, 0] [raw:00 00 00 ] @1452199711.964978>
+8982 Pufferspeichertemperatur 2 <BsbTelegram 0 -> 10: ret 0x053D0535 = [1, 0, 0] [raw:01 00 00 ] @1452199712.966213>
+8983 Pufferspeichertemperatur 3 <BsbTelegram 0 -> 10: ret 0x053D0536 = [1, 0, 0] [raw:01 00 00 ] @1452199713.696823>
+9031 Relaisausgang QX1 (Aus) <BsbTelegram 0 -> 10: ret 0x053D09BA = [0, 0] [raw:00 00 ] @1452199714.531374>
+9032 " QX2 (Aus) <BsbTelegram 0 -> 10: ret 0x053D09BB = [0, 0] [raw:00 00 ] @1452199715.505922>
+9033 " QX3 (Aus) <BsbTelegram 0 -> 10: ret 0x053D09BC = [0, 0] [raw:00 00 ] @1452199716.402985>
+9050 Relaisausgang QX21 Modul 1 (keine Funktion) <BsbTelegram 0 -> 10: ret 0x053D09F6 = [1, 0] [raw:01 00 ] @1452199717.219552>
+9051 " QX22 " <BsbTelegram 0 -> 10: ret 0x053D09F7 = [1, 0] [raw:01 00 ] @1452199718.045672>
+9052 " QX23 " <BsbTelegram 0 -> 10: ret 0x053D09F8 = [1, 0] [raw:01 00 ] @1452199718.799928>
+9053 " QX21 Modul 2 " <BsbTelegram 0 -> 10: ret 0x053D09F9 = [1, 0] [raw:01 00 ] @1452199719.617023>
+9054 " QX22 " <BsbTelegram 0 -> 10: ret 0x053D09FA = [1, 0] [raw:01 00 ] @1452199720.611506>
+9055 " QX23 " <BsbTelegram 0 -> 10: ret 0x053D09FB = [1, 0] [raw:01 00 ] @1452199721.585026>
+
+
+Es fehlen noch Menüs Kessel, Trinkwasserspeicher

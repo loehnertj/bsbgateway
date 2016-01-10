@@ -21,12 +21,14 @@
 ##############################################################################
 
 import itertools as it
-from bsb_field import BsbField, BsbFieldChoice, BsbFieldInt8, BsbFieldInt16, BsbFieldTemperature, BsbFieldTime
+from bsb_field import BsbField, BsbFieldChoice, BsbFieldInt8, BsbFieldInt16, BsbFieldInt32, BsbFieldTemperature, BsbFieldTime
 
 __all__ = ['groups', 'fields', 'fields_by_telegram_id']
 
+# Shorthands for recurring kwargs
 RW = {'rw':True}
 RWN = {'rw':True, 'nullable': True}
+OP_HOURS = {'unit': 'h', 'divisor': 3600}
 
 _choices_heizkreis = {
     0  : u'---',
@@ -337,7 +339,30 @@ groups = [
 
     
     Group(8300, u"8300 Diagnose Erzeuger", [
+        # FIXME: Fehlt im ISR-Systemhandbuch (2009) -> Statuswerte nicht bekannt
+        BsbFieldChoice(0x053d09a2, 8304, u'Kesselpumpe Q1', choices={
+            255: u'Ein', # von LCD abgelesen
+        }),
+        BsbFieldInt8(0x053D0826, 8308, u'Drehzahl Kesselpumpe', unit='%'),
         BsbFieldTemperature(0x0d3d0519, 8310, u'Kesseltemperatur', ),
+        BsbFieldTemperature(0x0d3d0923, 8311, u'Kesselsollwert', ),
+        # FIXME: Einheit nirgends zu finden -- geraten anhand Wert
+        BsbFieldTemperature(0x053D0B26, 8312, u'Kesselschaltpunkt'),
+        BsbFieldTemperature(0x113d051a, 8314, u'Kesselrücklauftemperatur', ),
+        # FIXME: Divisor nicht bekannt
+        BsbFieldInt16(0x093D0E69, 8323, u'Gebläsedrehzahl', unit='rpm'),
+        # FIXME: Divisor nicht bekannt
+        BsbFieldInt16(0x093D0E6A, 8324, u'Brennergebläsesollwert', unit='rpm'),
+        # FIXME: Divisor nicht bekannt
+        BsbFieldInt16(0x093D0E00, 8325, u'Akt. Gebläsesteuerung', unit='%'),
+        BsbFieldInt8(0x053D0834, 8326, u'Brennermodulation', unit='%'),
+        # FIXME: Divisor nicht bekannt
+        BsbFieldInt16(0x093D0E16, 8329, u'Ionisationsstrom', unit='uA'),
+        BsbFieldInt32(0x0D3D093B, 8330, u'Betriebsstunden 1. Stufe', **OP_HOURS),
+        BsbFieldInt32(0x053D08A5, 8330, u'Startzähler 1. Stufe'),
+        BsbFieldInt32(0x053D2FEB, 8338, u'Betriebsstunden Heizbetrieb', **OP_HOURS),
+        BsbFieldInt32(0x053D2FEC, 8339, u'Betriebsstunden TWW', **OP_HOURS),
+        BsbFieldInt8(0x093D0DFD, 8390, u'Aktuelle Phasennummer'),
     ]),
     
     Group(8400, u"8400 Diagnose Solar", [
@@ -449,14 +474,11 @@ groups = [
         BsbField(0x213d0663, 740, u'Vorlaufsollwert Minimum', ),
         BsbField(0x213d0662, 741, u'Vorlaufsollwert Maximum', ),
         BsbFieldTemperature(0x213d0518, 8743, u'Vorlauftemperatur 1', ),
-        BsbField(0x193d2fec, 8339, u'Betriebsstunden TWW', ),
-        BsbField(0x193d2feb, 8338, u'Betriebsstunden Heizbetrieb', ),
         BsbField(0x193d2fdc, 5761, u'Zonen mit Zubringerpumpe', ),
         BsbField(0x193d2fbf, 2442, u'Gebläse-PWM Reglerverzög', ),
         BsbField(0x193d2f8a, 894, u'dT Spreizung NormAussent', ),
         BsbField(0x193d2f88, 886, u'Norm Aussentemperatur', ),
         BsbField(0x153d3064, 6260, u'KonfigRg3.x', ),
-        BsbField(0x153d2ff0, 8329, u'Ionisationsstrom', ),
         BsbField(0x153d2fcc, 5920, u'Relaisausgang K2 LMU-Basis', ),
         BsbField(0x153d2fa4, 6300, u'KonfigRg7.x', ),
         BsbField(0x153d2fa3, 6290, u'KonfigRg6.x', ),
@@ -464,8 +486,6 @@ groups = [
         BsbField(0x153d2fa1, 6270, u'KonfigRg4.x', ),
         BsbField(0x153d2f9e, 6240, u'KonfigRg1.x', ),
         BsbField(0x153d2f9d, 6230, u'KonfigRg0.x', ),
-        BsbField(0x113d305f, 8326, u'Relative Leistung', ),
-        BsbField(0x113d305d, 8325, u'Aktuelle Gebläseansteuerung', ),
         BsbField(0x113d3051, 2471, u'Pumpennachlaufzeit HK\'s', ),
         BsbField(0x113d304f, 885, u'Pumpe-PWM Minimum', ),
         BsbField(0x113d2fe4, 5733, u'TWW Pum\'pause Verzögerung', ),
@@ -475,8 +495,6 @@ groups = [
         BsbField(0x113d2f95, 884, u'DrehzahlstufeAusleg\'punkt', ),
         BsbField(0x113d2f87, 2452, u'SD Brennerpause', ),
         BsbField(0x113d2f86, 2472, u'Pumpennachlauftemp TWW', ),
-        BsbField(0x113d0c82, 8324, u'Gebläsedrehzahl', ),
-        BsbFieldTemperature(0x113d051a, 8314, u'Kesselrücklauftemperatur', ),
         BsbField(0x0d3d304a, 9522, u'Gebl\'ansteuerung Betrieb. Max', ),
         BsbField(0x0d3d3049, 9520, u'Gebl\'ansteuerung Betrieb. Min', ),
         BsbField(0x0d3d3048, 9510, u'Gebl\'ansteuerung Zündung', ),
@@ -488,7 +506,6 @@ groups = [
         BsbField(0x0d3d092c, 2210, u'Sollwert Minimum', ),
         BsbField(0x0d3d092b, 2212, u'Sollwert Maximum', ),
         BsbField(0x0d3d092a, 7130, u'Schornsteinfegerfunktion', ),
-        BsbField(0x0d3d0923, 8311, u'Kesselsollwert', ),
         BsbField(0x0d3d08eb, 2214, u'Sollwert Handbetrieb', ),
         BsbField(0x093d3072, 6705, u'SW Diagnosecode', ),
         BsbField(0x093d3066, 2445, u'Leistung Nenn', ),

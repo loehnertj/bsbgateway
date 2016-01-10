@@ -1,14 +1,16 @@
 # Bsb Interface hardware
 
-**Preface: The circuit documented here is not recommended for reuse. It connects the Protective Earth (GND) wire of the bus to the "-15V wire" of the RS232 plug. That means that it will fail, possibly destructively, if your RS232 GND is connected to PE (i.e. the power line "ground" contact).
+**Preface: The circuit documented here is not recommended for reuse. It connects the Protective Earth (GND) wire of the bus to the "-15V wire" of the RS232 plug. That means that it will fail, possibly destructively, if your RS232 GND is connected to PE (i.e. the power line "ground" contact).**
 
-Please use a circuit with proper galvanic isolation, i.e. a 2-way optocoupler.
+**Please use a circuit with proper galvanic isolation, i.e. a 2-way optocoupler.**
 
-You can find lots of info and examples here: http://www.mikrocontroller.net/topic/218643 .**
+You can find lots of info and examples here: http://www.mikrocontroller.net/topic/218643.
 
 ## BSB hardware layer in short
 
 The `BSB`, a.k.a. `LPB` (Local process bus) is a 2-wire, unipolar voltage bus. While the bus is free, it is at +15V level. Voltages above 8V count as logic 0, below 7V as logic 1.
+
+Besides of the "wrong" voltage levels, the bus protocol is compatible with RS232, 4800 baud, odd parity, 1 stop bit.
 
 Collision detection is done by "CSMA", but details are hard to find.
 

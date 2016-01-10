@@ -359,7 +359,7 @@ groups = [
         # FIXME: Divisor nicht bekannt
         BsbFieldInt16(0x093D0E16, 8329, u'Ionisationsstrom', unit='uA'),
         BsbFieldInt32(0x0D3D093B, 8330, u'Betriebsstunden 1. Stufe', **OP_HOURS),
-        BsbFieldInt32(0x053D08A5, 8330, u'Startzähler 1. Stufe'),
+        BsbFieldInt32(0x053D08A5, 8331, u'Startzähler 1. Stufe'),
         BsbFieldInt32(0x053D2FEB, 8338, u'Betriebsstunden Heizbetrieb', **OP_HOURS),
         BsbFieldInt32(0x053D2FEC, 8339, u'Betriebsstunden TWW', **OP_HOURS),
         BsbFieldInt8(0x093D0DFD, 8390, u'Aktuelle Phasennummer'),

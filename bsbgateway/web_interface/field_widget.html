@@ -37,7 +37,7 @@ $else:
             </select>
             
         $elif field.type_name == 'time':
-            <input type="text" class="number" name="hour" value="$(value[0] if value else '--')">
+            <input type="text" class="number" name="hour" value="$(value[0] if value else '--')"> :
             <input type="text" class="number" name="minute" value="$(value[1] if value else '--')">
             
         $else:

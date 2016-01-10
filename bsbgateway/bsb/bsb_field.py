@@ -24,7 +24,7 @@ from datetime import time
 
 __all__ = ['EncodeError', 'ValidateError', 
            'BsbField', 'BsbFieldChoice', 'BsbFieldInt8', 'BsbFieldInt16',
-           'BsbFieldTemperature', 'BsbFieldInt32', 'BsbFieldOperatingHours',
+           'BsbFieldTemperature', 'BsbFieldInt32',
            'BsbFieldTime',
            ]
 
@@ -361,11 +361,6 @@ class BsbFieldInt32(BsbField):
             value += 0x100000000
         return [flag, (value // 0x1000000) & 0xff, (value // 0x10000) & 0xff, (value // 0x100) & 0xff, value & 0xff]
     
-class BsbFieldOperatingHours(BsbFieldInt32):
-    # Do not override type_name here - to the outside it looks like a standard BsbFieldInt32
-    def __init__(o, telegram_id, disp_id, disp_name, rw=False, nullable=False, min=None, max=None, *args, **kwargs):
-        BsbFieldInt16.__init__(o, unit=u'h', divisor=3600.0, **xo(locals()))
-        
 class BsbFieldTime(BsbField):
     '''time encoded as <flag> <hour> <minute>.
     '''

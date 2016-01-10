@@ -119,6 +119,10 @@ class Field(object):
             return "%d %s"%value
         elif field.type_name == 'time':
             return "%0.2d:%0.2d"%value
+        elif field.type_name == '':
+            dez = ' '.join(map(str, value))
+            hx = ' '.join(['%x'%num for num in value])
+            return "dec: %s / hex: %s"%(dez, hx)
         else:
             return "%g %s"%(value, field.unit)
         

@@ -7,6 +7,13 @@ Functionalities offered:
  * [Web interface](doc/web.md) at port :8081 (e.g. http://localhost:8081)
  * [Logging of fields](doc/logging.md) with preset interval. The logs are written in ASCII `.trace` files and can be loaded with `trace/load_trace.py` into `numpy` arrays.
 
+## Hardware
+
+You need hardware to interface with the bus. In priniple, a serial port and a level converter / galvanic decoupler is required.
+Schematic to be done. Have a look at http://www.mikrocontroller.net/topic/218643.
+
+The serial port driver evaluates the `CTS` (clear-to-send) pin of the RS232 in order to check if the bus is free. Depending on your circuit, you may want to change the settings (esp. invert/no invert) in ([bsb_comm.py](bsbgateway/bsb/bsb_comm.py)), around line 60.
+
 ## Installation
 
 Dependencies are web.py and pySerial.

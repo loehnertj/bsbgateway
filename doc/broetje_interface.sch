@@ -1,0 +1,448 @@
+EESchema Schematic File Version 2
+LIBS:broetje_interface-rescue
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:egl_linear
+LIBS:broetje_interface-cache
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date "17 feb 2015"
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+Text Label 8850 2350 0    60   ~ 0
+RI
+Text Label 8850 2450 0    60   ~ 0
+DTR (yw)
+Text Label 8850 3050 0    60   ~ 0
+DCD
+Text Label 8850 2250 0    60   ~ 0
+RPI-GND
+Text Label 8850 2950 0    60   ~ 0
+DSR
+Text Label 8850 2550 0    60   ~ 0
+CTS (gy)
+Text Label 8850 2750 0    60   ~ 0
+RTS (bk)
+Text Label 8850 2850 0    60   ~ 0
+RX (rd)
+Text Label 8850 2650 0    60   ~ 0
+TX (or)
+$Comp
+L R-RESCUE-broetje_interface R1
+U 1 1 528A7030
+P 2550 4650
+F 0 "R1" V 2630 4650 50  0000 C CNN
+F 1 "10k" V 2550 4650 50  0000 C CNN
+F 2 "" H 2550 4650 60  0001 C CNN
+F 3 "" H 2550 4650 60  0001 C CNN
+	1    2550 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L R-RESCUE-broetje_interface R2
+U 1 1 528A700D
+P 2850 4650
+F 0 "R2" V 2930 4650 50  0000 C CNN
+F 1 "1k" V 2850 4650 50  0000 C CNN
+F 2 "" H 2850 4650 60  0001 C CNN
+F 3 "" H 2850 4650 60  0001 C CNN
+	1    2850 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L R-RESCUE-broetje_interface R5
+U 1 1 528A6FED
+P 6550 4150
+F 0 "R5" V 6630 4150 50  0000 C CNN
+F 1 "220k" V 6550 4150 50  0000 C CNN
+F 2 "" H 6550 4150 60  0001 C CNN
+F 3 "" H 6550 4150 60  0001 C CNN
+	1    6550 4150
+	1    0    0    -1  
+$EndComp
+$Comp
+L R-RESCUE-broetje_interface R4
+U 1 1 528A6FD8
+P 6150 4800
+F 0 "R4" V 6230 4800 50  0000 C CNN
+F 1 "1k" V 6150 4800 50  0000 C CNN
+F 2 "" H 6150 4800 60  0001 C CNN
+F 3 "" H 6150 4800 60  0001 C CNN
+	1    6150 4800
+	1    0    0    -1  
+$EndComp
+$Comp
+L R-RESCUE-broetje_interface R3
+U 1 1 528A6FCF
+P 5700 4800
+F 0 "R3" V 5780 4800 50  0000 C CNN
+F 1 "1k" V 5700 4800 50  0000 C CNN
+F 2 "" H 5700 4800 60  0001 C CNN
+F 3 "" H 5700 4800 60  0001 C CNN
+	1    5700 4800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Csmall C2
+U 1 1 528A6FC5
+P 6800 5050
+F 0 "C2" H 6825 5100 30  0000 L CNN
+F 1 "10nF" H 6825 5000 30  0000 L CNN
+F 2 "" H 6800 5050 60  0001 C CNN
+F 3 "" H 6800 5050 60  0001 C CNN
+	1    6800 5050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Csmall C3
+U 1 1 528A6FC1
+P 6800 5450
+F 0 "C3" H 6825 5500 30  0000 L CNN
+F 1 "10nF" H 6825 5400 30  0000 L CNN
+F 2 "" H 6800 5450 60  0001 C CNN
+F 3 "" H 6800 5450 60  0001 C CNN
+	1    6800 5450
+	1    0    0    -1  
+$EndComp
+$Comp
+L DB9 J1
+U 1 1 528A6F96
+P 9700 2650
+F 0 "J1" H 9700 3200 70  0000 C CNN
+F 1 "DB9" H 9700 2100 70  0000 C CNN
+F 2 "" H 9700 2650 60  0001 C CNN
+F 3 "" H 9700 2650 60  0001 C CNN
+	1    9700 2650
+	1    0    0    -1  
+$EndComp
+$Comp
+L LED-RESCUE-broetje_interface D2
+U 1 1 528A6F73
+P 5700 5350
+F 0 "D2" H 5700 5450 50  0000 C CNN
+F 1 "LED (gn)" H 5700 5250 50  0000 C CNN
+F 2 "" H 5700 5350 60  0001 C CNN
+F 3 "" H 5700 5350 60  0001 C CNN
+	1    5700 5350
+	0    1    1    0   
+$EndComp
+$Comp
+L LED-RESCUE-broetje_interface D1
+U 1 1 528A6F6A
+P 2850 5100
+F 0 "D1" H 2850 5200 50  0000 C CNN
+F 1 "LED (rd)" H 2850 5000 50  0000 C CNN
+F 2 "" H 2850 5100 60  0001 C CNN
+F 3 "" H 2850 5100 60  0001 C CNN
+	1    2850 5100
+	0    1    1    0   
+$EndComp
+$Comp
+L BC546 Q2
+U 1 1 528A6F21
+P 6450 5250
+F 0 "Q2" H 6450 5101 40  0000 R CNN
+F 1 "BC546" H 6450 5400 40  0000 R CNN
+F 2 "TO92" H 6350 5352 29  0000 C CNN
+F 3 "" H 6450 5250 60  0001 C CNN
+	1    6450 5250
+	1    0    0    -1  
+$EndComp
+$Comp
+L BC546 Q1
+U 1 1 528A6F1F
+P 2150 5200
+F 0 "Q1" H 2150 5051 40  0000 R CNN
+F 1 "BC546" H 2150 5350 40  0000 R CNN
+F 2 "TO92" H 2050 5302 29  0000 C CNN
+F 3 "" H 2150 5200 60  0001 C CNN
+	1    2150 5200
+	-1   0    0    -1  
+$EndComp
+$Comp
+L CAPAPOL C1
+U 1 1 528A6EF1
+P 5000 4250
+F 0 "C1" H 5050 4350 50  0000 L CNN
+F 1 "CAPAPOL" H 5050 4150 50  0000 L CNN
+F 2 "" H 5000 4250 60  0001 C CNN
+F 3 "" H 5000 4250 60  0001 C CNN
+	1    5000 4250
+	1    0    0    -1  
+$EndComp
+$Comp
+L POT RV1
+U 1 1 528A67FD
+P 3550 4650
+F 0 "RV1" H 3550 4550 50  0000 C CNN
+F 1 "POT" H 3550 4650 50  0000 C CNN
+F 2 "" H 3550 4650 60  0001 C CNN
+F 3 "" H 3550 4650 60  0001 C CNN
+	1    3550 4650
+	0    1    1    0   
+$EndComp
+$Comp
+L CONN_2 P1
+U 1 1 528A65D3
+P 1000 3800
+F 0 "P1" V 950 3800 40  0000 C CNN
+F 1 "CONN_2" V 1050 3800 40  0000 C CNN
+F 2 "" H 1000 3800 60  0001 C CNN
+F 3 "" H 1000 3800 60  0001 C CNN
+	1    1000 3800
+	-1   0    0    -1  
+$EndComp
+$Comp
+L GND-RESCUE-broetje_interface #PWR1
+U 1 1 54E39657
+P 2250 6100
+F 0 "#PWR1" H 2250 6100 30  0001 C CNN
+F 1 "GND" H 2250 6030 30  0001 C CNN
+F 2 "" H 2250 6100 60  0000 C CNN
+F 3 "" H 2250 6100 60  0000 C CNN
+	1    2250 6100
+	1    0    0    -1  
+$EndComp
+$Comp
+L LM556N IC1
+U 2 1 54E3992F
+P 7500 4450
+F 0 "IC1" H 7250 4100 50  0000 L BNN
+F 1 "LM556N" H 7200 4800 50  0000 L BNN
+F 2 "linear3-SO14" H 7500 4600 50  0001 C CNN
+F 3 "" H 7500 4450 60  0000 C CNN
+	2    7500 4450
+	1    0    0    1   
+$EndComp
+$Comp
+L LM556N IC1
+U 1 1 54E39960
+P 4500 3550
+F 0 "IC1" H 4200 3980 50  0000 L BNN
+F 1 "LM556N" H 4200 3045 50  0000 L BNN
+F 2 "linear3-SO14" H 4500 3700 50  0001 C CNN
+F 3 "" H 4500 3550 60  0000 C CNN
+	1    4500 3550
+	1    0    0    -1  
+$EndComp
+Text Label 3300 5700 0    60   ~ 0
+GND
+$Comp
+L PWR_FLAG #FLG2
+U 1 1 54E3A14F
+P 8600 5700
+F 0 "#FLG2" H 8600 5795 30  0001 C CNN
+F 1 "PWR_FLAG" H 8600 5880 30  0000 C CNN
+F 2 "" H 8600 5700 60  0000 C CNN
+F 3 "" H 8600 5700 60  0000 C CNN
+	1    8600 5700
+	1    0    0    -1  
+$EndComp
+Text Label 5550 1850 0    60   ~ 0
+Vcc
+$Comp
+L PWR_FLAG #FLG1
+U 1 1 54E3A19F
+P 8450 1850
+F 0 "#FLG1" H 8450 1945 30  0001 C CNN
+F 1 "PWR_FLAG" H 8450 2030 30  0000 C CNN
+F 2 "" H 8450 1850 60  0000 C CNN
+F 3 "" H 8450 1850 60  0000 C CNN
+	1    8450 1850
+	1    0    0    -1  
+$EndComp
+NoConn ~ 7100 4250
+NoConn ~ 7100 4450
+NoConn ~ 8700 2250
+NoConn ~ 8700 2350
+NoConn ~ 8700 2950
+NoConn ~ 8700 3050
+Text Notes 950  2050 0    60   ~ 0
+!! NO GALVANIC DECOUPLING !! - RS232 side must be POTENTIAL-FREE!\nCTS line levels inverted (V>0 => bus in use)
+Text Label 7800 4000 2    60   ~ 0
+CTS_RC_Voltage
+NoConn ~ 4900 3450
+NoConn ~ 4100 3450
+NoConn ~ 4100 3650
+NoConn ~ 7900 4450
+Wire Wire Line
+	8600 5700 8600 2750
+Wire Wire Line
+	8600 2750 9250 2750
+Wire Wire Line
+	9250 2950 8700 2950
+Wire Wire Line
+	8700 2350 9250 2350
+Wire Wire Line
+	9250 2250 8700 2250
+Wire Wire Line
+	9250 2450 8600 2450
+Wire Wire Line
+	2850 2650 9250 2650
+Wire Wire Line
+	6350 2850 9250 2850
+Wire Wire Line
+	9250 3050 8700 3050
+Wire Wire Line
+	3550 5700 3550 4900
+Connection ~ 2250 5700
+Connection ~ 3550 4900
+Wire Wire Line
+	1500 5700 1500 3900
+Wire Wire Line
+	1500 3900 1350 3900
+Wire Wire Line
+	2250 5700 2250 6100
+Connection ~ 8600 5700
+Wire Wire Line
+	5250 1850 8600 1850
+Connection ~ 8600 1850
+Wire Wire Line
+	1350 3700 3550 3700
+Wire Wire Line
+	2550 4900 2550 5200
+Wire Wire Line
+	6800 5100 6800 5350
+Wire Wire Line
+	5700 5050 5700 5150
+Wire Wire Line
+	2550 5200 2350 5200
+Wire Wire Line
+	2050 3700 2050 5000
+Connection ~ 2050 3700
+Wire Wire Line
+	2050 5400 2050 5700
+Connection ~ 2050 5700
+Wire Wire Line
+	2850 5700 2850 5300
+Connection ~ 3550 5700
+Connection ~ 2850 5700
+Wire Wire Line
+	3550 3700 3550 4400
+Wire Wire Line
+	2850 2650 2850 4400
+Wire Wire Line
+	2550 4400 2550 4250
+Wire Wire Line
+	2550 4250 2850 4250
+Connection ~ 2850 4250
+Wire Wire Line
+	3800 2950 3800 4650
+Wire Wire Line
+	3800 3250 4100 3250
+Wire Wire Line
+	3800 2950 5000 2950
+Wire Wire Line
+	5000 2950 5000 3650
+Wire Wire Line
+	5000 3650 4900 3650
+Connection ~ 3800 3250
+Wire Wire Line
+	4100 3850 4000 3850
+Connection ~ 4000 5700
+Wire Wire Line
+	3800 4650 3700 4650
+Wire Wire Line
+	4900 3850 5250 3850
+Wire Wire Line
+	5000 4050 5000 3850
+Connection ~ 5000 3850
+Wire Wire Line
+	5000 4450 4000 4450
+Connection ~ 4000 4450
+Wire Wire Line
+	4900 3250 6350 3250
+Wire Wire Line
+	1500 5700 8600 5700
+Wire Wire Line
+	5700 3250 5700 4550
+Wire Wire Line
+	5700 5550 5700 5700
+Connection ~ 5700 5700
+Wire Wire Line
+	6150 3250 6150 4550
+Wire Wire Line
+	6150 5050 6150 5250
+Wire Wire Line
+	6150 5250 6250 5250
+Wire Wire Line
+	6550 5450 6550 5700
+Connection ~ 6550 5700
+Wire Wire Line
+	6800 5550 6800 5700
+Connection ~ 6800 5700
+Wire Wire Line
+	6550 4400 6550 5050
+Wire Wire Line
+	6550 4650 7100 4650
+Wire Wire Line
+	6800 4650 6800 4950
+Connection ~ 6550 1850
+Connection ~ 6550 4650
+Connection ~ 6800 4650
+Wire Wire Line
+	7000 4650 7000 4000
+Wire Wire Line
+	7000 4000 8000 4000
+Wire Wire Line
+	8000 4000 8000 4250
+Wire Wire Line
+	8000 4250 7900 4250
+Connection ~ 7000 4650
+Wire Wire Line
+	8150 2550 9250 2550
+Wire Wire Line
+	8150 4650 7900 4650
+Wire Wire Line
+	8150 2550 8150 4650
+Wire Wire Line
+	4000 3850 4000 5700
+Connection ~ 5700 3250
+Connection ~ 6150 3250
+Wire Wire Line
+	6350 3250 6350 2850
+Wire Wire Line
+	6550 3900 6550 1850
+Wire Wire Line
+	8600 1850 8600 2450
+Wire Wire Line
+	5250 3850 5250 1850
+Text Label 2250 3700 2    60   ~ 0
+Broetje_Bus_+
+$EndSCHEMATC

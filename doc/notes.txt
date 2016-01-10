@@ -14,6 +14,14 @@ Betriebsstunden: Divisor 3600
 
 Es fehlen noch Menüs Kessel, Trinkwasserspeicher
 
+value = 07 = anscheinend "Feld nicht vorhanden"
+get 8336
+<BsbTelegram 0 -> 24: unknown (8) 8336 Betriebsstunden Brennner = [7] [raw:07 ] @1452418736.311417>
+get 8337
+<BsbTelegram 0 -> 24: unknown (8) 8337 Startzähler Brenner = [7] [raw:07 ] @1452418743.752471>
+get 8338
+<BsbTelegram 0 -> 24: unknown (8) 8338 Betriebsstunden Heizbetrieb = [7] [raw:07 ] @1452418746.641733>
+
 ########################## ########################## ########################## ##########################
 # abgelauschte Broadcasts
 ########################## ########################## ########################## ##########################

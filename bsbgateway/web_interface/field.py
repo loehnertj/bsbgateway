@@ -80,6 +80,7 @@ class Field(object):
             raise web.notfound()
         if isinstance(t, Exception):
             # FIXME: web error should not be raised here
+            log().exception('error while requesting value: %s'%(t,))
             raise web.HTTPError(500, headers=_ERRHEADERS, data=str(t))
         
         data = t.data
@@ -108,6 +109,7 @@ class Field(object):
         if t is None:
             raise web.notfound()
         if isinstance(t, Exception):
+            log().exception('error while setting value')
             raise web.HTTPError(500, headers=_ERRHEADERS, data=str(t))
         # FIXME?
         return 'OK'

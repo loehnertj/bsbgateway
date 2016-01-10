@@ -14,9 +14,9 @@ Path: `/` - yields the index page as html.
 
 Path: `/group-<number>` e.g. `group-1600` - displays the given group of fields.
 
-Note that the fields are loaded with delay (0.5s for each field) in order to not block the BSB bus with requests.
+The values are only loaded on request. Press one of the field ID buttons to load or refresh this field's value. Press "Load all" to load all field values. The fields are loaded with delay (0.5s for each field) in order to not block the BSB bus with requests.
 
-If `...` is displayed after each field permanently, most likely you need to enable Javascript.
+If value loading does not work, most likely you need to enable Javascript. If that doesn't help, look at the logging output.
 
 ## Field
 
@@ -37,7 +37,7 @@ Multiple subqueries exist. Replace `<number>` with the 4-digit field number in e
 The structure of `value` depends on the field type:
   * Unknown type: list of byte values, the raw payload of the return telegram.
   * int8: integer value
-  * int16, temperature: float value
+  * int16, temperature, int32: float value
   * time: list of two values `[<hour>, <minute>]`
   * choice: list of two values `[<index>, <text>]` with `index` being the numeric index of the choice and `text` its cleartext representation.
 

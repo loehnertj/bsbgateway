@@ -12,7 +12,7 @@ The `BSB`, a.k.a. `LPB` (Local process bus) is a 2-wire, unipolar voltage bus. W
 
 Besides of the "wrong" voltage levels, the bus protocol is compatible with RS232, 4800 baud, odd parity, 1 stop bit.
 
-Collision detection is done by "CSMA", but details are hard to find.
+Collision detection is done by "CSMA". I.e. devices should never begin sending as long as someone else is sending. When the bus is free, each device that wants to send waits for a random amount of time before it begins sending. As soon as someone begins sending, other devices with pending data suspend their timers and resume them when the bus is free again.
 
 ## My circuit
 

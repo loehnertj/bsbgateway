@@ -150,6 +150,11 @@ def run(config):
         raise ValueError('Unsupported device')
     
     emailaction = make_email_action(config['emailserver'], config['emailaddress'], config['emailcredentials'])
+    
+    if config['loggers']:
+        if not os.path.exists(config['tracefile_dir']):
+            log().info('Creating trace directory %s'%config['tracefile_dir'])
+            os.makedirs(config['tracefile_dir'])
     loggers = [
         SingleFieldLogger(
             field=device.fields[disp_id],

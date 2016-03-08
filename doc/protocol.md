@@ -17,15 +17,16 @@ Packets are at least 11 bytes long. The longest packets I have seen so far were 
 
 The structure is as follows:
 
-Name | Length in bytes | example | Remarks
-Magic byte | 1 | `DC` | always `DC`
-Source address | 1 | `80` | XORed with `80` (in example, src is device `0`)
-Destination address | 1 | `0A` | 
-Length of packet | 1 | `0E` | total length including bytes before and CRC
-Telegram type | 1 | `07` | `inf` (2), `set` (3), `ack` (4), `get` (6), or `ret` (7)
-Field ID | 4 | `05 3D 05 6F` | For `get` and `set` packet type, first and second byte (e.g. `05` and `3D`) are swapped.
-Payload | variable 0 - 16? | `00 FD 8E` |
-CRC | 2 | `F5 4A` | CRC16-CCITT (XModem)
+|Name | Length in bytes | example | Remarks|
+|---|---|---|---|
+|Magic byte | 1 | `DC` | always `DC`|
+|Source address | 1 | `80` | XORed with `80` (in example, src is device `0`)|
+|Destination address | 1 | `0A` || 
+|Length of packet | 1 | `0E` | total length including bytes before and CRC|
+|Telegram type | 1 | `07` | `inf` (2), `set` (3), `ack` (4), `get` (6), or `ret` (7)|
+|Field ID | 4 | `05 3D 05 6F` | For `get` and `set` packet type, first and second byte (e.g. `05` and `3D`) are swapped.|
+|Payload | variable 0 - 16? | `00 FD 8E` ||
+|CRC | 2 | `F5 4A` | CRC16-CCITT (XModem)|
 
 ### Address
 

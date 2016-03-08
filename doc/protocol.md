@@ -13,7 +13,7 @@ The value formats (except for temperature values) were deciphered by myself. The
 
 ## Packet structure
 
-Packets are at least 10 bytes long. The longest packets I have seen so far were 26 bytes (16 payload bytes), so that may be the upper limit. Example packet: `DC 80 0A 0E 07 05 3D 05 6F 00 FD 8E F5 4A`
+Packets are at least 11 bytes long. The longest packets I have seen so far were 27 bytes (16 payload bytes). The upper limit according to Siemens documentation is 32 bytes ([source](https://www.mikrocontroller.net/topic/218643?goto=4499227#4499227)).  Example packet: `DC 80 0A 0E 07 05 3D 05 6F 00 FD 8E F5 4A`
 
 The structure is as follows:
 

@@ -366,8 +366,29 @@ groups = [
     ]),
     
     Group(8400, u"8400 Diagnose Solar", [
+        BsbFieldChoice(0x053D09AB, 8499, u'Kollektorpumpe 1 (Aus)', choices=['Aus', 'Ein']),
+        # FIXME: Statuswerte unbekannt
+        BsbFieldChoice(0x053D0A89, 8501, u'Solarstellglied Puffer', choices=[]),
+        # FIXME: Statuswerte unbekannt
+        BsbFieldChoice(0x053D0A8B, 8502, u'Solarstellglied Schwimmbad', choices=[]),
         BsbFieldTemperature(0x493d052a, 8510, u'Kollektortemperatur 1', ),
-    ]),
+        BsbFieldTemperature(0x493d053f, 8511, u'Kollektortemperatur 1 max', ),
+        BsbFieldTemperature(0x493d0718, 8512, u'Kollektortemperatur 1 min', ),
+        BsbFieldTemperature(0x493d053b, 8512, u'dT Kollektor 1 / TWW', ),
+        BsbFieldTemperature(0x493d053c, 8513, u'dT Kollektor 1 / Puffer', ),
+        BsbFieldTemperature(0x493d042e, 8514, u'dT Kollektor 1 / Schwimmbad', ),
+        BsbFieldTemperature(0x493d050e, 8519, u'Solarvorlauftemperatur', ),
+        BsbFieldTemperature(0x493d050f, 8520, u'Solarrücklauftemperatur', ),
+        # FIXME: Divisor geraten anhand Anzeige
+        BsbFieldInt16(0x493D0599, 8526, u'Tagesertrag Solarenergie (kWh)', divisor=10),
+        # FIXME: Divisor nicht bekannt
+        BsbFieldInt32(0x493D0598, 8527, u'Gesamtertrag Solarenergie (kWh)',),
+        BsbFieldInt32(0x493d0893, 8530, u'Betr\'stunden Solarertrag', **OP_HOURS),
+        BsbFieldInt32(0x493d0717, 8531, u'Betr\'stunden Kollektorüberhitz', **OP_HOURS),
+        BsbFieldInt32(0x053D10A5, 8532, u'Betr\'stunden Kollektorpumpe', **OP_HOURS),
+        BsbFieldTemperature(0x513D052E, 8560, u'Feststoffkesseltemperatur'),
+        BsbFieldInt32(0x513D0892, 8570, u'Betr\'stunden Feststoffkessel', **OP_HOURS),
+   ]),
     
     Group(8700, u"8700 Diagnose Verbraucher", [
         BsbFieldTemperature(0x053d0521, 8700, u'Außentemperatur', ),
@@ -384,7 +405,6 @@ groups = [
         BsbField(0x2e000211, 10103, u'HK2 - TBD', ),
 
         BsbField(0x313D0721, 1630, u'Trinkwasser Ladevorrang', ),
-        BsbField(0x493d0893, 8530, u'Betr\'stunden Solarertrag', ),
         BsbField(0x313d3009, 5019, u'Nachlad\'Übserhöh Schichtensp', ),
         BsbField(0x313d074b, 8831, u'Trinkwassersollwert', ),
         BsbFieldTemperature(0x313d0530, 8832, u'Trinkwassertemperatur 2',),

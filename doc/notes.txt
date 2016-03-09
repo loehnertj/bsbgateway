@@ -95,33 +95,6 @@ Sa (1.P.Aus -> 22:00) - 2. P. Ein 22:50
 ########################## ########################## ########################## ##########################
 #8700 Diagnose Verbraucher
 ########################## ########################## ########################## ##########################
-<BsbTelegram 0 -> 10: ret 8700 Außentemperatur = 2.890625 °C [raw:00 00 B9 ] @1452199672.190188>
-8701 Außentemperatur Minimum <BsbTelegram 0 -> 10: ret 0x053D056F = [0, 253, 12] [raw:00 FD 0C ] @1452199673.904086>
-8702 Außentemperatur Maximum <BsbTelegram 0 -> 10: ret 0x053D056E = [0, 9, 177] [raw:00 09 B1 ] @1452199674.857268>
-°C <BsbTelegram 0 -> 10: ret 8703 Außentemperatur gedämpft = [0, 0, 30] [raw:00 00 1E ] @1452199675.629090>
-°C <BsbTelegram 0 -> 10: ret 8704 Außentemperatur gemischt = [0, 0, 136] [raw:00 00 88 ] @1452199676.387851>
-8730 Heizkreispumpe 1 (Ein) <BsbTelegram 0 -> 10: ret 0x053D09A5 = [0, 255] [raw:00 FF ] @1452199677.180517>
-8731 Heizkreismischer 1 Auf (keine Funktion) <BsbTelegram 0 -> 10: ret 0x053D09A6 = [1, 0] [raw:01 00 ] @1452199678.088322>
-8732 Heizkreismischer 1 Zu (keine Funktion) <BsbTelegram 0 -> 10: ret 0x053D09A7 = [1, 0] [raw:01 00 ] @1452199678.911587>
-8735 Drehzahl Heizkreispumpe 1 (%) <BsbTelegram 0 -> 10: ret 0x213D04A7 = [1, 0] [raw:01 00 ] @1452199679.791416>
-<BsbTelegram 0 -> 10: ret 8740 Raumtemperatur 1 = 50.0 °C [raw:01 0C 80 ] @1452199680.729744>
-(<BsbTelegram 0 -> 10: ret 8741 Raumsollwert 1 = [0, 4, 192] [raw:00 04 C0 ] @1452199680.929925>)
-<BsbTelegram 0 -> 10: ret 8743 Vorlauftemperatur 1 = 0.0 °C [raw:01 00 00 ] @1452199681.586073>
-(<BsbTelegram 0 -> 10: ret 8744 Vorlaufsollwert 1 = [0, 9, 61] [raw:00 09 3D ] @1452199681.787954>)
-8749 Raumthermostat 1 (kein Bedarf) <BsbTelegram 0 -> 10: ret 0x053D0C7D = [0, 0] [raw:00 00 ] @1452199682.411534>
-8760 Heizkreispumpe 2 (keine Funktion) <BsbTelegram 0 -> 10: ret 0x053D09A8 = [1, 0] [raw:01 00 ] @1452199683.250105>
-8761 und ff. siehe 873x <BsbTelegram 0 -> 10: ret 0x053D09A9 = [1, 0] [raw:01 00 ] @1452199684.108885>
-8762 <BsbTelegram 0 -> 10: ret 0x053D09AA = [1, 0] [raw:01 00 ] @1452199684.877490>
-8765 <BsbTelegram 0 -> 10: ret 0x223D04A7 = [1, 0] [raw:01 00 ] @1452199685.599686>
- <BsbTelegram 0 -> 10: ret 8770 Raumtemperatur 2 = 50.0 °C [raw:01 0C 80 ] @1452199686.301493>
- <BsbTelegram 0 -> 10: ret 8771 Raumsollwert 2 = [1, 0, 0] [raw:01 00 00 ] @1452199686.502524>
- <BsbTelegram 0 -> 10: ret 8773 Vorlauftemperatur 2 = 0.0 °C [raw:01 00 00 ] @1452199687.150455>
- <BsbTelegram 0 -> 10: ret 8774 Vorlaufsollwert 2 = [1, 0, 0] [raw:01 00 00 ] @1452199687.348749>
-8779 Raumthermostat 2 (kein Bedarf) <BsbTelegram 0 -> 10: ret 0x063D0C7D = [0, 0] [raw:00 00 ] @1452199688.024799>
-8790 Heizkreispumpe 3 (keine Funktion) <BsbTelegram 0 -> 10: ret 0x053D09B0 = [1, 0] [raw:01 00 ] @1452199688.980656>
-8791 s.o. <BsbTelegram 0 -> 10: ret 0x053D0AA7 = [1, 0] [raw:01 00 ] @1452199689.948565>
-8792 s.o. <BsbTelegram 0 -> 10: ret 0x053D0AA8 = [1, 0] [raw:01 00 ] @1452199690.855157>
-8795 s.o. <BsbTelegram 0 -> 10: ret 0x233D04A7 = [1, 0] [raw:01 00 ] @1452199691.631848>
 8800 Raumtemperatur 3 (--°C) <BsbTelegram 0 -> 10: ret 0x2F3D051E = [1, 12, 128] [raw:01 0C 80 ] @1452199692.509476>
 8801 Raumsollwert 3 (--) <BsbTelegram 0 -> 10: ret 0x2F3D0593 = [1, 0, 0] [raw:01 00 00 ] @1452199692.709501>
 8803/4? Vorlauftemperatur 3 <BsbTelegram 0 -> 10: ret 0x233D0518 = [1, 0, 0] [raw:01 00 00 ] @1452199693.677157>
@@ -284,3 +257,31 @@ Setzen:
 8560 Feststoffkesseltemperatur <BsbTelegram 0 -> 10: ret 0x513D052E = [1, 0, 0] [raw:01 00 00 ] @1452198619.745131>
 8570 Betr'stunden Feststoffkessel (0h) <BsbTelegram 0 -> 10: ret 0x513D0892 = [0, 0, 0, 0, 0] [raw:00 00 00 00 00 ] @1452198621.689725>
 
+
+<BsbTelegram 0 -> 10: ret 8700 Außentemperatur = 2.890625 °C [raw:00 00 B9 ] @1452199672.190188>
+8701 Außentemperatur Minimum <BsbTelegram 0 -> 10: ret 0x053D056F = [0, 253, 12] [raw:00 FD 0C ] @1452199673.904086>
+8702 Außentemperatur Maximum <BsbTelegram 0 -> 10: ret 0x053D056E = [0, 9, 177] [raw:00 09 B1 ] @1452199674.857268>
+°C <BsbTelegram 0 -> 10: ret 8703 Außentemperatur gedämpft = [0, 0, 30] [raw:00 00 1E ] @1452199675.629090>
+°C <BsbTelegram 0 -> 10: ret 8704 Außentemperatur gemischt = [0, 0, 136] [raw:00 00 88 ] @1452199676.387851>
+8730 Heizkreispumpe 1 (Ein) <BsbTelegram 0 -> 10: ret 0x053D09A5 = [0, 255] [raw:00 FF ] @1452199677.180517>
+8731 Heizkreismischer 1 Auf (keine Funktion) <BsbTelegram 0 -> 10: ret 0x053D09A6 = [1, 0] [raw:01 00 ] @1452199678.088322>
+8732 Heizkreismischer 1 Zu (keine Funktion) <BsbTelegram 0 -> 10: ret 0x053D09A7 = [1, 0] [raw:01 00 ] @1452199678.911587>
+8735 Drehzahl Heizkreispumpe 1 (%) <BsbTelegram 0 -> 10: ret 0x213D04A7 = [1, 0] [raw:01 00 ] @1452199679.791416>
+<BsbTelegram 0 -> 10: ret 8740 Raumtemperatur 1 = 50.0 °C [raw:01 0C 80 ] @1452199680.729744>
+(<BsbTelegram 0 -> 10: ret 8741 Raumsollwert 1 = [0, 4, 192] [raw:00 04 C0 ] @1452199680.929925>)
+<BsbTelegram 0 -> 10: ret 8743 Vorlauftemperatur 1 = 0.0 °C [raw:01 00 00 ] @1452199681.586073>
+(<BsbTelegram 0 -> 10: ret 8744 Vorlaufsollwert 1 = [0, 9, 61] [raw:00 09 3D ] @1452199681.787954>)
+8749 Raumthermostat 1 (kein Bedarf) <BsbTelegram 0 -> 10: ret 0x053D0C7D = [0, 0] [raw:00 00 ] @1452199682.411534>
+8760 Heizkreispumpe 2 (keine Funktion) <BsbTelegram 0 -> 10: ret 0x053D09A8 = [1, 0] [raw:01 00 ] @1452199683.250105>
+8761 und ff. siehe 873x <BsbTelegram 0 -> 10: ret 0x053D09A9 = [1, 0] [raw:01 00 ] @1452199684.108885>
+8762 <BsbTelegram 0 -> 10: ret 0x053D09AA = [1, 0] [raw:01 00 ] @1452199684.877490>
+8765 <BsbTelegram 0 -> 10: ret 0x223D04A7 = [1, 0] [raw:01 00 ] @1452199685.599686>
+ <BsbTelegram 0 -> 10: ret 8770 Raumtemperatur 2 = 50.0 °C [raw:01 0C 80 ] @1452199686.301493>
+ <BsbTelegram 0 -> 10: ret 8771 Raumsollwert 2 = [1, 0, 0] [raw:01 00 00 ] @1452199686.502524>
+ <BsbTelegram 0 -> 10: ret 8773 Vorlauftemperatur 2 = 0.0 °C [raw:01 00 00 ] @1452199687.150455>
+ <BsbTelegram 0 -> 10: ret 8774 Vorlaufsollwert 2 = [1, 0, 0] [raw:01 00 00 ] @1452199687.348749>
+8779 Raumthermostat 2 (kein Bedarf) <BsbTelegram 0 -> 10: ret 0x063D0C7D = [0, 0] [raw:00 00 ] @1452199688.024799>
+8790 Heizkreispumpe 3 (keine Funktion) <BsbTelegram 0 -> 10: ret 0x053D09B0 = [1, 0] [raw:01 00 ] @1452199688.980656>
+8791 s.o. <BsbTelegram 0 -> 10: ret 0x053D0AA7 = [1, 0] [raw:01 00 ] @1452199689.948565>
+8792 s.o. <BsbTelegram 0 -> 10: ret 0x053D0AA8 = [1, 0] [raw:01 00 ] @1452199690.855157>
+8795 s.o. <BsbTelegram 0 -> 10: ret 0x233D04A7 = [1, 0] [raw:01 00 ] @1452199691.631848>

@@ -369,7 +369,7 @@ groups = [
         BsbFieldTemperature(0x493d052a, 8510, u'Kollektortemperatur 1', ),
     ]),
     
-    Group(8510, u"8700 Diagnose Verbraucher", [
+    Group(8700, u"8700 Diagnose Verbraucher", [
         BsbFieldTemperature(0x053d0521, 8700, u'Außentemperatur', ),
         BsbFieldTemperature(0x313d052f, 8830, u'Trinkwassertemperatur 1', ),
     ]),

@@ -93,47 +93,6 @@ Sa (1.P.Aus -> 22:00) - 2. P. Ein 22:50
 
 
 ########################## ########################## ########################## ##########################
-#8300 Diagnose Erzeuger / #8500 Diagnose Solar
-########################## ########################## ########################## ##########################
-8304 Kesselpumpe Q1 (Ein) <BsbTelegram 0 -> 10: ret 0x053D09A2 = [0, 255] [raw:00 FF ] @1452198593.243269>
-8308 Drehzahl Kesselpumpe (%) <BsbTelegram 0 -> 10: ret 0x053D0826 = [0, 30] [raw:00 1E ] @1452198595.477738>
-8310 Kesseltemperatur <BsbTelegram 0 -> 10: ret 8310 Kesseltemperatur = 40.125 °C [raw:00 0A 08 ] @1452198596.708486>
-(8311 <BsbTelegram 0 -> 10: ret 8311 Kesselsollwert = [0, 10, 80] [raw:00 0A 50 ] @1452198596.908089>)
-8312 Kesselschaltpunkt <BsbTelegram 0 -> 10: ret 0x053D0B26 = [0, 9, 80] [raw:00 09 50 ] @1452198597.603698>
-8314 Kesselrücklauftemperatur <BsbTelegram 0 -> 10: ret 8314 Kesselrücklauftemperatur = 31.90625 °C [raw:00 07 FA ] @1452198598.512682>
-8323 Gebläsedrehzahl (rpm) <BsbTelegram 0 -> 10: ret 0x093D0E69 = [0, 0, 0] [raw:00 00 00 ] @1452198599.347297>
-8324 Brennergebläsesollwert (rpm) <BsbTelegram 0 -> 10: ret 0x093D0E6A = [0, 0, 0] [raw:00 00 00 ] @1452198599.860400>
-8325 Akt. Gebläsesteuerung (%) <BsbTelegram 0 -> 10: ret 0x093D0E00 = [0, 0, 0] [raw:00 00 00 ] @1452198601.372346>
-8326 Brennermodulation (%) <BsbTelegram 0 -> 10: ret 0x053D0834 = [1, 0] [raw:01 00 ] @1452198601.569754>
-8329 Ionisationsstrom (uA) <BsbTelegram 0 -> 10: ret 0x093D0E16 = [0, 0, 0] [raw:00 00 00 ] @1452198602.126174>
-# int32, Einheit Sekunden d.h. divisor=3600
-8330 Betriebsstunden 1. Stufe (3484h) <BsbTelegram 0 -> 10: ret 0x0D3D093B = [0, 0, 191, 97, 192] [raw:00 00 BF 61 C0 ] @1452198603.010411>
-# int32 1:1
-8331 Startzähler 1. Stufe (110075#) <BsbTelegram 0 -> 10: ret 0x053D08A5 = [0, 0, 1, 173, 250] [raw:00 00 01 AD FA ] @1452198603.976653>
-8338 Betriebsstunden Heizbetrieb (4262h) <BsbTelegram 0 -> 10: ret 0x053D2FEB = [0, 0, 234, 30, 96] [raw:00 00 EA 1E 60 ] @1452198604.623747>
-8339 Betriebsstunden TWW (271h) <BsbTelegram 0 -> 10: ret 0x053D2FEC = [0, 0, 14, 226, 240] [raw:00 00 0E E2 F0 ] @1452198605.501766>
-8390 Aktuelle Phasennummer <BsbTelegram 0 -> 10: ret 0x093D0DFD = [0, 4] [raw:00 04 ] @1452198606.029517>
-8499 Kollektorpumpe 1 (Aus) <BsbTelegram 0 -> 10: ret 0x053D09AB = [0, 0] [raw:00 00 ] @1452198606.857200>
-8501 Solarstellglied Puffer (keine Funktion) <BsbTelegram 0 -> 10: ret 0x053D0A89 = [1, 0] [raw:01 00 ] @1452198607.628958>
-8502 Solarstellglied Schwimmbad (keine Funktion) <BsbTelegram 0 -> 10: ret 0x053D0A8B = [1, 0] [raw:01 00 ] @1452198608.171408>
-<BsbTelegram 0 -> 10: ret 8510 Kollektortemperatur 1 = 1.0625 °C [raw:00 00 44 ] @1452198609.148475>
-8511 Kollektortemperatur 1 max <BsbTelegram 0 -> 10: ret 0x493D053F = [0, 42, 162] [raw:00 2A A2 ] @1452198610.518932>
-8512 Kollektortemperatur 1 min <BsbTelegram 0 -> 10: ret 0x493D0718 = [0, 250, 63] [raw:00 FA 3F ] @1452198611.364475>
-8513 dT Kollektor 1 / TWW (°C) <BsbTelegram 0 -> 10: ret 0x493D053B = [0, 251, 131] [raw:00 FB 83 ] @1452198612.188213>
-8514 dT Kollektor 1 / Puffer <BsbTelegram 0 -> 10: ret 0x493D053C = [1, 221, 68] [raw:01 DD 44 ] @1452198612.860909>
-8515 dT Kollektor 1 / Schwimmbad <BsbTelegram 0 -> 10: ret 0x493D042E = [1, 0, 68] [raw:01 00 44 ] @1452198613.516853>
-8519 Solarvorlauftemperatur <BsbTelegram 0 -> 10: ret 0x493D050E = [1, 0, 0] [raw:01 00 00 ] @1452198614.120168>
-8520 Solarrücklauftemperatur <BsbTelegram 0 -> 10: ret 0x493D050F = [1, 0, 0] [raw:01 00 00 ] @1452198614.807857>
-8526 Tagesertrag Solarenergie (kWh, div=10??) <BsbTelegram 0 -> 10: ret 0x493D0599 = [0, 0, 0] [raw:00 00 00 ] @1452198615.488962>
-8527 Gesamtertrag Solarenergie (kWh) <BsbTelegram 0 -> 10: ret 0x493D0598 = [0, 0, 0, 0, 0] [raw:00 00 00 00 00 ] @1452198616.134048>
-8530 Betr'stunden Solarertrag (1401h) <BsbTelegram 0 -> 10: ret 8530 Betr'stunden Solarertrag = [0, 0, 76, 245, 144] [raw:00 00 4C F5 90 ] @1452198616.968083>
-8531 Betr'stunden Kollektorüberhitz (16h) <BsbTelegram 0 -> 10: ret 0x493D0717 = [0, 0, 0, 225, 0] [raw:00 00 00 E1 00 ] @1452198618.265396>
-8532 Betr'stunden Kollektorpumpe (1411h) <BsbTelegram 0 -> 10: ret 0x053D10A5 = [0, 0, 77, 130, 48] [raw:00 00 4D 82 30 ] @1452198619.119802>
-8560 Feststoffkesseltemperatur <BsbTelegram 0 -> 10: ret 0x513D052E = [1, 0, 0] [raw:01 00 00 ] @1452198619.745131>
-8570 Betr'stunden Feststoffkessel (0h) <BsbTelegram 0 -> 10: ret 0x513D0892 = [0, 0, 0, 0, 0] [raw:00 00 00 00 00 ] @1452198621.689725>
-
-
-########################## ########################## ########################## ##########################
 #8700 Diagnose Verbraucher
 ########################## ########################## ########################## ##########################
 <BsbTelegram 0 -> 10: ret 8700 Außentemperatur = 2.890625 °C [raw:00 00 B9 ] @1452199672.190188>
@@ -284,3 +243,44 @@ Setzen:
 <BsbTelegram 0 -> 10: ret 0x053D07AB = [0, 0] [raw:00 00 ] @1452198437.420432>
 # 8011
 <BsbTelegram 0 -> 10: ret 0x053D0AFC = [0, 0] [raw:00 00 ] @1452198438.521584>
+
+########################## ########################## ########################## ##########################
+#8300 Diagnose Erzeuger / #8500 Diagnose Solar
+########################## ########################## ########################## ##########################
+8304 Kesselpumpe Q1 (Ein) <BsbTelegram 0 -> 10: ret 0x053D09A2 = [0, 255] [raw:00 FF ] @1452198593.243269>
+8308 Drehzahl Kesselpumpe (%) <BsbTelegram 0 -> 10: ret 0x053D0826 = [0, 30] [raw:00 1E ] @1452198595.477738>
+8310 Kesseltemperatur <BsbTelegram 0 -> 10: ret 8310 Kesseltemperatur = 40.125 °C [raw:00 0A 08 ] @1452198596.708486>
+(8311 <BsbTelegram 0 -> 10: ret 8311 Kesselsollwert = [0, 10, 80] [raw:00 0A 50 ] @1452198596.908089>)
+8312 Kesselschaltpunkt <BsbTelegram 0 -> 10: ret 0x053D0B26 = [0, 9, 80] [raw:00 09 50 ] @1452198597.603698>
+8314 Kesselrücklauftemperatur <BsbTelegram 0 -> 10: ret 8314 Kesselrücklauftemperatur = 31.90625 °C [raw:00 07 FA ] @1452198598.512682>
+8323 Gebläsedrehzahl (rpm) <BsbTelegram 0 -> 10: ret 0x093D0E69 = [0, 0, 0] [raw:00 00 00 ] @1452198599.347297>
+8324 Brennergebläsesollwert (rpm) <BsbTelegram 0 -> 10: ret 0x093D0E6A = [0, 0, 0] [raw:00 00 00 ] @1452198599.860400>
+8325 Akt. Gebläsesteuerung (%) <BsbTelegram 0 -> 10: ret 0x093D0E00 = [0, 0, 0] [raw:00 00 00 ] @1452198601.372346>
+8326 Brennermodulation (%) <BsbTelegram 0 -> 10: ret 0x053D0834 = [1, 0] [raw:01 00 ] @1452198601.569754>
+8329 Ionisationsstrom (uA) <BsbTelegram 0 -> 10: ret 0x093D0E16 = [0, 0, 0] [raw:00 00 00 ] @1452198602.126174>
+# int32, Einheit Sekunden d.h. divisor=3600
+8330 Betriebsstunden 1. Stufe (3484h) <BsbTelegram 0 -> 10: ret 0x0D3D093B = [0, 0, 191, 97, 192] [raw:00 00 BF 61 C0 ] @1452198603.010411>
+# int32 1:1
+8331 Startzähler 1. Stufe (110075#) <BsbTelegram 0 -> 10: ret 0x053D08A5 = [0, 0, 1, 173, 250] [raw:00 00 01 AD FA ] @1452198603.976653>
+8338 Betriebsstunden Heizbetrieb (4262h) <BsbTelegram 0 -> 10: ret 0x053D2FEB = [0, 0, 234, 30, 96] [raw:00 00 EA 1E 60 ] @1452198604.623747>
+8339 Betriebsstunden TWW (271h) <BsbTelegram 0 -> 10: ret 0x053D2FEC = [0, 0, 14, 226, 240] [raw:00 00 0E E2 F0 ] @1452198605.501766>
+8390 Aktuelle Phasennummer <BsbTelegram 0 -> 10: ret 0x093D0DFD = [0, 4] [raw:00 04 ] @1452198606.029517>
+8499 Kollektorpumpe 1 (Aus) <BsbTelegram 0 -> 10: ret 0x053D09AB = [0, 0] [raw:00 00 ] @1452198606.857200>
+8501 Solarstellglied Puffer (keine Funktion) <BsbTelegram 0 -> 10: ret 0x053D0A89 = [1, 0] [raw:01 00 ] @1452198607.628958>
+8502 Solarstellglied Schwimmbad (keine Funktion) <BsbTelegram 0 -> 10: ret 0x053D0A8B = [1, 0] [raw:01 00 ] @1452198608.171408>
+<BsbTelegram 0 -> 10: ret 8510 Kollektortemperatur 1 = 1.0625 °C [raw:00 00 44 ] @1452198609.148475>
+8511 Kollektortemperatur 1 max <BsbTelegram 0 -> 10: ret 0x493D053F = [0, 42, 162] [raw:00 2A A2 ] @1452198610.518932>
+8512 Kollektortemperatur 1 min <BsbTelegram 0 -> 10: ret 0x493D0718 = [0, 250, 63] [raw:00 FA 3F ] @1452198611.364475>
+8513 dT Kollektor 1 / TWW (°C) <BsbTelegram 0 -> 10: ret 0x493D053B = [0, 251, 131] [raw:00 FB 83 ] @1452198612.188213>
+8514 dT Kollektor 1 / Puffer <BsbTelegram 0 -> 10: ret 0x493D053C = [1, 221, 68] [raw:01 DD 44 ] @1452198612.860909>
+8515 dT Kollektor 1 / Schwimmbad <BsbTelegram 0 -> 10: ret 0x493D042E = [1, 0, 68] [raw:01 00 44 ] @1452198613.516853>
+8519 Solarvorlauftemperatur <BsbTelegram 0 -> 10: ret 0x493D050E = [1, 0, 0] [raw:01 00 00 ] @1452198614.120168>
+8520 Solarrücklauftemperatur <BsbTelegram 0 -> 10: ret 0x493D050F = [1, 0, 0] [raw:01 00 00 ] @1452198614.807857>
+8526 Tagesertrag Solarenergie (kWh, div=10??) <BsbTelegram 0 -> 10: ret 0x493D0599 = [0, 0, 0] [raw:00 00 00 ] @1452198615.488962>
+8527 Gesamtertrag Solarenergie (kWh) <BsbTelegram 0 -> 10: ret 0x493D0598 = [0, 0, 0, 0, 0] [raw:00 00 00 00 00 ] @1452198616.134048>
+8530 Betr'stunden Solarertrag (1401h) <BsbTelegram 0 -> 10: ret 8530 Betr'stunden Solarertrag = [0, 0, 76, 245, 144] [raw:00 00 4C F5 90 ] @1452198616.968083>
+8531 Betr'stunden Kollektorüberhitz (16h) <BsbTelegram 0 -> 10: ret 0x493D0717 = [0, 0, 0, 225, 0] [raw:00 00 00 E1 00 ] @1452198618.265396>
+8532 Betr'stunden Kollektorpumpe (1411h) <BsbTelegram 0 -> 10: ret 0x053D10A5 = [0, 0, 77, 130, 48] [raw:00 00 4D 82 30 ] @1452198619.119802>
+8560 Feststoffkesseltemperatur <BsbTelegram 0 -> 10: ret 0x513D052E = [1, 0, 0] [raw:01 00 00 ] @1452198619.745131>
+8570 Betr'stunden Feststoffkessel (0h) <BsbTelegram 0 -> 10: ret 0x513D0892 = [0, 0, 0, 0, 0] [raw:00 00 00 00 00 ] @1452198621.689725>
+

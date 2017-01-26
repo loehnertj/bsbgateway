@@ -41,9 +41,9 @@ from bsb.bsb_field import EncodeError, ValidateError
 class BsbGateway(object):
     _hub = None
 
-    def __init__(o, serial_port, device, bus_address, loggers, atomic_interval, web_interface_port=8080, cmd_interface_enable=True):
+    def __init__(o, adapter_settings, device, bus_address, loggers, atomic_interval, web_interface_port=8080, cmd_interface_enable=True):
         o.device = device
-        o._bsbcomm = BsbComm('bsb', serial_port, device, bus_address, n_addresses=3)
+        o._bsbcomm = BsbComm('bsb', adapter_settings, device, bus_address, n_addresses=3)
         o.loggers = loggers
         o.atomic_interval = atomic_interval
         o.web_interface_port = web_interface_port
@@ -170,8 +170,15 @@ def run(config):
             if logger.field.disp_id == disp_id:
                 logger.add_trigger(emailaction, *trigger[1:])
                 
+    if 'adapter_settings' not in config and 'serial_port' in config:
+        # legacy config, update
+        config['adapter_settings'] = {
+            'adapter_type': 'fake' if config['serial_port']=='fake' else 'serial',
+            'adapter_device': config['serial_port'],
+        }
+                
     BsbGateway(
-        serial_port=config['serial_port'],
+        adapter_settings=config['adapter_settings'],
         device=device,
         bus_address=config['bus_address'],
         loggers=loggers,

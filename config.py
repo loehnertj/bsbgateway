@@ -15,15 +15,34 @@ logging.basicConfig(level='DEBUG', format='%(levelname)s %(name)s:%(lineno)d -- 
 # Read "driver" = "index of available fields".
 device = 'broetje_isr_plus'
 
-# The serial port to use.
-# * 'fake' = use a fake device, see below.
-# * '/dev/ttyS0' ... '/dev/ttyS3' are usual devices for real serial ports.
-# * '/dev/ttyUSB0' is the usual device for a USB-to-serial converter on Linux.
-#
-# The fake device answers get and set telegrams with appropriate replies. Set values are remembered for the session.
-serial_port = 'fake'
-# serial_port = '/dev/ttyS0'
-# serial_port = '/dev/ttyUSB0'
+# Settings for the used adapter.
+adapter_settings = {
+    # * 'fake' = use a fake serial device, see below.
+    #     The fake device answers get and set telegrams with appropriate replies. Set values are remembered for the session.
+    # * 'serial' = use a serial port (real or USB)
+    'adapter_type': 'serial',
+    
+    # * '/dev/ttyS0' ... '/dev/ttyS3' are usual devices for real serial ports.
+    # * '/dev/ttyUSB0' is the usual device for a USB-to-serial converter on Linux.
+    'adapter_device': '/dev/ttyUSB0',
+    
+    # hardware settings - only applicable if adapter_type is 'serial'.
+    # see also bsbgateway/serial_source.py
+    # baud rate - 4800 for BSB bus
+    'port_baud': 4800,
+    # 1, 1.5 or 2 - 1 for BSB bus
+    'port_stopbits': 1,
+    # 'odd' or 'even'. For BSB: 'odd' if you invert bytes (see below), 'even' if not.
+    'port_parity': 'odd',
+    # flip all bits after receive + before send. If you use a simple BSB-to-UART
+    # level converter, you most probably need to set this to True.
+    'invert_bytes': True,
+    # Only send if CTS has this state (True or False); None to disable.
+    # Use this if your adapter has a "bus in use" detection wired to CTS pin of the RS232 interface.
+    'expect_cts_state': None,
+    # wait time in seconds if blocked by CTS (see above).
+    'write_retry_time': 0.005,
+}
 
 # Bus adress offset of Gateway. Allowed range: 11 ... 125.
 # (0 is the main device, 10 is the control panel).

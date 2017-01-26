@@ -50,23 +50,25 @@ class BsbComm(EventSource):
     sniffmode = False
     _leftover_data = ''
     
-    def __init__(o, name, port, device, first_bus_address, n_addresses=1, sniffmode=False):
+    def __init__(o, name, adapter_settings, device, first_bus_address, n_addresses=1, sniffmode=False):
         if (first_bus_address<=10):
             raise ValueError("First bus address must be >10.")
         if (first_bus_address+n_addresses>127):
             raise ValueError("Last bus address must be <128.")
-        if port=='fake':
+        if adapter_settings['adapter_type']=='fake':
             o.serial = FakeSerialSource(name=name, device=device)
         else:
             o.serial = SerialSource(
                 name=name,
-                port_num=port,
-                port_baud=4800,
-                port_stopbits=1,
-                port_parity='odd',
-                invert_bytes=True,
-                expect_cts_state=False,
-                write_retry_time=0.005
+                port_num=adapter_settings['adapter_device'],
+                # use sane default values for the rest if not set
+                port_baud=adapter_settings.get('port_baud', 4800),
+                port_stopbits=adapter_settings.get('port_stopbits', 1),
+                port_parity=adapter_settings.get('port_parity', 'odd'),
+                # Most simple RS232 level converters will deliver inverted bytes.
+                invert_bytes=adapter_settings.get('invert_bytes', True),
+                expect_cts_state=adapter_settings.get('expect_cts_state', None),
+                write_retry_time=adapter_settings.get('write_retry_time', 0.005),
             )
         o.device = device
         o.bus_addresses = range(first_bus_address, first_bus_address+n_addresses)

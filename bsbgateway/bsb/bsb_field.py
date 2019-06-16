@@ -92,7 +92,12 @@ class BsbField(object):
         if o.nullable:
             if rawdata[0] in [1, 5]:
                 return None
-        return o._decode_data(rawdata)
+        try:
+            return o._decode_data(rawdata)
+        except Exception as e:
+            print('BsbField.decode: %r' % (e,))
+            return None
+            
     
     def _valueflag(o, val, packettype):
         '''returns the valueflag (first byte of value) to be set.
@@ -108,11 +113,13 @@ class BsbField(object):
         else:
             raise EncodeError('Can only encode value for packet type ret or set.')
 
-    def __repr__(o):
-        if o.disp_id!=0:
-            return (u'<BsbField %d'%o.disp_id + u' '+o.disp_name + u'>').encode('utf8')
-        else:
-            return '<BsbField 0http://9gag.com/gag/aEzr5E9x%0.8X>'%(o.telegram_id,)
+    def __repr__(o, kwparams='unit rw nullable'):
+        # build placeholder string a=%(a)s, b=%(b)s ...
+        # kwparams is used by the subclasses.
+        kwparams = ', '.join(['%s=%%(%s)r'%(param, param) for param in kwparams.split(' ')])
+        d = o.__dict__.copy()
+        d['cls'] = o.__class__.__name__
+        return '%(cls)s(0x%(telegram_id)0.8X, %(disp_id)04d, %(disp_name)r'%d+kwparams%d+')'
 
     def __str__(o):
         if o.disp_id!=0:
@@ -159,6 +166,9 @@ class BsbFieldChoice(BsbField):
         else:
             o.choices = choices
         o._choices_inv = dict(map(reversed, o.choices.items()))
+        
+    def __repr__(o):
+        return BsbField.__repr__(o, kwparams='choices rw')
         
     def _decode_data(o, rawdata):
         assert len(rawdata)==2
@@ -218,6 +228,9 @@ class BsbFieldInt8(BsbField):
         BsbField.__init__(o, **xo(locals()))
         o.min = min or 0
         o.max = max or 255
+        
+    def __repr__(o):
+        return BsbField.__repr__(o, kwparams='unit rw nullable min max')
         
     @property
     def _extra_description(o):

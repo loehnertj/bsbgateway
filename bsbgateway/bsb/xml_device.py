@@ -118,4 +118,8 @@ def _tfloat(s):
         # return value in units of the last part (e.g. hh:mm in minutes, mm:ss in seconds)
         parts = [int(p) for p in s.split(':')]
         return reduce(lambda x, y: 60*x+y, parts)
-    return float(s)
+    x = float(s)
+    if int(x)==x:
+        return int(x)
+    else:
+        return x

@@ -17,7 +17,7 @@ The serial port driver evaluates the `CTS` (clear-to-send) pin of the RS232 in o
 ## Installation
 
 Dependencies are web.py and pySerial.
-On a debian-based system: `sudo apt-get install python-serial python-webpy`
+To install them, use `pip install -r requirements.txt`
 
 Clone or download the project.
 

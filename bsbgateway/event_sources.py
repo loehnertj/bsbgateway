@@ -23,7 +23,10 @@ import time
 import logging
 log = lambda: logging.getLogger(__name__)
 
-from Queue import Queue
+if sys.version_info[0] == 2:
+    from Queue import Queue
+else:
+    from queue import Queue
 from threading import Thread
 
 __all__ = ['EventSource', 'StdinSource', 'TimerSource', 'HubSource']
@@ -210,11 +213,11 @@ def run_test():
         hub.add_and_start_source(source)
 
     def myhandler(evtype, data):
-        print evtype, repr(data)
+        print(evtype, repr(data))
         if evtype=='stdin' and 'q' in data:
             hub.stop()
         if evtype=='timer':
-            print time.time()
+            print(time.time())
 
     hubthread = hub.start_thread(myhandler)
     hubthread.join()

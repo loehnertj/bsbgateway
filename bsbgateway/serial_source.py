@@ -18,12 +18,17 @@
 #
 ##############################################################################
 
+import sys
 import time
-import Queue
 from threading import Thread
+if sys.version_info[0] == 2:
+    import Queue as queue
+    range = xrange
+else:
+    import queue
 import serial
 
-from event_sources import EventSource
+from .event_sources import EventSource
 
 
 class SerialSource(EventSource):
@@ -69,7 +74,7 @@ class SerialSource(EventSource):
 
         o._expect_cts_state = expect_cts_state
         o._write_retry_time = write_retry_time
-        o._write_retry_queue = Queue.Queue()
+        o._write_retry_queue = queue.Queue()
 
 
         o._serial_arg = dict( 
@@ -114,7 +119,7 @@ class SerialSource(EventSource):
                 timestamp = time.time()
                 if o._invert_bytes:
                     data = bytearray(data)
-                    for i in xrange(len(data)):
+                    for i in range(len(data)):
                         data[i] ^= 0xff
                     data = str(data)
                 putevent_func(o.name, (timestamp, data))
@@ -123,7 +128,7 @@ class SerialSource(EventSource):
     def write(o, data):
         if o._invert_bytes:
             data = bytearray(data)
-            for i in xrange(len(data)):
+            for i in range(len(data)):
                 data[i] ^= 0xff
             data = str(data)
 
@@ -136,7 +141,7 @@ class SerialSource(EventSource):
 
     def _write_delayed(o):
         # copy reference to exception, since on destruction, Queue module disappears before I stop.
-        empty_exception = Queue.Empty
+        empty_exception = queue.Empty
         '''if something appears on the retry queue, wait for the appropriate time, then try to resend.'''
         while not o._stopflag:
             try:
@@ -153,7 +158,7 @@ class SerialSource(EventSource):
                 cnt += 1
                 if o._stopflag: return
             if cnt>=100:
-                print 'could not send packet: not clear to send after 100 wait cycles'
+                print('could not send packet: not clear to send after 100 wait cycles')
                 continue
             o.serial_port.write(data)
 

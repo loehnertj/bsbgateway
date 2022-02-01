@@ -27,11 +27,10 @@ import logging
 log = lambda: logging.getLogger(__name__)
 logging.basicConfig(level=logging.DEBUG)
 
-import templates
-
 import time
 
-from Queue import Queue
+if sys.version_info[0] > 2:
+    raw_input = input
 from . import WebInterface
 
 class FakeField(object):

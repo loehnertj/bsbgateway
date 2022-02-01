@@ -22,20 +22,20 @@
 
 import sys
 import os
-sys.path.append(os.path.dirname(__file__))
+#sys.path.append(os.path.dirname(__file__))
 
 import logging
 log = lambda: logging.getLogger(__name__)
 
 import time
 
-from event_sources import SyncedSecondTimerSource, HubSource
-from single_field_logger import SingleFieldLogger
-from web_interface import WebInterface
-from cmd_interface import CmdInterface
-from email_action import make_email_action
-from bsb.bsb_comm import BsbComm
-from bsb.bsb_field import EncodeError, ValidateError
+from .event_sources import SyncedSecondTimerSource, HubSource
+from .single_field_logger import SingleFieldLogger
+from .web_interface import WebInterface
+from .cmd_interface import CmdInterface
+from .email_action import make_email_action
+from .bsb.bsb_comm import BsbComm
+from .bsb.bsb_field import EncodeError, ValidateError
 
 
 class BsbGateway(object):
@@ -145,7 +145,7 @@ class BsbGateway(object):
 def run(config):
     # FIXME: make this a dynamic import.
     if config['device'] == 'broetje_isr_plus':
-        import bsb.broetje_isr_plus as device
+        from .bsb import broetje_isr_plus as device
     else:
         raise ValueError('Unsupported device')
     

@@ -18,15 +18,14 @@
 #
 ##############################################################################
 
-from Queue import Queue
 import logging
 log = lambda: logging.getLogger(__name__)
 import datetime
 import web
 
-from bsb.bsb_field import ValidateError, EncodeError
-from util.webutils import bridge_call
-from templates import tpl
+from bsbgateway.bsb.bsb_field import ValidateError, EncodeError
+from .webutils import bridge_call
+from .templates import tpl
 
 _ERRHEADERS = {
     'Content-Type': 'text/plain; charset=utf-8',
@@ -81,7 +80,7 @@ class Field(object):
         if isinstance(t, Exception):
             # FIXME: web error should not be raised here
             log().exception('error while requesting value: %s'%(t,))
-            raise web.HTTPError(500, headers=_ERRHEADERS, data=str(t))
+            raise web.HTTPError("500", headers=_ERRHEADERS, data=str(t))
         
         data = t.data
         if hasattr(data, 'hour'):
@@ -110,7 +109,7 @@ class Field(object):
             raise web.notfound()
         if isinstance(t, Exception):
             log().exception('error while setting value')
-            raise web.HTTPError(500, headers=_ERRHEADERS, data=str(t))
+            raise web.HTTPError("500", headers=_ERRHEADERS, data=str(t))
         # FIXME?
         return 'OK'
     

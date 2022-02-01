@@ -20,12 +20,13 @@
 
 import logging
 log = lambda: logging.getLogger(__name__)
-from event_sources import EventSource
-from serial_source import SerialSource
-from fake_serial_source import FakeSerialSource
+# FIXME: importing from parent, this smells bad
+from bsbgateway.event_sources import EventSource
+from bsbgateway.serial_source import SerialSource
+from bsbgateway.fake_serial_source import FakeSerialSource
 
-from bsb_telegram import BsbTelegram
-from bsb_field import ValidateError, EncodeError
+from .bsb_telegram import BsbTelegram
+from .bsb_field import ValidateError, EncodeError
 
 class BsbComm(EventSource):
     '''simplifies the conversion between serial data and BsbTelegrams.
@@ -48,7 +49,7 @@ class BsbComm(EventSource):
     bus_addresses = []
     # set to true to return ALL telegrams going over the bus (not just those meant for me)
     sniffmode = False
-    _leftover_data = ''
+    _leftover_data = b''
     
     def __init__(o, name, adapter_settings, device, first_bus_address, n_addresses=1, sniffmode=False):
         if (first_bus_address<=10):
@@ -72,7 +73,7 @@ class BsbComm(EventSource):
             )
         o.device = device
         o.bus_addresses = range(first_bus_address, first_bus_address+n_addresses)
-        o._leftover_data = ''
+        o._leftover_data = b''
         o.sniffmode = sniffmode
         
     def run(o, putevent_func):
@@ -98,7 +99,7 @@ class BsbComm(EventSource):
         if not telegrams:
             return
         # junk at the end? remember, it could be an incomplete telegram.
-        leftover = ''
+        leftover = b''
         for data in reversed(telegrams):
             if isinstance(data, BsbTelegram):
                 break

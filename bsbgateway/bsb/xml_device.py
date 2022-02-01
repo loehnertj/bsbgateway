@@ -30,7 +30,7 @@ class XmlDevice(object):
         
         _all = it.chain(*[g.fields for g in self.groups])
         self.fields = {f.disp_id: f for f in _all}
-        self.fields_by_telegram_id = {f.telegram_id: f for f in self.fields.itervalues()}
+        self.fields_by_telegram_id = {f.telegram_id: f for f in self.fields.values()}
         
     def _read_groups(self, tree):
         groups = []

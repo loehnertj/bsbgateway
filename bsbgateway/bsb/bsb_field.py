@@ -20,6 +20,7 @@
 #
 ##############################################################################
 
+import sys
 from datetime import time
 
 __all__ = ['EncodeError', 'ValidateError', 
@@ -28,11 +29,15 @@ __all__ = ['EncodeError', 'ValidateError',
            'BsbFieldTime',
            ]
 
+if sys.version_info[0] > 2:
+    basestring = str
+
+
 class EncodeError(Exception): pass
 class ValidateError(Exception): pass
 
 def xo(dict):
-    return {k:v for k,v in dict.iteritems() if k!='o'}
+    return {k:v for k,v in dict.items() if k!='o'}
 
 class BsbField(object):
     type_name=''
@@ -123,7 +128,9 @@ class BsbField(object):
 
     def __str__(o):
         if o.disp_id!=0:
-            return(u'%d '%o.disp_id + o.disp_name).encode('utf8')
+            result = u'%d '%o.disp_id + o.disp_name 
+            # Python2 compat
+            return result if isinstance(result, str) else result.encode('utf8')
         else:
             return '0x%0.8X'%o.telegram_id
 

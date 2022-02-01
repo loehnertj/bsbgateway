@@ -18,13 +18,19 @@
 #
 ##############################################################################
 
+import sys
 import logging
 log = lambda: logging.getLogger(__name__)
 import datetime
 import time
-from Queue import Queue
+if sys.version_info[0] == 2:
+    from Queue import Queue
+    ashex = lambda b: b.encode('hex')
+else:
+    from queue import Queue
+    ashex = lambda b: b.hex()
 
-from event_sources import EventSource
+from .event_sources import EventSource
 
 class FakeSerialSource(EventSource):
     
@@ -41,14 +47,17 @@ class FakeSerialSource(EventSource):
             data = o.rdqueue.get(1)
             if not data: continue
             time.sleep(0.1)
-            log().debug('RETURN: [%s]'%data.encode('hex'))
+            log().debug('RETURN: [%s]'%ashex(data))
+            assert isinstance(data, bytes)
             putevent_func(o.name, (time.time(), data))
 
     def write(o, data):
-        log().debug('FAKE write: [%s]'%(data.encode('hex')))
+        if not isinstance(data, bytes):
+            raise ValueError("FakeSerialSource slaps you around a bit with a large trout (because your data was not bytes)")
+        log().debug('FAKE write: [%s]'%(ashex(data)))
         # read back written data (as the real bus adapter does)
         o.rdqueue.put(data)
-        from bsb.bsb_telegram import BsbTelegram
+        from .bsb.bsb_telegram import BsbTelegram
         t = BsbTelegram.deserialize(data, o.device)[0]
         
         # remember set value for session

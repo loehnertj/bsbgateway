@@ -18,5 +18,5 @@
 #
 ##############################################################################
 
-from util.webutils import UrlDir
+from .webutils import UrlDir
 tpl = UrlDir(__file__)

@@ -19,8 +19,16 @@
 #
 ##############################################################################
 
-from crc16pure import crc16xmodem
-from bsb_field import BsbField
+import sys
+if sys.version_info[0] == 2:
+    joinbytes = lambda ints: b''.join(map(chr, ints))
+    datatype = basestring
+else:
+    datatype = bytes
+    joinbytes = bytes
+
+from .crc16pure import crc16xmodem
+from .bsb_field import BsbField
 
 __all__ = ['DecodeError', 'BsbTelegram']
 
@@ -33,13 +41,10 @@ _PACKETTYPES = {
 }
 
 _PACKETTYPES_R = {
-    value: key for key, value in _PACKETTYPES.iteritems()
+    value: key for key, value in _PACKETTYPES.items()
 }
 
-
-
 class DecodeError(Exception): pass
-
 
 class BsbTelegram(object):
     '''src = source address (0...255)
@@ -71,17 +76,16 @@ class BsbTelegram(object):
         Order follows the input stream order.
         '''
         indata = data
-        if isinstance(indata, basestring):
-            indata = map(ord, indata)
+        assert isinstance(indata, datatype)
         result = []
 
         while indata:
             try:
                 t, indata = cls._parse(indata, device)
                 result.append(t)
-            except DecodeError, e:
+            except DecodeError as e:
                 junk, indata = cls._skip(indata)
-                result.append((''.join(map(chr, junk)), e.args[0]))
+                result.append((junk, e.args[0]))
         return result
 
     @classmethod
@@ -91,13 +95,16 @@ class BsbTelegram(object):
         and gold is the rest.
         '''
         try:
-            idx = data.index(0xdc, 1)
+            idx = data.index(b'\xdc', 1)
         except ValueError:
-            return data, []
+            return data, b''
         return data[:idx], data[idx:]
 
     @classmethod
     def _validate(cls, data):
+        if isinstance(data, str):
+            # Python 2 compat: convert to list of ints
+            data = [ord(c) for c in data]
         if data[0] != 0xdc:
             raise DecodeError("bad start marker")
         if len(data) < 4 or len(data) < data[3]:
@@ -115,33 +122,42 @@ class BsbTelegram(object):
     def _parse(cls, data, device):
         '''return cls instance, rest of data'''
         cls._validate(data)
+        # Python 2 compat: convert into list of ints
+        # In python 3, we work directly with the bytes.
+        if isinstance(data, str):
+            idata = [ord(c) for c in data]
+        else:
+            idata = data
 
 
         t = cls()
-        t.src = data[1] ^ 0x80
-        t.dst = data[2]
-        dlen = data[3]
-        t.packettype = _PACKETTYPES.get(data[4], 'unknown (%d)'%(data[4]))
+        t.src = idata[1] ^ 0x80
+        t.dst = idata[2]
+        dlen = idata[3]
+        t.packettype = _PACKETTYPES.get(idata[4], 'unknown (%d)'%(idata[4]))
 
-        mult = 0x1000000
+        fidbytes = [idata[i] for i in (5, 6, 7, 8)]
         # For requests, byte 5+6 are swapped.
         if t.packettype in ['get', 'set']:
-            data[5], data[6] = data[6], data[5]
+            fidbytes[0], fidbytes[1] = fidbytes[1], fidbytes[0]
 
         fieldid=0
-        for d in data[5:9]:
+        mult = 0x1000000
+        for d in fidbytes:
             fieldid, mult = d*mult+fieldid, mult / 0x100
 
         t.field = BsbField(telegram_id=fieldid, disp_id=0, disp_name='Unbekannt')
         if device:
             # Try to identify the field. if not found, keep the "null" field.
             t.field = device.fields_by_telegram_id.get(fieldid, t.field)
-        t.rawdata = data[9:dlen-2]
+        # Expects list of ints
+        t.rawdata = [x for x in idata[9:dlen-2]]
         if t.rawdata:
             t.data = t.field.decode(t.rawdata)
         else:
             t.data = None
 
+        # Return remainder in original format (str in py2, bytes in py3)
         return t, data[dlen:]
 
     def serialize(o, validate=True):
@@ -170,16 +186,17 @@ class BsbTelegram(object):
         result.append((crc & 0xff00) >> 8)
         result.append(crc & 0xff)
 
-        return ''.join(map(chr, result))
-
-
-
+        return joinbytes(result)
 
     def __repr__(o):
         d = o.__dict__.copy()
         d['rawdata'] = ''.join(['%0.2X '%i for i in o.rawdata])
         d['ts'] = ' @%f'%o.timestamp if o.timestamp else ''
-        d['unit'] = ' '+o.field.unit.encode('utf8') if o.field.unit else ''
+        if isinstance(o.field.unit, str):
+            unit = o.field.unit
+        else:
+            unit = o.field.unit.encode('utf8')
+        d['unit'] = ' '+unit if unit else ''
         return '''<BsbTelegram %(src)d -> %(dst)d: %(packettype)s %(field)s = %(data)r%(unit)s [raw:%(rawdata)s]%(ts)s>'''%d
 
 def runtest():
@@ -192,7 +209,7 @@ def runtest():
     result = BsbTelegram.deserialize(data, None)
 
     for r in result:
-        print repr(r)
+        print(repr(r))
 
 if __name__=='__main__':
     runtest()

@@ -21,7 +21,7 @@
 ##############################################################################
 
 import itertools as it
-from bsb_field import BsbField, BsbFieldChoice, BsbFieldInt8, BsbFieldInt16, BsbFieldInt32, BsbFieldTemperature, BsbFieldTime
+from .bsb_field import BsbField, BsbFieldChoice, BsbFieldInt8, BsbFieldInt16, BsbFieldInt32, BsbFieldTemperature, BsbFieldTime
 
 __all__ = ['groups', 'fields', 'fields_by_telegram_id']
 
@@ -625,5 +625,5 @@ groups = [
 _all = it.chain(*[g.fields for g in groups])
 
 fields = {f.disp_id: f for f in _all}
-fields_by_telegram_id = {f.telegram_id: f for f in fields.itervalues()}
+fields_by_telegram_id = {f.telegram_id: f for f in fields.values()}
 fields_by_disp_id = fields

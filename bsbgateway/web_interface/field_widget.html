@@ -30,7 +30,7 @@ $else:
                 $if field.nullable:
                     <option value="" $('selected' if value is None else '')>--</option>
                 $ vkey = value[0] if value else ''
-                $ keys = field.choices.keys()
+                $ keys = [key for key in field.choices.keys()]
                 $ keys.sort()
                 $for key in keys:
                     <option value="$key" $('selected' if key==vkey else '')>$key $field.choices[key]</option>

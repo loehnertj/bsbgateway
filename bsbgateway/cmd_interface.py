@@ -25,8 +25,8 @@ import datetime
 import logging
 log = lambda: logging.getLogger(__name__)
 
-from event_sources import EventSource, StdinSource
-from bsb.bsb_field import ValidateError, EncodeError
+from .event_sources import EventSource, StdinSource
+from .bsb.bsb_field import ValidateError, EncodeError
 
 CMDS = [
     {
@@ -121,10 +121,10 @@ class CmdInterface(EventSource):
                     getattr(o, 'cmd_' + cmd['cmd'])(**m.groupdict())
                 except Exception as e:
                     log().exception('Something crashed while processing this command.')
-                    print 'Error: '+str(e)
+                    print('Error: '+str(e))
                 break
         else:
-            print 'Unrecognized command.'
+            print('Unrecognized command.')
         
     def cmd_quit(o):
         o.bsb.quit()
@@ -134,7 +134,7 @@ class CmdInterface(EventSource):
         try:
             o.bsb.cmdline_get(disp_id)
         except (ValidateError, EncodeError) as e:
-            print e.__class__.__name__ +': '+ str(e)
+            print(e.__class__.__name__ +': '+ str(e))
         
                         
     def cmd_set(o, disp_id, value, use_force):
@@ -142,7 +142,7 @@ class CmdInterface(EventSource):
             disp_id = int(disp_id)
             field = o.device.fields[disp_id]
         except (TypeError, ValueError, KeyError):
-            print 'Unrecognized field.'
+            print('Unrecognized field.')
             return
         if value == '--':
             value = None
@@ -157,12 +157,12 @@ class CmdInterface(EventSource):
                 else:
                     raise TypeError('Data type for field %s %s is not defined.'%(field.disp_id, field.disp_name))
             except (TypeError, ValueError) as e:
-                print e
+                print(e)
                 return
         try:
             o.bsb.cmdline_set(field.disp_id, value, validate=(use_force!='!'))
         except (ValidateError, EncodeError) as e:
-            print e.__class__.__name__ +': '+ str(e)
+            print(e.__class__.__name__ +': '+ str(e))
             
     def cmd_dump(o, expr=None):
         # switch: Off if any filter is set, else On
@@ -172,7 +172,7 @@ class CmdInterface(EventSource):
         if expr == 'off':
             o.bsb.set_sniffmode(False)
             o._dump_filter = 'False'
-            print 'dump is now off.'
+            print('dump is now off.')
             log().debug('dump filter: %r'%o._dump_filter)
             return
         if expr == 'on':
@@ -186,9 +186,9 @@ class CmdInterface(EventSource):
                 'inf':'inf', 'ret':'ret', 'get':'get', 'ack':'ack', 'set':'set'
             })
         except:
-            print 'bad filter expression'
+            print('bad filter expression')
             return
-        print 'dump is now on.'
+        print('dump is now on.')
         o._dump_filter = expr
         log().debug('dump filter: %r'%o._dump_filter)
         o.bsb.set_sniffmode(True)
@@ -215,7 +215,7 @@ class CmdInterface(EventSource):
         else:
             grps = o.device.groups
         if len(grps) == 0:
-            print 'Not found.'
+            print('Not found.')
             return
         # expand if searching in field names or if only one group was found.
         if (text and not hash) or len(grps)==1:
@@ -223,17 +223,17 @@ class CmdInterface(EventSource):
             
         for grp in grps:
             if not expand:
-                print '#'+grp.name
+                print('#'+grp.name)
             else:
                 flds = grp.fields
                 if text and not hash:
                     flds = [f for f in flds if text in f.disp_name.lower()]
                 flds.sort(key=lambda x: (x.disp_id, x.telegram_id))
                 if flds:
-                    print '#'+grp.name+':'
+                    print('#'+grp.name+':')
                     for f in flds:
-                        print '    '+f.short_description
-                    print
+                        print('    '+f.short_description)
+                    print()
             
     def cmd_info(o, ids=''):
         '''info <id>[, <id>...]: print field descriptions for the given field ids (4-digit numbers).'''
@@ -241,29 +241,29 @@ class CmdInterface(EventSource):
         try:
             ll = [o.device.fields[id] for id in ids]
         except KeyError:
-            print 'Not found.'
+            print('Not found.')
             return
         ll.sort(key=lambda x: (x.disp_id, x.telegram_id))
         for field in ll:
-            print field.long_description
-            print
+            print(field.long_description)
+            print()
 
     def cmd_help(o, cmd=''):
         if not cmd:
-            print '''BsbGateway (c) 2013-2015 J. Löhnert
+            print('''BsbGateway (c) 2013-2015 J. Löhnert
 Commands: (every command can be abbreviated to just the first character)
     
 %s
 
 '''%(
                 '\n'.join((cmd['help'].split('\n')[0] for cmd in CMDS)),
-            )
+            ))
         else:
             cmd = [c for c in CMDS if c['cmd'].startswith(cmd)]
             if not cmd:
-                print 'Unknown command.'
+                print('Unknown command.')
             else:
-                print cmd[0]['help']
+                print(cmd[0]['help'])
                 
         
     def filtered_print(o, which_address, telegram):
@@ -278,4 +278,4 @@ Commands: (every command can be abbreviated to just the first character)
             log().error('error applying filter: %r'%e)
             ff = False
         if which_address==1 or ff is True:
-            print repr(telegram)
+            print(repr(telegram))

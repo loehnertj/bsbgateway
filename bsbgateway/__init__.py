@@ -18,5 +18,5 @@
 #
 ##############################################################################
 
-from bsb_gateway import run
+from .bsb_gateway import run
 

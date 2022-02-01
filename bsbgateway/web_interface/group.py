@@ -19,8 +19,8 @@
 ##############################################################################
 
 import web
-from templates import tpl
-from field import Field
+from .templates import tpl
+from .field import Field
 
 class Group(object):
     url = r'group-([0-9]+)'

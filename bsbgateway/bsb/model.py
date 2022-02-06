@@ -33,7 +33,9 @@ class BsbModel(BaseModel):
     compiletime: str
     """string YYYYMMDDHHMMSS"""
     categories: Dict[str, "BsbCategory"]
-    types: Dict[Tuple["BsbDatatype", str], "BsbType"] = {}
+    """Actual command entries by category"""
+    types: Dict[str, "BsbType"] = {}
+    """Known types"""
 
     @property
     def commands(self):
@@ -57,6 +59,15 @@ class BsbCommand(BaseModel):
     command: str
     """internal (hex) ID, e.g. '0x2D3D0574'"""
     type: "BsbType"
+    """Type instance, local copy.
+
+    Should be shared from BsbModel.types.
+
+    To deduplicate & standardize the type, use `dedup_types()`.
+    """
+
+    typename: str = ""
+    """Type reference, can be used to look up the type in BsbModel."""
 
     description: "I18nstr"
     enum: Dict[int, "I18nstr"] = {}
@@ -216,7 +227,7 @@ def dedup_types(model: BsbModel) -> BsbModel:
 
     for command in model.commands:
         dtype = command.type
-        key = (dtype.datatype, dtype.name)
+        key = dtype.name
         if key not in all_types:
             all_types[key] = dtype.copy(deep=True)
         else:
@@ -228,7 +239,8 @@ def dedup_types(model: BsbModel) -> BsbModel:
 
     mcopy = model.copy(deep=True)
     for command in mcopy.commands:
-        key = (command.type.datatype, command.type.name)
+        key = command.type.name
         command.type = all_types[key]
+        command.typename = key
     mcopy.types = all_types
     return mcopy

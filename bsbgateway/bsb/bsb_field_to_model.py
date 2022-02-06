@@ -98,18 +98,18 @@ def convert_type(field:BsbField) -> BsbType:
         else:
             name = "ENUM"
         assert enbl == 1
-        return types[Dt.Enum, name]
+        return types[name]
     elif isinstance(field, BsbFieldTemperature):
-        return types[Dt.Vals, "TEMP"]
+        return types["TEMP"]
     elif isinstance(field, (BsbFieldInt8,BsbFieldInt16,BsbFieldInt32)):
         if not field.new_type_name:
             raise ValueError("Need .tn property for int fields: %s" % str(field))
-        t = types[Dt.Vals, field.new_type_name]
+        t = types[field.new_type_name]
         if field.rw and t.enable_byte != enbl:
             print("%s field.nullable=%s enable_byte=%s"% (str(field), field.nullable, t.enable_byte))
         return t
     elif isinstance(field, BsbFieldTime):
-        t = types[Dt.HourMinutes, "HOUR_MINUTES"]
+        t = types["HOUR_MINUTES"]
         if field.rw and t.enable_byte != enbl:
             print("%s field.nullable=%s enable_byte=%s"% (str(field), field.nullable, t.enable_byte))
         return t

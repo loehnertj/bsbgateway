@@ -55,19 +55,19 @@ def convert_field(field:BsbField) -> BsbCommand:
         }
     if isinstance(field, BsbFieldInt8):
         if field.min != 0:
-            kwargs["min"] = field.min
+            kwargs["min_value"] = field.min
         if field.max != 255:
-            kwargs["max"] = field.max
+            kwargs["max_value"] = field.max
     if isinstance(field, BsbFieldInt16):
         if field.min != -0x8000:
-            kwargs["min"] = field.min / field.divisor
+            kwargs["min_value"] = field.min / field.divisor
         if field.max != 0x7fff:
-            kwargs["max"] = field.max / field.divisor
+            kwargs["max_value"] = field.max / field.divisor
     if isinstance(field, BsbFieldInt32):
         if field.min != -0x8000000:
-            kwargs["min"] = field.min / field.divisor
+            kwargs["min_value"] = field.min / field.divisor
         if field.max != 0x7fffffff:
-            kwargs["max"] = field.max / field.divisor
+            kwargs["max_value"] = field.max / field.divisor
     return BsbCommand(
         parameter=field.disp_id,
         command=f'0x{field.telegram_id:08x}',

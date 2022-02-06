@@ -58,10 +58,11 @@ class BsbCommand(BaseModel):
     """display number of parameter"""
     command: str
     """internal (hex) ID, e.g. '0x2D3D0574'"""
-    type: "BsbType"
+    type: "BsbType" = None
     """Type instance, local copy.
 
     Should be shared from BsbModel.types.
+    If ``None``, type should be looked up using ``typename``.
 
     To deduplicate & standardize the type, use `dedup_types()`.
     """

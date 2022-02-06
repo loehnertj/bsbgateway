@@ -174,7 +174,7 @@
     "TEMP": {
       "unit": {
         "KEY": "UNIT_DEG_TEXT",
-        "DE": "\u00b0C"
+        "DE": "°C"
       },
       "name": "TEMP",
       "datatype": "VALS",
@@ -188,7 +188,7 @@
     "TEMP_SHORT5": {
       "unit": {
         "KEY": "UNIT_DEG_TEXT",
-        "DE": "\u00b0C"
+        "DE": "°C"
       },
       "name": "TEMP_SHORT5",
       "datatype": "VALS",
@@ -215,7 +215,7 @@
     "TEMP_SHORT": {
       "unit": {
         "KEY": "UNIT_DEG_TEXT",
-        "DE": "\u00b0C"
+        "DE": "°C"
       },
       "name": "TEMP_SHORT",
       "datatype": "VALS",
@@ -229,7 +229,7 @@
     "TEMP_SHORT5_US": {
       "unit": {
         "KEY": "UNIT_DEG_TEXT",
-        "DE": "\u00b0C"
+        "DE": "°C"
       },
       "name": "TEMP_SHORT5_US",
       "datatype": "VALS",
@@ -258,7 +258,7 @@
       "unit": {
         "KEY": "UNIT_SEC_TEXT",
         "DE": "s",
-        "RU": "\u0441"
+        "RU": "с"
       },
       "name": "SECONDS_WORD",
       "datatype": "VALS",
@@ -273,7 +273,7 @@
       "unit": {
         "KEY": "UNIT_MIN_TEXT",
         "DE": "min",
-        "RU": "\u043c\u0438\u043d"
+        "RU": "мин"
       },
       "name": "MINUTES",
       "datatype": "VALS",
@@ -288,7 +288,7 @@
       "unit": {
         "KEY": "UNIT_GRADIENT_TEXT",
         "DE": "min/K",
-        "RU": "\u043c\u0438\u043d/K"
+        "RU": "мин/K"
       },
       "name": "GRADIENT",
       "datatype": "VALS",
@@ -304,7 +304,7 @@
         "KEY": "UNIT_DAYS_TEXT",
         "DE": "Tage",
         "HU": "Nap",
-        "RU": "\u0434\u043d\u0435\u0439"
+        "RU": "дней"
       },
       "name": "DAYS",
       "datatype": "VALS",
@@ -320,7 +320,7 @@
         "KEY": "UNIT_DAYS_TEXT",
         "DE": "Tage",
         "HU": "Nap",
-        "RU": "\u0434\u043d\u0435\u0439"
+        "RU": "дней"
       },
       "name": "DAYS_WORD",
       "datatype": "VALS",
@@ -376,7 +376,7 @@
     "TEMP_WORD5_US": {
       "unit": {
         "KEY": "UNIT_DEG_TEXT",
-        "DE": "\u00b0C"
+        "DE": "°C"
       },
       "name": "TEMP_WORD5_US",
       "datatype": "VALS",
@@ -405,7 +405,7 @@
       "unit": {
         "KEY": "UNIT_MIN_TEXT",
         "DE": "min",
-        "RU": "\u043c\u0438\u043d"
+        "RU": "мин"
       },
       "name": "MINUTES_SHORT",
       "datatype": "VALS",
@@ -433,7 +433,7 @@
       "unit": {
         "KEY": "UNIT_SEC_TEXT",
         "DE": "s",
-        "RU": "\u0441"
+        "RU": "с"
       },
       "name": "SECONDS_WORD16",
       "datatype": "VALS",
@@ -448,7 +448,7 @@
       "unit": {
         "KEY": "UNIT_HOUR_TEXT",
         "DE": "h",
-        "RU": "\u0447"
+        "RU": "ч"
       },
       "name": "HOURS_SHORT",
       "datatype": "VALS",
@@ -463,7 +463,7 @@
       "unit": {
         "KEY": "UNIT_MIN_TEXT",
         "DE": "min",
-        "RU": "\u043c\u0438\u043d"
+        "RU": "мин"
       },
       "name": "MINUTES_WORD",
       "datatype": "VALS",
@@ -503,7 +503,7 @@
     "TEMP_WORD": {
       "unit": {
         "KEY": "UNIT_DEG_TEXT",
-        "DE": "\u00b0C"
+        "DE": "°C"
       },
       "name": "TEMP_WORD",
       "datatype": "VALS",
@@ -517,8 +517,8 @@
     "CELMIN": {
       "unit": {
         "KEY": "UNIT_CEL_MIN_TEXT",
-        "DE": "\u00b0Cmin",
-        "RU": "\u00b0C&times;\u043c\u0438\u043d"
+        "DE": "°Cmin",
+        "RU": "°C&times;мин"
       },
       "name": "CELMIN",
       "datatype": "VALS",
@@ -533,7 +533,7 @@
       "unit": {
         "KEY": "UNIT_SEC_TEXT",
         "DE": "s",
-        "RU": "\u0441"
+        "RU": "с"
       },
       "name": "SECONDS_SHORT",
       "datatype": "VALS",
@@ -548,7 +548,7 @@
       "unit": {
         "KEY": "UNIT_SEC_TEXT",
         "DE": "s",
-        "RU": "\u0441"
+        "RU": "с"
       },
       "name": "SECONDS_WORD5",
       "datatype": "VALS",
@@ -563,7 +563,7 @@
       "unit": {
         "KEY": "UNIT_SEC_TEXT",
         "DE": "s",
-        "RU": "\u0441"
+        "RU": "с"
       },
       "name": "SECONDS_SHORT4",
       "datatype": "VALS",
@@ -578,7 +578,7 @@
       "unit": {
         "KEY": "UNIT_KW_TEXT",
         "DE": "kW",
-        "RU": "\u043a\u0412\u0442"
+        "RU": "кВт"
       },
       "name": "POWER_WORD",
       "datatype": "VALS",
@@ -607,7 +607,7 @@
       "unit": {
         "KEY": "UNIT_HOUR_TEXT",
         "DE": "h",
-        "RU": "\u0447"
+        "RU": "ч"
       },
       "name": "HOURS_WORD",
       "datatype": "VALS",
@@ -622,7 +622,7 @@
       "unit": {
         "KEY": "UNIT_RPM_TEXT",
         "DE": "U/min",
-        "RU": "\u041e\u0431/\u043c\u0438\u043d"
+        "RU": "Об/мин"
       },
       "name": "SPEED",
       "datatype": "VALS",
@@ -637,7 +637,7 @@
       "unit": {
         "KEY": "UNIT_RPM_TEXT",
         "DE": "U/min",
-        "RU": "\u041e\u0431/\u043c\u0438\u043d"
+        "RU": "Об/мин"
       },
       "name": "SPEED2",
       "datatype": "VALS",
@@ -652,7 +652,7 @@
       "unit": {
         "KEY": "UNIT_KW_TEXT",
         "DE": "kW",
-        "RU": "\u043a\u0412\u0442"
+        "RU": "кВт"
       },
       "name": "POWER",
       "datatype": "VALS",
@@ -666,7 +666,7 @@
     "TEMP_SHORT_US": {
       "unit": {
         "KEY": "UNIT_DEG_TEXT",
-        "DE": "\u00b0C"
+        "DE": "°C"
       },
       "name": "TEMP_SHORT_US",
       "datatype": "VALS",
@@ -681,7 +681,7 @@
       "unit": {
         "KEY": "UNIT_SEC_TEXT",
         "DE": "s",
-        "RU": "\u0441"
+        "RU": "с"
       },
       "name": "SECONDS_SHORT5",
       "datatype": "VALS",
@@ -696,7 +696,7 @@
       "unit": {
         "KEY": "UNIT_BAR_TEXT",
         "DE": "bar",
-        "RU": "\u0431\u0430\u0440"
+        "RU": "бар"
       },
       "name": "PRESSURE50",
       "datatype": "VALS",
@@ -711,7 +711,7 @@
       "unit": {
         "KEY": "UNIT_SEC_TEXT",
         "DE": "s",
-        "RU": "\u0441"
+        "RU": "с"
       },
       "name": "SECONDS_SHORT2",
       "datatype": "VALS",
@@ -726,7 +726,7 @@
       "unit": {
         "KEY": "UNIT_LITERPERMIN_TEXT",
         "DE": "l/min",
-        "RU": "\u043b/\u043c\u0438\u043d"
+        "RU": "л/мин"
       },
       "name": "LITERPERMIN",
       "datatype": "VALS",
@@ -741,7 +741,7 @@
       "unit": {
         "KEY": "UNIT_LITERPERMIN_TEXT",
         "DE": "l/min",
-        "RU": "\u043b/\u043c\u0438\u043d"
+        "RU": "л/мин"
       },
       "name": "LPM_SHORT",
       "datatype": "VALS",
@@ -781,8 +781,8 @@
     "CURRENT": {
       "unit": {
         "KEY": "UNIT_CURR_TEXT",
-        "DE": "\u00b5A",
-        "RU": "\u00b5\u0410"
+        "DE": "µA",
+        "RU": "µА"
       },
       "name": "CURRENT",
       "datatype": "VALS",
@@ -823,7 +823,7 @@
       "unit": {
         "KEY": "UNIT_LITERPERHOUR_TEXT",
         "DE": "l/h",
-        "RU": "\u043b/\u0447"
+        "RU": "л/ч"
       },
       "name": "LITERPERHOUR",
       "datatype": "VALS",
@@ -850,8 +850,8 @@
     "ENERGY_CONTENT": {
       "unit": {
         "KEY": "UNIT_KWHM3_TEXT",
-        "DE": "kWh/m\u00b3",
-        "RU": "\u043a\u0412\u0442&times;\u0447/\u043c&sup3;"
+        "DE": "kWh/m³",
+        "RU": "кВт&times;ч/м&sup3;"
       },
       "name": "ENERGY_CONTENT",
       "datatype": "VALS",
@@ -866,7 +866,7 @@
       "unit": {
         "KEY": "UNIT_KW_TEXT",
         "DE": "kW",
-        "RU": "\u043a\u0412\u0442"
+        "RU": "кВт"
       },
       "name": "POWER_WORD100",
       "datatype": "VALS",
@@ -894,7 +894,7 @@
       "unit": {
         "KEY": "UNIT_GRADIENT_TEXT",
         "DE": "min/K",
-        "RU": "\u043c\u0438\u043d/K"
+        "RU": "мин/K"
       },
       "name": "GRADIENT_SHORT",
       "datatype": "VALS",
@@ -909,7 +909,7 @@
       "unit": {
         "KEY": "UNIT_GRADIENTKS_TEXT",
         "DE": "K/s",
-        "RU": "K/\u0441"
+        "RU": "K/с"
       },
       "name": "TEMP_SHORT64",
       "datatype": "VALS",
@@ -924,7 +924,7 @@
       "unit": {
         "KEY": "UNIT_MIN_TEXT",
         "DE": "min",
-        "RU": "\u043c\u0438\u043d"
+        "RU": "мин"
       },
       "name": "MINUTES_WORD10",
       "datatype": "VALS",
@@ -939,7 +939,7 @@
       "unit": {
         "KEY": "UNIT_KWH_TEXT",
         "DE": "kWh",
-        "RU": "\u043a\u0412\u0442&times;\u0447"
+        "RU": "кВт&times;ч"
       },
       "name": "ENERGY_WORD",
       "datatype": "VALS",
@@ -954,7 +954,7 @@
       "unit": {
         "KEY": "UNIT_VOLT_TEXT",
         "DE": "V",
-        "RU": "\u0412"
+        "RU": "В"
       },
       "name": "VOLTAGE",
       "datatype": "VALS",
@@ -969,7 +969,7 @@
       "unit": {
         "KEY": "UNIT_VOLT_TEXT",
         "DE": "V",
-        "RU": "\u0412"
+        "RU": "В"
       },
       "name": "VOLTAGE_WORD",
       "datatype": "VALS",
@@ -984,7 +984,7 @@
       "unit": {
         "KEY": "UNIT_BAR_TEXT",
         "DE": "bar",
-        "RU": "\u0431\u0430\u0440"
+        "RU": "бар"
       },
       "name": "PRESSURE",
       "datatype": "VALS",
@@ -1012,8 +1012,8 @@
     "TEMP_PER_MIN": {
       "unit": {
         "KEY": "UNIT_TEMP_PER_MIN_TEXT",
-        "DE": "\u00b0C/min",
-        "RU": "\u00b0C/\u043c\u0438\u043d"
+        "DE": "°C/min",
+        "RU": "°C/мин"
       },
       "name": "TEMP_PER_MIN",
       "datatype": "VALS",
@@ -1028,7 +1028,7 @@
       "unit": {
         "KEY": "UNIT_BAR_TEXT",
         "DE": "bar",
-        "RU": "\u0431\u0430\u0440"
+        "RU": "бар"
       },
       "name": "PRESSURE_WORD",
       "datatype": "VALS",
@@ -1056,7 +1056,7 @@
       "unit": {
         "KEY": "UNIT_HOUR_TEXT",
         "DE": "h",
-        "RU": "\u0447"
+        "RU": "ч"
       },
       "name": "HOURS",
       "datatype": "VALS",
@@ -1123,8 +1123,8 @@
       "unit": {
         "KEY": "UNIT_MONTHS_TEXT",
         "DE": "Monate",
-        "HU": "H\u00f3nap",
-        "RU": "\u043c\u0435\u0441\u044f\u0446\u0435\u0432"
+        "HU": "Hónap",
+        "RU": "месяцев"
       },
       "name": "MONTHS",
       "datatype": "VALS",
@@ -1139,8 +1139,8 @@
       "unit": {
         "KEY": "UNIT_MONTHS_TEXT",
         "DE": "Monate",
-        "HU": "H\u00f3nap",
-        "RU": "\u043c\u0435\u0441\u044f\u0446\u0435\u0432"
+        "HU": "Hónap",
+        "RU": "месяцев"
       },
       "name": "MONTHS_WORD",
       "datatype": "VALS",
@@ -1155,7 +1155,7 @@
       "unit": {
         "KEY": "UNIT_SEC_TEXT",
         "DE": "s",
-        "RU": "\u0441"
+        "RU": "с"
       },
       "name": "SECONDS_DWORD",
       "datatype": "VALS",

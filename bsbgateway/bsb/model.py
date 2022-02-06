@@ -1,4 +1,15 @@
-from typing import Dict, List, Optional
+__all__ = [
+    "BsbModel",
+    "BsbCategory",
+    "BsbCommand",
+    "BsbType",
+    "BsbDatatype",
+    "BsbCommandFlags",
+    "BsbDevice",
+    "I18nstr",
+    "dedup_types",
+]
+from typing import Dict, List, Tuple, Optional
 from pydantic import BaseModel
 from enum import Enum
 import locale
@@ -16,19 +27,26 @@ import locale
 #       inherit or replace BsbField
 
 
-class BsbDeviceDescription(BaseModel):
+class BsbModel(BaseModel):
     version: str
     "e.g. 2.1.0"
     compiletime: str
     """string YYYYMMDDHHMMSS"""
     categories: Dict[str, "BsbCategory"]
+    types: Dict[Tuple["BsbDatatype", str], "BsbType"] = {}
+
+    @property
+    def commands(self):
+        """Iterate all commands in all categories."""
+        for cat in self.categories.values():
+            yield from cat.commands
 
 
 class BsbCategory(BaseModel):
     name: "I18nstr"
     min: int
     """First parameter number"""
-    max: int
+    max: int = 0
     """Last contained parameter"""
     commands: List["BsbCommand"]
 
@@ -41,7 +59,7 @@ class BsbCommand(BaseModel):
     type: "BsbType"
 
     description: "I18nstr"
-    enum: Optional[Dict[int, "I18nstr"]]
+    enum: Dict[int, "I18nstr"] = {}
     """Possible values for an enum field, mapped to their description"""
 
     device: List["BsbDevice"]
@@ -49,6 +67,12 @@ class BsbCommand(BaseModel):
 
     flags: List["BsbCommandFlags"] = []
     """"""
+
+    min_value: Optional[float] = None
+    """Minimum allowed set value"""
+
+    max_value: Optional[float] = None
+    """Maximum allowed set value"""
 
 class BsbCommandFlags(Enum):
     """Command flags.
@@ -83,24 +107,24 @@ class BsbType(BaseModel):
     """Underlying binary type.
     """
 
-    datatype_id: int
+    datatype_id: int = 0
     """Not unique! :-/"""
-    factor: int
+    factor: int = 1
     """Conversion factor display value -> stored value"""
 
     payload_length: int
     """Payload length in bytes, without flag byte"""
 
-    precision: int
+    precision: int = 0
     """Recommended display precision (number of decimals)"""
 
-    enable_byte: int
+    enable_byte: int = 0
     """Flag value to use for Set telegram, usually 1 or 6
     
     NB. 6 indicates a nullable value!
     """
 
-    payload_flags: int
+    payload_flags: int = 0
     """
     32 = special decoding (custom function) required
     64 = variable length
@@ -116,7 +140,7 @@ class BsbDatatype(Enum):
     Datetime = "DTTM"
     DayMonth = "DDMM"
     Time = "THMS"
-    HourMinuts = "HHMM"
+    HourMinutes = "HHMM"
     TimeProgram = "TMPR"
 
 class BsbDevice(BaseModel):
@@ -163,7 +187,48 @@ class I18nstr(BaseModel):
     def __str__(self):
         return self.__getattr__(_os_language())
 
-BsbDeviceDescription.update_forward_refs()
+    def __deepcopy__(self, memo):
+        return I18nstr(__root__ = self.__root__.copy())
+
+BsbModel.update_forward_refs()
 BsbCategory.update_forward_refs()
 BsbCommand.update_forward_refs()
 BsbType.update_forward_refs()
+
+
+def dedup_types(model: BsbModel) -> BsbModel:
+    """Deduplicates command types
+
+    I.e., iterates all commands in the model;
+    replaces each command's ``type`` property by a shared reference;
+    ensures that no type metainformation was changed by that.
+
+    The unique identification of each type is the tuple (.datatype, .name).
+
+    Return model with ``.types`` property set.
+
+    If ``.types`` is already set, just returns the model unchanged.
+    """
+    if model.types:
+        return model
+
+    all_types = {}
+
+    for command in model.commands:
+        dtype = command.type
+        key = (dtype.datatype, dtype.name)
+        if key not in all_types:
+            all_types[key] = dtype.copy(deep=True)
+        else:
+            reference = all_types[key]
+            if dtype != reference:
+                refjson = reference.json(exclude_unset=True)
+                dtjson = dtype.json(exclude_unset=True)
+                raise ValueError(f"Command {command.parameter}: dtype differs from reference.\nreference:{refjson}\ninstance:{dtjson}")
+
+    mcopy = model.copy(deep=True)
+    for command in mcopy.commands:
+        key = (command.type.datatype, command.type.name)
+        command.type = all_types[key]
+    mcopy.types = all_types
+    return mcopy

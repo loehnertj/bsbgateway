@@ -94,3 +94,8 @@ def test_parse_device_description(testdata):
 #@pytest.mark.skip("Full json file not included in repo yet")
 def test_parse_production_file():
     m = model.BsbModel.parse_file("bsb-parameter.json")
+
+def test_dedup_types():
+    m = model.BsbModel.parse_file("bsb-parameter.json")
+    m = model.dedup_types(m)
+    assert len(m.types) == 85

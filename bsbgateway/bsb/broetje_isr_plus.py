@@ -28,7 +28,7 @@ __all__ = ['groups', 'fields', 'fields_by_telegram_id']
 # Shorthands for recurring kwargs
 RW = {'rw':True}
 RWN = {'rw':True, 'nullable': True}
-OP_HOURS = {'unit': 'h', 'divisor': 3600}
+OP_HOURS = {'unit': 'h', 'tn': 'HOURS', 'divisor': 3600}
 
 _choices_heizkreis = {
     0  : u'---',
@@ -84,7 +84,7 @@ groups = [
             'Periodisch',
             'Fixer Wochentag',
         ], **RW),
-        BsbFieldInt8(0x313d0738, 1641, u'Legionellenfkt Periodisch', min=1, max=7, **RW),
+        BsbFieldInt8(0x313d0738, 1641, u'Legionellenfkt Periodisch', min=1, max=7, tn="DAYS", **RW),
         BsbFieldChoice(0x313d075e, 1642, u'Legionellenfkt Wochentag', choices=[
             '',
             'Montag',
@@ -97,7 +97,7 @@ groups = [
         ], **RW),
         BsbFieldTime(0x313d075a, 1644, u'Legionellenfunktion Zeitpunkt', **RWN),
         BsbFieldTemperature(0x313d06bc, 1645, u'Legionellenfunktion Sollwert', min=55, max=95, **RW),
-        BsbFieldInt16(0x313d0496, 1646, u'Legionellenfunktion Verweildauer', min=10, max=360, **RWN),
+        BsbFieldInt16(0x313d0496, 1646, u'Legionellenfunktion Verweildauer', min=10, max=360, tn="MINUTES_WORD", **RWN),
         BsbFieldChoice(0x313d08ab, 1647, u'Legionellenfkt Zirk’pumpe', choices=['Aus', 'Ein'], **RW),
         BsbFieldChoice(0x253d072e, 1660, u'Zirkulationspumpe Freigabe', choices=[
             '',
@@ -163,15 +163,16 @@ groups = [
             u'Trinkwasserspeicher', 
             u'Pufferspeicher'
         ], **RW),
-        BsbFieldInt8(0x493D0AE0, 3825, u'Ladezeit relativer Vorrang', unit=u'min', min=2, max=60, **RWN),
-        BsbFieldInt8(0x493D0AE1, 3826, u'Wartezeit relativer Vorrang', unit=u'min', min=1, max=40, **RW),
-        BsbFieldInt8(0x493D0AE2, 3827, u'Wartezeit Parallelbetrieb', unit=u'min', min=8, max=40, **RWN),
-        BsbFieldInt16(0x493D0AEE, 3828, u'Verzögerung Sekundärpumpe', unit=u'sec', min=0, max=600, **RW),
-        BsbFieldInt8(0x493D0716, 3830, u'Kollektorstartfunktion', unit=u'min', min=5, max=60, **RWN),
-        BsbFieldInt8(0x493D0719, 3831, u'Mindestlaufzeit Kollek\'pumpe', unit=u'sec', min=5, max=120, **RW),
+        # FIXME:
+        BsbFieldInt8(0x493D0AE0, 3825, u'Ladezeit relativer Vorrang', unit=u'min', tn="MINUTES_SHORT", min=2, max=60,  **RWN),
+        BsbFieldInt8(0x493D0AE1, 3826, u'Wartezeit relativer Vorrang', unit=u'min', tn="MINUTES_SHORT", min=1, max=40,  **RW),
+        BsbFieldInt8(0x493D0AE2, 3827, u'Wartezeit Parallelbetrieb', unit=u'min', tn="MINUTES_SHORT", min=8, max=40,  **RWN),
+        BsbFieldInt16(0x493D0AEE, 3828, u'Verzögerung Sekundärpumpe', unit=u'sec', tn="SECONDS_WORD", min=0, max=600, **RW),
+        BsbFieldInt8(0x493D0716, 3830, u'Kollektorstartfunktion', unit=u'min', tn="MINUTES_SHORT", min=5, max=60, **RWN),
+        BsbFieldInt8(0x493D0719, 3831, u'Mindestlaufzeit Kollek\'pumpe', unit=u'sec', tn="SECONDS_SHORT", min=5, max=120, **RW),
         BsbFieldTime(0x493D0AE4, 3832, u'Kollektorstartfunktion ein', **RW),
         BsbFieldTime(0x493D0AE5, 3833, u'Kollektorstartfunktion aus', **RW),
-        BsbFieldInt8(0x493D0B12, 3834, u'Kollektorstartfkt. Gradient', unit=u'min/°C', min=1, max=20, **RWN),
+        BsbFieldInt8(0x493D0B12, 3834, u'Kollektorstartfkt. Gradient', unit=u'min/°C', tn="GRADIENT_SHORT", min=1, max=20, **RWN),
         BsbFieldTemperature(0x493D0860, 3840, u'Kollektor Frostschutz', min=-20, max=5, **RWN),
         BsbFieldTemperature(0x493D0865, 3850, u'Kollektorüberhitzschutz', min=30, max=350, **RWN),
         BsbFieldTemperature(0x493D0551, 3860, u'Verdampfung Wärmeträger', min=60, max=350, **RWN),
@@ -182,9 +183,10 @@ groups = [
             u'Propylenglykol',
             u'Ethylen- und Propylenglykol',
         ], **RW),
-        BsbFieldInt8(0x493D050A, 3881, u'Frost\'mittel Konzentration', unit=u'%', min=1, max=100, **RW),
-        BsbFieldInt16(0x493D050C, 3884, u'Pumpendurchfluss', unit=u'l/h', min=10, max=1500, **RW),
-        BsbFieldInt16(0x053D0F93, 3887, u'Impulseinheit Ertrag', unit=u'l', divisor=10.0, min=0, max=100, **RW),
+        BsbFieldInt8(0x493D050A, 3881, u'Frost\'mittel Konzentration', unit=u'%', tn="PERCENT", min=1, max=100, **RW),
+        BsbFieldInt16(0x493D050C, 3884, u'Pumpendurchfluss', unit=u'l/h', tn="LITERPERHOUR", min=10, max=1500, **RW),
+        # Fehlinterpretiert
+        #BsbFieldInt16(0x053D0F93, 3887, u'Impulseinheit Ertrag', unit=u'l', divisor=10.0, min=0, max=100, **RW),
     ]),
         
     Group(8000, u"8000 Status", [
@@ -377,26 +379,26 @@ groups = [
         BsbFieldChoice(0x053d09a2, 8304, u'Kesselpumpe Q1', choices={
             255: u'Ein', # von LCD abgelesen
         }),
-        BsbFieldInt8(0x053D0826, 8308, u'Drehzahl Kesselpumpe', unit='%'),
+        BsbFieldInt8(0x053D0826, 8308, u'Drehzahl Kesselpumpe', unit='%', tn="PERCENT"),
         BsbFieldTemperature(0x0d3d0519, 8310, u'Kesseltemperatur', ),
         BsbFieldTemperature(0x0d3d0923, 8311, u'Kesselsollwert', ),
         # FIXME: Einheit nirgends zu finden -- geraten anhand Wert
         BsbFieldTemperature(0x053D0B26, 8312, u'Kesselschaltpunkt'),
         BsbFieldTemperature(0x113d051a, 8314, u'Kesselrücklauftemperatur', ),
         # FIXME: Divisor nicht bekannt
-        BsbFieldInt16(0x093D0E69, 8323, u'Gebläsedrehzahl', unit='rpm'),
+        BsbFieldInt16(0x093D0E69, 8323, u'Gebläsedrehzahl', unit='rpm', tn="SPEED2"),
         # FIXME: Divisor nicht bekannt
-        BsbFieldInt16(0x093D0E6A, 8324, u'Brennergebläsesollwert', unit='rpm'),
+        BsbFieldInt16(0x093D0E6A, 8324, u'Brennergebläsesollwert', unit='rpm', tn="SPEED2"),
         # FIXME: Divisor nicht bekannt
-        BsbFieldInt16(0x093D0E00, 8325, u'Akt. Gebläsesteuerung', unit='%'),
-        BsbFieldInt8(0x053D0834, 8326, u'Brennermodulation', unit='%'),
+        BsbFieldInt16(0x093D0E00, 8325, u'Akt. Gebläsesteuerung', unit='%', tn="PERCENT_WORD1"),
+        BsbFieldInt8(0x053D0834, 8326, u'Brennermodulation', unit='%', tn="PERCENT"),
         # FIXME: Divisor nicht bekannt
-        BsbFieldInt16(0x093D0E16, 8329, u'Ionisationsstrom', unit='uA'),
+        BsbFieldInt16(0x093D0E16, 8329, u'Ionisationsstrom', unit='uA', tn="CURRENT"),
         BsbFieldInt32(0x0D3D093B, 8330, u'Betriebsstunden 1. Stufe', **OP_HOURS),
-        BsbFieldInt32(0x053D08A5, 8331, u'Startzähler 1. Stufe'),
+        BsbFieldInt32(0x053D08A5, 8331, u'Startzähler 1. Stufe', tn="DWORD"),
         BsbFieldInt32(0x053D2FEB, 8338, u'Betriebsstunden Heizbetrieb', **OP_HOURS),
         BsbFieldInt32(0x053D2FEC, 8339, u'Betriebsstunden TWW', **OP_HOURS),
-        BsbFieldInt8(0x093D0DFD, 8390, u'Aktuelle Phasennummer'),
+        BsbFieldInt8(0x093D0DFD, 8390, u'Aktuelle Phasennummer', tn="BYTE"),
     ]),
     
     Group(8400, u"8400 Diagnose Solar", [
@@ -414,9 +416,9 @@ groups = [
         BsbFieldTemperature(0x493d050e, 8519, u'Solarvorlauftemperatur', ),
         BsbFieldTemperature(0x493d050f, 8520, u'Solarrücklauftemperatur', ),
         # FIXME: Divisor geraten anhand Anzeige
-        BsbFieldInt16(0x493D0599, 8526, u'Tagesertrag Solarenergie (kWh)', divisor=10),
+        BsbFieldInt16(0x493D0599, 8526, u'Tagesertrag Solarenergie (kWh)', tn="ENERGY_WORD", divisor=10),
         # FIXME: Divisor nicht bekannt
-        BsbFieldInt32(0x493D0598, 8527, u'Gesamtertrag Solarenergie (kWh)',),
+        BsbFieldInt32(0x493D0598, 8527, u'Gesamtertrag Solarenergie (kWh)', tn="ENERGY_WORD"),
         BsbFieldInt32(0x493d0893, 8530, u'Betr\'stunden Solarertrag', **OP_HOURS),
         BsbFieldInt32(0x493d0717, 8531, u'Betr\'stunden Kollektorüberhitz', **OP_HOURS),
         BsbFieldInt32(0x053D10A5, 8532, u'Betr\'stunden Kollektorpumpe', **OP_HOURS),
@@ -434,7 +436,7 @@ groups = [
         BsbFieldChoice(0x053D09A5, 8730, u'Heizkreispumpe 1', choices={0:'Aus', 1:'Ein', 255:'Ein'}),
         BsbFieldChoice(0x053D09A6, 8731, u'Heizkreismischer 1 Auf', choices=['Aus', 'Ein']),
         BsbFieldChoice(0x053D09A7, 8732, u'Heizkreismischer 1 Zu', choices=['Aus', 'Ein']),
-        BsbFieldInt8(0x213D04A7, 8735, u'Drehzahl Heizkreispumpe 1', unit='%'),
+        BsbFieldInt8(0x213D04A7, 8735, u'Drehzahl Heizkreispumpe 1', unit='%', tn="PERCENT1"),
         BsbFieldTemperature(0x2d3d051e, 8740, u'Raumtemperatur 1', ),
         BsbFieldTemperature(0x2d3d0593, 8741, u'Raumsollwert 1', ),
         BsbFieldTemperature(0x213d0518, 8743, u'Vorlauftemperatur 1', ),
@@ -443,7 +445,7 @@ groups = [
         BsbFieldChoice(0x053D09A8, 8760, u'Heizkreispumpe 2', choices={0:'Aus', 1:'Ein', 255:'Ein'}),
         BsbFieldChoice(0x053D09A9, 8761, u'Heizkreismischer 2 Auf', choices=['Aus', 'Ein']),
         BsbFieldChoice(0x053D09AA, 8762, u'Heizkreismischer 2 Zu', choices=['Aus', 'Ein']),
-        BsbFieldInt8(0x223D04A7, 8765, u'Drehzahl Heizkreispumpe 2', unit='%'),
+        BsbFieldInt8(0x223D04A7, 8765, u'Drehzahl Heizkreispumpe 2', unit='%', tn="PERCENT1"),
         BsbFieldTemperature(0x2e3d051e, 8770, u'Raumtemperatur 2', ),
         BsbFieldTemperature(0x2e3d0593, 8771, u'Raumsollwert 2', ),
         BsbFieldTemperature(0x223d0518, 8773, u'Vorlauftemperatur 2', ),
@@ -452,7 +454,7 @@ groups = [
         BsbFieldChoice(0x053D09B0, 8790, u'Heizkreispumpe 3', choices={0:'Aus', 1:'Ein', 255:'Ein'}),
         BsbFieldChoice(0x053D0AA7, 8791, u'Heizkreismischer 3 Auf', choices=['Aus', 'Ein']),
         BsbFieldChoice(0x053D0AA8, 8792, u'Heizkreismischer 3 Zu', choices=['Aus', 'Ein']),
-        BsbFieldInt8(0x233D04A7, 8795, u'Drehzahl Heizkreispumpe 3', unit='%'),
+        BsbFieldInt8(0x233D04A7, 8795, u'Drehzahl Heizkreispumpe 3', unit='%', tn="PERCENT1"),
         BsbFieldTemperature(0x313d052f, 8830, u'Trinkwassertemperatur 1', ),
    ]),
         

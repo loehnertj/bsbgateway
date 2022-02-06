@@ -1,0 +1,1209 @@
+{
+  "version": "2.1.0",
+  "compiletime": "20211231181308",
+  "types": {
+    "DATETIME": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "DATETIME",
+      "datatype": "DTTM",
+      "datatype_id": 5,
+      "factor": 1,
+      "payload_length": 8,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 32
+    },
+    "TIME": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "TIME",
+      "datatype": "THMS",
+      "datatype_id": 10,
+      "factor": 1,
+      "payload_length": 8,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 32
+    },
+    "DAYMONTH": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "DAYMONTH",
+      "datatype": "DDMM",
+      "datatype_id": 6,
+      "factor": 1,
+      "payload_length": 8,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 32
+    },
+    "YEAR": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "YEAR",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 8,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 32
+    },
+    "ENUM": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "ENUM",
+      "datatype": "ENUM",
+      "datatype_id": 1,
+      "factor": 1,
+      "payload_length": 1,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "ONOFF": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "ONOFF",
+      "datatype": "ENUM",
+      "datatype_id": 1,
+      "factor": 1,
+      "payload_length": 1,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "BYTE": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "BYTE",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 1,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "YESNO": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "YESNO",
+      "datatype": "ENUM",
+      "datatype_id": 1,
+      "factor": 1,
+      "payload_length": 1,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "UNKNOWN": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "UNKNOWN",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 0,
+      "precision": 1,
+      "enable_byte": 0,
+      "payload_flags": 0
+    },
+    "FP1": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "FP1",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 10,
+      "payload_length": 2,
+      "precision": 1,
+      "enable_byte": 0,
+      "payload_flags": 0
+    },
+    "TIMEPROG": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "TIMEPROG",
+      "datatype": "TMPR",
+      "datatype_id": 9,
+      "factor": 1,
+      "payload_length": 11,
+      "precision": 0,
+      "enable_byte": 8,
+      "payload_flags": 32
+    },
+    "VACATIONPROG": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "VACATIONPROG",
+      "datatype": "DDMM",
+      "datatype_id": 6,
+      "factor": 1,
+      "payload_length": 8,
+      "precision": 0,
+      "enable_byte": 6,
+      "payload_flags": 32
+    },
+    "CUSTOM_ENUM": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "CUSTOM_ENUM",
+      "datatype": "ENUM",
+      "datatype_id": 1,
+      "factor": 1,
+      "payload_length": 22,
+      "precision": 0,
+      "enable_byte": 8,
+      "payload_flags": 96
+    },
+    "TEMP": {
+      "unit": {
+        "KEY": "UNIT_DEG_TEXT",
+        "DE": "\u00b0C"
+      },
+      "name": "TEMP",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 64,
+      "payload_length": 2,
+      "precision": 1,
+      "enable_byte": 1,
+      "payload_flags": 32
+    },
+    "TEMP_SHORT5": {
+      "unit": {
+        "KEY": "UNIT_DEG_TEXT",
+        "DE": "\u00b0C"
+      },
+      "name": "TEMP_SHORT5",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 2,
+      "payload_length": 1,
+      "precision": 1,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "FP02": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "FP02",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 50,
+      "payload_length": 2,
+      "precision": 2,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "TEMP_SHORT": {
+      "unit": {
+        "KEY": "UNIT_DEG_TEXT",
+        "DE": "\u00b0C"
+      },
+      "name": "TEMP_SHORT",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 1,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "TEMP_SHORT5_US": {
+      "unit": {
+        "KEY": "UNIT_DEG_TEXT",
+        "DE": "\u00b0C"
+      },
+      "name": "TEMP_SHORT5_US",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 2,
+      "payload_length": 1,
+      "precision": 1,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "PERCENT": {
+      "unit": {
+        "KEY": "UNIT_PERC_TEXT",
+        "DE": "%"
+      },
+      "name": "PERCENT",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 1,
+      "precision": 0,
+      "enable_byte": 6,
+      "payload_flags": 0
+    },
+    "SECONDS_WORD": {
+      "unit": {
+        "KEY": "UNIT_SEC_TEXT",
+        "DE": "s",
+        "RU": "\u0441"
+      },
+      "name": "SECONDS_WORD",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 2,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "MINUTES": {
+      "unit": {
+        "KEY": "UNIT_MIN_TEXT",
+        "DE": "min",
+        "RU": "\u043c\u0438\u043d"
+      },
+      "name": "MINUTES",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 60,
+      "payload_length": 4,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "GRADIENT": {
+      "unit": {
+        "KEY": "UNIT_GRADIENT_TEXT",
+        "DE": "min/K",
+        "RU": "\u043c\u0438\u043d/K"
+      },
+      "name": "GRADIENT",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 2,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "DAYS": {
+      "unit": {
+        "KEY": "UNIT_DAYS_TEXT",
+        "DE": "Tage",
+        "HU": "Nap",
+        "RU": "\u0434\u043d\u0435\u0439"
+      },
+      "name": "DAYS",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 1,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "DAYS_WORD": {
+      "unit": {
+        "KEY": "UNIT_DAYS_TEXT",
+        "DE": "Tage",
+        "HU": "Nap",
+        "RU": "\u0434\u043d\u0435\u0439"
+      },
+      "name": "DAYS_WORD",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 2,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "PERCENT_WORD1": {
+      "unit": {
+        "KEY": "UNIT_PERC_TEXT",
+        "DE": "%"
+      },
+      "name": "PERCENT_WORD1",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 2,
+      "precision": 1,
+      "enable_byte": 6,
+      "payload_flags": 0
+    },
+    "PERCENT1": {
+      "unit": {
+        "KEY": "UNIT_PERC_TEXT",
+        "DE": "%"
+      },
+      "name": "PERCENT1",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 1,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "PERCENT5": {
+      "unit": {
+        "KEY": "UNIT_PERC_TEXT",
+        "DE": "%"
+      },
+      "name": "PERCENT5",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 2,
+      "payload_length": 1,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "TEMP_WORD5_US": {
+      "unit": {
+        "KEY": "UNIT_DEG_TEXT",
+        "DE": "\u00b0C"
+      },
+      "name": "TEMP_WORD5_US",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 2,
+      "payload_length": 2,
+      "precision": 1,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "PERCENT_WORD": {
+      "unit": {
+        "KEY": "UNIT_PERC_TEXT",
+        "DE": "%"
+      },
+      "name": "PERCENT_WORD",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 2,
+      "payload_length": 2,
+      "precision": 1,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "MINUTES_SHORT": {
+      "unit": {
+        "KEY": "UNIT_MIN_TEXT",
+        "DE": "min",
+        "RU": "\u043c\u0438\u043d"
+      },
+      "name": "MINUTES_SHORT",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 1,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "PROPVAL": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "PROPVAL",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 16,
+      "payload_length": 2,
+      "precision": 2,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "SECONDS_WORD16": {
+      "unit": {
+        "KEY": "UNIT_SEC_TEXT",
+        "DE": "s",
+        "RU": "\u0441"
+      },
+      "name": "SECONDS_WORD16",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 16,
+      "payload_length": 2,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "HOURS_SHORT": {
+      "unit": {
+        "KEY": "UNIT_HOUR_TEXT",
+        "DE": "h",
+        "RU": "\u0447"
+      },
+      "name": "HOURS_SHORT",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 1,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "MINUTES_WORD": {
+      "unit": {
+        "KEY": "UNIT_MIN_TEXT",
+        "DE": "min",
+        "RU": "\u043c\u0438\u043d"
+      },
+      "name": "MINUTES_WORD",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 2,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "BIT": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "BIT",
+      "datatype": "BITS",
+      "datatype_id": 2,
+      "factor": 1,
+      "payload_length": 1,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "HOUR_MINUTES": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "HOUR_MINUTES",
+      "datatype": "HHMM",
+      "datatype_id": 4,
+      "factor": 1,
+      "payload_length": 2,
+      "precision": 0,
+      "enable_byte": 6,
+      "payload_flags": 32
+    },
+    "TEMP_WORD": {
+      "unit": {
+        "KEY": "UNIT_DEG_TEXT",
+        "DE": "\u00b0C"
+      },
+      "name": "TEMP_WORD",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 2,
+      "precision": 1,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "CELMIN": {
+      "unit": {
+        "KEY": "UNIT_CEL_MIN_TEXT",
+        "DE": "\u00b0Cmin",
+        "RU": "\u00b0C&times;\u043c\u0438\u043d"
+      },
+      "name": "CELMIN",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 2,
+      "precision": 1,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "SECONDS_SHORT": {
+      "unit": {
+        "KEY": "UNIT_SEC_TEXT",
+        "DE": "s",
+        "RU": "\u0441"
+      },
+      "name": "SECONDS_SHORT",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 1,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "SECONDS_WORD5": {
+      "unit": {
+        "KEY": "UNIT_SEC_TEXT",
+        "DE": "s",
+        "RU": "\u0441"
+      },
+      "name": "SECONDS_WORD5",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 2,
+      "payload_length": 2,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "SECONDS_SHORT4": {
+      "unit": {
+        "KEY": "UNIT_SEC_TEXT",
+        "DE": "s",
+        "RU": "\u0441"
+      },
+      "name": "SECONDS_SHORT4",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 4,
+      "payload_length": 1,
+      "precision": 1,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "POWER_WORD": {
+      "unit": {
+        "KEY": "UNIT_KW_TEXT",
+        "DE": "kW",
+        "RU": "\u043a\u0412\u0442"
+      },
+      "name": "POWER_WORD",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 10,
+      "payload_length": 2,
+      "precision": 1,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "PERCENT_100": {
+      "unit": {
+        "KEY": "UNIT_PERC_TEXT",
+        "DE": "%"
+      },
+      "name": "PERCENT_100",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 100,
+      "payload_length": 2,
+      "precision": 1,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "HOURS_WORD": {
+      "unit": {
+        "KEY": "UNIT_HOUR_TEXT",
+        "DE": "h",
+        "RU": "\u0447"
+      },
+      "name": "HOURS_WORD",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 2,
+      "precision": 0,
+      "enable_byte": 6,
+      "payload_flags": 0
+    },
+    "SPEED": {
+      "unit": {
+        "KEY": "UNIT_RPM_TEXT",
+        "DE": "U/min",
+        "RU": "\u041e\u0431/\u043c\u0438\u043d"
+      },
+      "name": "SPEED",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 0,
+      "payload_length": 2,
+      "precision": 0,
+      "enable_byte": 0,
+      "payload_flags": 0
+    },
+    "SPEED2": {
+      "unit": {
+        "KEY": "UNIT_RPM_TEXT",
+        "DE": "U/min",
+        "RU": "\u041e\u0431/\u043c\u0438\u043d"
+      },
+      "name": "SPEED2",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 2,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "POWER": {
+      "unit": {
+        "KEY": "UNIT_KW_TEXT",
+        "DE": "kW",
+        "RU": "\u043a\u0412\u0442"
+      },
+      "name": "POWER",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 10,
+      "payload_length": 4,
+      "precision": 1,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "TEMP_SHORT_US": {
+      "unit": {
+        "KEY": "UNIT_DEG_TEXT",
+        "DE": "\u00b0C"
+      },
+      "name": "TEMP_SHORT_US",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 1,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "SECONDS_SHORT5": {
+      "unit": {
+        "KEY": "UNIT_SEC_TEXT",
+        "DE": "s",
+        "RU": "\u0441"
+      },
+      "name": "SECONDS_SHORT5",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 5,
+      "payload_length": 1,
+      "precision": 1,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "PRESSURE50": {
+      "unit": {
+        "KEY": "UNIT_BAR_TEXT",
+        "DE": "bar",
+        "RU": "\u0431\u0430\u0440"
+      },
+      "name": "PRESSURE50",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 50,
+      "payload_length": 1,
+      "precision": 2,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "SECONDS_SHORT2": {
+      "unit": {
+        "KEY": "UNIT_SEC_TEXT",
+        "DE": "s",
+        "RU": "\u0441"
+      },
+      "name": "SECONDS_SHORT2",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 2,
+      "payload_length": 1,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "LITERPERMIN": {
+      "unit": {
+        "KEY": "UNIT_LITERPERMIN_TEXT",
+        "DE": "l/min",
+        "RU": "\u043b/\u043c\u0438\u043d"
+      },
+      "name": "LITERPERMIN",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 10,
+      "payload_length": 2,
+      "precision": 1,
+      "enable_byte": 0,
+      "payload_flags": 0
+    },
+    "LPM_SHORT": {
+      "unit": {
+        "KEY": "UNIT_LITERPERMIN_TEXT",
+        "DE": "l/min",
+        "RU": "\u043b/\u043c\u0438\u043d"
+      },
+      "name": "LPM_SHORT",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 10,
+      "payload_length": 2,
+      "precision": 1,
+      "enable_byte": 0,
+      "payload_flags": 0
+    },
+    "SINT1000": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "SINT1000",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1000,
+      "payload_length": 2,
+      "precision": 3,
+      "enable_byte": 1,
+      "payload_flags": 32
+    },
+    "SINT": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "SINT",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 2,
+      "precision": 0,
+      "enable_byte": 6,
+      "payload_flags": 0
+    },
+    "CURRENT": {
+      "unit": {
+        "KEY": "UNIT_CURR_TEXT",
+        "DE": "\u00b5A",
+        "RU": "\u00b5\u0410"
+      },
+      "name": "CURRENT",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 100,
+      "payload_length": 2,
+      "precision": 2,
+      "enable_byte": 0,
+      "payload_flags": 0
+    },
+    "UINT": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "UINT",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 2,
+      "precision": 0,
+      "enable_byte": 6,
+      "payload_flags": 0
+    },
+    "UINT100": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "UINT100",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 100,
+      "payload_length": 4,
+      "precision": 2,
+      "enable_byte": 6,
+      "payload_flags": 0
+    },
+    "LITERPERHOUR": {
+      "unit": {
+        "KEY": "UNIT_LITERPERHOUR_TEXT",
+        "DE": "l/h",
+        "RU": "\u043b/\u0447"
+      },
+      "name": "LITERPERHOUR",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 2,
+      "precision": 0,
+      "enable_byte": 0,
+      "payload_flags": 0
+    },
+    "BYTE10": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "BYTE10",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 10,
+      "payload_length": 1,
+      "precision": 1,
+      "enable_byte": 0,
+      "payload_flags": 0
+    },
+    "ENERGY_CONTENT": {
+      "unit": {
+        "KEY": "UNIT_KWHM3_TEXT",
+        "DE": "kWh/m\u00b3",
+        "RU": "\u043a\u0412\u0442&times;\u0447/\u043c&sup3;"
+      },
+      "name": "ENERGY_CONTENT",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 10,
+      "payload_length": 2,
+      "precision": 1,
+      "enable_byte": 0,
+      "payload_flags": 0
+    },
+    "POWER_WORD100": {
+      "unit": {
+        "KEY": "UNIT_KW_TEXT",
+        "DE": "kW",
+        "RU": "\u043a\u0412\u0442"
+      },
+      "name": "POWER_WORD100",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 100,
+      "payload_length": 2,
+      "precision": 2,
+      "enable_byte": 0,
+      "payload_flags": 0
+    },
+    "STRING": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "STRING",
+      "datatype": "STRN",
+      "datatype_id": 7,
+      "factor": 1,
+      "payload_length": 22,
+      "precision": 0,
+      "enable_byte": 8,
+      "payload_flags": 64
+    },
+    "GRADIENT_SHORT": {
+      "unit": {
+        "KEY": "UNIT_GRADIENT_TEXT",
+        "DE": "min/K",
+        "RU": "\u043c\u0438\u043d/K"
+      },
+      "name": "GRADIENT_SHORT",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 6,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "TEMP_SHORT64": {
+      "unit": {
+        "KEY": "UNIT_GRADIENTKS_TEXT",
+        "DE": "K/s",
+        "RU": "K/\u0441"
+      },
+      "name": "TEMP_SHORT64",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 64,
+      "payload_length": 1,
+      "precision": 5,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "MINUTES_WORD10": {
+      "unit": {
+        "KEY": "UNIT_MIN_TEXT",
+        "DE": "min",
+        "RU": "\u043c\u0438\u043d"
+      },
+      "name": "MINUTES_WORD10",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 0,
+      "payload_length": 2,
+      "precision": 0,
+      "enable_byte": 0,
+      "payload_flags": 0
+    },
+    "ENERGY_WORD": {
+      "unit": {
+        "KEY": "UNIT_KWH_TEXT",
+        "DE": "kWh",
+        "RU": "\u043a\u0412\u0442&times;\u0447"
+      },
+      "name": "ENERGY_WORD",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 10,
+      "payload_length": 2,
+      "precision": 1,
+      "enable_byte": 0,
+      "payload_flags": 0
+    },
+    "VOLTAGE": {
+      "unit": {
+        "KEY": "UNIT_VOLT_TEXT",
+        "DE": "V",
+        "RU": "\u0412"
+      },
+      "name": "VOLTAGE",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 10,
+      "payload_length": 1,
+      "precision": 1,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "VOLTAGE_WORD": {
+      "unit": {
+        "KEY": "UNIT_VOLT_TEXT",
+        "DE": "V",
+        "RU": "\u0412"
+      },
+      "name": "VOLTAGE_WORD",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 10,
+      "payload_length": 2,
+      "precision": 1,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "PRESSURE": {
+      "unit": {
+        "KEY": "UNIT_BAR_TEXT",
+        "DE": "bar",
+        "RU": "\u0431\u0430\u0440"
+      },
+      "name": "PRESSURE",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 10,
+      "payload_length": 1,
+      "precision": 1,
+      "enable_byte": 6,
+      "payload_flags": 0
+    },
+    "METER": {
+      "unit": {
+        "KEY": "UNIT_METER_TEXT",
+        "DE": "m"
+      },
+      "name": "METER",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 10,
+      "payload_length": 2,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "TEMP_PER_MIN": {
+      "unit": {
+        "KEY": "UNIT_TEMP_PER_MIN_TEXT",
+        "DE": "\u00b0C/min",
+        "RU": "\u00b0C/\u043c\u0438\u043d"
+      },
+      "name": "TEMP_PER_MIN",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 1,
+      "precision": 0,
+      "enable_byte": 6,
+      "payload_flags": 0
+    },
+    "PRESSURE_WORD": {
+      "unit": {
+        "KEY": "UNIT_BAR_TEXT",
+        "DE": "bar",
+        "RU": "\u0431\u0430\u0440"
+      },
+      "name": "PRESSURE_WORD",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 10,
+      "payload_length": 2,
+      "precision": 1,
+      "enable_byte": 6,
+      "payload_flags": 0
+    },
+    "DWORD": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "DWORD",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 4,
+      "precision": 0,
+      "enable_byte": 6,
+      "payload_flags": 0
+    },
+    "HOURS": {
+      "unit": {
+        "KEY": "UNIT_HOUR_TEXT",
+        "DE": "h",
+        "RU": "\u0447"
+      },
+      "name": "HOURS",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 3600,
+      "payload_length": 4,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "CUSTOM_BYTE": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "CUSTOM_BYTE",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 22,
+      "precision": 0,
+      "enable_byte": 0,
+      "payload_flags": 96
+    },
+    "LPBADDR": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "LPBADDR",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 1,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "ERRORCODE": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "ERRORCODE",
+      "datatype": "ENUM",
+      "datatype_id": 1,
+      "factor": 1,
+      "payload_length": 0,
+      "precision": 0,
+      "enable_byte": 0,
+      "payload_flags": 0
+    },
+    "UINT5": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "UINT5",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 5,
+      "payload_length": 2,
+      "precision": 0,
+      "enable_byte": 6,
+      "payload_flags": 0
+    },
+    "MONTHS": {
+      "unit": {
+        "KEY": "UNIT_MONTHS_TEXT",
+        "DE": "Monate",
+        "HU": "H\u00f3nap",
+        "RU": "\u043c\u0435\u0441\u044f\u0446\u0435\u0432"
+      },
+      "name": "MONTHS",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 1,
+      "precision": 0,
+      "enable_byte": 6,
+      "payload_flags": 0
+    },
+    "MONTHS_WORD": {
+      "unit": {
+        "KEY": "UNIT_MONTHS_TEXT",
+        "DE": "Monate",
+        "HU": "H\u00f3nap",
+        "RU": "\u043c\u0435\u0441\u044f\u0446\u0435\u0432"
+      },
+      "name": "MONTHS_WORD",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 2,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "SECONDS_DWORD": {
+      "unit": {
+        "KEY": "UNIT_SEC_TEXT",
+        "DE": "s",
+        "RU": "\u0441"
+      },
+      "name": "SECONDS_DWORD",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 4,
+      "precision": 0,
+      "enable_byte": 0,
+      "payload_flags": 0
+    },
+    "UINT10": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "UINT10",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 10,
+      "payload_length": 2,
+      "precision": 1,
+      "enable_byte": 6,
+      "payload_flags": 0
+    },
+    "CLOSEDOPEN": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "CLOSEDOPEN",
+      "datatype": "VALS",
+      "datatype_id": 0,
+      "factor": 1,
+      "payload_length": 1,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    },
+    "VOLTAGEONOFF": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "VOLTAGEONOFF",
+      "datatype": "ENUM",
+      "datatype_id": 1,
+      "factor": 1,
+      "payload_length": 1,
+      "precision": 0,
+      "enable_byte": 1,
+      "payload_flags": 0
+    }
+  }
+}

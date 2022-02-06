@@ -32,7 +32,7 @@ class BsbModel(BaseModel):
     "e.g. 2.1.0"
     compiletime: str
     """string YYYYMMDDHHMMSS"""
-    categories: Dict[str, "BsbCategory"]
+    categories: Dict[str, "BsbCategory"] = {}
     """Actual command entries by category"""
     types: Dict[str, "BsbType"] = {}
     """Known types"""

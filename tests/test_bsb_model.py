@@ -1,5 +1,5 @@
 import pytest
-from bsbgateway.bsb import json_device
+from bsbgateway.bsb import model
 
 @pytest.fixture
 def testdata():
@@ -87,10 +87,10 @@ def testdata():
 }
 
 def test_parse_device_description(testdata):
-    jd = json_device.BsbDeviceDescription.parse_obj(testdata)
-    cat = jd.categories["2200"]
+    m = model.BsbModel.parse_obj(testdata)
+    cat = m.categories["2200"]
     assert (cat.name.de == "Kessel")
 
-@pytest.mark.skip("Full json file not included in repo yet")
+#@pytest.mark.skip("Full json file not included in repo yet")
 def test_parse_production_file():
-    jd = json_device.BsbDeviceDescription.parse_file("bsb-parameter.json")
+    m = model.BsbModel.parse_file("bsb-parameter.json")

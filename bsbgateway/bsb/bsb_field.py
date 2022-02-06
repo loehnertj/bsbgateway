@@ -42,13 +42,14 @@ def xo(dict):
 class BsbField(object):
     type_name=''
     type_description = u'Unknown type'
-    def __init__(o, telegram_id, disp_id, disp_name, unit=u'', rw=False, nullable=False, *args, **kwargs):
+    def __init__(o, telegram_id, disp_id, disp_name, unit=u'', rw=False, nullable=False, tn="", *args, **kwargs):
         o.telegram_id = telegram_id
         o.disp_id = disp_id
         o.disp_name = disp_name
         o.unit = unit
         o.rw = rw
         o.nullable = nullable
+        o.new_type_name = tn
         
     # Override these 3 ...
     def _decode_data(o, rawdata):
@@ -231,7 +232,7 @@ class BsbFieldInt8(BsbField):
     '''
     type_name = 'int8'
     type_description = u'Integer 8-bit'
-    def __init__(o, telegram_id, disp_id, disp_name, unit=u'', rw=False, nullable=False, min=None, max=None, *args, **kwargs):
+    def __init__(o, telegram_id, disp_id, disp_name, unit=u'', tn='', rw=False, nullable=False, min=None, max=None, *args, **kwargs):
         BsbField.__init__(o, **xo(locals()))
         o.min = min or 0
         o.max = max or 255
@@ -277,7 +278,7 @@ class BsbFieldInt16(BsbField):
     type_name = 'int16'
     type_description = u'Fixed-point 16-bit'
     
-    def __init__(o, telegram_id, disp_id, disp_name, unit=u'', rw=False, nullable=False, divisor=1, min=None, max=None, *args, **kwargs):
+    def __init__(o, telegram_id, disp_id, disp_name, unit=u'', tn='', rw=False, nullable=False, divisor=1, min=None, max=None, *args, **kwargs):
         BsbField.__init__(o, **xo(locals()))
         o.divisor = divisor
         o.min = -32768 if min is None else int(min*divisor)
@@ -335,7 +336,7 @@ class BsbFieldInt32(BsbField):
     type_name = 'int32'
     type_description = u'Fixed-point 16-bit'
     
-    def __init__(o, telegram_id, disp_id, disp_name, unit=u'', rw=False, nullable=False, divisor=1, min=None, max=None, *args, **kwargs):
+    def __init__(o, telegram_id, disp_id, disp_name, unit=u'', tn='', rw=False, nullable=False, divisor=1, min=None, max=None, *args, **kwargs):
         BsbField.__init__(o, **xo(locals()))
         o.divisor = divisor
         o.min = -0x80000000 if min is None else int(min*divisor)

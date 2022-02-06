@@ -1,3 +1,33 @@
+# === Einarbeiten bsb-Parameter.json
+
+* eigene broetje_isr_plus.py enthält weitere Felder (8000 Serie) und Metainformationen (min, max)
+* Plan:
+    1. Skripten um broetje_isr_plus.py als .json zu exportieren (analog bsb-parameter.json)
+    2. Merge/Override Funktion um mehrere .json Dateien zusammenzufügen
+        - Kategorie Konflikte: melden und entspr. neuer Kat. umsortieren
+        - __fields_set__ auswerten für Override
+        - Texte mergen
+        - welchen gerätetyp für ISR plus? (erstmal 255/255?)
+
+
+* komplette 8000er Serie (Diagnose/Status) fehlt in bsb_parameter
+
+
+* Nullable Diskrepanzen: (gem. eigener Daten)
+1646 Legionellenfunktion Verweildauer is nullable but enable_byte=1
+3825 Ladezeit relativer Vorrang is nullable but enable_byte=1
+3827 Wartezeit Parallelbetrieb is nullable but enable_byte=1
+3830 Kollektorstartfunktion nullable but enable_byte=1
+3832 Kollektorstartfunktion ein is NOT nullable but enable_byte=6
+3833 Kollektorstartfunktion aus is NOT nullable but enable_byte=6
+3834 Kollektorstartfkt. Gradient is nullable but enable_byte=1
+3881 Frost'mittel Konzentration is NOT nullable but enable_byte=6
+3884 Pumpendurchfluss is NOT nullable and has enable_byte=0
+
+
+
+# === Reverse engineering
+#
 # This file contains sniffed telegrams for reverse-engineering field types and finding field (hex) ids.
 # Unsorted dump of stuff with german comments. :-/
 

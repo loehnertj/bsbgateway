@@ -70,7 +70,7 @@ def convert_field(field:BsbField) -> BsbCommand:
             kwargs["max"] = field.max / field.divisor
     return BsbCommand(
         parameter=field.disp_id,
-        command=field.telegram_id,
+        command=f'0x{field.telegram_id:08x}',
         type=convert_type(field),
         description=istr(field.disp_name),
         flags=flags,

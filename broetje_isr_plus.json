@@ -1,0 +1,3241 @@
+{
+  "version": "2.1.0",
+  "compiletime": "20220206144234",
+  "categories": {
+    "1600": {
+      "name": {
+        "DE": "1600 Trinkwasser"
+      },
+      "min": 1600,
+      "max": 1680,
+      "commands": [
+        {
+          "parameter": 1610,
+          "command": "0x313d06b9",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Nennsollwert"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [],
+          "min_value": 23.0,
+          "max_value": 65.0
+        },
+        {
+          "parameter": 1612,
+          "command": "0x313d06ba",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Reduziertsollwert"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [],
+          "min_value": 8.0,
+          "max_value": 40.0
+        },
+        {
+          "parameter": 1620,
+          "command": "0x253d0722",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Freigabe"
+          },
+          "enum": {
+            "0": {
+              "DE": "24h/Tag"
+            },
+            "1": {
+              "DE": "Zeitprogramm Heizkreise"
+            },
+            "2": {
+              "DE": "Zeitprogramm 4/TWW"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": []
+        },
+        {
+          "parameter": 1640,
+          "command": "0x313d0759",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Legionellenfunktion"
+          },
+          "enum": {
+            "0": {
+              "DE": "Aus"
+            },
+            "1": {
+              "DE": "Periodisch"
+            },
+            "2": {
+              "DE": "Fixer Wochentag"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": []
+        },
+        {
+          "parameter": 1641,
+          "command": "0x313d0738",
+          "typename": "DAYS",
+          "description": {
+            "DE": "Legionellenfkt Periodisch"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [],
+          "min_value": 1.0,
+          "max_value": 7.0
+        },
+        {
+          "parameter": 1642,
+          "command": "0x313d075e",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Legionellenfkt Wochentag"
+          },
+          "enum": {
+            "1": {
+              "DE": "Montag"
+            },
+            "2": {
+              "DE": "Dienstag"
+            },
+            "3": {
+              "DE": "Mittwoch"
+            },
+            "4": {
+              "DE": "Donnerstag"
+            },
+            "5": {
+              "DE": "Freitag"
+            },
+            "6": {
+              "DE": "Samstag"
+            },
+            "7": {
+              "DE": "Sonntag"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": []
+        },
+        {
+          "parameter": 1644,
+          "command": "0x313d075a",
+          "typename": "HOUR_MINUTES",
+          "description": {
+            "DE": "Legionellenfunktion Zeitpunkt"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": []
+        },
+        {
+          "parameter": 1645,
+          "command": "0x313d06bc",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Legionellenfunktion Sollwert"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [],
+          "min_value": 55.0,
+          "max_value": 95.0
+        },
+        {
+          "parameter": 1646,
+          "command": "0x313d0496",
+          "typename": "MINUTES_WORD",
+          "description": {
+            "DE": "Legionellenfunktion Verweildauer"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [],
+          "min_value": 10.0,
+          "max_value": 360.0
+        },
+        {
+          "parameter": 1647,
+          "command": "0x313d08ab",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Legionellenfkt Zirk\u2019pumpe"
+          },
+          "enum": {
+            "0": {
+              "DE": "Aus"
+            },
+            "1": {
+              "DE": "Ein"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": []
+        },
+        {
+          "parameter": 1660,
+          "command": "0x253d072e",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Zirkulationspumpe Freigabe"
+          },
+          "enum": {
+            "1": {
+              "DE": "Zeitprogramm 3/HKP"
+            },
+            "2": {
+              "DE": "Trinkwasser Freigabe"
+            },
+            "3": {
+              "DE": "Zeitprogramm 4/TWW"
+            },
+            "4": {
+              "DE": "Zeitprogramm 5"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": []
+        },
+        {
+          "parameter": 1661,
+          "command": "0x253d0689",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Zirk\u2019pumpe Taktbetrieb"
+          },
+          "enum": {
+            "0": {
+              "DE": "Aus"
+            },
+            "1": {
+              "DE": "Ein"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": []
+        },
+        {
+          "parameter": 1663,
+          "command": "0x253d077e",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Trinkwasser Zirkulationssollwert"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [],
+          "min_value": 8.0,
+          "max_value": 40.0
+        },
+        {
+          "parameter": 1680,
+          "command": "0x053d0e84",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Trinkwasser Betriebsartumschaltung"
+          },
+          "enum": {
+            "0": {
+              "DE": "Keine"
+            },
+            "1": {
+              "DE": "Aus"
+            },
+            "2": {
+              "DE": "Ein"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": []
+        }
+      ]
+    },
+    "2000": {
+      "name": {
+        "DE": "2000 Kessel"
+      },
+      "min": 2000,
+      "max": 10120,
+      "commands": [
+        {
+          "parameter": 2200,
+          "command": "0x0d3d0949",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Betriebsart"
+          },
+          "enum": {
+            "0": {
+              "DE": "Dauerbetrieb"
+            },
+            "2": {
+              "DE": "Auto, verl\u00e4ngerte Laufzeit"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 2201,
+          "command": "0x0d3d08d3",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Erzeugersperre"
+          },
+          "enum": {
+            "0": {
+              "DE": "Aus"
+            },
+            "1": {
+              "DE": "Ein"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 2203,
+          "command": "0x113d04d3",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Freigabe unter Au\u00dfentemperatur"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 2204,
+          "command": "0x113d11f3",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Freigabe \u00fcber Au\u00dfentemperatur"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 7119,
+          "command": "0x05050d20",
+          "typename": "ENUM",
+          "description": {
+            "DE": "\u00d6kofunktion"
+          },
+          "enum": {
+            "0": {
+              "DE": "Aus"
+            },
+            "1": {
+              "DE": "Ein"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 10119,
+          "command": "0x053d0d20",
+          "typename": "ENUM",
+          "description": {
+            "DE": "\u00d6kofunktion"
+          },
+          "enum": {
+            "0": {
+              "DE": "Aus"
+            },
+            "1": {
+              "DE": "Ein"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 7120,
+          "command": "0x05050b4e",
+          "typename": "ENUM",
+          "description": {
+            "DE": "\u00d6kobetrieb"
+          },
+          "enum": {
+            "0": {
+              "DE": "Aus"
+            },
+            "1": {
+              "DE": "Ein"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 10120,
+          "command": "0x053d0b4e",
+          "typename": "ENUM",
+          "description": {
+            "DE": "\u00d6kobetrieb"
+          },
+          "enum": {
+            "0": {
+              "DE": "Aus"
+            },
+            "1": {
+              "DE": "Ein"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 2205,
+          "command": "0x053d0d16",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Bei \u00d6kobetrieb"
+          },
+          "enum": {
+            "0": {
+              "DE": "Aus"
+            },
+            "1": {
+              "DE": "Nur Trinkwasser"
+            },
+            "2": {
+              "DE": "Ein"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": []
+        },
+        {
+          "parameter": 2210,
+          "command": "0x0d3d092c",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Sollwert Minimum"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 2212,
+          "command": "0x0d3d092b",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Sollwert Maximum"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 2214,
+          "command": "0x0d3d08eb",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Sollwert Handbetrieb"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        }
+      ]
+    },
+    "3800": {
+      "name": {
+        "DE": "3800 Solar"
+      },
+      "min": 3800,
+      "max": 3884,
+      "commands": [
+        {
+          "parameter": 3810,
+          "command": "0x493d085d",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Temperaturdifferenz EIN"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [],
+          "min_value": 4.0,
+          "max_value": 40.0
+        },
+        {
+          "parameter": 3811,
+          "command": "0x493d085c",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Temperaturdifferenz AUS"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [],
+          "min_value": 0.0,
+          "max_value": 8.0
+        },
+        {
+          "parameter": 3812,
+          "command": "0x493d085a",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Ladetemp Min TWW-Speicher"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [],
+          "min_value": 8.0,
+          "max_value": 95.0
+        },
+        {
+          "parameter": 3813,
+          "command": "0x493d0adc",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Temp'differenz EIN Puffer"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [],
+          "min_value": 0.5,
+          "max_value": 50.0
+        },
+        {
+          "parameter": 3814,
+          "command": "0x493d0add",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Temp'differenz EIN Puffer"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [],
+          "min_value": 0.0,
+          "max_value": 4.0
+        },
+        {
+          "parameter": 3815,
+          "command": "0x493d0a07",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Ladetemp Min Puffer"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [],
+          "min_value": 8.0,
+          "max_value": 95.0
+        },
+        {
+          "parameter": 3816,
+          "command": "0x493d0ade",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Temp'differenz EIN Sch'bad"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [],
+          "min_value": 4.0,
+          "max_value": 40.0
+        },
+        {
+          "parameter": 3817,
+          "command": "0x493d0adf",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Temp'differenz AUS Sch'bad"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [],
+          "min_value": 0.0,
+          "max_value": 4.0
+        },
+        {
+          "parameter": 3818,
+          "command": "0x493d0ae7",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Ladetemp Min Schwimmbad"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [],
+          "min_value": 8.0,
+          "max_value": 95.0
+        },
+        {
+          "parameter": 3822,
+          "command": "0x493d0ae3",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Ladevorrang Speicher"
+          },
+          "enum": {
+            "0": {
+              "DE": "Kein"
+            },
+            "1": {
+              "DE": "Trinkwasserspeicher"
+            },
+            "2": {
+              "DE": "Pufferspeicher"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": []
+        },
+        {
+          "parameter": 3825,
+          "command": "0x493d0ae0",
+          "typename": "MINUTES_SHORT",
+          "description": {
+            "DE": "Ladezeit relativer Vorrang"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [],
+          "min_value": 2.0,
+          "max_value": 60.0
+        },
+        {
+          "parameter": 3826,
+          "command": "0x493d0ae1",
+          "typename": "MINUTES_SHORT",
+          "description": {
+            "DE": "Wartezeit relativer Vorrang"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [],
+          "min_value": 1.0,
+          "max_value": 40.0
+        },
+        {
+          "parameter": 3827,
+          "command": "0x493d0ae2",
+          "typename": "MINUTES_SHORT",
+          "description": {
+            "DE": "Wartezeit Parallelbetrieb"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [],
+          "min_value": 8.0,
+          "max_value": 40.0
+        },
+        {
+          "parameter": 3828,
+          "command": "0x493d0aee",
+          "typename": "SECONDS_WORD",
+          "description": {
+            "DE": "Verz\u00f6gerung Sekund\u00e4rpumpe"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [],
+          "min_value": 0.0,
+          "max_value": 600.0
+        },
+        {
+          "parameter": 3830,
+          "command": "0x493d0716",
+          "typename": "MINUTES_SHORT",
+          "description": {
+            "DE": "Kollektorstartfunktion"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [],
+          "min_value": 5.0,
+          "max_value": 60.0
+        },
+        {
+          "parameter": 3831,
+          "command": "0x493d0719",
+          "typename": "SECONDS_SHORT",
+          "description": {
+            "DE": "Mindestlaufzeit Kollek'pumpe"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [],
+          "min_value": 5.0,
+          "max_value": 120.0
+        },
+        {
+          "parameter": 3832,
+          "command": "0x493d0ae4",
+          "typename": "HOUR_MINUTES",
+          "description": {
+            "DE": "Kollektorstartfunktion ein"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": []
+        },
+        {
+          "parameter": 3833,
+          "command": "0x493d0ae5",
+          "typename": "HOUR_MINUTES",
+          "description": {
+            "DE": "Kollektorstartfunktion aus"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": []
+        },
+        {
+          "parameter": 3834,
+          "command": "0x493d0b12",
+          "typename": "GRADIENT_SHORT",
+          "description": {
+            "DE": "Kollektorstartfkt. Gradient"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [],
+          "min_value": 1.0,
+          "max_value": 20.0
+        },
+        {
+          "parameter": 3840,
+          "command": "0x493d0860",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Kollektor Frostschutz"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [],
+          "min_value": -20.0,
+          "max_value": 5.0
+        },
+        {
+          "parameter": 3850,
+          "command": "0x493d0865",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Kollektor\u00fcberhitzschutz"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [],
+          "min_value": 30.0,
+          "max_value": 350.0
+        },
+        {
+          "parameter": 3860,
+          "command": "0x493d0551",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Verdampfung W\u00e4rmetr\u00e4ger"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [],
+          "min_value": 60.0,
+          "max_value": 350.0
+        },
+        {
+          "parameter": 3880,
+          "command": "0x493d0509",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Frostschutzmittel"
+          },
+          "enum": {
+            "1": {
+              "DE": "Kein"
+            },
+            "2": {
+              "DE": "Ethylenglykol"
+            },
+            "3": {
+              "DE": "Propylenglykol"
+            },
+            "4": {
+              "DE": "Ethylen- und Propylenglykol"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": []
+        },
+        {
+          "parameter": 3881,
+          "command": "0x493d050a",
+          "typename": "PERCENT",
+          "description": {
+            "DE": "Frost'mittel Konzentration"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [],
+          "min_value": 1.0,
+          "max_value": 100.0
+        },
+        {
+          "parameter": 3884,
+          "command": "0x493d050c",
+          "typename": "LITERPERHOUR",
+          "description": {
+            "DE": "Pumpendurchfluss"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [],
+          "min_value": 10.0,
+          "max_value": 1500.0
+        }
+      ]
+    },
+    "8000": {
+      "name": {
+        "DE": "8000 Status"
+      },
+      "min": 8000,
+      "max": 8011,
+      "commands": [
+        {
+          "parameter": 8000,
+          "command": "0x053d07a3",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Status Heizkreis 1"
+          },
+          "enum": {
+            "0": {
+              "DE": "---"
+            },
+            "3": {
+              "DE": "W\u00e4chter angesprochen"
+            },
+            "4": {
+              "DE": "Handbetrieb aktiv"
+            },
+            "102": {
+              "DE": "Estrichfunktion aktiv"
+            },
+            "56": {
+              "DE": "\u00dcberhitzschutz aktiv"
+            },
+            "103": {
+              "DE": "Eingeschr\u00e4nkt, Kesselschutz"
+            },
+            "104": {
+              "DE": "Eingeschr\u00e4nkt, TWW-Vorrang"
+            },
+            "105": {
+              "DE": "Eingeschr\u00e4nkt, Puffer"
+            },
+            "106": {
+              "DE": "Heizbetrieb eingeschr\u00e4nkt"
+            },
+            "107": {
+              "DE": "Zwangsabnahme Puffer"
+            },
+            "108": {
+              "DE": "Zwangsabnahme TWW"
+            },
+            "109": {
+              "DE": "Zwangsabnahme Erzeuger"
+            },
+            "110": {
+              "DE": "Zwangsabnahme"
+            },
+            "17": {
+              "DE": "Nachlauf aktiv"
+            },
+            "111": {
+              "DE": "Einschaltopt + Schnellaufheiz"
+            },
+            "112": {
+              "DE": "Einschaltoptimierung"
+            },
+            "113": {
+              "DE": "Schnellaufheizung"
+            },
+            "114": {
+              "DE": "Heizbetrieb Komfort"
+            },
+            "115": {
+              "DE": "Ausschaltoptimierung"
+            },
+            "116": {
+              "DE": "Heizbetrieb Reduziert"
+            },
+            "101": {
+              "DE": "Raumfrostschutz aktiv"
+            },
+            "117": {
+              "DE": "Vorlauffrostschutz aktiv"
+            },
+            "23": {
+              "DE": "Anlagenfrostschutz aktiv"
+            },
+            "24": {
+              "DE": "Frostschutz aktiv"
+            },
+            "118": {
+              "DE": "Sommerbetrieb"
+            },
+            "119": {
+              "DE": "Tages-Eco aktiv"
+            },
+            "120": {
+              "DE": "Absenkung Reduziert"
+            },
+            "121": {
+              "DE": "Absenkung Frostschutz"
+            },
+            "122": {
+              "DE": "Raumtemp\u2019begrenzung"
+            },
+            "25": {
+              "DE": "Aus"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8001,
+          "command": "0x053d07a5",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Status Heizkreis 2"
+          },
+          "enum": {
+            "0": {
+              "DE": "---"
+            },
+            "3": {
+              "DE": "W\u00e4chter angesprochen"
+            },
+            "4": {
+              "DE": "Handbetrieb aktiv"
+            },
+            "102": {
+              "DE": "Estrichfunktion aktiv"
+            },
+            "56": {
+              "DE": "\u00dcberhitzschutz aktiv"
+            },
+            "103": {
+              "DE": "Eingeschr\u00e4nkt, Kesselschutz"
+            },
+            "104": {
+              "DE": "Eingeschr\u00e4nkt, TWW-Vorrang"
+            },
+            "105": {
+              "DE": "Eingeschr\u00e4nkt, Puffer"
+            },
+            "106": {
+              "DE": "Heizbetrieb eingeschr\u00e4nkt"
+            },
+            "107": {
+              "DE": "Zwangsabnahme Puffer"
+            },
+            "108": {
+              "DE": "Zwangsabnahme TWW"
+            },
+            "109": {
+              "DE": "Zwangsabnahme Erzeuger"
+            },
+            "110": {
+              "DE": "Zwangsabnahme"
+            },
+            "17": {
+              "DE": "Nachlauf aktiv"
+            },
+            "111": {
+              "DE": "Einschaltopt + Schnellaufheiz"
+            },
+            "112": {
+              "DE": "Einschaltoptimierung"
+            },
+            "113": {
+              "DE": "Schnellaufheizung"
+            },
+            "114": {
+              "DE": "Heizbetrieb Komfort"
+            },
+            "115": {
+              "DE": "Ausschaltoptimierung"
+            },
+            "116": {
+              "DE": "Heizbetrieb Reduziert"
+            },
+            "101": {
+              "DE": "Raumfrostschutz aktiv"
+            },
+            "117": {
+              "DE": "Vorlauffrostschutz aktiv"
+            },
+            "23": {
+              "DE": "Anlagenfrostschutz aktiv"
+            },
+            "24": {
+              "DE": "Frostschutz aktiv"
+            },
+            "118": {
+              "DE": "Sommerbetrieb"
+            },
+            "119": {
+              "DE": "Tages-Eco aktiv"
+            },
+            "120": {
+              "DE": "Absenkung Reduziert"
+            },
+            "121": {
+              "DE": "Absenkung Frostschutz"
+            },
+            "122": {
+              "DE": "Raumtemp\u2019begrenzung"
+            },
+            "25": {
+              "DE": "Aus"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8002,
+          "command": "0x053d07a7",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Status Heizkreis P"
+          },
+          "enum": {
+            "0": {
+              "DE": "---"
+            },
+            "3": {
+              "DE": "W\u00e4chter angesprochen"
+            },
+            "4": {
+              "DE": "Handbetrieb aktiv"
+            },
+            "102": {
+              "DE": "Estrichfunktion aktiv"
+            },
+            "56": {
+              "DE": "\u00dcberhitzschutz aktiv"
+            },
+            "103": {
+              "DE": "Eingeschr\u00e4nkt, Kesselschutz"
+            },
+            "104": {
+              "DE": "Eingeschr\u00e4nkt, TWW-Vorrang"
+            },
+            "105": {
+              "DE": "Eingeschr\u00e4nkt, Puffer"
+            },
+            "106": {
+              "DE": "Heizbetrieb eingeschr\u00e4nkt"
+            },
+            "107": {
+              "DE": "Zwangsabnahme Puffer"
+            },
+            "108": {
+              "DE": "Zwangsabnahme TWW"
+            },
+            "109": {
+              "DE": "Zwangsabnahme Erzeuger"
+            },
+            "110": {
+              "DE": "Zwangsabnahme"
+            },
+            "17": {
+              "DE": "Nachlauf aktiv"
+            },
+            "111": {
+              "DE": "Einschaltopt + Schnellaufheiz"
+            },
+            "112": {
+              "DE": "Einschaltoptimierung"
+            },
+            "113": {
+              "DE": "Schnellaufheizung"
+            },
+            "114": {
+              "DE": "Heizbetrieb Komfort"
+            },
+            "115": {
+              "DE": "Ausschaltoptimierung"
+            },
+            "116": {
+              "DE": "Heizbetrieb Reduziert"
+            },
+            "101": {
+              "DE": "Raumfrostschutz aktiv"
+            },
+            "117": {
+              "DE": "Vorlauffrostschutz aktiv"
+            },
+            "23": {
+              "DE": "Anlagenfrostschutz aktiv"
+            },
+            "24": {
+              "DE": "Frostschutz aktiv"
+            },
+            "118": {
+              "DE": "Sommerbetrieb"
+            },
+            "119": {
+              "DE": "Tages-Eco aktiv"
+            },
+            "120": {
+              "DE": "Absenkung Reduziert"
+            },
+            "121": {
+              "DE": "Absenkung Frostschutz"
+            },
+            "122": {
+              "DE": "Raumtemp\u2019begrenzung"
+            },
+            "25": {
+              "DE": "Aus"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8003,
+          "command": "0x053d07a2",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Status Trinkwasser"
+          },
+          "enum": {
+            "0": {
+              "DE": "---"
+            },
+            "92": {
+              "DE": "Push, Legionellensollwert"
+            },
+            "93": {
+              "DE": "Push, Nennsollwert"
+            },
+            "94": {
+              "DE": "Push aktiv"
+            },
+            "95": {
+              "DE": "Ladung, Legionellensollwert"
+            },
+            "96": {
+              "DE": "Ladung, Nennsollwert"
+            },
+            "97": {
+              "DE": "Ladung, Reduziertsollwert"
+            },
+            "69": {
+              "DE": "Ladung aktiv"
+            },
+            "24": {
+              "DE": "Frostschutz aktiv"
+            },
+            "17": {
+              "DE": "Nachlauf aktiv"
+            },
+            "201": {
+              "DE": "Bereitschaftsladung"
+            },
+            "70": {
+              "DE": "Geladen, Max Speichertemp"
+            },
+            "71": {
+              "DE": "Geladen, Max Ladetemp"
+            },
+            "98": {
+              "DE": "Geladen, Legio\u2019temperatur"
+            },
+            "99": {
+              "DE": "Geladen, Nenntemperatur"
+            },
+            "100": {
+              "DE": "Geladen, Reduz\u2019temperatur"
+            },
+            "75": {
+              "DE": "Geladen"
+            },
+            "25": {
+              "DE": "Aus"
+            },
+            "200": {
+              "DE": "Bereit"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8005,
+          "command": "0x053d07a9",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Status Kessel"
+          },
+          "enum": {
+            "0": {
+              "DE": "---"
+            },
+            "1": {
+              "DE": "STB angesprochen"
+            },
+            "123": {
+              "DE": "STB Test aktiv"
+            },
+            "2": {
+              "DE": "St\u00f6rung"
+            },
+            "3": {
+              "DE": "W\u00e4chter angesprochen"
+            },
+            "4": {
+              "DE": "Handbetrieb aktiv"
+            },
+            "5": {
+              "DE": "Schornsteinfegerfkt, Vollast"
+            },
+            "6": {
+              "DE": "Schornsteinfegerfkt, Teillast"
+            },
+            "7": {
+              "DE": "Schornsteinfegerfkt aktiv"
+            },
+            "8": {
+              "DE": "Gesperrt, Manuell"
+            },
+            "172": {
+              "DE": "Gesperrt, Feststoffkessel"
+            },
+            "9": {
+              "DE": "Gesperrt, Automatisch"
+            },
+            "176": {
+              "DE": "Gesperrt, Au\u00dfentemperatur"
+            },
+            "198": {
+              "DE": "Gesperrt, Oekobetrieb"
+            },
+            "10": {
+              "DE": "Gesperrt"
+            },
+            "20": {
+              "DE": "Minimalbegrenzung"
+            },
+            "21": {
+              "DE": "Minimalbegrenzung, Teillast"
+            },
+            "22": {
+              "DE": "Minimalbegrenzung aktiv"
+            },
+            "11": {
+              "DE": "Anfahrentlastung"
+            },
+            "12": {
+              "DE": "Anfahrentlastung, Teillast"
+            },
+            "13": {
+              "DE": "R\u00fcckl\u2019begrenzung"
+            },
+            "14": {
+              "DE": "R\u00fcckl\u2019begrenzung, Teillast"
+            },
+            "18": {
+              "DE": "In Betrieb"
+            },
+            "59": {
+              "DE": "Ladung Pufferspeicher"
+            },
+            "170": {
+              "DE": "In Betrieb f\u00fcr HK, TWW"
+            },
+            "171": {
+              "DE": "In Teillastbetrieb f\u00fcr HK, TWW"
+            },
+            "173": {
+              "DE": "Freigegeben f\u00fcr HK, TWW"
+            },
+            "168": {
+              "DE": "In Betrieb f\u00fcr Trinkwasser"
+            },
+            "169": {
+              "DE": "In Teillastbetrieb f\u00fcr TWW"
+            },
+            "174": {
+              "DE": "Freigeben f\u00fcr TWW"
+            },
+            "166": {
+              "DE": "In Betrieb f\u00fcr Heizkreis"
+            },
+            "167": {
+              "DE": "In Teillastbetrieb f\u00fcr HK"
+            },
+            "175": {
+              "DE": "Freigegeben f\u00fcr HK"
+            },
+            "17": {
+              "DE": "Nachlauf aktiv"
+            },
+            "19": {
+              "DE": "Freigegeben"
+            },
+            "23": {
+              "DE": "Anlagenfrostschutz aktiv"
+            },
+            "24": {
+              "DE": "Frostschutz aktiv"
+            },
+            "25": {
+              "DE": "Aus"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8007,
+          "command": "0x053d07ae",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Status Solar"
+          },
+          "enum": {
+            "0": {
+              "DE": "---"
+            },
+            "4": {
+              "DE": "Handbetrieb aktiv"
+            },
+            "2": {
+              "DE": "St\u00f6rung"
+            },
+            "52": {
+              "DE": "Kollektorfrostschutz aktiv"
+            },
+            "53": {
+              "DE": "R\u00fcckk\u00fchlung aktiv"
+            },
+            "54": {
+              "DE": "Max Speichertemp erreicht"
+            },
+            "55": {
+              "DE": "Verdampfungsschutz aktiv"
+            },
+            "56": {
+              "DE": "\u00dcberhitzschutz aktiv"
+            },
+            "57": {
+              "DE": "Max Ladetemp erreicht"
+            },
+            "151": {
+              "DE": "Lad'ng TWW + Puffer + Sch'bad"
+            },
+            "152": {
+              "DE": "Ladung Trinkwasser + Puffer"
+            },
+            "153": {
+              "DE": "Ladung Trinkwasser + Sch'bad"
+            },
+            "154": {
+              "DE": "Ladung Puffer + Schwimmbad"
+            },
+            "58": {
+              "DE": "Ladung Trinkwasser"
+            },
+            "59": {
+              "DE": "Ladung Pufferspeicher"
+            },
+            "60": {
+              "DE": "Ladung Schwimmbad"
+            },
+            "61": {
+              "DE": "Min Ladetemp nicht erreicht"
+            },
+            "62": {
+              "DE": "Temp\u2019differenz ungen\u00fcgend"
+            },
+            "63": {
+              "DE": "Einstrahlung ungen\u00fcgend"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8008,
+          "command": "0x053d0a08",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Status Feststoffkessel"
+          },
+          "enum": {
+            "0": {
+              "DE": "---"
+            },
+            "4": {
+              "DE": "Handbetrieb aktiv"
+            },
+            "2": {
+              "DE": "St\u00f6rung"
+            },
+            "56": {
+              "DE": "\u00dcberhitzschutz aktiv"
+            },
+            "8": {
+              "DE": "Gesperrt, Manuell"
+            },
+            "9": {
+              "DE": "Gesperrt, Automatisch"
+            },
+            "10": {
+              "DE": "Gesperrt"
+            },
+            "20": {
+              "DE": "Minimalbegrenzung"
+            },
+            "21": {
+              "DE": "Minimalbegrenzung, Teillast"
+            },
+            "22": {
+              "DE": "Minimalbegrenzung aktiv"
+            },
+            "11": {
+              "DE": "Anfahrentlastung"
+            },
+            "12": {
+              "DE": "Anfahrentlastung, Teillast"
+            },
+            "13": {
+              "DE": "R\u00fccklaufbegrenzung"
+            },
+            "14": {
+              "DE": "R\u00fccklaufbegrenzung, Teillast"
+            },
+            "166": {
+              "DE": "In Betrieb f\u00fcr Heizkreis"
+            },
+            "167": {
+              "DE": "In Teillastbetrieb f\u00fcr HK"
+            },
+            "168": {
+              "DE": "In Betrieb f\u00fcr Trinkwasser"
+            },
+            "169": {
+              "DE": "In Teillastbetrieb f\u00fcr TWW"
+            },
+            "170": {
+              "DE": "In Betrieb f\u00fcr HK, TWW"
+            },
+            "171": {
+              "DE": "In Teillastbetrieb f\u00fcr HK, TWW"
+            },
+            "17": {
+              "DE": "Nachlauf aktiv"
+            },
+            "18": {
+              "DE": "In Betrieb"
+            },
+            "163": {
+              "DE": "Anfeuerungshilfe aktiv"
+            },
+            "19": {
+              "DE": "Freigegeben"
+            },
+            "23": {
+              "DE": "Anlagenfrostschutz aktiv"
+            },
+            "141": {
+              "DE": "Kesselfrostschutz aktiv"
+            },
+            "24": {
+              "DE": "Frostschutz aktiv"
+            },
+            "25": {
+              "DE": "Aus"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8009,
+          "command": "0x053d0f66",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Status Brenner"
+          },
+          "enum": {},
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8010,
+          "command": "0x053d07ab",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Status Pufferspeicher"
+          },
+          "enum": {
+            "0": {
+              "DE": "---"
+            },
+            "202": {
+              "DE": "Frostschutz K\u00fchlen aktiv"
+            },
+            "135": {
+              "DE": "Sperrdauer nach Heizen"
+            },
+            "81": {
+              "DE": "Ladung gesperrt"
+            },
+            "124": {
+              "DE": "Ladung eingeschr\u00e4nkt"
+            },
+            "67": {
+              "DE": "Zwangsladung aktiv"
+            },
+            "203": {
+              "DE": "Durchladung aktiv"
+            },
+            "69": {
+              "DE": "Ladung aktiv"
+            },
+            "72": {
+              "DE": "Geladen, Zwanglad Solltemp"
+            },
+            "73": {
+              "DE": "Geladen, Solltemperatur"
+            },
+            "143": {
+              "DE": "Geladen, Min Ladetemp"
+            },
+            "75": {
+              "DE": "Geladen"
+            },
+            "147": {
+              "DE": "Warm"
+            },
+            "51": {
+              "DE": "Keine W\u00e4rmeanforderung"
+            },
+            "24": {
+              "DE": "Frostschutz aktiv"
+            },
+            "64": {
+              "DE": "Ladung Elektro, Notbetrieb"
+            },
+            "65": {
+              "DE": "Ladung Elektro, Quell\u2019schutz"
+            },
+            "131": {
+              "DE": "Ladung Elektro, Abtauen"
+            },
+            "164": {
+              "DE": "Ladung Elektro, Zwang"
+            },
+            "165": {
+              "DE": "Ladung Elektro, Ersatz"
+            },
+            "66": {
+              "DE": "Ladung Elektroeinsatz"
+            },
+            "104": {
+              "DE": "Eingeschr\u00e4nkt, TWW-Vorrang"
+            },
+            "68": {
+              "DE": "Teilladung aktiv"
+            },
+            "77": {
+              "DE": "R\u00fcckk\u00fchlung via Kollektor"
+            },
+            "142": {
+              "DE": "R\u00fcckk\u00fchlung via TWW / Hk\u2019s"
+            },
+            "53": {
+              "DE": "R\u00fcckk\u00fchlung aktiv"
+            },
+            "70": {
+              "DE": "Geladen, Max Speichertemp"
+            },
+            "71": {
+              "DE": "Geladen, Max Ladetemp"
+            },
+            "74": {
+              "DE": "Teilgeladen, Solltemperatur"
+            },
+            "76": {
+              "DE": "Kalt"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8011,
+          "command": "0x053d0afc",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Status Schwimmbad"
+          },
+          "enum": {
+            "0": {
+              "DE": "---"
+            },
+            "4": {
+              "DE": "Handbetrieb aktiv"
+            },
+            "2": {
+              "DE": "St\u00f6rung"
+            },
+            "106": {
+              "DE": "Heizbetrieb eingeschr\u00e4nkt"
+            },
+            "110": {
+              "DE": "Zwangsabnahme"
+            },
+            "155": {
+              "DE": "Heizbetrieb Erzeuger"
+            },
+            "137": {
+              "DE": "Heizbetrieb"
+            },
+            "156": {
+              "DE": "Geheizt, Max Schw'badtemp"
+            },
+            "158": {
+              "DE": "Geheizt, Sollwert Solar"
+            },
+            "157": {
+              "DE": "Geheizt, Sollwert Erzeuger"
+            },
+            "159": {
+              "DE": "Geheizt"
+            },
+            "160": {
+              "DE": "Heizbetrieb Solar aus"
+            },
+            "161": {
+              "DE": "Heizbetrieb Erzeuger aus"
+            },
+            "162": {
+              "DE": "Heizbetrieb aus"
+            },
+            "76": {
+              "DE": "Kalt"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        }
+      ]
+    },
+    "8300": {
+      "name": {
+        "DE": "8300 Diagnose Erzeuger"
+      },
+      "min": 8300,
+      "max": 8390,
+      "commands": [
+        {
+          "parameter": 8304,
+          "command": "0x053d09a2",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Kesselpumpe Q1"
+          },
+          "enum": {
+            "255": {
+              "DE": "Ein"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8308,
+          "command": "0x053d0826",
+          "typename": "PERCENT",
+          "description": {
+            "DE": "Drehzahl Kesselpumpe"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8310,
+          "command": "0x0d3d0519",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Kesseltemperatur"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8311,
+          "command": "0x0d3d0923",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Kesselsollwert"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8312,
+          "command": "0x053d0b26",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Kesselschaltpunkt"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8314,
+          "command": "0x113d051a",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Kesselr\u00fccklauftemperatur"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8323,
+          "command": "0x093d0e69",
+          "typename": "SPEED2",
+          "description": {
+            "DE": "Gebl\u00e4sedrehzahl"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8324,
+          "command": "0x093d0e6a",
+          "typename": "SPEED2",
+          "description": {
+            "DE": "Brennergebl\u00e4sesollwert"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8325,
+          "command": "0x093d0e00",
+          "typename": "PERCENT_WORD1",
+          "description": {
+            "DE": "Akt. Gebl\u00e4sesteuerung"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8326,
+          "command": "0x053d0834",
+          "typename": "PERCENT",
+          "description": {
+            "DE": "Brennermodulation"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8329,
+          "command": "0x093d0e16",
+          "typename": "CURRENT",
+          "description": {
+            "DE": "Ionisationsstrom"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8330,
+          "command": "0x0d3d093b",
+          "typename": "HOURS",
+          "description": {
+            "DE": "Betriebsstunden 1. Stufe"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ],
+          "min_value": -596523.2355555556
+        },
+        {
+          "parameter": 8331,
+          "command": "0x053d08a5",
+          "typename": "DWORD",
+          "description": {
+            "DE": "Startz\u00e4hler 1. Stufe"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ],
+          "min_value": -2147483648.0
+        },
+        {
+          "parameter": 8338,
+          "command": "0x053d2feb",
+          "typename": "HOURS",
+          "description": {
+            "DE": "Betriebsstunden Heizbetrieb"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ],
+          "min_value": -596523.2355555556
+        },
+        {
+          "parameter": 8339,
+          "command": "0x053d2fec",
+          "typename": "HOURS",
+          "description": {
+            "DE": "Betriebsstunden TWW"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ],
+          "min_value": -596523.2355555556
+        },
+        {
+          "parameter": 8390,
+          "command": "0x093d0dfd",
+          "typename": "BYTE",
+          "description": {
+            "DE": "Aktuelle Phasennummer"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        }
+      ]
+    },
+    "8400": {
+      "name": {
+        "DE": "8400 Diagnose Solar"
+      },
+      "min": 8400,
+      "max": 8570,
+      "commands": [
+        {
+          "parameter": 8499,
+          "command": "0x053d09ab",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Kollektorpumpe 1 (Aus)"
+          },
+          "enum": {
+            "0": {
+              "DE": "Aus"
+            },
+            "1": {
+              "DE": "Ein"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8501,
+          "command": "0x053d0a89",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Solarstellglied Puffer"
+          },
+          "enum": {},
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8502,
+          "command": "0x053d0a8b",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Solarstellglied Schwimmbad"
+          },
+          "enum": {},
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8510,
+          "command": "0x493d052a",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Kollektortemperatur 1"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8511,
+          "command": "0x493d053f",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Kollektortemperatur 1 max"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8512,
+          "command": "0x493d0718",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Kollektortemperatur 1 min"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8512,
+          "command": "0x493d053b",
+          "typename": "TEMP",
+          "description": {
+            "DE": "dT Kollektor 1 / TWW"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8513,
+          "command": "0x493d053c",
+          "typename": "TEMP",
+          "description": {
+            "DE": "dT Kollektor 1 / Puffer"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8514,
+          "command": "0x493d042e",
+          "typename": "TEMP",
+          "description": {
+            "DE": "dT Kollektor 1 / Schwimmbad"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8519,
+          "command": "0x493d050e",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Solarvorlauftemperatur"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8520,
+          "command": "0x493d050f",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Solarr\u00fccklauftemperatur"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8526,
+          "command": "0x493d0599",
+          "typename": "ENERGY_WORD",
+          "description": {
+            "DE": "Tagesertrag Solarenergie (kWh)"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8527,
+          "command": "0x493d0598",
+          "typename": "ENERGY_WORD",
+          "description": {
+            "DE": "Gesamtertrag Solarenergie (kWh)"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ],
+          "min_value": -2147483648.0
+        },
+        {
+          "parameter": 8530,
+          "command": "0x493d0893",
+          "typename": "HOURS",
+          "description": {
+            "DE": "Betr'stunden Solarertrag"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ],
+          "min_value": -596523.2355555556
+        },
+        {
+          "parameter": 8531,
+          "command": "0x493d0717",
+          "typename": "HOURS",
+          "description": {
+            "DE": "Betr'stunden Kollektor\u00fcberhitz"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ],
+          "min_value": -596523.2355555556
+        },
+        {
+          "parameter": 8532,
+          "command": "0x053d10a5",
+          "typename": "HOURS",
+          "description": {
+            "DE": "Betr'stunden Kollektorpumpe"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ],
+          "min_value": -596523.2355555556
+        },
+        {
+          "parameter": 8560,
+          "command": "0x513d052e",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Feststoffkesseltemperatur"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8570,
+          "command": "0x513d0892",
+          "typename": "HOURS",
+          "description": {
+            "DE": "Betr'stunden Feststoffkessel"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ],
+          "min_value": -596523.2355555556
+        }
+      ]
+    },
+    "8700": {
+      "name": {
+        "DE": "8700 Diagnose Verbraucher"
+      },
+      "min": 8700,
+      "max": 8830,
+      "commands": [
+        {
+          "parameter": 8700,
+          "command": "0x053d0521",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Au\u00dfentemperatur"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8701,
+          "command": "0x053d056f",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Au\u00dfentemperatur Minimum"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8702,
+          "command": "0x053d056e",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Au\u00dfentemperatur Maximum"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8703,
+          "command": "0x053d05f0",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Au\u00dfentemperatur ged\u00e4mpft"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8704,
+          "command": "0x053d05f2",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Au\u00dfentemperatur gemischt"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8730,
+          "command": "0x053d09a5",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Heizkreispumpe 1"
+          },
+          "enum": {
+            "0": {
+              "DE": "Aus"
+            },
+            "1": {
+              "DE": "Ein"
+            },
+            "255": {
+              "DE": "Ein"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8731,
+          "command": "0x053d09a6",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Heizkreismischer 1 Auf"
+          },
+          "enum": {
+            "0": {
+              "DE": "Aus"
+            },
+            "1": {
+              "DE": "Ein"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8732,
+          "command": "0x053d09a7",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Heizkreismischer 1 Zu"
+          },
+          "enum": {
+            "0": {
+              "DE": "Aus"
+            },
+            "1": {
+              "DE": "Ein"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8735,
+          "command": "0x213d04a7",
+          "typename": "PERCENT1",
+          "description": {
+            "DE": "Drehzahl Heizkreispumpe 1"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8740,
+          "command": "0x2d3d051e",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Raumtemperatur 1"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8741,
+          "command": "0x2d3d0593",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Raumsollwert 1"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8743,
+          "command": "0x213d0518",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Vorlauftemperatur 1"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8744,
+          "command": "0x213d0667",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Vorlaufsollwert 1"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8749,
+          "command": "0x053d0c7d",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Raumthermostat 1"
+          },
+          "enum": {},
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8760,
+          "command": "0x053d09a8",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Heizkreispumpe 2"
+          },
+          "enum": {
+            "0": {
+              "DE": "Aus"
+            },
+            "1": {
+              "DE": "Ein"
+            },
+            "255": {
+              "DE": "Ein"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8761,
+          "command": "0x053d09a9",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Heizkreismischer 2 Auf"
+          },
+          "enum": {
+            "0": {
+              "DE": "Aus"
+            },
+            "1": {
+              "DE": "Ein"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8762,
+          "command": "0x053d09aa",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Heizkreismischer 2 Zu"
+          },
+          "enum": {
+            "0": {
+              "DE": "Aus"
+            },
+            "1": {
+              "DE": "Ein"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8765,
+          "command": "0x223d04a7",
+          "typename": "PERCENT1",
+          "description": {
+            "DE": "Drehzahl Heizkreispumpe 2"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8770,
+          "command": "0x2e3d051e",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Raumtemperatur 2"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8771,
+          "command": "0x2e3d0593",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Raumsollwert 2"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8773,
+          "command": "0x223d0518",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Vorlauftemperatur 2"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8774,
+          "command": "0x223d0667",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Vorlaufsollwert 2"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8779,
+          "command": "0x063d0c7d",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Raumthermostat 2"
+          },
+          "enum": {},
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8790,
+          "command": "0x053d09b0",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Heizkreispumpe 3"
+          },
+          "enum": {
+            "0": {
+              "DE": "Aus"
+            },
+            "1": {
+              "DE": "Ein"
+            },
+            "255": {
+              "DE": "Ein"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8791,
+          "command": "0x053d0aa7",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Heizkreismischer 3 Auf"
+          },
+          "enum": {
+            "0": {
+              "DE": "Aus"
+            },
+            "1": {
+              "DE": "Ein"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8792,
+          "command": "0x053d0aa8",
+          "typename": "ENUM",
+          "description": {
+            "DE": "Heizkreismischer 3 Zu"
+          },
+          "enum": {
+            "0": {
+              "DE": "Aus"
+            },
+            "1": {
+              "DE": "Ein"
+            }
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8795,
+          "command": "0x233d04a7",
+          "typename": "PERCENT1",
+          "description": {
+            "DE": "Drehzahl Heizkreispumpe 3"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8830,
+          "command": "0x313d052f",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Trinkwassertemperatur 1"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        }
+      ]
+    },
+    "0": {
+      "name": {
+        "DE": "Unsortiert"
+      },
+      "min": 0,
+      "max": 8980,
+      "commands": [
+        {
+          "parameter": 8832,
+          "command": "0x313d0530",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Trinkwassertemperatur 2"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8836,
+          "command": "0x253d0b33",
+          "typename": "TEMP",
+          "description": {
+            "DE": "TWW Ladetemperatur"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 5055,
+          "command": "0x253d08bd",
+          "typename": "TEMP",
+          "description": {
+            "DE": "R\u00fcckk\u00fchltemperatur"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 5050,
+          "command": "0x253d08a3",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Ladetemperatur Maximum"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        },
+        {
+          "parameter": 8980,
+          "command": "0x053d0534",
+          "typename": "TEMP",
+          "description": {
+            "DE": "Pufferspeichertemperatur 1"
+          },
+          "device": [
+            {
+              "family": 255,
+              "var": 255
+            }
+          ],
+          "flags": [
+            "READONLY"
+          ]
+        }
+      ]
+    }
+  }
+}

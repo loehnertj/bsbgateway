@@ -71,7 +71,8 @@ def convert_field(field:BsbField) -> BsbCommand:
     return BsbCommand(
         parameter=field.disp_id,
         command=f'0x{field.telegram_id:08x}',
-        type=convert_type(field),
+        #type=convert_type(field),
+        typename=find_typename(field),
         description=istr(field.disp_name),
         flags=flags,
         device = [BsbDevice(family=255,var=255)],
@@ -84,11 +85,10 @@ def load_reference_types(model: BsbModel):
     model = dedup_types(model)
     _REFERENCE_TYPES.update(model.types)
 
-def convert_type(field:BsbField) -> BsbType:
+def find_typename(field:BsbField) -> str:
     if not _REFERENCE_TYPES:
         raise RuntimeError("Reference types were not loaded")
     types = _REFERENCE_TYPES
-    Dt = BsbDatatype
     enbl = 6 if field.nullable else 1
     if type(field) is BsbField:
         raise ValueError("Cannot convert field with anonymous type: %s" % (str(field),))
@@ -98,21 +98,21 @@ def convert_type(field:BsbField) -> BsbType:
         else:
             name = "ENUM"
         assert enbl == 1
-        return types[name]
+        return name
     elif isinstance(field, BsbFieldTemperature):
-        return types["TEMP"]
+        return "TEMP"
     elif isinstance(field, (BsbFieldInt8,BsbFieldInt16,BsbFieldInt32)):
         if not field.new_type_name:
             raise ValueError("Need .tn property for int fields: %s" % str(field))
         t = types[field.new_type_name]
         if field.rw and t.enable_byte != enbl:
             print("%s field.nullable=%s enable_byte=%s"% (str(field), field.nullable, t.enable_byte))
-        return t
+        return t.name
     elif isinstance(field, BsbFieldTime):
         t = types["HOUR_MINUTES"]
         if field.rw and t.enable_byte != enbl:
             print("%s field.nullable=%s enable_byte=%s"% (str(field), field.nullable, t.enable_byte))
-        return t
+        return t.name
     else:
         raise ValueError("Cannot convert field: %s" % (str(field),))
 
@@ -130,7 +130,7 @@ def dump_types(model: BsbModel, filename: Path):
             f.write(tt + "\n\n")
 
 if __name__ == "__main__":
-    m = BsbModel.parse_file("bsb-parameter.json")
+    m = BsbModel.parse_file("bsb-types.json")
     load_reference_types(m)
     from ..bsb.broetje_isr_plus import groups
     m_convert = convert(groups)

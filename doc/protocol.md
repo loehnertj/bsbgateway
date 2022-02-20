@@ -70,8 +70,8 @@ In a **`ret` telegram**, flag `00` indicates a "normal" value, `01` a null value
 In a **`set` telegram**, the flag is set to:
 
  * `01` when setting the value of a non-nullable field;
- * `05` when setting a value for a nullable field;
- * `06` when setting a nullable field to NULL (in this case, the `<value>` byte will be ignored).
+ * `06` when setting a value for a nullable field;
+ * `05` when setting a nullable field to NULL (in this case, the `<value>` byte will be ignored).
  
 ### Choice
 

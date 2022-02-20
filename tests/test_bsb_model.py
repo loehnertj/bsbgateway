@@ -1,5 +1,6 @@
 import pytest
 from bsbgateway.bsb import model
+from bsbgateway.bsb.model_merge import merge
 
 @pytest.fixture
 def testdata():
@@ -86,6 +87,31 @@ def testdata():
     }
 }
 
+@pytest.fixture
+def ty_model():
+    return model.BsbModel.parse_obj(
+        {
+            "version": "",
+            "compiletime": "",
+            "types": {
+                "TEMP": {
+                    "unit": {
+                        "KEY": "UNIT_DEG_TEXT",
+                        "DE": "°C"
+                    },
+                    "name": "TEMP",
+                    "datatype": "VALS",
+                    "datatype_id": 0,
+                    "factor": 64,
+                    "payload_length": 2,
+                    "precision": 1,
+                    "enable_byte": 1,
+                    "payload_flags": 32
+                }
+            }
+        }
+    )
+
 def test_parse_device_description(testdata):
     m = model.BsbModel.parse_obj(testdata)
     cat = m.categories["2200"]
@@ -99,3 +125,39 @@ def test_dedup_types():
     m = model.BsbModel.parse_file("bsb-parameter.json")
     m = model.dedup_types(m)
     assert len(m.types) == 85
+
+def test_merge_types(ty_model):
+    m2 = ty_model.copy(deep=True)
+    ty2 = m2.types["TEMP"]
+    ty2.unit.__root__["DE"] = "new de text"
+    ty2.unit.__root__["EN"] = "new en text"
+    ty2.precision = 2
+    m2.types["TEMP2"] = ty2
+    # test succesful merge
+    merge_log = merge(ty_model, m2)
+    assert merge_log == [
+        "types[TEMP].unit.DE: °C -> new de text",
+        "types[TEMP].unit.EN: + new en text",
+        "types[TEMP].precision: 1 -> 2",
+        "types[TEMP2]: +",
+    ]
+    ty = ty_model.types["TEMP"]
+    assert len(ty.unit.__root__) == 3
+    assert ty.unit.DE == "new de text"
+    assert ty.unit.EN == "new en text"
+    assert ty.precision == 2
+    assert "TEMP2" in ty_model.types
+
+    # test failing merge
+    del m2.types["TEMP2"]
+    ty2.name = "TEMP1"
+    ty2.datatype=model.BsbDatatype.Byte
+    ty2.factor = 65
+    ty2.payload_length = 3
+    ty2.enable_byte = 2
+    ty2.payload_flags = 33
+    with pytest.raises(ValueError) as exc:
+        merge(ty_model, m2)
+    for property in ["name", "datatype", "factor", "payload_length", "enable_byte", "payload_flags"]:
+        assert property in str(exc.value)
+    

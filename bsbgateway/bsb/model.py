@@ -26,7 +26,6 @@ import locale
 #       BsbType --> BsbType<datatype> --> BsbType<name>
 #       inherit or replace BsbField
 
-
 class BsbModel(BaseModel):
     version: str
     "e.g. 2.1.0"
@@ -58,7 +57,7 @@ class BsbCommand(BaseModel):
     """display number of parameter"""
     command: str
     """internal (hex) ID, e.g. '0x2D3D0574'"""
-    type: "BsbType" = None
+    type: Optional["BsbType"] = None
     """Type instance, local copy.
 
     Should be shared from BsbModel.types.
@@ -142,6 +141,7 @@ class BsbType(BaseModel):
     64 = variable length
     """
 
+
 class BsbDatatype(Enum):
     Vals = "VALS"
     """Int with scaling factor"""
@@ -196,11 +196,18 @@ class I18nstr(BaseModel):
             return d["KEY"]
         return "<MISSING TEXT>"
 
+    def __contains__(self, lang):
+        return lang in self.__root__
+
+    def __iter__(self):
+        return iter(self.__root__)
+
     def __str__(self):
         return self.__getattr__(_os_language())
 
     def __deepcopy__(self, memo):
         return I18nstr(__root__ = self.__root__.copy())
+
 
 BsbModel.update_forward_refs()
 BsbCategory.update_forward_refs()

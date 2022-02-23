@@ -4,7 +4,7 @@ from typing import List
 from datetime import datetime
 from pathlib import Path
 
-from ..bsb.model import BsbCommand, BsbCommandFlags, BsbDatatype, BsbDevice, BsbModel, BsbCategory, BsbType, I18nstr, dedup_types
+from ..bsb.model import BsbCommand, BsbCommandFlags, BsbDatatype, BsbDevice, BsbModel, BsbCategory, BsbType, I18nstr, as_json, dedup_types
 from ..bsb.bsb_field import BsbField, BsbFieldChoice, BsbFieldInt8, BsbFieldInt16, BsbFieldInt32, BsbFieldTemperature, BsbFieldTime
 from ..bsb.broetje_isr_plus import Group
 
@@ -13,7 +13,7 @@ def istr(text_de):
 
     FIXME: At least set KEY property
     """
-    return I18nstr(__root__={"DE": text_de})
+    return I18nstr({"DE": text_de})
 
 def convert(groups: List[Group]) -> BsbModel: 
     now = datetime.now()
@@ -125,7 +125,7 @@ def dump_types(model: BsbModel, filename: Path):
     with filename.open("w") as f:
         for key in keys:
             f.write(str(key) + "\n    ")
-            tt = types[key].json(exclude_unset=True, indent=2)
+            tt = as_json(types[key])
             tt = tt.replace("\n", "\n    ")
             f.write(tt + "\n\n")
 
@@ -134,7 +134,8 @@ if __name__ == "__main__":
     load_reference_types(m)
     from ..bsb.broetje_isr_plus import groups
     m_convert = convert(groups)
-    json = m_convert.json(exclude={"types"}, exclude_unset=True, indent=2)
+    m_convert.types = {}
+    json = as_json(m_convert)
     with Path("broetje_isr_plus.json").open("w") as f:
         f.write(json)
 

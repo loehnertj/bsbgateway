@@ -6,17 +6,14 @@ from ..bsb.model import BsbModel, dedup_types
 def main():
     model = BsbModel.parse_file("bsb-parameter.json")
     model = dedup_types(model)
-    tmodel = model.copy()
-    tmodel.categories = {}
-    tmodel.__fields_set__.remove("categories")
+    tmodel = BsbModel(version=model.version, compiletime=model.compiletime, types=model.types)
     with Path("bsb-types.json").open("w") as f:
-        f.write(tmodel.json(exclude_unset=True, indent=2, ensure_ascii=False))
+        f.write(tmodel.json())
     print("Wrote bsb-types.json")
     for cmd in model.commands:
         cmd.type = None
-        cmd.__fields_set__.remove("type")
     with Path("bsb-parameter-stripped.json").open("w") as f:
-        f.write(model.json(exclude_unset=True, indent=0, ensure_ascii=False))
+        f.write(model.json(indent=0))
     print("Wrote bsb-parameter-stripped.json")
 
 

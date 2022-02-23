@@ -8,12 +8,17 @@ __all__ = [
     "BsbDevice",
     "I18nstr",
     "dedup_types",
+    "as_json",
 ]
 from typing import Dict, List, Tuple, Optional
-from pydantic import BaseModel
+#from pydantic import BaseModel
+import attr
+import cattr
+from cattr.gen import make_dict_unstructure_fn
+import json
 from enum import Enum
 import locale
-#from .bsb_field import BsbField, BsbFieldChoice, BsbFieldInt8, BsbFieldInt16, BsbFieldInt32, BsbFieldTemperature, BsbFieldTime
+from copy import deepcopy
 
 # Deszn:
 # I18nstring needs special treatment
@@ -26,7 +31,12 @@ import locale
 #       BsbType --> BsbType<datatype> --> BsbType<name>
 #       inherit or replace BsbField
 
-class BsbModel(BaseModel):
+def as_json(thing, indent=2):
+    ud = cattr.unstructure(thing)
+    return json.dumps(ud, indent=indent, ensure_ascii=False)
+
+@attr.mutable
+class BsbModel:
     version: str
     "e.g. 2.1.0"
     compiletime: str
@@ -42,21 +52,43 @@ class BsbModel(BaseModel):
         for cat in self.categories.values():
             yield from cat.commands
 
+    @classmethod
+    def parse_obj(cls, obj):
+        return cattr.structure(obj, cls)
 
-class BsbCategory(BaseModel):
+    @classmethod
+    def parse_file(cls, filename):
+        with open(filename, "r") as f:
+            ud = json.load(f)
+        return cls.parse_obj(ud)
+
+    def json(self, indent=2):
+        return as_json(self, indent=indent)
+
+@attr.mutable
+class BsbCategory:
     name: "I18nstr"
     min: int
     """First parameter number"""
+
     max: int = 0
     """Last contained parameter"""
-    commands: List["BsbCommand"]
+
+    commands: List["BsbCommand"] = attr.Factory(list)
 
 
-class BsbCommand(BaseModel):
+@attr.mutable
+class BsbCommand:
     parameter: int
     """display number of parameter"""
     command: str
     """internal (hex) ID, e.g. '0x2D3D0574'"""
+
+    description: "I18nstr"
+
+    device: List["BsbDevice"]
+    """Device(s) for which the command exists."""
+
     type: Optional["BsbType"] = None
     """Type instance, local copy.
 
@@ -69,14 +101,10 @@ class BsbCommand(BaseModel):
     typename: str = ""
     """Type reference, can be used to look up the type in BsbModel."""
 
-    description: "I18nstr"
-    enum: Dict[int, "I18nstr"] = {}
+    enum: Dict[int, "I18nstr"] = attr.Factory(dict)
     """Possible values for an enum field, mapped to their description"""
 
-    device: List["BsbDevice"]
-    """Device(s) for which the command exists."""
-
-    flags: List["BsbCommandFlags"] = []
+    flags: List["BsbCommandFlags"] = attr.Factory(list)
     """"""
 
     min_value: Optional[float] = None
@@ -111,20 +139,20 @@ class BsbCommandFlags(Enum):
     """Software controlled read-only flag. I.e. can be unlocked in Software."""
 
 
-class BsbType(BaseModel):
+@attr.mutable
+class BsbType:
     unit: "I18nstr"
     name: str
     datatype: "BsbDatatype"
-    """Underlying binary type.
-    """
+    """Underlying binary type."""
+
+    payload_length: int
+    """Payload length in bytes, without flag byte"""
 
     datatype_id: int = 0
     """Not unique! :-/"""
     factor: int = 1
     """Conversion factor display value -> stored value"""
-
-    payload_length: int
-    """Payload length in bytes, without flag byte"""
 
     precision: int = 0
     """Recommended display precision (number of decimals)"""
@@ -154,8 +182,12 @@ class BsbDatatype(Enum):
     Time = "THMS"
     HourMinutes = "HHMM"
     TimeProgram = "TMPR"
+    # FIXME : ???
+    Date = "DWHM"
 
-class BsbDevice(BaseModel):
+
+@attr.mutable
+class BsbDevice:
     """Device type for which the command is valid"""
     family: int
     """byte, 255 = generic"""
@@ -169,7 +201,7 @@ def _os_language():
     return lang
 
 
-class I18nstr(BaseModel):
+class I18nstr(dict):
     """Internationalized string.
 
     Use ``.<CountryCode>`` property to get string in a certain language.
@@ -183,37 +215,33 @@ class I18nstr(BaseModel):
     * If english is also unavailable, return KEY
     * if also not available, return "<MISSING TEXT>"
     """
-    __root__: Dict[str, str]
 
     def __getattr__(self, lang):
+        if lang.startswith('__'):
+            # Get out of the way.
+            raise AttributeError(lang)
         lang = lang.upper()
-        d = self.__root__
-        if lang in d:
-            return d[lang]
-        if "EN" in d:
-            return d["EN"]
-        if "KEY" in d:
-            return d["KEY"]
+        if lang in self:
+            return self[lang]
+        if "EN" in self:
+            return self["EN"]
+        if "KEY" in self:
+            return self["KEY"]
         return "<MISSING TEXT>"
-
-    def __contains__(self, lang):
-        return lang in self.__root__
-
-    def __iter__(self):
-        return iter(self.__root__)
 
     def __str__(self):
         return self.__getattr__(_os_language())
 
-    def __deepcopy__(self, memo):
-        return I18nstr(__root__ = self.__root__.copy())
+    def copy(self):
+        return I18nstr(self.copy())
 
-
-BsbModel.update_forward_refs()
-BsbCategory.update_forward_refs()
-BsbCommand.update_forward_refs()
-BsbType.update_forward_refs()
-
+# Set up serialization / deserialization
+#cattr.register_unstructure_hook(BsbCommand, lambda *args, **kwargs: 1/0)
+# !!! Order is apparently important when registering the hooks (!?)
+for T in [BsbType, BsbCommand, BsbCategory, BsbModel]:
+    attr.resolve_types(T)
+    cattr.register_unstructure_hook(T, make_dict_unstructure_fn(T, cattr.global_converter, _cattrs_omit_if_default=True))
+cattr.register_structure_hook(I18nstr, lambda d, T: T(d))
 
 def dedup_types(model: BsbModel) -> BsbModel:
     """Deduplicates command types
@@ -227,6 +255,7 @@ def dedup_types(model: BsbModel) -> BsbModel:
     Return model with ``.types`` property set.
 
     If ``.types`` is already set, just returns the model unchanged.
+
     """
     if model.types:
         return model
@@ -237,18 +266,18 @@ def dedup_types(model: BsbModel) -> BsbModel:
         dtype = command.type
         key = dtype.name
         if key not in all_types:
-            all_types[key] = dtype.copy(deep=True)
+            all_types[key] = deepcopy(dtype)
         else:
             reference = all_types[key]
             if dtype != reference:
-                refjson = reference.json(exclude_unset=True)
-                dtjson = dtype.json(exclude_unset=True)
+                refjson = attr.asdict(reference)
+                dtjson = attr.asdict(dtype)
                 raise ValueError(f"Command {command.parameter}: dtype differs from reference.\nreference:{refjson}\ninstance:{dtjson}")
 
-    mcopy = model.copy(deep=True)
-    for command in mcopy.commands:
+    model = deepcopy(model)
+    for command in model.commands:
         key = command.type.name
         command.type = all_types[key]
         command.typename = key
-    mcopy.types = all_types
-    return mcopy
+    model.types = all_types
+    return model

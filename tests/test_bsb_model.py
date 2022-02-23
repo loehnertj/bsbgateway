@@ -1,6 +1,8 @@
 import pytest
 from bsbgateway.bsb import model
 from bsbgateway.bsb.model_merge import merge
+from copy import deepcopy
+import cattr
 
 @pytest.fixture
 def testdata():
@@ -112,6 +114,28 @@ def ty_model():
         }
     )
 
+def test_structure_i18nstr():
+    ud = {"KEY": "k", "EN": "en", "DE": "de"}
+    x = cattr.structure(ud, model.I18nstr)
+    assert x.__class__ is model.I18nstr
+
+def test_unstructure_cmd_single():
+    cmd = model.BsbCommand(parameter=1, command="0xABCD", device=[], description=model.I18nstr(), typename="FOO")
+    ud = cattr.unstructure(cmd)
+    assert "type" not in ud
+    assert "min_value" not in ud
+    assert "max_value" not in ud
+
+def test_unstructure_cmd_nested():
+    cmd = model.BsbCommand(parameter=1, command="0xABCD", device=[], description=model.I18nstr(), typename="FOO")
+    cat = model.BsbCategory(name=model.I18nstr(), min=0, commands=[cmd])
+    ud = cattr.unstructure(cat)
+    ud = ud["commands"][0]
+    assert "type" not in ud
+    assert "min_value" not in ud
+    assert "max_value" not in ud
+
+
 def test_parse_device_description(testdata):
     m = model.BsbModel.parse_obj(testdata)
     cat = m.categories["2200"]
@@ -124,13 +148,15 @@ def test_parse_production_file():
 def test_dedup_types():
     m = model.BsbModel.parse_file("bsb-parameter.json")
     m = model.dedup_types(m)
-    assert len(m.types) == 85
+    assert len(m.types) == 91
 
 def test_merge_types(ty_model):
-    m2 = ty_model.copy(deep=True)
+    assert isinstance(ty_model.types["TEMP"].unit, model.I18nstr)
+    m2 = deepcopy(ty_model)
+    assert isinstance(m2.types["TEMP"].unit, model.I18nstr)
     ty2 = m2.types["TEMP"]
-    ty2.unit.__root__["DE"] = "new de text"
-    ty2.unit.__root__["EN"] = "new en text"
+    ty2.unit["DE"] = "new de text"
+    ty2.unit["EN"] = "new en text"
     ty2.precision = 2
     m2.types["TEMP2"] = ty2
     # test succesful merge
@@ -142,7 +168,7 @@ def test_merge_types(ty_model):
         "types[TEMP2]: +",
     ]
     ty = ty_model.types["TEMP"]
-    assert len(ty.unit.__root__) == 3
+    assert len(ty.unit) == 3
     assert ty.unit.DE == "new de text"
     assert ty.unit.EN == "new en text"
     assert ty.precision == 2

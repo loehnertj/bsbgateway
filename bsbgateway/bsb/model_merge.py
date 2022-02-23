@@ -4,10 +4,11 @@ __all__ = [
     "MergeUnknownTypeError",
     "MergeImmutableFieldError",
 ]
-from typing import List, TypeVar
+from typing import List
 from functools import singledispatch
-from pydantic import BaseModel
+from copy import deepcopy
 from .model import BsbCategory, BsbCommand, BsbModel, BsbType, I18nstr
+
 
 class MergeError:
     """Base class for merge errors"""
@@ -48,7 +49,7 @@ def _(a:BsbModel, b:BsbModel) -> List[str]:
     for key, b_type in b.types.items():
         if key not in a.types:
             # Just add type.
-            a.types[key] = b_type.copy(deep=True)
+            a.types[key] = deepcopy(b_type)
             merge_log.append(f"types[{key}]: +")
         else:
             try:
@@ -61,7 +62,7 @@ def _(a:BsbModel, b:BsbModel) -> List[str]:
     # Merge categories themselves
     for key, b_cat in b.categories.items():
         if key not in a.categories:
-            a.categories[key] = b_cat.copy(deep=True)
+            a.categories[key] = deepcopy(b_cat)
             merge_log.append(f"categories[{key}]: +")
         else:
             print("category exists", key)
@@ -86,7 +87,7 @@ def _(a:BsbModel, b:BsbModel) -> List[str]:
         # Ensure that command is in b's category
         if parameter not in map_a:
             # add
-            a_catkey, a_cmd = b_catkey, b_cmd.copy(deep=True)
+            a_catkey, a_cmd = b_catkey, deepcopy(b_cmd)
             merge_log.append(f'categories[{b_catkey}].commands: + {parameter}')
             a.categories[a_catkey].commands.append(a_cmd)
         else:
@@ -157,7 +158,7 @@ def _(a:BsbCommand, b:BsbCommand) -> List[str]:
     for val, name in b.enum.items():
         if val not in a.enum:
             merge_log.append(f"enum[{val}]: +")
-            a.enum[val] = name.copy(deep=True)
+            a.enum[val] = deepcopy(name)
         else:
             merge_log.extend(
                 _prefix_with(f"enum[{val}].", merge(a.enum[val], name))
@@ -176,5 +177,5 @@ def _(a:I18nstr, b:I18nstr) -> List[str]:
         for key in b
         if key not in a
     ]
-    a.__root__.update(b.__root__)
+    a.update(b)
     return merge_log

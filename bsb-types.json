@@ -8,10 +8,8 @@
       },
       "name": "DATETIME",
       "datatype": "DTTM",
-      "datatype_id": 5,
-      "factor": 1,
       "payload_length": 8,
-      "precision": 0,
+      "datatype_id": 5,
       "enable_byte": 1,
       "payload_flags": 32
     },
@@ -21,10 +19,8 @@
       },
       "name": "TIME",
       "datatype": "THMS",
-      "datatype_id": 10,
-      "factor": 1,
       "payload_length": 8,
-      "precision": 0,
+      "datatype_id": 10,
       "enable_byte": 1,
       "payload_flags": 32
     },
@@ -34,10 +30,8 @@
       },
       "name": "DAYMONTH",
       "datatype": "DDMM",
-      "datatype_id": 6,
-      "factor": 1,
       "payload_length": 8,
-      "precision": 0,
+      "datatype_id": 6,
       "enable_byte": 1,
       "payload_flags": 32
     },
@@ -47,64 +41,9 @@
       },
       "name": "YEAR",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
       "payload_length": 8,
-      "precision": 0,
       "enable_byte": 1,
       "payload_flags": 32
-    },
-    "ENUM": {
-      "unit": {
-        "DE": ""
-      },
-      "name": "ENUM",
-      "datatype": "ENUM",
-      "datatype_id": 1,
-      "factor": 1,
-      "payload_length": 1,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
-    },
-    "ONOFF": {
-      "unit": {
-        "DE": ""
-      },
-      "name": "ONOFF",
-      "datatype": "ENUM",
-      "datatype_id": 1,
-      "factor": 1,
-      "payload_length": 1,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
-    },
-    "BYTE": {
-      "unit": {
-        "DE": ""
-      },
-      "name": "BYTE",
-      "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
-      "payload_length": 1,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
-    },
-    "YESNO": {
-      "unit": {
-        "DE": ""
-      },
-      "name": "YESNO",
-      "datatype": "ENUM",
-      "datatype_id": 1,
-      "factor": 1,
-      "payload_length": 1,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
     },
     "UNKNOWN": {
       "unit": {
@@ -112,12 +51,47 @@
       },
       "name": "UNKNOWN",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
       "payload_length": 0,
-      "precision": 1,
-      "enable_byte": 0,
-      "payload_flags": 0
+      "precision": 1
+    },
+    "ENUM": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "ENUM",
+      "datatype": "ENUM",
+      "payload_length": 1,
+      "datatype_id": 1,
+      "enable_byte": 1
+    },
+    "ONOFF": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "ONOFF",
+      "datatype": "ENUM",
+      "payload_length": 1,
+      "datatype_id": 1,
+      "enable_byte": 1
+    },
+    "BYTE": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "BYTE",
+      "datatype": "VALS",
+      "payload_length": 1,
+      "enable_byte": 1
+    },
+    "YESNO": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "YESNO",
+      "datatype": "ENUM",
+      "payload_length": 1,
+      "datatype_id": 1,
+      "enable_byte": 1
     },
     "FP1": {
       "unit": {
@@ -125,12 +99,9 @@
       },
       "name": "FP1",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 10,
       "payload_length": 2,
-      "precision": 1,
-      "enable_byte": 0,
-      "payload_flags": 0
+      "factor": 10,
+      "precision": 1
     },
     "TIMEPROG": {
       "unit": {
@@ -138,10 +109,8 @@
       },
       "name": "TIMEPROG",
       "datatype": "TMPR",
-      "datatype_id": 9,
-      "factor": 1,
       "payload_length": 11,
-      "precision": 0,
+      "datatype_id": 9,
       "enable_byte": 8,
       "payload_flags": 32
     },
@@ -151,10 +120,8 @@
       },
       "name": "VACATIONPROG",
       "datatype": "DDMM",
-      "datatype_id": 6,
-      "factor": 1,
       "payload_length": 8,
-      "precision": 0,
+      "datatype_id": 6,
       "enable_byte": 6,
       "payload_flags": 32
     },
@@ -164,10 +131,8 @@
       },
       "name": "CUSTOM_ENUM",
       "datatype": "ENUM",
-      "datatype_id": 1,
-      "factor": 1,
       "payload_length": 22,
-      "precision": 0,
+      "datatype_id": 1,
       "enable_byte": 8,
       "payload_flags": 96
     },
@@ -178,9 +143,8 @@
       },
       "name": "TEMP",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 64,
       "payload_length": 2,
+      "factor": 64,
       "precision": 1,
       "enable_byte": 1,
       "payload_flags": 32
@@ -192,12 +156,10 @@
       },
       "name": "TEMP_SHORT5",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 2,
       "payload_length": 1,
+      "factor": 2,
       "precision": 1,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "FP02": {
       "unit": {
@@ -205,12 +167,10 @@
       },
       "name": "FP02",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 50,
       "payload_length": 2,
+      "factor": 50,
       "precision": 2,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "TEMP_SHORT": {
       "unit": {
@@ -219,12 +179,8 @@
       },
       "name": "TEMP_SHORT",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
       "payload_length": 1,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "TEMP_SHORT5_US": {
       "unit": {
@@ -233,12 +189,10 @@
       },
       "name": "TEMP_SHORT5_US",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 2,
       "payload_length": 1,
+      "factor": 2,
       "precision": 1,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "PERCENT": {
       "unit": {
@@ -247,12 +201,8 @@
       },
       "name": "PERCENT",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
       "payload_length": 1,
-      "precision": 0,
-      "enable_byte": 6,
-      "payload_flags": 0
+      "enable_byte": 6
     },
     "SECONDS_WORD": {
       "unit": {
@@ -262,12 +212,8 @@
       },
       "name": "SECONDS_WORD",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
       "payload_length": 2,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "MINUTES": {
       "unit": {
@@ -277,12 +223,9 @@
       },
       "name": "MINUTES",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 60,
       "payload_length": 4,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "factor": 60,
+      "enable_byte": 1
     },
     "GRADIENT": {
       "unit": {
@@ -292,12 +235,8 @@
       },
       "name": "GRADIENT",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
       "payload_length": 2,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "DAYS": {
       "unit": {
@@ -308,12 +247,8 @@
       },
       "name": "DAYS",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
       "payload_length": 1,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "DAYS_WORD": {
       "unit": {
@@ -324,12 +259,8 @@
       },
       "name": "DAYS_WORD",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
       "payload_length": 2,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "PERCENT_WORD1": {
       "unit": {
@@ -338,12 +269,9 @@
       },
       "name": "PERCENT_WORD1",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
       "payload_length": 2,
       "precision": 1,
-      "enable_byte": 6,
-      "payload_flags": 0
+      "enable_byte": 6
     },
     "PERCENT1": {
       "unit": {
@@ -352,12 +280,8 @@
       },
       "name": "PERCENT1",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
       "payload_length": 1,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "PERCENT5": {
       "unit": {
@@ -366,12 +290,9 @@
       },
       "name": "PERCENT5",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 2,
       "payload_length": 1,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "factor": 2,
+      "enable_byte": 1
     },
     "TEMP_WORD5_US": {
       "unit": {
@@ -380,12 +301,10 @@
       },
       "name": "TEMP_WORD5_US",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 2,
       "payload_length": 2,
+      "factor": 2,
       "precision": 1,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "PERCENT_WORD": {
       "unit": {
@@ -394,12 +313,10 @@
       },
       "name": "PERCENT_WORD",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 2,
       "payload_length": 2,
+      "factor": 2,
       "precision": 1,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "MINUTES_SHORT": {
       "unit": {
@@ -409,12 +326,8 @@
       },
       "name": "MINUTES_SHORT",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
       "payload_length": 1,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "PROPVAL": {
       "unit": {
@@ -422,12 +335,10 @@
       },
       "name": "PROPVAL",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 16,
       "payload_length": 2,
+      "factor": 16,
       "precision": 2,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "SECONDS_WORD16": {
       "unit": {
@@ -437,12 +348,9 @@
       },
       "name": "SECONDS_WORD16",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 16,
       "payload_length": 2,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "factor": 16,
+      "enable_byte": 1
     },
     "HOURS_SHORT": {
       "unit": {
@@ -452,12 +360,8 @@
       },
       "name": "HOURS_SHORT",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
       "payload_length": 1,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "MINUTES_WORD": {
       "unit": {
@@ -467,12 +371,8 @@
       },
       "name": "MINUTES_WORD",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
       "payload_length": 2,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "BIT": {
       "unit": {
@@ -480,12 +380,9 @@
       },
       "name": "BIT",
       "datatype": "BITS",
-      "datatype_id": 2,
-      "factor": 1,
       "payload_length": 1,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "datatype_id": 2,
+      "enable_byte": 1
     },
     "HOUR_MINUTES": {
       "unit": {
@@ -493,10 +390,8 @@
       },
       "name": "HOUR_MINUTES",
       "datatype": "HHMM",
-      "datatype_id": 4,
-      "factor": 1,
       "payload_length": 2,
-      "precision": 0,
+      "datatype_id": 4,
       "enable_byte": 6,
       "payload_flags": 32
     },
@@ -507,12 +402,9 @@
       },
       "name": "TEMP_WORD",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
       "payload_length": 2,
       "precision": 1,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "CELMIN": {
       "unit": {
@@ -522,12 +414,9 @@
       },
       "name": "CELMIN",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
       "payload_length": 2,
       "precision": 1,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "SECONDS_SHORT": {
       "unit": {
@@ -537,12 +426,8 @@
       },
       "name": "SECONDS_SHORT",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
       "payload_length": 1,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "SECONDS_WORD5": {
       "unit": {
@@ -552,12 +437,9 @@
       },
       "name": "SECONDS_WORD5",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 2,
       "payload_length": 2,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "factor": 2,
+      "enable_byte": 1
     },
     "SECONDS_SHORT4": {
       "unit": {
@@ -567,12 +449,10 @@
       },
       "name": "SECONDS_SHORT4",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 4,
       "payload_length": 1,
+      "factor": 4,
       "precision": 1,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "POWER_WORD": {
       "unit": {
@@ -582,12 +462,10 @@
       },
       "name": "POWER_WORD",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 10,
       "payload_length": 2,
+      "factor": 10,
       "precision": 1,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "PERCENT_100": {
       "unit": {
@@ -596,12 +474,10 @@
       },
       "name": "PERCENT_100",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 100,
       "payload_length": 2,
+      "factor": 100,
       "precision": 1,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "HOURS_WORD": {
       "unit": {
@@ -611,12 +487,8 @@
       },
       "name": "HOURS_WORD",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
       "payload_length": 2,
-      "precision": 0,
-      "enable_byte": 6,
-      "payload_flags": 0
+      "enable_byte": 6
     },
     "SPEED": {
       "unit": {
@@ -626,12 +498,8 @@
       },
       "name": "SPEED",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 0,
       "payload_length": 2,
-      "precision": 0,
-      "enable_byte": 0,
-      "payload_flags": 0
+      "factor": 0
     },
     "SPEED2": {
       "unit": {
@@ -641,12 +509,8 @@
       },
       "name": "SPEED2",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
       "payload_length": 2,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "POWER": {
       "unit": {
@@ -656,12 +520,10 @@
       },
       "name": "POWER",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 10,
       "payload_length": 4,
+      "factor": 10,
       "precision": 1,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "TEMP_SHORT_US": {
       "unit": {
@@ -670,12 +532,8 @@
       },
       "name": "TEMP_SHORT_US",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
       "payload_length": 1,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "SECONDS_SHORT5": {
       "unit": {
@@ -685,12 +543,10 @@
       },
       "name": "SECONDS_SHORT5",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 5,
       "payload_length": 1,
+      "factor": 5,
       "precision": 1,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "PRESSURE50": {
       "unit": {
@@ -700,12 +556,10 @@
       },
       "name": "PRESSURE50",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 50,
       "payload_length": 1,
+      "factor": 50,
       "precision": 2,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "SECONDS_SHORT2": {
       "unit": {
@@ -715,12 +569,9 @@
       },
       "name": "SECONDS_SHORT2",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 2,
       "payload_length": 1,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "factor": 2,
+      "enable_byte": 1
     },
     "LITERPERMIN": {
       "unit": {
@@ -730,12 +581,9 @@
       },
       "name": "LITERPERMIN",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 10,
       "payload_length": 2,
-      "precision": 1,
-      "enable_byte": 0,
-      "payload_flags": 0
+      "factor": 10,
+      "precision": 1
     },
     "LPM_SHORT": {
       "unit": {
@@ -745,12 +593,9 @@
       },
       "name": "LPM_SHORT",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 10,
       "payload_length": 2,
-      "precision": 1,
-      "enable_byte": 0,
-      "payload_flags": 0
+      "factor": 10,
+      "precision": 1
     },
     "SINT1000": {
       "unit": {
@@ -758,9 +603,8 @@
       },
       "name": "SINT1000",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1000,
       "payload_length": 2,
+      "factor": 1000,
       "precision": 3,
       "enable_byte": 1,
       "payload_flags": 32
@@ -771,12 +615,8 @@
       },
       "name": "SINT",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
       "payload_length": 2,
-      "precision": 0,
-      "enable_byte": 6,
-      "payload_flags": 0
+      "enable_byte": 6
     },
     "CURRENT": {
       "unit": {
@@ -786,12 +626,9 @@
       },
       "name": "CURRENT",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 100,
       "payload_length": 2,
-      "precision": 2,
-      "enable_byte": 0,
-      "payload_flags": 0
+      "factor": 100,
+      "precision": 2
     },
     "UINT": {
       "unit": {
@@ -799,12 +636,8 @@
       },
       "name": "UINT",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
       "payload_length": 2,
-      "precision": 0,
-      "enable_byte": 6,
-      "payload_flags": 0
+      "enable_byte": 6
     },
     "UINT100": {
       "unit": {
@@ -812,12 +645,10 @@
       },
       "name": "UINT100",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 100,
       "payload_length": 4,
+      "factor": 100,
       "precision": 2,
-      "enable_byte": 6,
-      "payload_flags": 0
+      "enable_byte": 6
     },
     "LITERPERHOUR": {
       "unit": {
@@ -827,12 +658,7 @@
       },
       "name": "LITERPERHOUR",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
-      "payload_length": 2,
-      "precision": 0,
-      "enable_byte": 0,
-      "payload_flags": 0
+      "payload_length": 2
     },
     "BYTE10": {
       "unit": {
@@ -840,12 +666,9 @@
       },
       "name": "BYTE10",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 10,
       "payload_length": 1,
-      "precision": 1,
-      "enable_byte": 0,
-      "payload_flags": 0
+      "factor": 10,
+      "precision": 1
     },
     "ENERGY_CONTENT": {
       "unit": {
@@ -855,12 +678,9 @@
       },
       "name": "ENERGY_CONTENT",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 10,
       "payload_length": 2,
-      "precision": 1,
-      "enable_byte": 0,
-      "payload_flags": 0
+      "factor": 10,
+      "precision": 1
     },
     "POWER_WORD100": {
       "unit": {
@@ -870,12 +690,9 @@
       },
       "name": "POWER_WORD100",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 100,
       "payload_length": 2,
-      "precision": 2,
-      "enable_byte": 0,
-      "payload_flags": 0
+      "factor": 100,
+      "precision": 2
     },
     "STRING": {
       "unit": {
@@ -883,10 +700,8 @@
       },
       "name": "STRING",
       "datatype": "STRN",
-      "datatype_id": 7,
-      "factor": 1,
       "payload_length": 22,
-      "precision": 0,
+      "datatype_id": 7,
       "enable_byte": 8,
       "payload_flags": 64
     },
@@ -898,12 +713,8 @@
       },
       "name": "GRADIENT_SHORT",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
       "payload_length": 6,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "TEMP_SHORT64": {
       "unit": {
@@ -913,12 +724,10 @@
       },
       "name": "TEMP_SHORT64",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 64,
       "payload_length": 1,
+      "factor": 64,
       "precision": 5,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "MINUTES_WORD10": {
       "unit": {
@@ -928,12 +737,8 @@
       },
       "name": "MINUTES_WORD10",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 0,
       "payload_length": 2,
-      "precision": 0,
-      "enable_byte": 0,
-      "payload_flags": 0
+      "factor": 0
     },
     "ENERGY_WORD": {
       "unit": {
@@ -943,12 +748,9 @@
       },
       "name": "ENERGY_WORD",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 10,
       "payload_length": 2,
-      "precision": 1,
-      "enable_byte": 0,
-      "payload_flags": 0
+      "factor": 10,
+      "precision": 1
     },
     "VOLTAGE": {
       "unit": {
@@ -958,12 +760,10 @@
       },
       "name": "VOLTAGE",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 10,
       "payload_length": 1,
+      "factor": 10,
       "precision": 1,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "VOLTAGE_WORD": {
       "unit": {
@@ -973,12 +773,10 @@
       },
       "name": "VOLTAGE_WORD",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 10,
       "payload_length": 2,
+      "factor": 10,
       "precision": 1,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "enable_byte": 1
     },
     "PRESSURE": {
       "unit": {
@@ -988,41 +786,40 @@
       },
       "name": "PRESSURE",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 10,
       "payload_length": 1,
+      "factor": 10,
       "precision": 1,
-      "enable_byte": 6,
-      "payload_flags": 0
+      "enable_byte": 6
     },
-    "METER": {
+    "UINT10": {
       "unit": {
-        "KEY": "UNIT_METER_TEXT",
-        "DE": "m"
+        "DE": ""
       },
-      "name": "METER",
+      "name": "UINT10",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 10,
       "payload_length": 2,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "factor": 10,
+      "precision": 1,
+      "enable_byte": 6
     },
-    "TEMP_PER_MIN": {
+    "CLOSEDOPEN": {
       "unit": {
-        "KEY": "UNIT_TEMP_PER_MIN_TEXT",
-        "DE": "°C/min",
-        "RU": "°C/мин"
+        "DE": ""
       },
-      "name": "TEMP_PER_MIN",
+      "name": "CLOSEDOPEN",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
       "payload_length": 1,
-      "precision": 0,
-      "enable_byte": 6,
-      "payload_flags": 0
+      "enable_byte": 1
+    },
+    "VOLTAGEONOFF": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "VOLTAGEONOFF",
+      "datatype": "ENUM",
+      "payload_length": 1,
+      "datatype_id": 1,
+      "enable_byte": 1
     },
     "PRESSURE_WORD": {
       "unit": {
@@ -1032,25 +829,34 @@
       },
       "name": "PRESSURE_WORD",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 10,
       "payload_length": 2,
+      "factor": 10,
       "precision": 1,
-      "enable_byte": 6,
-      "payload_flags": 0
+      "enable_byte": 6
     },
-    "DWORD": {
+    "PRESSURE_1000": {
       "unit": {
-        "DE": ""
+        "KEY": "UNIT_BAR_TEXT",
+        "DE": "bar",
+        "RU": "бар"
       },
-      "name": "DWORD",
+      "name": "PRESSURE_1000",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
-      "payload_length": 4,
-      "precision": 0,
-      "enable_byte": 6,
-      "payload_flags": 0
+      "payload_length": 2,
+      "factor": 1000,
+      "precision": 1
+    },
+    "CURRENT1000": {
+      "unit": {
+        "KEY": "UNIT_CURR_TEXT",
+        "DE": "µA",
+        "RU": "µА"
+      },
+      "name": "CURRENT1000",
+      "datatype": "VALS",
+      "payload_length": 0,
+      "factor": 1000,
+      "precision": 2
     },
     "HOURS": {
       "unit": {
@@ -1060,51 +866,18 @@
       },
       "name": "HOURS",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 3600,
       "payload_length": 4,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "factor": 3600,
+      "enable_byte": 1
     },
-    "CUSTOM_BYTE": {
+    "DWORD": {
       "unit": {
         "DE": ""
       },
-      "name": "CUSTOM_BYTE",
+      "name": "DWORD",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
-      "payload_length": 22,
-      "precision": 0,
-      "enable_byte": 0,
-      "payload_flags": 96
-    },
-    "LPBADDR": {
-      "unit": {
-        "DE": ""
-      },
-      "name": "LPBADDR",
-      "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
-      "payload_length": 1,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
-    },
-    "ERRORCODE": {
-      "unit": {
-        "DE": ""
-      },
-      "name": "ERRORCODE",
-      "datatype": "ENUM",
-      "datatype_id": 1,
-      "factor": 1,
-      "payload_length": 0,
-      "precision": 0,
-      "enable_byte": 0,
-      "payload_flags": 0
+      "payload_length": 4,
+      "enable_byte": 6
     },
     "UINT5": {
       "unit": {
@@ -1112,44 +885,71 @@
       },
       "name": "UINT5",
       "datatype": "VALS",
-      "datatype_id": 0,
+      "payload_length": 2,
       "factor": 5,
-      "payload_length": 2,
-      "precision": 0,
-      "enable_byte": 6,
-      "payload_flags": 0
+      "enable_byte": 6
     },
-    "MONTHS": {
+    "ENERGY": {
       "unit": {
-        "KEY": "UNIT_MONTHS_TEXT",
-        "DE": "Monate",
-        "HU": "Hónap",
-        "RU": "месяцев"
+        "KEY": "UNIT_KWH_TEXT",
+        "DE": "kWh",
+        "RU": "кВт&times;ч"
       },
-      "name": "MONTHS",
+      "name": "ENERGY",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
+      "payload_length": 4,
+      "enable_byte": 1
+    },
+    "POWER100": {
+      "unit": {
+        "KEY": "UNIT_KW_TEXT",
+        "DE": "kW",
+        "RU": "кВт"
+      },
+      "name": "POWER100",
+      "datatype": "VALS",
+      "payload_length": 4,
+      "factor": 100,
+      "precision": 2
+    },
+    "SPF": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "SPF",
+      "datatype": "VALS",
+      "payload_length": 2,
+      "factor": 100,
+      "precision": 2
+    },
+    "CUSTOM_BIT": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "CUSTOM_BIT",
+      "datatype": "BITS",
+      "payload_length": 22,
+      "datatype_id": 2,
+      "payload_flags": 96
+    },
+    "PPS_TIME": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "PPS_TIME",
+      "datatype": "DWHM",
+      "payload_length": 0,
+      "datatype_id": 8
+    },
+    "WEEKDAY": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "WEEKDAY",
+      "datatype": "ENUM",
       "payload_length": 1,
-      "precision": 0,
-      "enable_byte": 6,
-      "payload_flags": 0
-    },
-    "MONTHS_WORD": {
-      "unit": {
-        "KEY": "UNIT_MONTHS_TEXT",
-        "DE": "Monate",
-        "HU": "Hónap",
-        "RU": "месяцев"
-      },
-      "name": "MONTHS_WORD",
-      "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
-      "payload_length": 2,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "datatype_id": 1,
+      "enable_byte": 1
     },
     "SECONDS_DWORD": {
       "unit": {
@@ -1159,51 +959,55 @@
       },
       "name": "SECONDS_DWORD",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
-      "payload_length": 4,
-      "precision": 0,
-      "enable_byte": 0,
-      "payload_flags": 0
+      "payload_length": 4
     },
-    "UINT10": {
+    "GR_PER_CUBM": {
       "unit": {
-        "DE": ""
+        "KEY": "UNIT_GR_PER_CUBM_TEXT",
+        "DE": "g/m³",
+        "RU": "г/м&sup3;"
       },
-      "name": "UINT10",
+      "name": "GR_PER_CUBM",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 10,
-      "payload_length": 2,
-      "precision": 1,
-      "enable_byte": 6,
-      "payload_flags": 0
+      "payload_length": 0,
+      "precision": 3
     },
-    "CLOSEDOPEN": {
+    "ATM_PRESSURE": {
       "unit": {
-        "DE": ""
+        "KEY": "UNIT_HPA_TEXT",
+        "DE": "hPa",
+        "RU": "гПа"
       },
-      "name": "CLOSEDOPEN",
+      "name": "ATM_PRESSURE",
       "datatype": "VALS",
-      "datatype_id": 0,
-      "factor": 1,
-      "payload_length": 1,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "payload_length": 0,
+      "precision": 2
     },
-    "VOLTAGEONOFF": {
+    "ALTITUDE": {
+      "unit": {
+        "KEY": "UNIT_METER_TEXT",
+        "DE": "m"
+      },
+      "name": "ALTITUDE",
+      "datatype": "VALS",
+      "payload_length": 0
+    },
+    "FLOAT": {
       "unit": {
         "DE": ""
       },
-      "name": "VOLTAGEONOFF",
-      "datatype": "ENUM",
-      "datatype_id": 1,
-      "factor": 1,
-      "payload_length": 1,
-      "precision": 0,
-      "enable_byte": 1,
-      "payload_flags": 0
+      "name": "FLOAT",
+      "datatype": "VALS",
+      "payload_length": 0,
+      "precision": 2
+    },
+    "LONG": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "LONG",
+      "datatype": "VALS",
+      "payload_length": 0
     }
   }
 }

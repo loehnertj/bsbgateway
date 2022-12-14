@@ -88,7 +88,7 @@ groups = [
         BsbFieldTemperature(0x2d3d058e, 710, u'Komfortsollwert', min=14.0, max=35.0, **RW),
         BsbFieldTemperature(0x2d3d0590, 712, u'Reduziertsollwert', min=10.0, max=19.0, **RW),
         BsbFieldTemperature(0x2d3d0592, 714, u'Frostschutzsollwert', min=4.0, max=14.0, **RW),
-        BsbFieldInt16(0x2d3d05f6, 720, u'Kennlinie Steilheit', min=0.1, max=4.0, divisor=50.0, **RW),
+        BsbFieldInt16(0x2d3d05f6, 720, u'Kennlinie Steilheit', min=0.1, max=4.0, divisor=50.0, tn="FP02", **RW),
         BsbFieldTemperature(0x2d3d0610, 721, u'Kennlinie Verschiebung', min=-4.5, max=4.5, **RW),
         BsbFieldChoice(0x2d3d060b, 726, u'Kennlinie Adaption', **ONOFF_RW),
 

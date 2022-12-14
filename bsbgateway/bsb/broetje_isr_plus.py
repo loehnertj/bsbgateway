@@ -28,6 +28,7 @@ __all__ = ['groups', 'fields', 'fields_by_telegram_id']
 # Shorthands for recurring kwargs
 RW = {'rw':True}
 RWN = {'rw':True, 'nullable': True}
+ONOFF_RW = {'rw': True, 'choices': {0: u'Aus', 255: u'Ein'}}
 OP_HOURS = {'unit': 'h', 'tn': 'HOURS', 'divisor': 3600}
 
 _choices_heizkreis = {
@@ -70,7 +71,127 @@ class Group(object):
         o.fields = fields
 
 groups = [
+    Group(700, "700 Heizkreis 1", [
+        BsbFieldChoice(0x2d3d0574, 900, u'Betriebsartwahl HK - 1', choices={
+            0: u'Schutzbetrieb',
+            1: u'Automatik',
+            2: u'Dauerhaft Reduziert heizen',
+            3: u'Dauerhaft Komfort heizen',
+        }, **RW),
+
+        # 710 19°C ret 710 Komfortsollwert = [0, 4, 192] [raw:00 04 C0 ] @1670337788.529230> 14-35
+        # 712 14°C ret 712 Reduziertsollwert = [0, 3, 128]  10-19
+        # 714 10°C ret 714 Frostschutzsollwert = [0, 2, 128] 4-14
+        # 720 0.78 720 Kennlinie Steilheit = [0, 0, 39] 0.1 - 4.0 / 0.5 = [0 0 25]
+        # 721 1.5°C Kennlinie Verschiebung = [0, 0, 96] -4.5 - +4.5
+        # 726 Aus Kennlinie Adaption = [0, 0] ; Ein = [0 255]; Set [1 0] bzw [1 255]
+        BsbFieldTemperature(0x2d3d058e, 710, u'Komfortsollwert', min=14.0, max=35.0, **RW),
+        BsbFieldTemperature(0x2d3d0590, 712, u'Reduziertsollwert', min=10.0, max=19.0, **RW),
+        BsbFieldTemperature(0x2d3d0592, 714, u'Frostschutzsollwert', min=4.0, max=14.0, **RW),
+        BsbFieldInt16(0x2d3d05f6, 720, u'Kennlinie Steilheit', min=0.1, max=4.0, divisor=50.0, **RW),
+        BsbFieldTemperature(0x2d3d0610, 721, u'Kennlinie Verschiebung', min=-4.5, max=4.5, **RW),
+        BsbFieldChoice(0x2d3d060b, 726, u'Kennlinie Adaption', **ONOFF_RW),
+
+        #730 19°C Sommer-/Winterheizgrenze = [0, 4, 192]  ---, 8-30
+        # 732 0°C Tagesheizgrenze = [0, 0, 0] --, -10-10
+        # 740 12°C Vorlaufsollwert Minimum = [0, 3, 0] 8-95
+        # 741 54°C Vorlaufsollwert Maximum = [0, 13, 128] 8-95
+        # 742 --°C Vorlaufsollw Raumthermostat 0x213D0A88 = [1, 16, 64] set mit 5/6 --, 8-95
+        # 750 --% Raumeinfluss = [1, 1]  2% = [0, 2] 100% = [0, 100] set mit 5/6 --, 0-100%
+        BsbFieldTemperature(0x2d3d05fd, 730, u'Sommer-/Winterheizgrenze', min=8.0, max=30.0, **RWN ),
+        BsbFieldTemperature(0x2d3d0640, 732, u'Tagesheizgrenze', min=-10, max=10, **RWN),
+        BsbFieldTemperature(0x213d0663, 740, u'Vorlaufsollwert Minimum', min=8, max=95, **RW),
+        BsbFieldTemperature(0x213d0662, 741, u'Vorlaufsollwert Maximum', min=8, max=95, **RW),
+        BsbFieldTemperature(0x213d0a88, 742, u'Vorlaufsollwert Raumthermostat', min=8.0, max=95.0, **RWN),
+        BsbFieldInt8(0x2d3d0603, 750, u'Raumeinfluss', min=0, max=100, unit=u"%", tn="PERCENT", **RWN),
+
+        # 760 --°C Raumtemperaturbegrenzung = [1, 0, 32] nullable --, 0.5...4°C
+        # 770 --°C Schnellaufheizung = [1, 0, 0] nullable --, 0-20
+        # 780 ENUM Schnellabsenkung
+        #   0 = Aus
+        #   1 = Bis Reduziertsollwert
+        #   2 = Bis Frostschutzsollwert
+        # 790 0 min Einschalt-Optimierung Max = [0, 0, 0, 0, 0]  10 min = [..0 2 88] 20 min = [... 0 4 176]  120 min = [... 28 32] not null --- 0-360 min
+        # 791 0 min Ausschalt-Optimierung Max = [0, 0, 0, 0, 0] 360 min = .... 84, 96] notnull 0-360 min
+        BsbFieldTemperature(0x2d3d0614, 760, u'Raumtemperaturbegrenzung', min=0.5, max=4.0, **RWN),
+        BsbFieldTemperature(0x2d3d0602, 770, u'Schnellaufheizung', min=0, max=20, **RWN),
+        BsbFieldChoice(0x2d3d05e8, 780, u'Schnellabsenkung', choices={
+            0: u"Aus", 1: u"Bis Reduziertsollwert", 2: u"Bis Frostschutzsollwert"
+        }, **RW),
+        BsbFieldInt32(0x2d3d0607, 790, u'Einschalt-Optimierung Max', min=0, max=360, divisor=60, unit=u"min", tn="MINUTES", **RW),
+        BsbFieldInt32(0x2d3d0609, 791, u'Ausschalt-Optimierung Max', min=0, max=360, divisor=60, unit=u"min", tn="MINUTES", **RW),
+
+        # 800 --°C Reduziert-Anhebung Beginn = [1, 254, 192]  -15°C = [0 252 64] null --, -15 - 10
+        # 801 -15°C Reduziert-Anhebung Ende NN -30 - -15
+        # 809 HK1 Pumpendauerlauf Enum  0x053D1289 
+        #   0 = Nein
+        #   255 = Ja - NN
+        # 820 ÜBerhitzschutz Pumpenkreis ENum 0x213D0674 
+        #   0 = Aus
+        #   255 = Ein
+        # 830 5°C HK1 Mischerüberhöhung 0x213D065D 0-50°C
+        # 834 120s HK1 ANtrieb Laufzeit 0x213D065A = [0, 0, 120] 30-873s 30 = 0 0 30 /  873 = 00 3 105
+        # XX 850  Estrich-Funktion 0=Aus, 855 = Estrich Sollwert aktuell
+        BsbFieldTemperature(0x2d3d059e, 800, u'Reduziert-Anhebung Beginn', min=-15, max=10, **RWN),
+        BsbFieldTemperature(0x2d3d059d, 801, u'Reduziert-Anhebung Ende', min=-30, max=-15, **RWN),
+        BsbFieldChoice(0x053D1289, 809, u"Pumpendauerlauf", **ONOFF_RW),
+        BsbFieldChoice(0x213D0674, 820, u"Überhitzschutz Pumpenkreis", **ONOFF_RW),
+        BsbFieldTemperature(0x213D065D, 830, u"Mischerüberhöhung", min=0, max=50, **RW),
+        BsbFieldInt16(0x213D065A, 834, u"Antrieb Laufzeit", min=0, max=120, unit=u"s", tn="SECONDS_WORD", **RW),
+        # Absichtlich ausgeblendet!!
+        #BsbField(0x2d3d067b, 850, u'Estrich-Funktion ', ),
+        #BsbField(0x2d3d068a, 851, u'Estrich Sollwert manuell', ),
+
+        # 861 Übertemperaturabnahme Enum 0x213D08C9 = [0, 1]
+        #   0=Aus
+        #   1=Heizbetrieb
+        #   2=Immer
+        # 870 Mit Pufferspeicher 0x2D3D07C4 = [0, 0]
+        #   0=Nein, 255=Ja
+        # 872 Mit VOrregler / Zubringpumpe 0x2D3D07C5 = [0, 0] 0=nein 255=ja
+        # 880 HK1 PUmpe Drehzahlreduktion 0x213D04AD 
+        #   0 = Betriebsniveau
+        #   1 = Kennlinie
+        # 882 30% Pumpendrehzahl Minimum 0x053D115E = [0, 30] 0-100%
+        # 883 100% Pumpendrehzahl MAximum 0x053D115F = [0, 100] 0-100%
+        BsbFieldChoice(0x213D08C9, 861, u"Übertemperaturabnahme", choices={
+            0: u"Aus", 1: u"Heizbetrieb", 2: u"Immer",
+        }, **RW),
+        BsbFieldChoice(0x2D3D07C4, 870, u"Mit Pufferspeicher", **ONOFF_RW),
+        BsbFieldChoice(0x2D3D07C5, 872, u"Mit Vorregler / Zubringpumpe", **ONOFF_RW),
+        BsbFieldChoice(0x213D04AD, 880, u"Pumpe Drehzahlreduktion", choices={
+            0: u"Betriebsniveau", 1: u"Kennlinie",
+        }, **RW),
+        BsbFieldInt8(0x053D115E, 882, u"Pumpendrehzahl Minimum", min=0, max=100, unit=u"%", tn="PERCENT", **RW),
+        BsbFieldInt8(0x053D115F, 883, u"Pumpendrehzahl Maximum", min=0, max=100, unit=u"%", tn="PERCENT", **RW),
+
+        # 888 10% Kennliniekorr. bei 50% Drehz 0x213D0E38 = [0, 10] 0-100%
+        # 890 Vorlaufsollwertkorrektur Drehzahlregelung 0x213D10C2 = [0, 255] 0=nein, 255=ja
+        # 898 Betriebsniveauumschaltung 0x053D0DD4 = [0, 1]
+        #   0= Frostschutz
+        #   1 = Reduziert
+        #   2 = Komfort
+        # 900 Betriebsartumschaltung 0x053D0DD4 = [0, 1] !??
+        #   0 = Keine
+        #   1 = Schutzbetrieb
+        #   2 = Reduziert
+        #   3 = Komfort
+        #   4 = Automatik
+        BsbFieldInt8(0x213D0E38, 888, u"Kennnlinienkorrektur bei 50% Drehzahl", min=0, max=100, unit=u"%", tn="PERCENT", **RW),
+        BsbFieldChoice(0x213D10C2, 890, u"Vorlaufsollwertkorrektur Drehzahlregelung", **ONOFF_RW),
+        BsbFieldChoice(0x053D0DD4, 898, u"Betriebsniveauumschaltung", choices={
+            0: u"Frostschutz", 1: u"Reduziert", 2: u"Komfort",
+        }, **RW),
+        BsbFieldChoice(0x053D07BE, 10900, u"Betriebsartumschaltung", choices={
+            0: u"Keine",
+            1: u"Schutzbetrieb",
+            2: u"Reduziert",
+            3: u"Komfort",
+            4: u"Automatik",
+        }, **RW)
+    ]),
     Group(1600, "1600 Trinkwasser", [
+        BsbFieldChoice(0x313d0571, 10111, u'Trinkwasserbereitung', choices=["Aus", "Ein"], **RW),
         # Menü Trinkwasser
         BsbFieldTemperature(0x313d06b9, 1610, u'Nennsollwert', min=23, max=65, **RW),
         BsbFieldTemperature(0x313d06ba, 1612, u'Reduziertsollwert', min=8, max=40, **RW),
@@ -460,10 +581,8 @@ groups = [
         
     Group(0, "Unsortiert", [
         # weitere (nicht verifizierte) Eintraege
-        BsbField(0x2d3d0574, 10110, u'Setzen RGT HK - 1', ),
         BsbField(0x2d3d0215, 10109, u'Senden Raumtemperatur', ),
         BsbField(0x2d000211, 10102, u'HK1 - TBD', ),
-        BsbField(0x313d0571, 10111, u'Trinkwasserbereitung', ),
         BsbField(0x2e3e0574, 10112, u'Heizbetrieb', ),
         BsbField(0x2e000211, 10103, u'HK2 - TBD', ),
 
@@ -500,28 +619,9 @@ groups = [
         BsbField(0x2d3d2fd9, 7010, u'Quittierung Meldung', ),
         BsbField(0x2d3d2fd8, 7050, u'Gebläsedrehzahl Ion Strom', ),
         BsbField(0x2d3d2fd6, 7042, u'Brennerstarts Intervall', ),
-        BsbField(0x2d3d068a, 851, u'Estrich Sollwert manuell', ),
-        BsbField(0x2d3d067b, 850, u'Estrich-Funktion ', ),
-        BsbField(0x2d3d0640, 732, u'Tagesheizgrenze', ),
-        BsbField(0x2d3d0614, 760, u'Raumtemperaturbegrenzung', ),
-        BsbField(0x2d3d0610, 721, u'Kennlinie Verschiebung', ),
-        BsbField(0x2d3d060b, 726, u'Kennlinie Adaption', ),
-        BsbField(0x2d3d0609, 791, u'Ausschalt-Optimierung Max', ),
-        BsbField(0x2d3d0607, 790, u'Einschalt-Optimierung Max', ),
-        BsbField(0x2d3d0603, 750, u'Raumeinfluss', ),
-        BsbField(0x2d3d0602, 770, u'Schnellaufheizung', ),
-        BsbField(0x2d3d05fd, 730, u'Sommer-/Winterheizgrenze', ),
-        BsbField(0x2d3d05f6, 720, u'Kennlinie Steilheit', ),
-        BsbField(0x2d3d05e8, 780, u'Schnellabsenkung', ),
-        BsbField(0x2d3d059e, 800, u'Reduziert-Anhebung Beginn', ),
-        BsbField(0x2d3d059d, 801, u'Reduziert-Anhebung Ende', ),
-        BsbField(0x2d3d0592, 714, u'Frostschutzsollwert', ),
-        BsbField(0x2d3d0590, 712, u'Reduziertsollwert', ),
-        BsbField(0x2d3d058e, 710, u'Komfortsollwert', ),
         BsbField(0x2d3d04c2, 648, u'Betriebsniveau', ),
         BsbField(0x253d2fe9, 9563, u'Solldrehzahl Durchlasung', ),
         BsbField(0x253d2fe8, 9560, u'Gebl\'ansteuerung Durchlad', ),
-        BsbField(0x253d2fe5, 888, u'dT Überhöhungsfaktor', ),
         BsbField(0x253d2fdf, 7043, u'Brennerstarts seit Wartung', ),
         BsbField(0x253d2fdd, 7011, u'Repetitionszeit Meldung', ),
         BsbField(0x253d2f9f, 6250, u'KonfigRg2.x', ),
@@ -542,8 +642,6 @@ groups = [
         BsbField(0x213d2f91, 5026, u'Schaltdifferenz 1 Aus max', ),
         BsbField(0x213d2f90, 5025, u'Schaltdifferenz 1 Aus min', ),
         BsbField(0x213d2f8f, 5024, u'Schaltdifferenz 1 ein', ),
-        BsbField(0x213d0663, 740, u'Vorlaufsollwert Minimum', ),
-        BsbField(0x213d0662, 741, u'Vorlaufsollwert Maximum', ),
         BsbField(0x193d2fdc, 5761, u'Zonen mit Zubringerpumpe', ),
         BsbField(0x193d2f8a, 894, u'dT Spreizung NormAussent', ),
         BsbField(0x193d2f88, 886, u'Norm Aussentemperatur', ),

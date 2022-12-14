@@ -126,7 +126,7 @@ class SerialSource(EventSource):
                     data = bytearray(data)
                     for i in range(len(data)):
                         data[i] ^= 0xff
-                    data = str(data)
+                    data = bytes(data)
                 putevent_func(o.name, (timestamp, data))
         o.serial_port.close()
 
@@ -135,7 +135,7 @@ class SerialSource(EventSource):
             data = bytearray(data)
             for i in range(len(data)):
                 data[i] ^= 0xff
-            data = str(data)
+            data = bytes(data)
 
         if o._expect_cts_state is not None:
             # put in queue

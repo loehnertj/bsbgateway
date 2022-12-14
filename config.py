@@ -6,7 +6,10 @@
 # See https://docs.python.org/2/library/logging.html on how to configure logging.
 # You will probably want to set filename='something.log'.
 import logging
-logging.basicConfig(level='DEBUG', format='%(levelname)s %(name)s:%(lineno)d -- %(message)s')
+logging.basicConfig(
+    level='DEBUG',
+    format='%(levelname)s %(name)s:%(lineno)d @%(relativeCreated)d -- %(message)s'
+)
 
 ################################################
 # Device configuration
@@ -17,16 +20,13 @@ device = 'broetje_isr_plus'
 
 # Settings for the used adapter.
 adapter_settings = {
-    # * 'fake' = use a fake serial device, see below.
-    #     The fake device answers get and set telegrams with appropriate replies. Set values are remembered for the session.
-    # * 'serial' = use a serial port (real or USB)
-    'adapter_type': 'serial',
-    
     # * '/dev/ttyS0' ... '/dev/ttyS3' are usual devices for real serial ports.
     # * '/dev/ttyUSB0' is the usual device for a USB-to-serial converter on Linux.
-    'adapter_device': '/dev/ttyUSB0',
+    # * ':sim' opens a simple device simulation (no actual serial port required)
+    'adapter_device': ':sim',
+    #'adapter_device': '/dev/ttyUSB0',
     
-    # hardware settings - only applicable if adapter_type is 'serial'.
+    # hardware settings - ignored when using simulation.
     # see also bsbgateway/serial_source.py
     # baud rate - 4800 for BSB bus
     'port_baud': 4800,

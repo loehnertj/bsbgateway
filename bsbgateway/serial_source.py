@@ -28,6 +28,8 @@ else:
     import queue
 import serial
 
+from .virtual_serial import VirtualSerial
+from .virtual_device import virtual_device
 from .event_sources import EventSource
 
 
@@ -95,7 +97,10 @@ class SerialSource(EventSource):
 
 
     def run(o, putevent_func):
-        o.serial_port = serial.Serial(**o._serial_arg)
+        if o._serial_arg["port"] == ":sim":
+            o.serial_port = VirtualSerial(**o._serial_arg, responder=virtual_device)
+        else:
+            o.serial_port = serial.Serial(**o._serial_arg)
         # activate power supply
         o.serial_port.setRTS(False)
         o.serial_port.setDTR(True)

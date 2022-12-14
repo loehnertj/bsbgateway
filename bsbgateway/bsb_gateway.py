@@ -169,13 +169,10 @@ def run(config):
         for logger in loggers:
             if logger.field.disp_id == disp_id:
                 logger.add_trigger(emailaction, *trigger[1:])
-                
-    if 'adapter_settings' not in config and 'serial_port' in config:
-        # legacy config, update
-        config['adapter_settings'] = {
-            'adapter_type': 'fake' if config['serial_port']=='fake' else 'serial',
-            'adapter_device': config['serial_port'],
-        }
+    # legacy config
+    tt = config["adapter_settings"].pop("adapter_type", "")
+    if tt == "fake":
+        config["adapter_settings"]["adapter_device"] = ":sim"
                 
     BsbGateway(
         adapter_settings=config['adapter_settings'],

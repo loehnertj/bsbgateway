@@ -72,7 +72,7 @@ class Group(object):
 
 groups = [
     Group(700, "700 Heizkreis 1", [
-        BsbFieldChoice(0x2d3d0574, 900, u'Betriebsartwahl HK - 1', choices={
+        BsbFieldChoice(0x2d3d0574, 700, u'Betriebsartwahl HK - 1', choices={
             0: u'Schutzbetrieb',
             1: u'Automatik',
             2: u'Dauerhaft Reduziert heizen',
@@ -577,6 +577,7 @@ groups = [
         BsbFieldChoice(0x053D0AA8, 8792, u'Heizkreismischer 3 Zu', choices=['Aus', 'Ein']),
         BsbFieldInt8(0x233D04A7, 8795, u'Drehzahl Heizkreispumpe 3', unit='%', tn="PERCENT1"),
         BsbFieldTemperature(0x313d052f, 8830, u'Trinkwassertemperatur 1', ),
+        BsbFieldTemperature(0x313d0530, 8832, u'Trinkwassertemperatur 2',),
    ]),
         
     Group(0, "Unsortiert", [
@@ -585,11 +586,9 @@ groups = [
         BsbField(0x2d000211, 10102, u'HK1 - TBD', ),
         BsbField(0x2e3e0574, 10112, u'Heizbetrieb', ),
         BsbField(0x2e000211, 10103, u'HK2 - TBD', ),
-
         BsbField(0x313D0721, 1630, u'Trinkwasser Ladevorrang', ),
         BsbField(0x313d3009, 5019, u'Nachlad\'Übserhöh Schichtensp', ),
         BsbField(0x313d074b, 8831, u'Trinkwassersollwert', ),
-        BsbFieldTemperature(0x313d0530, 8832, u'Trinkwassertemperatur 2',),
         BsbField(0x2e3d3073, 5971, u'Konfig Raumthermostat 2', ),
         BsbField(0x2e3d068a, 1151, u'Estrich Sollwert manuell', ),
         BsbField(0x2e3d067b, 1150, u'Estrich-Funktion', ),

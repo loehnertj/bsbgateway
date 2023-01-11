@@ -113,6 +113,11 @@ class BsbCommand:
     max_value: Optional[float] = None
     """Maximum allowed set value"""
 
+    @property
+    def uid(self):
+        """unique command id, tuple"""
+        return self.parameter, self.command.lower(), self.device[0].family, self.device[0].var
+
 class BsbCommandFlags(Enum):
     """Command flags.
     

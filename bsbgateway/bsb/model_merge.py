@@ -62,17 +62,21 @@ def _(a:BsbModel, b:BsbModel) -> List[str]:
     # Merge categories themselves
     for key, b_cat in b.categories.items():
         if key not in a.categories:
-            a.categories[key] = deepcopy(b_cat)
+            #a.categories[key] = deepcopy(b_cat)
+            a.categories[key] = BsbCategory(
+                name=b_cat.name,
+                min=b_cat.min,
+                max=b_cat.max,
+            )
             merge_log.append(f"categories[{key}]: +")
         else:
-            print("category exists", key)
             c_merge_log = merge(a.categories[key], b.categories[key])
             merge_log.extend(_prefix_with(f"categories[{key}].", c_merge_log))
 
+    _cmdid = lambda cmd: (cmd.parameter, cmd.command.lower(), cmd.device[0].family, cmd.device[0].var)
     # Merge commands
     map_a = {
-        # Problem: how to hande device-specific versions of same command
-        cmd.parameter: (catkey, cmd)
+        cmd.uid: (catkey, cmd)
         for catkey in a.categories
         for cmd in a.categories[catkey].commands
     }
@@ -81,29 +85,29 @@ def _(a:BsbModel, b:BsbModel) -> List[str]:
         for catkey in b.categories
         for cmd in b.categories[catkey].commands
     ]
-    print(f"merging {len(list_b)} cmds into {len(map_a)} existing cmds")
+    print(f"XXX: merging {len(list_b)} cmds into {len(map_a)} existing cmds")
     for (b_catkey, b_cmd) in list_b:
-        parameter = b_cmd.parameter
-        # Ensure that command is in b's category
-        if parameter not in map_a:
-            # add
+        cmdid = b_cmd.uid
+        if cmdid not in map_a:
+            # Command not there at all. Add.
             a_catkey, a_cmd = b_catkey, deepcopy(b_cmd)
-            merge_log.append(f'categories[{b_catkey}].commands: + {parameter}')
+            merge_log.append(f'categories[{b_catkey}].commands: + {cmdid}')
             a.categories[a_catkey].commands.append(a_cmd)
         else:
-            a_catkey, a_cmd = map_a[parameter]
+            # Ensure that command is in b's category
+            a_catkey, a_cmd = map_a[cmdid]
             if a_catkey != b_catkey:
                 # move
-                merge_log.append(f'categories[{a_catkey} -> {b_catkey}]: {parameter}')
+                merge_log.append(f'categories[{a_catkey} -> {b_catkey}]: {cmdid}')
                 a.categories[a_catkey].commands.remove(a_cmd)
                 a.categories[b_catkey].commands.append(a_cmd)
         # merge actual commands
         try:
             c_merge_log = merge(a_cmd, b_cmd)
         except MergeImmutableFieldError as e:
-            problems.extend(_prefix_with(f"$command[{parameter}].", e.problems))
+            problems.extend(_prefix_with(f"$command[{cmdid}].", e.problems))
         else:
-            merge_log.extend(_prefix_with(f"$command[{parameter}].", c_merge_log))
+            merge_log.extend(_prefix_with(f"$command[{cmdid}].", c_merge_log))
 
     if problems:
         raise MergeImmutableFieldError(problems)

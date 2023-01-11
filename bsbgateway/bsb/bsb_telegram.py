@@ -144,7 +144,7 @@ class BsbTelegram(object):
         fieldid=0
         mult = 0x1000000
         for d in fidbytes:
-            fieldid, mult = d*mult+fieldid, mult / 0x100
+            fieldid, mult = d*mult+fieldid, mult // 0x100
 
         t.field = BsbField(telegram_id=fieldid, disp_id=0, disp_name='Unbekannt')
         if device:

@@ -163,7 +163,7 @@ class BsbFieldChoice(BsbField):
     type_name = 'choice'
     type_description = u'Choice value'
     
-    def __init__(o, telegram_id, disp_id, disp_name, choices, rw=False, *args, **kwargs):
+    def __init__(o, telegram_id, disp_id, disp_name, choices, tn="", rw=False, *args, **kwargs):
         BsbField.__init__(o, nullable=False, **xo(locals()))
         if not isinstance(choices, dict):
             d = {}

@@ -1,6 +1,6 @@
 {
   "version": "2.1.0",
-  "compiletime": "20221214212729",
+  "compiletime": "20230111210520",
   "categories": {
     "700": {
       "name": {
@@ -10,7 +10,7 @@
       "max": 10900,
       "commands": [
         {
-          "parameter": 900,
+          "parameter": 700,
           "command": "0x2d3d0574",
           "description": {
             "DE": "Betriebsartwahl HK - 1"
@@ -129,7 +129,7 @@
               "var": 255
             }
           ],
-          "typename": "ENUM",
+          "typename": "ONOFF",
           "enum": {
             "0": {
               "DE": "Aus"
@@ -367,7 +367,7 @@
               "var": 255
             }
           ],
-          "typename": "ENUM",
+          "typename": "ONOFF",
           "enum": {
             "0": {
               "DE": "Aus"
@@ -389,7 +389,7 @@
               "var": 255
             }
           ],
-          "typename": "ENUM",
+          "typename": "ONOFF",
           "enum": {
             "0": {
               "DE": "Aus"
@@ -468,7 +468,7 @@
               "var": 255
             }
           ],
-          "typename": "ENUM",
+          "typename": "ONOFF",
           "enum": {
             "0": {
               "DE": "Aus"
@@ -490,7 +490,7 @@
               "var": 255
             }
           ],
-          "typename": "ENUM",
+          "typename": "ONOFF",
           "enum": {
             "0": {
               "DE": "Aus"
@@ -579,7 +579,7 @@
               "var": 255
             }
           ],
-          "typename": "ENUM",
+          "typename": "ONOFF",
           "enum": {
             "0": {
               "DE": "Aus"
@@ -3204,7 +3204,7 @@
         "DE": "8700 Diagnose Verbraucher"
       },
       "min": 8700,
-      "max": 8830,
+      "max": 8832,
       "commands": [
         {
           "parameter": 8700,
@@ -3762,89 +3762,12 @@
           "flags": [
             "READONLY"
           ]
-        }
-      ]
-    },
-    "0": {
-      "name": {
-        "DE": "Unsortiert"
-      },
-      "min": 0,
-      "max": 8980,
-      "commands": [
+        },
         {
           "parameter": 8832,
           "command": "0x313d0530",
           "description": {
             "DE": "Trinkwassertemperatur 2"
-          },
-          "device": [
-            {
-              "family": 255,
-              "var": 255
-            }
-          ],
-          "typename": "TEMP",
-          "flags": [
-            "READONLY"
-          ]
-        },
-        {
-          "parameter": 8836,
-          "command": "0x253d0b33",
-          "description": {
-            "DE": "TWW Ladetemperatur"
-          },
-          "device": [
-            {
-              "family": 255,
-              "var": 255
-            }
-          ],
-          "typename": "TEMP",
-          "flags": [
-            "READONLY"
-          ]
-        },
-        {
-          "parameter": 5055,
-          "command": "0x253d08bd",
-          "description": {
-            "DE": "Rückkühltemperatur"
-          },
-          "device": [
-            {
-              "family": 255,
-              "var": 255
-            }
-          ],
-          "typename": "TEMP",
-          "flags": [
-            "READONLY"
-          ]
-        },
-        {
-          "parameter": 5050,
-          "command": "0x253d08a3",
-          "description": {
-            "DE": "Ladetemperatur Maximum"
-          },
-          "device": [
-            {
-              "family": 255,
-              "var": 255
-            }
-          ],
-          "typename": "TEMP",
-          "flags": [
-            "READONLY"
-          ]
-        },
-        {
-          "parameter": 8980,
-          "command": "0x053d0534",
-          "description": {
-            "DE": "Pufferspeichertemperatur 1"
           },
           "device": [
             {

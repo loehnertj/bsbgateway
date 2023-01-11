@@ -20,6 +20,8 @@ def convert(groups: List[Group]) -> BsbModel:
     categories = [
         convert_group(group)
         for group in groups
+        # ignore "unsorted" category
+        if group.disp_id != 0
     ]
     return BsbModel(
         version="2.1.0",
@@ -93,7 +95,11 @@ def find_typename(field:BsbField) -> str:
     if type(field) is BsbField:
         raise ValueError("Cannot convert field with anonymous type: %s" % (str(field),))
     if isinstance(field, BsbFieldChoice):
-        if field.choices == ["Aus", "Ein"]:
+        if field.new_type_name:
+            return types[field.new_type_name].name
+        elif field.choices == ["Aus", "Ein"]:
+            name = "ONOFF"
+        elif field.choices == {0:"Aus", 255:"Ein"}:
             name = "ONOFF"
         else:
             name = "ENUM"

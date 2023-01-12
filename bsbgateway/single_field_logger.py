@@ -108,7 +108,7 @@ class SingleFieldLogger(object):
             
     def log_fieldname(o):
         o._log_append(':disp_id %d'%o.field.disp_id)
-        o._log_append(':fieldname %s'%o.field.disp_name.encode('utf8'))
+        o._log_append(':fieldname %s'%o.field.disp_name)
         
     def log_interval(o):
         o._log_append(':interval %d'%o.interval)

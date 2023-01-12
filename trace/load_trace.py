@@ -58,7 +58,7 @@ class Trace(object):
     
     '''
     def __init__(o, filename, start=None, end=None):
-        fh = open(filename, 'r')
+        fh = open(filename, 'r', encoding='utf-8')
         index = []
         data = []
         fieldname = ''
@@ -76,7 +76,7 @@ class Trace(object):
                 if attrname == ':disp_id':
                     disp_id = int(attrvalue)
                 elif attrname == ':fieldname':
-                    fieldname = attrvalue.decode('utf8')
+                    fieldname = attrvalue
                 elif attrname == ':interval':
                     interval = int(attrvalue)
                 elif attrname == ':time':
@@ -87,7 +87,7 @@ class Trace(object):
                     
             elif line.replace('~','') =='\n':
                 # repeat value only
-                for n in xrange(len(line)-1):
+                for n in range(len(line)-1):
                     if curtime >= (start or curtime) and curtime <= (end or curtime):
                         index.append(datetime.fromtimestamp(curtime))
                         data.append(data[-1])
@@ -104,7 +104,7 @@ class Trace(object):
                     except:
                         log.exception('error converting value %r in %s'%(val, filename))
                         raise
-                for n in xrange(line.count('~') + 1):
+                for n in range(line.count('~') + 1):
                     # Append the value and the given number of repetitions.
                     if curtime >= (start or curtime) and curtime <= (end or curtime):
                         data.append(val)

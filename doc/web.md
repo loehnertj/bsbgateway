@@ -30,7 +30,7 @@ Multiple subqueries exist. Replace `<number>` with the 4-digit field number in e
  
  * `field-<number>.value` - returns the current value as JSON. Returns a json object with the following keys:
    * `disp_id`: The field id (that has been given)
-   * `disp_name`: The field's display name, utf8-encoded
+   * `disp_name`: The field's display name
    * `timestamp`: unix timestamp when the value was queried
    * `value`: The value - int, float or list.
 

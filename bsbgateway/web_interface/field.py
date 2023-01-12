@@ -87,7 +87,7 @@ class Field(object):
             data = (data.hour, data.minute)
         return {
             'disp_id': t.field.disp_id,
-            'disp_name': t.field.disp_name.encode('utf8'),
+            'disp_name': t.field.disp_name,
             'timestamp': t.timestamp,
             'data': data,
         }

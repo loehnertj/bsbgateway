@@ -20,6 +20,7 @@
 
 import logging
 log = lambda: logging.getLogger(__name__)
+from queue import Empty
 import datetime
 import web
 
@@ -74,7 +75,11 @@ class Field(object):
         # sends event to the BsbGateway requesting field's value.
         queue = web.ctx.bsb.get(field.disp_id)
         # blocks until result is available
-        t = queue.get()
+        try:
+            t = queue.get(timeut=3.0)
+        except Empty:
+            log().exception('timeout while requesting value')
+            raise web.HTTPError("500", headers=_ERRHEADERS, data="Data query from heater timed out.")
         if t is None:
             raise web.notfound()
         if isinstance(t, Exception):
@@ -104,7 +109,11 @@ class Field(object):
         field.validate(value)
         log().info('set field %d to value %r'%(field.disp_id, value))
         queue = web.ctx.bsb.set(field.disp_id, value)
-        t = queue.get()
+        try:
+            t = queue.get(timeout=3.0)
+        except Empty:
+            log().exception('timeout while requesting value')
+            raise web.HTTPError("500", headers=_ERRHEADERS, data="Data request to heater timed out.")
         if t is None:
             raise web.notfound()
         if isinstance(t, Exception):

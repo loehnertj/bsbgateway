@@ -29,7 +29,7 @@ log = lambda: logging.getLogger(__name__)
 
 import time
 
-from .event_sources import SyncedSecondTimerSource, HubSource
+from .event_sources import SyncedSecondTimerSource, HubSource, DelaySource
 from .single_field_logger import SingleFieldLogger
 from .web_interface import WebInterface
 from .cmd_interface import CmdInterface
@@ -55,9 +55,12 @@ class BsbGateway(object):
         log().info('BsbGateway (c) J. Loehnert 2013-2015, starting @%s'%time.time())
         for logger in o.loggers:
             logger.send_get_telegram = lambda disp_id: o._bsbcomm.send_get(disp_id)
+
+        o._delay = DelaySource("delay")
         
         sources = [
             SyncedSecondTimerSource('timer'),
+            o._delay,
             o._bsbcomm,
         ]
         
@@ -69,7 +72,7 @@ class BsbGateway(object):
             log().info('Running without cmdline interface. Use Ctrl+C or SIGTERM to quit.')
         
         if o.web_interface_port:
-            sources.append( WebInterface('web', device=o.device, port=o.web_interface_port) )
+            sources.append(WebInterface('web', device=o.device, port=o.web_interface_port) )
             
         o._hub = HubSource()
         for source in sources:
@@ -128,6 +131,14 @@ class BsbGateway(object):
                 rq.put(e)
         else:
             raise ValueError('unsupported action')
+        # If no response arrives, put back timeout.
+        # If response arrived in time, the Timeout just vanishes with the queue.
+        def return_timeout():
+            rq.put(TimeoutError("No response from BSB device"))
+        o._delay.delay(return_timeout, 3.0)
+
+    def on_delay_event(o, action):
+        action()
         
     def quit(o):
         o._hub.stop()

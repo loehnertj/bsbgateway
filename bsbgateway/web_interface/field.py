@@ -76,15 +76,16 @@ class Field(object):
         queue = web.ctx.bsb.get(field.disp_id)
         # blocks until result is available
         try:
-            t = queue.get(timeut=3.0)
+            # Internal timeout is 3.0s, give some additional time for crossthreading
+            t = queue.get(timeout=4.0)
         except Empty:
-            log().exception('timeout while requesting value')
+            log().error('timeout while requesting value')
             raise web.HTTPError("500", headers=_ERRHEADERS, data="Data query from heater timed out.")
         if t is None:
             raise web.notfound()
         if isinstance(t, Exception):
             # FIXME: web error should not be raised here
-            log().exception('error while requesting value: %s'%(t,))
+            log().error('error while requesting value: %s: %s', t.__class__.__name__, str(t))
             raise web.HTTPError("500", headers=_ERRHEADERS, data=str(t))
         
         data = t.data
@@ -110,14 +111,15 @@ class Field(object):
         log().info('set field %d to value %r'%(field.disp_id, value))
         queue = web.ctx.bsb.set(field.disp_id, value)
         try:
-            t = queue.get(timeout=3.0)
+            # Internal timeout is 3.0s, give some additional time for crossthreading
+            t = queue.get(timeout=4.0)
         except Empty:
-            log().exception('timeout while requesting value')
+            log().error('timeout while setting value')
             raise web.HTTPError("500", headers=_ERRHEADERS, data="Data request to heater timed out.")
         if t is None:
             raise web.notfound()
         if isinstance(t, Exception):
-            log().exception('error while setting value')
+            log().error('error while setting value: %s: %s', t.__class__.__name__, str(t))
             raise web.HTTPError("500", headers=_ERRHEADERS, data=str(t))
         # FIXME?
         return 'OK'

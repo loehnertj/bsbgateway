@@ -27,9 +27,9 @@ if sys.version_info[0] == 2:
     from Queue import Queue
 else:
     from queue import Queue
-from threading import Thread
+from threading import Thread, Event, Lock
 
-__all__ = ['EventSource', 'StdinSource', 'TimerSource', 'HubSource']
+__all__ = ['EventSource', 'StdinSource', 'TimerSource', 'SyncedSecondTimerSource', 'DelaySource', 'HubSource']
 
 class EventSource(object):
     '''base class for event sources.
@@ -162,6 +162,51 @@ class SyncedSecondTimerSource(EventSource):
             if o._stopflag:
                 break
             putevent_func(o.name, None)
+
+class DelaySource(EventSource):
+    '''Takes data and puts it back again after n seconds.
+    '''
+    name = 'delay'
+
+    def __init__(o, name='delay'):
+        o.name = name
+        o.stoppable = True
+        o._todo = []
+        o._todo_lock = Lock()
+        o._waiter = Event()
+
+    def delay(o, data, by_seconds):
+        t = time.time()
+        with o._todo_lock:
+            o._todo.append((t + by_seconds, data))
+            o._todo.sort(key=lambda item: item[0])
+        o._waiter.set()
+
+    def run(o, putevent_func):
+        o._waiter.clear()
+        while True:
+            # retrieve next item
+            with o._todo_lock:
+                if o._todo:
+                    at, _ = o._todo[0]
+                    waitfor = at - time.time()
+                else:
+                    waitfor = 1.0
+            # wait for at most 1 second (allow stopping)
+            waitfor = min(waitfor, 1.0)
+            if waitfor > 0:
+                o._waiter.wait(waitfor)
+                o._waiter.clear()
+            now = time.time()
+            # Countdown items
+            with o._todo_lock:
+                do_items = [data for at, data in o._todo if at <= now]
+                o._todo = [(at, data) for at, data in o._todo if at > now]
+            for item in do_items:
+                putevent_func(o.name, item)
+            if o._stopflag:
+                return
+
 
 class HubSource(EventSource):
     '''collects events from multiple sources.

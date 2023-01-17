@@ -106,10 +106,12 @@ class BsbGateway(object):
                         logger.log_value(telegram.timestamp, telegram.data)
             if which_address==2 and telegram.packettype in ['ret', 'ack']:
                 key = '%s%d'%(telegram.packettype, telegram.field.disp_id)
+                # Answer ALL pending requests for that field.
                 for rq in o.pending_web_requests:
                     if rq[0] == key:
-                        o.pending_web_requests.remove(rq)
                         rq[1].put(telegram)
+                # and remove from pending-list
+                o.pending_web_requests = [rq for rq in o.pending_web_requests if rq[0] != key]
                         
     def on_web_event(o, request):
         # FIXME: rate limit 10/s

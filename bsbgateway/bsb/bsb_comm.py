@@ -20,6 +20,12 @@
 
 import logging
 log = lambda: logging.getLogger(__name__)
+
+from contextlib import contextmanager
+import threading
+import queue
+import time
+
 # FIXME: importing from parent, this smells bad
 from bsbgateway.event_sources import EventSource
 from bsbgateway.serial_source import SerialSource
@@ -50,7 +56,7 @@ class BsbComm(EventSource):
     sniffmode = False
     _leftover_data = b''
     
-    def __init__(o, name, adapter_settings, device, first_bus_address, n_addresses=1, sniffmode=False):
+    def __init__(o, name, adapter_settings, device, first_bus_address, n_addresses=1, sniffmode=False, min_wait_s=0.1):
         if (first_bus_address<=10):
             raise ValueError("First bus address must be >10.")
         if (first_bus_address+n_addresses>127):
@@ -71,14 +77,18 @@ class BsbComm(EventSource):
         o.bus_addresses = range(first_bus_address, first_bus_address+n_addresses)
         o._leftover_data = b''
         o.sniffmode = sniffmode
+        o.min_wait_s = min_wait_s
+        o._do_throttled = None
         
     def run(o, putevent_func):
         def convert_data(name, data):
             # data = timestamp,bytes
             telegrams = o.process_received_data(data[0], data[1])
             putevent_func(name, telegrams)
-        o.serial.run(convert_data)
-        
+        with throttle_factory(min_wait_s=o.min_wait_s) as do_throttled:
+            o._do_throttled = do_throttled
+            o.serial.run(convert_data)
+        o._do_throttled = None
         
     def process_received_data(o, timestamp, data):
         '''timestamp: unix timestamp
@@ -114,7 +124,7 @@ class BsbComm(EventSource):
             elif t[1] != 'incomplete telegram':
                 log().info('++++%r :: %s'%t )
         return result
-                
+
     def send_get(o, disp_id, which_address=0):
         '''sends a GET request for the given disp_id.
         which_address: which busadress to use, default 0 (the first)'''
@@ -125,7 +135,7 @@ class BsbComm(EventSource):
         t.dst = 0
         t.packettype = 'get'
         t.field = o.device.fields[disp_id]
-        o.serial.write(t.serialize())
+        o._send_throttled(t.serialize())
 
     def send_set(o, disp_id, value, which_address=0, validate=True):
         '''sends a SET request for the given disp_id.
@@ -143,5 +153,57 @@ class BsbComm(EventSource):
         t.data = value
         # might throw ValidateError or EncodeError.
         data = t.serialize(validate=validate)
-        o.serial.write(data)
+        o._send_throttled(data)
+
+    def _send_throttled(o, data:bytes):
+        if not o._do_throttled:
+            raise IOError("Cannot send: Not running")
+        o._do_throttled(lambda: o.serial.write(data))
         
+
+@contextmanager
+def throttle_factory(min_wait_s = 0.1):
+    """Throttled action.
+
+    Contextmanager yields a function ``do_throttled(action)``.
+
+    Calling it will schedule a call of ``action()``, which can be whatever you want..
+
+    Multiple action(s) are executed sequentially, and there is a minimum time of
+    ``min_wait_s`` between *end* of last and *start* of next action.
+
+    To achieve this, a separate thread is used, which is automatically started
+    and stopped.
+    """
+    stop = threading.Event()
+    todo = queue.Queue()
+
+    def runner():
+        action = None
+        while not stop.is_set():
+            if action is not None:
+                action()
+            action_end_time = time.time()
+            action = todo.get()
+            # Throttle using wallclock time
+            # If todo.get() blocked for longer than min_wait_s, do not wait.
+            wait_for = action_end_time + min_wait_s - time.time()
+            if wait_for > 0.0:
+                log().debug("throttle: wait %s seconds", wait_for)
+                stop.wait(wait_for)
+
+    def do_throttled(action):
+        todo.put(action)
+
+    thread = threading.Thread(target=runner, name="throttled_runner")
+    thread.start()
+    try:
+        yield do_throttled
+    finally:
+        stop.set()
+        # Unblock todo.get()
+        todo.put(lambda:None)
+
+
+        
+

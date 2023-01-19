@@ -41,9 +41,9 @@ from .bsb.bsb_field import EncodeError, ValidateError
 class BsbGateway(object):
     _hub = None
 
-    def __init__(o, adapter_settings, device, bus_address, loggers, atomic_interval, web_interface_port=8080, cmd_interface_enable=True):
+    def __init__(o, adapter_settings, device, bus_address, loggers, atomic_interval, web_interface_port=8080, cmd_interface_enable=True, min_wait_s=0.1):
         o.device = device
-        o._bsbcomm = BsbComm('bsb', adapter_settings, device, bus_address, n_addresses=3)
+        o._bsbcomm = BsbComm('bsb', adapter_settings, device, bus_address, n_addresses=3, min_wait_s=min_wait_s)
         o.loggers = loggers
         o.atomic_interval = atomic_interval
         o.web_interface_port = web_interface_port
@@ -194,5 +194,6 @@ def run(config):
         loggers=loggers,
         atomic_interval=config['atomic_interval'],
         web_interface_port=(config['web_interface_port'] if config['web_interface_enable'] else None),
-        cmd_interface_enable=config['cmd_interface_enable']
+        cmd_interface_enable=config['cmd_interface_enable'],
+        min_wait_s=config.get('min_wait_s', 0.1),
     ).run()

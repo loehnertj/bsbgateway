@@ -52,6 +52,12 @@ adapter_settings = {
 # This address + 2 for webinterface requests
 bus_address = 23
 
+# Minimum wait time between subsequent data requests on the bus. Used to avoid
+# blocking up the bus when lots of requests come in at once.
+# Note that the web interface has builtin timeout of 3.0 s. I.e. if you send
+# more than (3.0 / min_wait_s) requests at once, the last ones will timeout.
+min_wait_s = 0.1
+
 
 ################################################
 # Logger configuration

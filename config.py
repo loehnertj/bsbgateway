@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 '''Configuration file template for BsbGateway.'''
 
 ################################################
@@ -6,9 +7,12 @@
 # See https://docs.python.org/2/library/logging.html on how to configure logging.
 # You will probably want to set filename='something.log'.
 import logging
+import sys
 logging.basicConfig(
-    level='DEBUG',
-    format='%(levelname)s %(name)s:%(lineno)d @%(relativeCreated)d -- %(message)s'
+    level='WARN',
+    format='%(levelname)s %(name)s:%(lineno)d @%(relativeCreated)d -- %(message)s',
+#    filename='/var/log/bsbgateway.log'
+    stream=sys.stdout
 )
 
 ################################################
@@ -23,8 +27,10 @@ adapter_settings = {
     # * '/dev/ttyS0' ... '/dev/ttyS3' are usual devices for real serial ports.
     # * '/dev/ttyUSB0' is the usual device for a USB-to-serial converter on Linux.
     # * ':sim' opens a simple device simulation (no actual serial port required)
-    'adapter_device': ':sim',
+    #'adapter_device': ':sim',
     #'adapter_device': '/dev/ttyUSB0',
+    #'adapter_device': '/dev/ttyS0',
+    'adapter_device': '/dev/ttyAMA1',
     
     # hardware settings - ignored when using simulation.
     # see also bsbgateway/serial_source.py
@@ -56,7 +62,7 @@ bus_address = 23
 # blocking up the bus when lots of requests come in at once.
 # Note that the web interface has builtin timeout of 3.0 s. I.e. if you send
 # more than (3.0 / min_wait_s) requests at once, the last ones will timeout.
-min_wait_s = 0.1
+min_wait_s = 0.25
 
 
 ################################################
@@ -77,14 +83,14 @@ tracefile_dir = 'traces'
 # or by using the LIST and INFO commands of the commandline interface.
 # Interval in seconds MUST be a multiple of atomic_interval.
 loggers = [
-    (8510, 5), # Kollektortemperatur
-    (8310, 300), # Kesseltemperatur
-    (8830, 300), # TW-Temperatur 1
-    (8832, 300), # TW-Temperatur unten
-    (8743, 300), # Vorlauftemp. 1
-    (8700, 300), # Aussentemperatur
-    (8003, 300), # Status TW
-    (8007, 5), # Status Solar
+#    (8510, 5), # Kollektortemperatur
+#    (8310, 300), # Kesseltemperatur
+#    (8830, 300), # TW-Temperatur 1
+#    (8832, 300), # TW-Temperatur unten
+#    (8743, 300), # Vorlauftemp. 1
+#    (8700, 300), # Aussentemperatur
+#    (8003, 300), # Status TW
+#    (8007, 5), # Status Solar
 ]
 
 # Triggers for email notification.
@@ -100,16 +106,16 @@ triggers = [
 ]
 
 # Email recipient
-emailaddress = 'recipient@domain.com'
+emailaddress = 'recipient@scritch.de'
 # SMTP server and credentials for sending email notifications
-emailserver = 'smtp.domain.com'
+emailserver = 'smtp.scritch.de'
 emailcredentials = ('loginname', 'password')
 
 
 ################################################
 # Cmdline interface configuration
 
-cmd_interface_enable = True
+cmd_interface_enable = False
 
 
 ################################################

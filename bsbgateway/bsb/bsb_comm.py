@@ -33,6 +33,8 @@ from bsbgateway.serial_source import SerialSource
 from .bsb_telegram import BsbTelegram
 from .bsb_field import ValidateError, EncodeError
 
+MAX_PENDING_REQUESTS = 50
+
 class BsbComm(EventSource):
     '''simplifies the conversion between serial data and BsbTelegrams.
     BsbComm represents one or multiple BSB bus endpoint(s). You can
@@ -162,7 +164,7 @@ class BsbComm(EventSource):
         
 
 @contextmanager
-def throttle_factory(min_wait_s = 0.1):
+def throttle_factory(min_wait_s = 0.1, max_pending_requests=MAX_PENDING_REQUESTS):
     """Throttled action.
 
     Contextmanager yields a function ``do_throttled(action)``.
@@ -176,7 +178,7 @@ def throttle_factory(min_wait_s = 0.1):
     and stopped.
     """
     stop = threading.Event()
-    todo = queue.Queue()
+    todo = queue.Queue(maxsize=max_pending_requests)
 
     def runner():
         action = None
@@ -193,7 +195,10 @@ def throttle_factory(min_wait_s = 0.1):
                 stop.wait(wait_for)
 
     def do_throttled(action):
-        todo.put(action)
+        try:
+            todo.put(action, timeout=0)
+        except queue.Full as e:
+            raise RuntimeError("Too many requests at once!") from e
 
     thread = threading.Thread(target=runner, name="throttled_runner")
     thread.start()

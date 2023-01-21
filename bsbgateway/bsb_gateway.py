@@ -122,14 +122,14 @@ class BsbGateway(object):
             o.pending_web_requests.append(('ret%d'%disp_id, rq))
             try:
                 o._bsbcomm.send_get(disp_id, 2)
-            except (ValidateError, EncodeError) as e:
+            except (ValidateError, EncodeError, RuntimeError) as e:
                 rq.put(e)
         elif action == 'set':
             disp_id, value = request
             o.pending_web_requests.append(('ack%d'%disp_id, rq))
             try:
                 o._bsbcomm.send_set(disp_id, value, 2)
-            except (ValidateError, EncodeError) as e:
+            except (ValidateError, EncodeError, RuntimeError) as e:
                 rq.put(e)
         else:
             raise ValueError('unsupported action')

@@ -42,40 +42,48 @@ def virtual_device(device=broetje_isr_plus):
     state = {}
     while True:
         rxdata = yield txdata
-        log().debug('Virtual device receives: [%s]'%(ashex(rxdata)))
+        try:
+            txdata = _handle(device, rxdata, state)
+        except Exception:
+            log().error("Virtual device encountered internal error", exc_info=True)
+            txdata = rxdata
 
-        # read back written data (as the real bus adapter does)
-        txdata = rxdata
+def _handle(device, rxdata, state):
+    log().debug('Virtual device receives: [%s]'%(ashex(rxdata)))
 
-        maybe_inv = invert if (rxdata.startswith(b'\x23')) else lambda x:x
+    # read back written data (as the real bus adapter does)
+    txdata = rxdata
 
-        # construct response
-        rxdata = maybe_inv(rxdata)
-        t = BsbTelegram.deserialize(rxdata, device)[0]
-        log().debug("decoded packet: %s", t)
-        if isinstance(t, tuple):
-            # Bad packet. Do not send a response
-            continue
+    maybe_inv = invert if (rxdata.startswith(b'\x23')) else lambda x:x
 
-        # remember set value for session
-        if t.packettype == 'set':
-            log().debug('cached value of %r'%(t.data,))
-            state[t.field.disp_id] = t.data
-        t.src, t.dst = t.dst, t.src
-        data = rxdata
-        t.packettype = {'set':'ack', 'get':'ret'}[t.packettype]
-        # for GET, return current state if set, else default value dep. on field type.
-        if t.packettype == 'ret':
-            try:
-                t.data = state[t.field.disp_id]
-            except KeyError:
-                t.data = {
-                    'choice': 1,
-                    'time': datetime.time(13,37),
-                }.get(t.field.type_name, 42)
-        retdata = t.serialize(validate=False)
-        retdata = maybe_inv(retdata)
+    # construct response
+    rxdata = maybe_inv(rxdata)
+    t = BsbTelegram.deserialize(rxdata, device)[0]
+    log().debug("decoded packet: %s", t)
+    if isinstance(t, tuple):
+        # Bad packet. Do not send a response
+        return rxdata
 
-        time.sleep(0.1)
-        log().debug('Virtual device returns : [%s]'%ashex(retdata))
-        txdata += retdata
+    # remember set value for session
+    if t.packettype == 'set':
+        log().debug('cached value of %r'%(t.data,))
+        state[t.field.disp_id] = t.data
+    t.src, t.dst = t.dst, t.src
+    data = rxdata
+    t.packettype = {'set':'ack', 'get':'ret'}[t.packettype]
+    # for GET, return current state if set, else default value dep. on field type.
+    if t.packettype == 'ret':
+        try:
+            t.data = state[t.field.disp_id]
+        except KeyError:
+            t.data = {
+                'choice': 1,
+                'time': datetime.time(13,37),
+            }.get(t.field.type_name, 42)
+    retdata = t.serialize(validate=False)
+    retdata = maybe_inv(retdata)
+
+    time.sleep(0.1)
+    log().debug('Virtual device returns : [%s]'%ashex(retdata))
+    txdata += retdata
+    return txdata

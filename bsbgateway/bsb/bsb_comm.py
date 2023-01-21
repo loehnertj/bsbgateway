@@ -184,7 +184,10 @@ def throttle_factory(min_wait_s = 0.1, max_pending_requests=MAX_PENDING_REQUESTS
         action = None
         while not stop.is_set():
             if action is not None:
-                action()
+                try:
+                    action()
+                except Exception:
+                    log().error("Exception in throttle thread", exc_info=True)
             action_end_time = time.time()
             action = todo.get()
             # Throttle using wallclock time
@@ -208,7 +211,3 @@ def throttle_factory(min_wait_s = 0.1, max_pending_requests=MAX_PENDING_REQUESTS
         stop.set()
         # Unblock todo.get()
         todo.put(lambda:None)
-
-
-        
-

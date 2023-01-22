@@ -177,7 +177,7 @@ def test_merge_types(ty_model):
     # test failing merge
     del m2.types["TEMP2"]
     ty2.name = "TEMP1"
-    ty2.datatype=model.BsbDatatype.Byte
+    ty2.datatype=model.BsbDatatype.Bits
     ty2.factor = 65
     ty2.payload_length = 3
     ty2.enable_byte = 2

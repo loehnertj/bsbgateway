@@ -190,6 +190,7 @@
       "name": "TEMP_SHORT5_US",
       "datatype": "VALS",
       "payload_length": 1,
+      "unsigned": true,
       "factor": 2,
       "precision": 1,
       "enable_byte": 1
@@ -301,6 +302,7 @@
       "name": "PERCENT5",
       "datatype": "VALS",
       "payload_length": 1,
+      "unsigned": true,
       "factor": 2,
       "enable_byte": 1
     },
@@ -312,6 +314,7 @@
       "name": "TEMP_WORD5_US",
       "datatype": "VALS",
       "payload_length": 2,
+      "unsigned": true,
       "factor": 2,
       "precision": 1,
       "enable_byte": 1
@@ -576,6 +579,7 @@
       "name": "TEMP_SHORT_US",
       "datatype": "VALS",
       "payload_length": 1,
+      "unsigned": true,
       "enable_byte": 1
     },
     "SECONDS_SHORT5": {
@@ -637,6 +641,7 @@
       "name": "LPM_SHORT",
       "datatype": "VALS",
       "payload_length": 2,
+      "unsigned": true,
       "factor": 10,
       "precision": 1
     },
@@ -711,6 +716,7 @@
       "name": "BYTE10",
       "datatype": "VALS",
       "payload_length": 1,
+      "unsigned": true,
       "factor": 10,
       "precision": 1
     },
@@ -816,6 +822,7 @@
       "name": "VOLTAGE",
       "datatype": "VALS",
       "payload_length": 1,
+      "unsigned": true,
       "factor": 10,
       "precision": 1,
       "enable_byte": 1
@@ -842,6 +849,7 @@
       "name": "PRESSURE",
       "datatype": "VALS",
       "payload_length": 1,
+      "unsigned": true,
       "factor": 10,
       "precision": 1,
       "enable_byte": 6

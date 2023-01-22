@@ -157,7 +157,10 @@ class BsbType:
     datatype_id: int = 0
     """Not unique! :-/"""
     factor: int = 1
-    """Conversion factor display value -> stored value"""
+    """Conversion factor display value -> stored value. Only for Vals datatype."""
+
+    unsigned: bool = False
+    """Is value signed or unsigned. Only for Vals datatype."""
 
     precision: int = 0
     """Recommended display precision (number of decimals)"""
@@ -174,12 +177,15 @@ class BsbType:
     64 = variable length
     """
 
+    @property
+    def nullable(self):
+        return (self.enable_byte == 6)
+
 
 class BsbDatatype(Enum):
     Vals = "VALS"
     """Int with scaling factor"""
     Enum = "ENUM"
-    Byte = "BYTE"
     Bits = "BITS"
     String = "STRN"
     Datetime = "DTTM"

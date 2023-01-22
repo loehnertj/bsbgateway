@@ -1,6 +1,6 @@
 {
   "version": "2.1.0",
-  "compiletime": "20230111210520",
+  "compiletime": "20230122120735",
   "categories": {
     "700": {
       "name": {
@@ -534,7 +534,7 @@
               "var": 255
             }
           ],
-          "typename": "PERCENT",
+          "typename": "PERCENT_NN",
           "max_value": 100
         },
         {
@@ -549,7 +549,7 @@
               "var": 255
             }
           ],
-          "typename": "PERCENT",
+          "typename": "PERCENT_NN",
           "max_value": 100
         },
         {
@@ -564,7 +564,7 @@
               "var": 255
             }
           ],
-          "typename": "PERCENT",
+          "typename": "PERCENT_NN",
           "max_value": 100
         },
         {
@@ -853,7 +853,7 @@
               "var": 255
             }
           ],
-          "typename": "MINUTES_WORD",
+          "typename": "MINUTES_WORD_N",
           "min_value": 10.0,
           "max_value": 360.0
         },
@@ -1429,7 +1429,7 @@
               "var": 255
             }
           ],
-          "typename": "MINUTES_SHORT",
+          "typename": "MINUTES_SHORT_N",
           "min_value": 2,
           "max_value": 60
         },
@@ -1461,7 +1461,7 @@
               "var": 255
             }
           ],
-          "typename": "MINUTES_SHORT",
+          "typename": "MINUTES_SHORT_N",
           "min_value": 8,
           "max_value": 40
         },
@@ -1493,7 +1493,7 @@
               "var": 255
             }
           ],
-          "typename": "MINUTES_SHORT",
+          "typename": "MINUTES_SHORT_N",
           "min_value": 5,
           "max_value": 60
         },
@@ -1525,7 +1525,7 @@
               "var": 255
             }
           ],
-          "typename": "HOUR_MINUTES"
+          "typename": "HOUR_MINUTES_NN"
         },
         {
           "parameter": 3833,
@@ -1539,7 +1539,7 @@
               "var": 255
             }
           ],
-          "typename": "HOUR_MINUTES"
+          "typename": "HOUR_MINUTES_NN"
         },
         {
           "parameter": 3834,
@@ -1553,7 +1553,7 @@
               "var": 255
             }
           ],
-          "typename": "GRADIENT_SHORT",
+          "typename": "GRADIENT_SHORT_N",
           "min_value": 1,
           "max_value": 20
         },
@@ -1645,7 +1645,7 @@
               "var": 255
             }
           ],
-          "typename": "PERCENT",
+          "typename": "PERCENT_NN",
           "min_value": 1,
           "max_value": 100
         },

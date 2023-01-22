@@ -162,8 +162,8 @@ groups = [
         BsbFieldChoice(0x213D04AD, 880, u"Pumpe Drehzahlreduktion", choices={
             0: u"Betriebsniveau", 1: u"Kennlinie",
         }, **RW),
-        BsbFieldInt8(0x053D115E, 882, u"Pumpendrehzahl Minimum", min=0, max=100, unit=u"%", tn="PERCENT", **RW),
-        BsbFieldInt8(0x053D115F, 883, u"Pumpendrehzahl Maximum", min=0, max=100, unit=u"%", tn="PERCENT", **RW),
+        BsbFieldInt8(0x053D115E, 882, u"Pumpendrehzahl Minimum", min=0, max=100, unit=u"%", tn="PERCENT_NN", **RW),
+        BsbFieldInt8(0x053D115F, 883, u"Pumpendrehzahl Maximum", min=0, max=100, unit=u"%", tn="PERCENT_NN", **RW),
 
         # 888 10% Kennliniekorr. bei 50% Drehz 0x213D0E38 = [0, 10] 0-100%
         # 890 Vorlaufsollwertkorrektur Drehzahlregelung 0x213D10C2 = [0, 255] 0=nein, 255=ja
@@ -177,7 +177,7 @@ groups = [
         #   2 = Reduziert
         #   3 = Komfort
         #   4 = Automatik
-        BsbFieldInt8(0x213D0E38, 888, u"Kennnlinienkorrektur bei 50% Drehzahl", min=0, max=100, unit=u"%", tn="PERCENT", **RW),
+        BsbFieldInt8(0x213D0E38, 888, u"Kennnlinienkorrektur bei 50% Drehzahl", min=0, max=100, unit=u"%", tn="PERCENT_NN", **RW),
         BsbFieldChoice(0x213D10C2, 890, u"Vorlaufsollwertkorrektur Drehzahlregelung", **ONOFF_RW),
         BsbFieldChoice(0x053D0DD4, 898, u"Betriebsniveauumschaltung", choices={
             0: u"Frostschutz", 1: u"Reduziert", 2: u"Komfort",
@@ -218,7 +218,7 @@ groups = [
         ], **RW),
         BsbFieldTime(0x313d075a, 1644, u'Legionellenfunktion Zeitpunkt', **RWN),
         BsbFieldTemperature(0x313d06bc, 1645, u'Legionellenfunktion Sollwert', min=55, max=95, **RW),
-        BsbFieldInt16(0x313d0496, 1646, u'Legionellenfunktion Verweildauer', min=10, max=360, tn="MINUTES_WORD", **RWN),
+        BsbFieldInt16(0x313d0496, 1646, u'Legionellenfunktion Verweildauer', min=10, max=360, tn="MINUTES_WORD_N", **RWN),
         BsbFieldChoice(0x313d08ab, 1647, u'Legionellenfkt Zirk’pumpe', choices=['Aus', 'Ein'], **RW),
         BsbFieldChoice(0x253d072e, 1660, u'Zirkulationspumpe Freigabe', choices=[
             '',
@@ -285,15 +285,15 @@ groups = [
             u'Pufferspeicher'
         ], **RW),
         # FIXME:
-        BsbFieldInt8(0x493D0AE0, 3825, u'Ladezeit relativer Vorrang', unit=u'min', tn="MINUTES_SHORT", min=2, max=60,  **RWN),
+        BsbFieldInt8(0x493D0AE0, 3825, u'Ladezeit relativer Vorrang', unit=u'min', tn="MINUTES_SHORT_N", min=2, max=60,  **RWN),
         BsbFieldInt8(0x493D0AE1, 3826, u'Wartezeit relativer Vorrang', unit=u'min', tn="MINUTES_SHORT", min=1, max=40,  **RW),
-        BsbFieldInt8(0x493D0AE2, 3827, u'Wartezeit Parallelbetrieb', unit=u'min', tn="MINUTES_SHORT", min=8, max=40,  **RWN),
+        BsbFieldInt8(0x493D0AE2, 3827, u'Wartezeit Parallelbetrieb', unit=u'min', tn="MINUTES_SHORT_N", min=8, max=40,  **RWN),
         BsbFieldInt16(0x493D0AEE, 3828, u'Verzögerung Sekundärpumpe', unit=u'sec', tn="SECONDS_WORD", min=0, max=600, **RW),
-        BsbFieldInt8(0x493D0716, 3830, u'Kollektorstartfunktion', unit=u'min', tn="MINUTES_SHORT", min=5, max=60, **RWN),
+        BsbFieldInt8(0x493D0716, 3830, u'Kollektorstartfunktion', unit=u'min', tn="MINUTES_SHORT_N", min=5, max=60, **RWN),
         BsbFieldInt8(0x493D0719, 3831, u'Mindestlaufzeit Kollek\'pumpe', unit=u'sec', tn="SECONDS_SHORT", min=5, max=120, **RW),
         BsbFieldTime(0x493D0AE4, 3832, u'Kollektorstartfunktion ein', **RW),
         BsbFieldTime(0x493D0AE5, 3833, u'Kollektorstartfunktion aus', **RW),
-        BsbFieldInt8(0x493D0B12, 3834, u'Kollektorstartfkt. Gradient', unit=u'min/°C', tn="GRADIENT_SHORT", min=1, max=20, **RWN),
+        BsbFieldInt8(0x493D0B12, 3834, u'Kollektorstartfkt. Gradient', unit=u'min/°C', tn="GRADIENT_SHORT_N", min=1, max=20, **RWN),
         BsbFieldTemperature(0x493D0860, 3840, u'Kollektor Frostschutz', min=-20, max=5, **RWN),
         BsbFieldTemperature(0x493D0865, 3850, u'Kollektorüberhitzschutz', min=30, max=350, **RWN),
         BsbFieldTemperature(0x493D0551, 3860, u'Verdampfung Wärmeträger', min=60, max=350, **RWN),
@@ -304,7 +304,7 @@ groups = [
             u'Propylenglykol',
             u'Ethylen- und Propylenglykol',
         ], **RW),
-        BsbFieldInt8(0x493D050A, 3881, u'Frost\'mittel Konzentration', unit=u'%', tn="PERCENT", min=1, max=100, **RW),
+        BsbFieldInt8(0x493D050A, 3881, u'Frost\'mittel Konzentration', unit=u'%', tn="PERCENT_NN", min=1, max=100, **RW),
         BsbFieldInt16(0x493D050C, 3884, u'Pumpendurchfluss', unit=u'l/h', tn="LITERPERHOUR", min=10, max=1500, **RW),
         # Fehlinterpretiert
         #BsbFieldInt16(0x053D0F93, 3887, u'Impulseinheit Ertrag', unit=u'l', divisor=10.0, min=0, max=100, **RW),

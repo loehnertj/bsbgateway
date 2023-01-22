@@ -204,6 +204,16 @@
       "payload_length": 1,
       "enable_byte": 6
     },
+    "PERCENT_NN": {
+      "unit": {
+        "KEY": "UNIT_PERC_TEXT",
+        "DE": "%"
+      },
+      "name": "PERCENT_NN",
+      "datatype": "VALS",
+      "payload_length": 1,
+      "enable_byte": 1
+    },
     "SECONDS_WORD": {
       "unit": {
         "KEY": "UNIT_SEC_TEXT",
@@ -329,6 +339,17 @@
       "payload_length": 1,
       "enable_byte": 1
     },
+    "MINUTES_SHORT_N": {
+      "unit": {
+        "KEY": "UNIT_MIN_TEXT",
+        "DE": "min",
+        "RU": "мин"
+      },
+      "name": "MINUTES_SHORT_N",
+      "datatype": "VALS",
+      "payload_length": 1,
+      "enable_byte": 6
+    },
     "PROPVAL": {
       "unit": {
         "DE": ""
@@ -374,6 +395,17 @@
       "payload_length": 2,
       "enable_byte": 1
     },
+    "MINUTES_WORD_N": {
+      "unit": {
+        "KEY": "UNIT_MIN_TEXT",
+        "DE": "min",
+        "RU": "мин"
+      },
+      "name": "MINUTES_WORD_N",
+      "datatype": "VALS",
+      "payload_length": 2,
+      "enable_byte": 6
+    },
     "BIT": {
       "unit": {
         "DE": ""
@@ -383,6 +415,17 @@
       "payload_length": 1,
       "datatype_id": 2,
       "enable_byte": 1
+    },
+    "HOUR_MINUTES_NN": {
+      "unit": {
+        "DE": ""
+      },
+      "name": "HOUR_MINUTES_NN",
+      "datatype": "HHMM",
+      "payload_length": 2,
+      "datatype_id": 4,
+      "enable_byte": 1,
+      "payload_flags": 32
     },
     "HOUR_MINUTES": {
       "unit": {
@@ -658,7 +701,8 @@
       },
       "name": "LITERPERHOUR",
       "datatype": "VALS",
-      "payload_length": 2
+      "payload_length": 2,
+      "enable_byte": 1
     },
     "BYTE10": {
       "unit": {
@@ -715,6 +759,17 @@
       "datatype": "VALS",
       "payload_length": 6,
       "enable_byte": 1
+    },
+    "GRADIENT_SHORT_N": {
+      "unit": {
+        "KEY": "UNIT_GRADIENT_TEXT",
+        "DE": "min/K",
+        "RU": "мин/K"
+      },
+      "name": "GRADIENT_SHORT_N",
+      "datatype": "VALS",
+      "payload_length": 6,
+      "enable_byte": 6
     },
     "TEMP_SHORT64": {
       "unit": {

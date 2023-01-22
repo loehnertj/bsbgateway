@@ -115,7 +115,7 @@ def find_typename(field:BsbField) -> str:
             print("%s field.nullable=%s enable_byte=%s"% (str(field), field.nullable, t.enable_byte))
         return t.name
     elif isinstance(field, BsbFieldTime):
-        t = types["HOUR_MINUTES"]
+        t = types["HOUR_MINUTES"] if field.nullable else types["HOUR_MINUTES_NN"]
         if field.rw and t.enable_byte != enbl:
             print("%s field.nullable=%s enable_byte=%s"% (str(field), field.nullable, t.enable_byte))
         return t.name

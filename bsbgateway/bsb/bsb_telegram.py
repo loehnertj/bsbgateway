@@ -28,9 +28,10 @@ else:
     joinbytes = bytes
 
 from .crc16pure import crc16xmodem
-from .bsb_field import BsbField
+from .model import BsbCommand, I18nstr
+from .errors import DecodeError
 
-__all__ = ['DecodeError', 'BsbTelegram']
+__all__ = ['BsbTelegram']
 
 _PACKETTYPES = {
     2: 'inf',
@@ -43,8 +44,6 @@ _PACKETTYPES = {
 _PACKETTYPES_R = {
     value: key for key, value in _PACKETTYPES.items()
 }
-
-class DecodeError(Exception): pass
 
 class BsbTelegram(object):
     '''src = source address (0...255)

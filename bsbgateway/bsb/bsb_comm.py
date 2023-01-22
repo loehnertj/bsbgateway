@@ -31,7 +31,7 @@ from bsbgateway.event_sources import EventSource
 from bsbgateway.serial_source import SerialSource
 
 from .bsb_telegram import BsbTelegram
-from .bsb_field import ValidateError, EncodeError
+from .errors import ValidateError, EncodeError
 
 MAX_PENDING_REQUESTS = 50
 

@@ -22,8 +22,9 @@
 
 import sys
 from datetime import time
+from .errors import EncodeError, ValidateError
 
-__all__ = ['EncodeError', 'ValidateError', 
+__all__ = [
            'BsbField', 'BsbFieldChoice', 'BsbFieldInt8', 'BsbFieldInt16',
            'BsbFieldTemperature', 'BsbFieldInt32',
            'BsbFieldTime',
@@ -32,9 +33,6 @@ __all__ = ['EncodeError', 'ValidateError',
 if sys.version_info[0] > 2:
     basestring = str
 
-
-class EncodeError(Exception): pass
-class ValidateError(Exception): pass
 
 def xo(dict):
     return {k:v for k,v in dict.items() if k!='o'}

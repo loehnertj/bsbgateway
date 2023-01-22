@@ -10,7 +10,7 @@ from copy import deepcopy
 from .model import BsbCategory, BsbCommand, BsbModel, BsbType, I18nstr
 
 
-class MergeError:
+class MergeError(Exception):
     """Base class for merge errors"""
 
 class MergeUnknownTypeError(TypeError, MergeError):

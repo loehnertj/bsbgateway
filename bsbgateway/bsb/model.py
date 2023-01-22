@@ -7,11 +7,13 @@ __all__ = [
     "BsbCommandFlags",
     "BsbDevice",
     "I18nstr",
+    "EnumValue",
+    "ScheduleEntry",
     "dedup_types",
     "as_json",
 ]
 from typing import Dict, List, Tuple, Optional
-#from pydantic import BaseModel
+import datetime as dt
 import attr
 import cattr
 from cattr.gen import make_dict_unstructure_fn
@@ -245,6 +247,21 @@ class I18nstr(dict):
 
     def copy(self):
         return I18nstr(self.copy())
+
+@attr.mutable
+class EnumValue:
+    "decoded value of an enum field"
+    val: int
+    "Numeric value"
+    description: I18nstr
+    "Human-readable interpretation of value"
+
+@attr.mutable
+class ScheduleEntry:
+    """Time program (on/off schedule)"""
+    on: dt.time
+    off: dt.time
+
 
 # Set up serialization / deserialization
 #cattr.register_unstructure_hook(BsbCommand, lambda *args, **kwargs: 1/0)

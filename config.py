@@ -121,6 +121,14 @@ web_interface_enable = True
 # Port on which the web interface shall listen.
 web_interface_port = 8081
 
+# Fields to display as "dashboard" on the index page.
+# List of lists, making up a table.
+# You can set entries to None to leave gaps.
+web_dashboard = [
+    [ 700, 710, 8005, 8310, 8314],
+    [ 1620, 1610, 8830, None, 8700],
+]
+
 
 ################################################
 # Leave this alone

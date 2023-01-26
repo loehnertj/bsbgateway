@@ -1,4 +1,4 @@
-$def with (fields, groups, field_func, dash_breaks)
+$def with (SELF, field)
 $code:
     ##############################################################################
     #
@@ -20,23 +20,13 @@ $code:
     #
     ##############################################################################
 
-<h2>Dashboard</h2>
-<button onclick="load_all();">Refresh</button>
-<ul class="dashboard">
-$for n, field in enumerate(fields):
-    $if n in dash_breaks:
-        </ul><ul class="dashboard">
-    $if field:
-        <li>
-        $:field_func(field)
-        </li>
-    $else:
-        <li class="empty"></li>
-</ul>
-
-<h2>Parameter Groups</h2>
-<ul>
-$for group in groups:
-    <li><a href='group-$group.disp_id'>#$group.name</a></li>
-</ul>
-<script>$$(document).ready(load_all);</script>
+<div class="dashwidget">
+    <p>
+        <span class="fieldid">$field.disp_id</span>
+        <span class="fieldname">$field.disp_name</span>
+    </p>
+    <p>
+        <span class="fieldwidget" id="fieldwidget-$field.disp_id">
+        <span class="fieldsetresult" id="fieldsetresult-$field.disp_id"></span>
+    </p>
+</div>

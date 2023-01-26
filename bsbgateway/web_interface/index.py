@@ -20,8 +20,22 @@
 
 import web
 from .templates import tpl
+from .field import Field
 
 class Index(object):
     url = r''
     def GET(o):
-        return tpl.base(tpl.index(web.ctx.bsb.groups))
+        dash_fields = web.ctx.dash_fields
+        dash_breaks = web.ctx.dash_breaks
+        print(dash_breaks)
+        return tpl.base(
+            tpl.index(
+                dash_fields,
+                web.ctx.bsb.groups,
+                o.render_field,
+                dash_breaks,
+            )
+        )
+
+    def render_field(o, field):
+        return Field().dashwidget(field)

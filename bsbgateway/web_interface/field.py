@@ -70,6 +70,9 @@ class Field(object):
     def widget(o, field):
         val = o.value(field)['data']
         return tpl.field_widget(o, field, val)
+
+    def dashwidget(o, field):
+        return tpl.field_dashwidget(o, field)
             
     def value(o, field):
         # sends event to the BsbGateway requesting field's value.

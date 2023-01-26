@@ -54,10 +54,22 @@ def print_handlers(urls):
     log().info('\n    '.join(s))
 
 class WebInterface(EventSource):
-    def __init__(o, name, device, port=8080):
+    def __init__(o, name, device, port=8080, dashboard=None):
         o.name = name
         o.device = device
         o.port = port
+        dash_fields = []
+        dash_breaks = []
+        n = 0
+        for row in dashboard or []:
+            if not row:
+                continue
+            dash_breaks.append(n)
+            for disp_id in row:
+                n += 1
+                dash_fields.append(device.fields_by_disp_id[disp_id] if disp_id else None)
+        o.dash_fields = dash_fields
+        o.dash_breaks = dash_breaks[1:]
         o.stoppable = False
         o.server = None
         
@@ -71,6 +83,8 @@ class WebInterface(EventSource):
         
         app = web.application(urls)
         app.add_processor(add_to_ctx(Web2Bsb(o.name, o.device, putevent), 'bsb'))
+        app.add_processor(add_to_ctx(o.dash_fields, "dash_fields"))
+        app.add_processor(add_to_ctx(o.dash_breaks, "dash_breaks"))
         #web.httpserver.runsimple(app.wsgifunc(), ("0.0.0.0", o.port)) 
         o.server = o.startserver(app.wsgifunc(), o.port)
         

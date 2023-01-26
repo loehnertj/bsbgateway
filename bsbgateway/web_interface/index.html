@@ -20,19 +20,19 @@ $code:
     #
     ##############################################################################
 
-<h2>Dashboard</h2>
-<button onclick="load_all();">Refresh</button>
-<ul class="dashboard">
-$for n, field in enumerate(fields):
-    $if n in dash_breaks:
-        </ul><ul class="dashboard">
-    $if field:
-        <li>
-        $:field_func(field)
-        </li>
-    $else:
-        <li class="empty"></li>
-</ul>
+$if fields:
+    <h2>Dashboard <button onclick="load_all();">Refresh</button></h2>
+    <ul class="dashboard">
+    $for n, field in enumerate(fields):
+        $if n in dash_breaks:
+            </ul><ul class="dashboard">
+        $if field:
+            <li>
+            $:field_func(field)
+            </li>
+        $else:
+            <li class="empty"></li>
+    </ul>
 
 <h2>Parameter Groups</h2>
 <ul>

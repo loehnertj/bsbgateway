@@ -137,7 +137,7 @@ class Field(object):
             hx = ' '.join(['%x'%num for num in value])
             return "dec: %s / hex: %s"%(dez, hx)
         else:
-            return "%g %s"%(value, field.unit)
+            return "%.3g %s"%(value, field.unit)
         
     def fmt_range(o, field):
         if field.type_name in ('int16', 'temperature', 'int32'):

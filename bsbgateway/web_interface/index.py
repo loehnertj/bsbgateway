@@ -27,7 +27,6 @@ class Index(object):
     def GET(o):
         dash_fields = web.ctx.dash_fields
         dash_breaks = web.ctx.dash_breaks
-        print(dash_breaks)
         return tpl.base(
             tpl.index(
                 dash_fields,

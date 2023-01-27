@@ -195,7 +195,7 @@ def run(config):
         loggers=loggers,
         atomic_interval=config['atomic_interval'],
         web_interface_port=(config['web_interface_port'] if config['web_interface_enable'] else None),
-        web_dashboard=config['web_dashboard'],
+        web_dashboard=config.get('web_dashboard', []),
         cmd_interface_enable=config['cmd_interface_enable'],
         min_wait_s=config.get('min_wait_s', 0.1),
     ).run()

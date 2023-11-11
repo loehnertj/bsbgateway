@@ -168,8 +168,8 @@ def autojson(obj):
 
 def filter_kwargs(fn):
     '''decorator which swallows all kwargs not supported by the wrapped fn.'''
-    from inspect import getargspec
-    allowed, dummy1, dummy2, dummy3 = getargspec(fn)
+    from inspect import signature
+    allowed = signature(fn).parameters
     # *args must be included or it won't work with methods (self is automatically
     # passed as anonymous first arg).
     def wrapped(*args, **kwargs):

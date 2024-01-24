@@ -24,6 +24,8 @@ import sys
 import os
 #sys.path.append(os.path.dirname(__file__))
 
+import importlib
+
 import logging
 log = lambda: logging.getLogger(__name__)
 
@@ -157,10 +159,11 @@ class BsbGateway(object):
         
 
 def run(config):
-    # FIXME: make this a dynamic import.
-    if config['device'] == 'broetje_isr_plus':
-        from .bsb import broetje_isr_plus as device
-    else:
+    try:
+        device = importlib.import_module('.bsb.' + config['device'], __package__)
+    except ModuleNotFoundError:
+        device = None
+    if not device:
         raise ValueError('Unsupported device')
     
     emailaction = make_email_action(config['emailserver'], config['emailaddress'], config['emailcredentials'])

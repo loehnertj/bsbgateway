@@ -7,7 +7,7 @@
 # You will probably want to set filename='something.log'.
 import logging
 logging.basicConfig(
-    level='DEBUG',
+    level='INFO',
     format='%(levelname)s %(name)s:%(lineno)d @%(relativeCreated)d -- %(message)s'
 )
 
@@ -18,31 +18,47 @@ logging.basicConfig(
 # Read "driver" = "index of available fields".
 device = 'broetje_isr_plus'
 
-# Settings for the used adapter.
-adapter_settings = {
-    # * '/dev/ttyS0' ... '/dev/ttyS3' are usual devices for real serial ports.
-    # * '/dev/ttyUSB0' is the usual device for a USB-to-serial converter on Linux.
-    # * ':sim' opens a simple device simulation (no actual serial port required)
-    'adapter_device': ':sim',
-    #'adapter_device': '/dev/ttyUSB0',
-    
-    # hardware settings - ignored when using simulation.
-    # see also bsbgateway/serial_source.py
-    # baud rate - 4800 for BSB bus
-    'port_baud': 4800,
-    # 1, 1.5 or 2 - 1 for BSB bus
-    'port_stopbits': 1,
-    # 'odd' or 'even'. For BSB: 'odd' if you invert bytes (see below), 'even' if not.
-    'port_parity': 'odd',
-    # flip all bits after receive + before send. If you use a simple BSB-to-UART
-    # level converter, you most probably need to set this to True.
-    'invert_bytes': True,
-    # Only send if CTS has this state (True or False); None to disable.
-    # Use this if your adapter has a "bus in use" detection wired to CTS pin of the RS232 interface.
-    'expect_cts_state': None,
-    # wait time in seconds if blocked by CTS (see above).
-    'write_retry_time': 0.005,
-}
+comm_interface = {
+    # Type of connection. 'serial' for a serial adapter, 'network' for TCP connection
+    # only the respective configuration ('adapter_settings'/'network_settings') will be used
+    'type': 'network',
+
+    # Settings for the used adapter.
+    'adapter_settings' : {
+        # * '/dev/ttyS0' ... '/dev/ttyS3' are usual devices for real serial ports.
+        # * '/dev/ttyUSB0' is the usual device for a USB-to-serial converter on Linux.
+        # * ':sim' opens a simple device simulation (no actual serial port required)
+        #'adapter_device': ':sim',
+        'adapter_device': 'COM5',
+
+        # hardware settings - ignored when using simulation.
+        # see also bsbgateway/serial_source.py
+        # baud rate - 4800 for BSB bus
+        'port_baud': 4800,
+        # 1, 1.5 or 2 - 1 for BSB bus
+        'port_stopbits': 1,
+        # 'odd' or 'even'. For BSB: 'odd' if you invert bytes (see below), 'even' if not.
+        'port_parity': 'odd',
+        # flip all bits after receive + before send. If you use a simple BSB-to-UART
+        # level converter, you most probably need to set this to True.
+        'invert_bytes': True,
+        # Only send if CTS has this state (True or False); None to disable.
+        # Use this if your adapter has a "bus in use" detection wired to CTS pin of the RS232 interface.
+        'expect_cts_state': None,
+        # wait time in seconds if blocked by CTS (see above).
+        'write_retry_time': 0.005,
+    },
+    # Settings for the network connection
+    'network_settings' : {
+        'host': '192.168.0.59',
+        'port': '6638',
+        # flip all bits after receive + before send. If you use a simple BSB-to-UART
+        # level converter, you most probably need to set this to True.
+        'invert_bytes': True,
+    }
+};
+
+
 
 # Bus adress offset of Gateway. Allowed range: 11 ... 125.
 # (0 is the main device, 10 is the control panel).

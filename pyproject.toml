@@ -30,7 +30,7 @@ classifiers = [
     "Topic :: Home Automation",
     "Topic :: System :: Monitoring",
 ]
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 
 packages = [
     { include = "bsbgateway", from = "src" }

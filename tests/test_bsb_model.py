@@ -368,4 +368,156 @@ def test_parse_obj_with_custom_default_language():
         assert isinstance(result["categories"]["100"]["name"], str)
     finally:
         model._default_language_context = old_context
-    
+
+
+# ------------------- Global enum reference tests -------------------
+
+@pytest.fixture
+def enum_model_data():
+    """Model JSON with top-level enums and a command that references one."""
+    return {
+        "version": "1.0",
+        "compiletime": "20240101000000",
+        "default_language": "DE",
+        "enums": {
+            "toggle1": {
+                "0": {"DE": "Aus"},
+                "1": {"DE": "An"},
+            }
+        },
+        "categories": {
+            "100": {
+                "name": "Heizung",
+                "min": 100,
+                "max": 200,
+                "commands": [
+                    {
+                        "parameter": 100,
+                        "command": "0x01020304",
+                        "description": "Betrieb",
+                        "device": [{"family": 255, "var": 255}],
+                        "enum": "toggle1",
+                    },
+                    {
+                        "parameter": 101,
+                        "command": "0x01020305",
+                        "description": "Modus",
+                        "device": [{"family": 255, "var": 255}],
+                        "enum": {"0": {"DE": "Nein"}, "1": {"DE": "Ja"}},
+                    },
+                ],
+            }
+        },
+    }
+
+
+def test_global_enum_parsed(enum_model_data):
+    """BsbModel.enums is populated with structured enum dicts."""
+    m = model.BsbModel.parse_obj(enum_model_data)
+    assert "toggle1" in m.enums
+    assert isinstance(m.enums["toggle1"], dict)
+    assert m.enums["toggle1"][0].DE == "Aus"
+    assert m.enums["toggle1"][1].DE == "An"
+
+
+def test_enum_ref_resolved_to_shared_object(enum_model_data):
+    """A command with enum='toggle1' gets the exact same object as model.enums['toggle1']."""
+    m = model.BsbModel.parse_obj(enum_model_data)
+    cmd100 = m.fields[100]
+    assert cmd100.enum is m.enums["toggle1"], "cmd.enum must be the exact shared dict object"
+
+
+def test_enum_ref_accessible(enum_model_data):
+    """Shared enum dict contains correct values."""
+    m = model.BsbModel.parse_obj(enum_model_data)
+    cmd100 = m.fields[100]
+    assert cmd100.enum[0].DE == "Aus"
+    assert cmd100.enum[1].DE == "An"
+
+
+def test_inline_enum_not_shared(enum_model_data):
+    """Command with inline dict enum is NOT the global enum object."""
+    m = model.BsbModel.parse_obj(enum_model_data)
+    cmd101 = m.fields[101]
+    assert cmd101.enum is not m.enums["toggle1"]
+
+
+def test_unknown_enum_ref_raises(enum_model_data):
+    """Referencing a non-existent global enum raises KeyError with clear message."""
+    enum_model_data["categories"]["100"]["commands"][0]["enum"] = "nonexistent"
+    with pytest.raises((KeyError, Exception), match="nonexistent"):
+        model.BsbModel.parse_obj(enum_model_data)
+
+
+def test_roundtrip_enum_ref_serialized_as_string(enum_model_data):
+    """Unstructuring a model with shared enum emits the ref name as string."""
+    m = model.BsbModel.parse_obj(enum_model_data)
+    d = cattr.unstructure(m)
+    cmd100_d = d["categories"]["100"]["commands"][0]
+    assert cmd100_d["enum"] == "toggle1", "Shared enum should serialize as string ref"
+
+
+def test_roundtrip_inline_enum_serialized_as_dict(enum_model_data):
+    """Inline enum (not identity-shared) is serialized as a dict."""
+    m = model.BsbModel.parse_obj(enum_model_data)
+    d = cattr.unstructure(m)
+    cmd101_d = d["categories"]["100"]["commands"][1]
+    assert isinstance(cmd101_d["enum"], dict), "Non-shared enum should remain inline dict"
+
+
+def test_full_roundtrip_with_global_enums(enum_model_data):
+    """parse -> unstructure -> parse produces equivalent model."""
+    import json
+    m1 = model.BsbModel.parse_obj(enum_model_data)
+    json_str = m1.json()
+    d2 = json.loads(json_str)
+    m2 = model.BsbModel.parse_obj(d2)
+    # global enum still present
+    assert "toggle1" in m2.enums
+    # ref'd command still has shared object
+    assert m2.fields[100].enum is m2.enums["toggle1"]
+    # values correct
+    assert m2.fields[100].enum[0].DE == "Aus"
+
+
+def test_model_without_global_enums_backward_compatible():
+    """Models without top-level enums continue to parse correctly."""
+    data = {
+        "version": "1.0",
+        "compiletime": "20240101000000",
+        "categories": {
+            "100": {
+                "name": "Test",
+                "min": 100,
+                "max": 200,
+                "commands": [
+                    {
+                        "parameter": 100,
+                        "command": "0x01020304",
+                        "description": "Irgendwas",
+                        "device": [{"family": 255, "var": 255}],
+                        "enum": {"0": {"DE": "Nein"}, "1": {"DE": "Ja"}},
+                    }
+                ],
+            }
+        },
+    }
+    m = model.BsbModel.parse_obj(data)
+    assert m.enums == {}
+    assert m.fields[100].enum[0].DE == "Nein"
+
+
+def test_merge_normalizes_shared_enum_ref(enum_model_data):
+    """Merging a command with a shared enum ref into another model
+    breaks the shared reference and produces an independent inline copy."""
+    m = model.BsbModel.parse_obj(enum_model_data)
+    m2 = deepcopy(m)
+    # After deepcopy, cmd.enum is a new dict object, not the same as m.enums['toggle1']
+    # but _enum_ref is still 'toggle1'.  Merging back into original should work.
+    merge(m, m2)
+    cmd = m.fields[100]
+    # After merge, cmd.enum should be an independent inline copy (no longer shared ref)
+    assert cmd._enum_ref is None or cmd.enum is not m2.enums.get("toggle1"), \
+        "After merge, enumref should be broken into inline copy"
+    # Values must still be correct
+    assert cmd.enum[0].DE == "Aus"

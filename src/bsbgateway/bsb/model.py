@@ -47,6 +47,14 @@ _TYPES_FILE = Path(__file__).with_name("bsb-types.json")
 # Context variable for cattr hooks to access the current default language
 _default_language_context = "DE"
 
+# Context variable: pre-structured global enum dicts, keyed by name.
+# Set in parse_obj before cattr.structure so BsbCommand hooks can resolve refs.
+_global_enums_context: dict = {}
+
+# Context variable: id(enum_dict) -> name, for identity-based lookup on unstructure.
+# Set in _unstructure_bsb_model before delegating to sub-unstructuring.
+_global_enum_id_to_name: dict = {}
+
 def _load_default_types():
     """Returns dictionary of default BsbTypes, keyed by typename."""
     model = BsbModel.parse_file(str(_TYPES_FILE))
@@ -62,6 +70,8 @@ class BsbModel:
     """Human-readable name of device"""
     categories: Dict[str, "BsbCategory"] = attr.Factory(dict)
     """Actual command entries by category"""
+    enums: Dict[str, Dict[int, "I18nstr"]] = attr.Factory(dict)
+    """Global named enums, reusable by commands"""
     types: Dict[str, "BsbType"] = attr.Factory(_load_default_types)
     """Known types"""
     default_language: str = "DE"
@@ -97,7 +107,7 @@ class BsbModel:
             default_language: Default language code for I18nstr serialization (e.g. 'DE', 'EN')
                             If not specified, extracted from obj['default_language'] or defaults to 'DE'
         """
-        global _default_language_context
+        global _default_language_context, _global_enums_context
         
         # Extract default_language from object if present
         if default_language is None:
@@ -106,16 +116,29 @@ class BsbModel:
         # Set context for hooks to access during structure phase
         old_context = _default_language_context
         _default_language_context = default_language
+
+        # Pre-structure global enums so command hooks can resolve string refs.
+        raw_enums = obj.get("enums", {})
+        old_global_enums = _global_enums_context
+        _global_enums_context = {
+            name: {int(k): cattr.structure(v, I18nstr) for k, v in enum_dict.items()}
+            for name, enum_dict in raw_enums.items()
+        }
         
         try:
             model = cattr.structure(obj, cls)
+            # Replace model.enums with the pre-structured shared objects so
+            # identity checks on cmd.enum work correctly.
+            model.enums = _global_enums_context
             # Store the default_language on the model instance
             model.default_language = default_language
             if link_types:
                 model.link_types()
+            model.resolve_enums()
             return model
         finally:
             _default_language_context = old_context
+            _global_enums_context = old_global_enums
 
     @classmethod
     def parse_file(cls, filename, link_types=True, default_language=None):
@@ -143,6 +166,26 @@ class BsbModel:
                 cmd.type = self.types[cmd.typename]
         return self
 
+    def resolve_enums(self):
+        """Replace command enum shared references from model.enums.
+
+        For commands whose enum came from a string reference (stored in
+        ``_enum_ref``), replaces ``cmd.enum`` with the shared dict object
+        from ``self.enums`` and validates the reference exists.
+
+        Modifies the model in-place.
+        """
+        for cmd in self.commands:
+            ref = cmd._enum_ref
+            if ref is not None:
+                if ref not in self.enums:
+                    raise KeyError(
+                        f"Command {cmd.parameter!r}: enum references unknown global enum "
+                        f"{ref!r}. Available: {list(self.enums.keys())}"
+                    )
+                cmd.enum = self.enums[ref]
+        return self
+
 @attr.mutable
 class BsbCategory:
     name: "I18nstr"
@@ -157,6 +200,33 @@ class BsbCategory:
 
 @attr.mutable
 class BsbCommand:
+    """A single BSB parameter with its metadata and optional enum value map.
+
+    **Deserialization** (``BsbModel.parse_obj`` / ``parse_file``):
+
+    The ``"enum"`` field in the JSON may be either an inline dict or a string
+    reference into the top-level ``"enums"`` map of the enclosing
+    :class:`BsbModel`::
+
+        # inline dict
+        "enum": {"0": {"DE": "Aus"}, "1": {"DE": "An"}}
+
+        # named reference — resolved to a shared dict object from BsbModel.enums
+        "enum": "toggle1"
+
+    When a reference is used, :attr:`_enum_ref` is set to the reference name
+    and :attr:`enum` is assigned the *same object* stored in
+    ``BsbModel.enums[name]``.  Unknown references raise :exc:`KeyError` (from
+    :meth:`BsbModel.resolve_enums`).
+
+    **Serialization** (``BsbModel.json`` / ``cattr.unstructure``):
+
+    If :attr:`enum` is the *identical* object (by ``id``) as one of the values
+    in the enclosing model's ``BsbModel.enums``, it is serialized as the
+    reference string instead of an inline dict.  Inline enum dicts (or any
+    dict that is not the same object as a global entry) are always serialized
+    in full.
+    """
     parameter: int
     """display number of parameter"""
     command: str
@@ -181,6 +251,9 @@ class BsbCommand:
 
     enum: Dict[int, "I18nstr"] = attr.Factory(dict)
     """Possible values for an enum field, mapped to their description"""
+
+    _enum_ref: Optional[str] = attr.field(default=None, init=False)
+    """Name of global enum this command's enum was loaded from, if any."""
 
     flags: List["BsbCommandFlags"] = attr.Factory(list)
     """Command flags, see there."""
@@ -499,12 +572,60 @@ def _unstructure_i18nstr(obj):
 cattr.register_structure_hook(I18nstr, _structure_i18nstr)
 cattr.register_unstructure_hook(I18nstr, _unstructure_i18nstr)
 
-# Now register hooks for other types
-#cattr.register_unstructure_hook(BsbCommand, lambda *args, **kwargs: 1/0)
-# !!! Order is apparently important when registering the hooks (!?)
-for T in [BsbType, BsbCommand, BsbCategory]:
-    attr.resolve_types(T)
-    cattr.register_unstructure_hook(T, make_dict_unstructure_fn(T, cattr.global_converter, _cattrs_omit_if_default=True))
+# Register hooks for BsbType first (no dependencies)
+attr.resolve_types(BsbType)
+cattr.register_unstructure_hook(BsbType, make_dict_unstructure_fn(BsbType, cattr.global_converter, _cattrs_omit_if_default=True))
+
+# BsbCommand hooks next — must be registered before BsbCategory so that
+# BsbCategory's generated unstructure fn picks up the right BsbCommand hook.
+attr.resolve_types(BsbCommand)
+
+# Structure hook for BsbCommand: resolve enum string references to shared dicts.
+_base_structure_bsb_command = cattr.gen.make_dict_structure_fn(
+    BsbCommand,
+    cattr.global_converter,
+    _enum_ref=cattr.override(omit=True),
+)
+
+def _structure_bsb_command(d, T):
+    raw_enum = d.get("enum")
+    enum_ref = None
+    if isinstance(raw_enum, str):
+        enum_ref = raw_enum
+        # Remove string ref so the base structurer sees no enum; we assign below.
+        d = dict(d)
+        del d["enum"]
+    cmd = _base_structure_bsb_command(d, T)
+    if enum_ref is not None:
+        cmd._enum_ref = enum_ref
+        # Assign shared pre-structured dict if available; resolve_enums validates later.
+        if enum_ref in _global_enums_context:
+            cmd.enum = _global_enums_context[enum_ref]
+    return cmd
+
+cattr.register_structure_hook(BsbCommand, _structure_bsb_command)
+
+# Unstructure hook for BsbCommand: emit enum as string ref when identity matches.
+_base_unstructure_bsb_command = make_dict_unstructure_fn(
+    BsbCommand,
+    cattr.global_converter,
+    _cattrs_omit_if_default=True,
+    _enum_ref=cattr.override(omit=True),
+)
+
+def _unstructure_bsb_command(cmd):
+    d = _base_unstructure_bsb_command(cmd)
+    if cmd.enum:
+        enum_name = _global_enum_id_to_name.get(id(cmd.enum))
+        if enum_name is not None:
+            d["enum"] = enum_name
+    return d
+
+cattr.register_unstructure_hook(BsbCommand, _unstructure_bsb_command)
+
+# BsbCategory registered last so it sees the BsbCommand hooks above.
+attr.resolve_types(BsbCategory)
+cattr.register_unstructure_hook(BsbCategory, make_dict_unstructure_fn(BsbCategory, cattr.global_converter, _cattrs_omit_if_default=True))
 
 # Resolve BsbModel types and register custom unstructure hook
 attr.resolve_types(BsbModel)
@@ -514,17 +635,22 @@ def _unstructure_bsb_model(model):
     
     Sets the context to the model's default_language before unstructuring
     to ensure that I18nstr fields are serialized correctly.
+    Also builds the identity map used by _unstructure_bsb_command to emit
+    global enum references as strings.
     """
-    global _default_language_context
+    global _default_language_context, _global_enum_id_to_name
     old_context = _default_language_context
+    old_id_map = _global_enum_id_to_name
     _default_language_context = model.default_language
-    
+    _global_enum_id_to_name = {id(v): k for k, v in model.enums.items()}
+
     try:
         # Use the standard unstructure function for BsbModel
         fn = make_dict_unstructure_fn(BsbModel, cattr.global_converter, _cattrs_omit_if_default=True)
         return fn(model)
     finally:
         _default_language_context = old_context
+        _global_enum_id_to_name = old_id_map
 
 cattr.register_unstructure_hook(BsbModel, _unstructure_bsb_model)
 

@@ -159,7 +159,13 @@ def _(a:BsbCommand, b:BsbCommand) -> List[str]:
     merge_log.extend(
         _prefix_with("description.", merge(a.description, b.description))
     )
-    for val, name in b.enum.items():
+    # Normalize: if either enum is a shared global reference, break the shared
+    # reference before merging so we work on an independent inline copy.
+    if a._enum_ref is not None:
+        a.enum = dict(a.enum)
+        a._enum_ref = None
+    b_enum = dict(b.enum)  # always iterate a plain copy of b's enum
+    for val, name in b_enum.items():
         if val not in a.enum:
             merge_log.append(f"enum[{val}]: +")
             a.enum[val] = deepcopy(name)

@@ -8,7 +8,7 @@ def test_serialize_config():
     # most complicated type
     config.web_interface.web_dashboard = [ [700, 710, 8005], [1620, None, 8830]]
     cp = _config_to_configparser(config)
-    assert set(cp.sections()) == {'gateway', 'adapter', 'web_interface', 'cmd_interface', 'loggers'}
+    assert set(cp.sections()) == {'gateway', 'adapter', 'web_interface', 'cmd_interface', 'loggers','bsb2tcp', 'mqtt_interface'}
     assert cp.get('web_interface', 'web_dashboard') == '[[700, 710, 8005], [1620, None, 8830]]'
 
 def test_parse_config():

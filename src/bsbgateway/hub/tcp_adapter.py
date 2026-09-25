@@ -21,6 +21,8 @@ class TcpAdapter:
     def __init__(self, host: str, port:int, token:bytes):
         self.transport = RestartingTransport(TcpClientTransportWithToken(host, port, token=token))
         self.transport.set_on_received(self._on_received)
+        self.host = host
+        self.port = port
     
     @classmethod
     def from_adapter_settings(cls, settings: AdapterSettings):

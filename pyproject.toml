@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "BsbGateway"
-version = "1.1.0"
+version = "1.2.0"
 description = "Read and write data on a BSB (Boiler System Bus)"
 authors = [{name = "Johannes Loehnert", email = "loehnert.kde@gmx.de"}]
 license = "LGPL-3.0-or-later AND Apache-2.0"

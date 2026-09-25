@@ -185,6 +185,9 @@ Planned:
 * Test correct reading+writing of all datatypes with actual device
 * Add "edit-model" mode with automatic sniffing + adding of fields
 
+(version 1.2 @ 2026-02-23)
+
+* Device JSON format: Simplified string representation + default enums. See https://github.com/loehnertj/bsbgateway/issues/39#issuecomment-4070064072.
 
 (version 1.1 @ 2026-02-23)
 
